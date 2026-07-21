@@ -17,4 +17,14 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\VehicleController;
+use App\Http\Controllers\MechanicController;
+
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::resource('customers', CustomerController::class);
+    Route::resource('vehicles', VehicleController::class);
+    Route::resource('mechanics', MechanicController::class);
+});
+
 require __DIR__.'/auth.php';
