@@ -312,6 +312,45 @@ Tabel fakta utama yang mencatat seluruh aktivitas transaksi pengerjaan servis at
 
 ---
 
+### 8.3. Matriks Rute Web UI/UX Frontend (Web Navigation Routes)
+
+Tabel berikut mendefinisikan seluruh Rute Web (*Web Routes* di `routes/web.php`) yang dibutuhkan untuk merancang antarmuka pengguna (UI/UX Frontend Blade Views):
+
+| Modul UI | Rute Web (URL Endpoint) | Method | Fungsi & Komponen Tampilan UI | Akses Hak (RBAC) |
+| :--- | :--- | :--- | :--- | :--- |
+| **Autentikasi** | `/login` | `GET` | Form Login (*Email, Password, Remember Me*) | Public (Guest) |
+| | `/login` | `POST` | Akses Submit Form Login & Buat Session | Public (Guest) |
+| | `/logout` | `POST` | Akses Logout & Hapus Session | Authenticated |
+| **Dashboard** | `/dashboard` | `GET` | Dashboard Utama (Widget KPI, Ringkasan Transaksi Servis) | Authenticated |
+| **Pelanggan** | `/customers` | `GET` | Tabel Data Pelanggan (Search, Pagination) | Admin |
+| | `/customers/create` | `GET` | Form Tambah Pelanggan Baru | Admin |
+| | `/customers` | `POST` | Submit Simpan Pelanggan Baru | Admin |
+| | `/customers/{id}/edit` | `GET` | Form Edit Data Pelanggan | Admin |
+| | `/customers/{id}` | `PUT` | Submit Update Data Pelanggan | Admin |
+| | `/customers/{id}` | `DELETE` | Akses Hapus Data Pelanggan | Admin |
+| **Kendaraan** | `/vehicles` | `GET` | Tabel Data Kendaraan (Filter Plat Nomor & Merk) | Admin |
+| | `/vehicles/create` | `GET` | Form Tambah Kendaraan Baru (Select Pelanggan) | Admin |
+| | `/vehicles` | `POST` | Submit Simpan Kendaraan Baru | Admin |
+| | `/vehicles/{id}/edit` | `GET` | Form Edit Data Kendaraan | Admin |
+| | `/vehicles/{id}` | `PUT` | Submit Update Data Kendaraan | Admin |
+| | `/vehicles/{id}` | `DELETE` | Akses Hapus Data Kendaraan | Admin |
+| **Mekanik** | `/mechanics` | `GET` | Tabel Data Mekanik (Spesialisasi & Status) | Admin |
+| | `/mechanics/create` | `GET` | Form Tambah Mekanik Baru | Admin |
+| | `/mechanics` | `POST` | Submit Simpan Mekanik Baru | Admin |
+| | `/mechanics/{id}/edit` | `GET` | Form Edit Data Mekanik | Admin |
+| | `/mechanics/{id}` | `PUT` | Submit Update Data Mekanik | Admin |
+| | `/mechanics/{id}` | `DELETE` | Akses Hapus Data Mekanik | Admin |
+| **Transaksi Servis**| `/transactions` | `GET` | Tabel Transaksi Servis (Filter Status `pending/proses/selesai`) | Admin & Mekanik |
+| | `/transactions/create` | `GET` | Form Input Servis Baru (Select Kendaraan & Mekanik) | Admin |
+| | `/transactions` | `POST` | Submit Simpan Transaksi Servis Baru | Admin |
+| | `/transactions/{id}/edit` | `GET` | Form Edit Transaksi Servis | Admin |
+| | `/transactions/{id}` | `PUT` | Submit Update Transaksi Servis | Admin |
+| | `/transactions/{id}/status`| `PATCH` | Akses Cepat Update Status (`pending` → `proses` → `selesai`) | Admin & Mekanik |
+| | `/transactions/{id}` | `DELETE` | Akses Hapus Data Transaksi | Admin |
+| | `/transactions/{id}/invoice`| `GET` | Halaman Tampilan Cetak Nota / Invoice Servis (Print View) | Admin & Mekanik |
+
+---
+
 ## 9. Spesifikasi REST API (Laravel Sanctum)
 
 API dikembangkan menggunakan Laravel Sanctum untuk otentikasi berbasis *Bearer Token*. SELURUH endpoint mengembalikan respon standar berformat JSON.
