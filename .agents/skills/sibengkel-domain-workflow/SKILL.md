@@ -5,7 +5,10 @@ description: Business logic, service transaction lifecycle, user personas, domai
 
 # SIBENGKEL Business Domain & Academic Requirements Skill
 
-This skill defines the business domain workflow, operational lifecycle, user personas, and academic submission alignment for **SIBENGKEL**.
+> [!IMPORTANT]
+> **MANDATORY PREREQUISITE**: Before modifying business domain logic, user persona permissions, transaction lifecycles, or academic submission materials, you MUST inspect these authoritative documents:
+> 1. [PRD_Sistem_Informasi_Bengkel.md](file:///Users/ryo/PemrogramanWeb/SIBENGKEL/SIBENGKEL/docs/PRD_Sistem_Informasi_Bengkel.md) (Section 3: Stakeholder & Personas, Section 5: RBAC Matrix, Section 12: Business Workflow, Section 16: Academic Rubric)
+> 2. [README.md](file:///Users/ryo/PemrogramanWeb/SIBENGKEL/SIBENGKEL/README.md) (Peta Alur Fitur Sekuensial A-O, Pembagian Peran, Fitur O: Laporan PDF Akademis)
 
 ## 1. Core Business Workflow
 1. **Customer Arrival**: Customer brings vehicle to workshop. Staff checks existing record or registers a new Customer and Vehicle.

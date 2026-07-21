@@ -5,7 +5,10 @@ description: Quality assurance testing, Postman API verification, GitHub Actions
 
 # SIBENGKEL QA, Testing & DevSecOps Skill
 
-This skill provides guidelines for QA testing, CI/CD automation, server security hardening, and deployment verification for **SIBENGKEL**.
+> [!IMPORTANT]
+> **MANDATORY PREREQUISITE**: Before executing any QA, testing, CI/CD pipeline, or deployment tasks, you MUST inspect these authoritative documents:
+> 1. [README.md](file:///Users/ryo/PemrogramanWeb/SIBENGKEL/SIBENGKEL/README.md) (Fitur K: DevSecOps, Fitur L: LEMP Stack, Fitur M: Cloudflare SSL, Fitur N: Production)
+> 2. [PRD_Sistem_Informasi_Bengkel.md](file:///Users/ryo/PemrogramanWeb/SIBENGKEL/SIBENGKEL/docs/PRD_Sistem_Informasi_Bengkel.md) (Section 13: Test Plan & Section 14: Deployment Plan)
 
 ## 1. Automated & Manual QA Verification
 - **PHPUnit / Pest Testing**:

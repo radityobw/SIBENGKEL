@@ -5,7 +5,13 @@ description: UI/UX design rules, mobile-first Blade templating guidelines, desig
 
 # SIBENGKEL Frontend & UI/UX Development Skill
 
-This skill defines UI/UX standards and rules for converting designs into Laravel Blade templates with Tailwind CSS for **SIBENGKEL**.
+> [!IMPORTANT]
+> **MANDATORY PREREQUISITE**: Before creating or editing Blade views, Tailwind CSS styles, or UI components, you MUST inspect these authoritative documents:
+> 1. [DESIGN.md](file:///Users/ryo/PemrogramanWeb/SIBENGKEL/SIBENGKEL/docs/DESIGN.md) (Design System, HSL/HEX color tokens, typography & touch targets)
+> 2. [Master_Prompt_Google_Stitch_SIBENGKEL.md](file:///Users/ryo/PemrogramanWeb/SIBENGKEL/SIBENGKEL/docs/Master_Prompt_Google_Stitch_SIBENGKEL.md) (Prompt per-layar & route mapping)
+> 3. Raw HTML reference files in [docs/stitch](file:///Users/ryo/PemrogramanWeb/SIBENGKEL/SIBENGKEL/docs/stitch)
+> 4. [PRD_Sistem_Informasi_Bengkel.md](file:///Users/ryo/PemrogramanWeb/SIBENGKEL/SIBENGKEL/docs/PRD_Sistem_Informasi_Bengkel.md) (Section 8.3 Web Routes Matrix & Wireframe Guidelines)
+> 5. [README.md](file:///Users/ryo/PemrogramanWeb/SIBENGKEL/SIBENGKEL/README.md) (Fitur J: Mobile-First Responsive UI/UX)
 
 ## 1. Design System & Tokens (from DESIGN.md)
 - **Primary (Industrial Navy)**: `#022448` / `#1e3a5f` (Headers, sidebar, primary actions)

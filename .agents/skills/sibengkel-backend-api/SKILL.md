@@ -5,7 +5,10 @@ description: Architectural standards, database migrations, Eloquent models, REST
 
 # SIBENGKEL Backend & API Development Skill
 
-This skill provides mandatory guidelines and patterns for backend engineers working on **Sistem Informasi Bengkel (SIBENGKEL)**.
+> [!IMPORTANT]
+> **MANDATORY PREREQUISITE**: Before executing any backend task (migrations, models, controllers, API endpoints, or middleware), you MUST inspect these authoritative documents:
+> 1. [PRD_Sistem_Informasi_Bengkel.md](file:///Users/ryo/PemrogramanWeb/SIBENGKEL/SIBENGKEL/docs/PRD_Sistem_Informasi_Bengkel.md) (Section 6: ERD & Data Dictionary, Section 9: REST API Sanctum)
+> 2. [README.md](file:///Users/ryo/PemrogramanWeb/SIBENGKEL/SIBENGKEL/README.md) (Fitur B: Database, Fitur C: Auth & RBAC, Fitur I: REST API)
 
 ## 1. Database Architecture & Migrations
 - **Naming Conventions**: Plural table names (`customers`, `vehicles`, `mechanics`, `service_transactions`).
