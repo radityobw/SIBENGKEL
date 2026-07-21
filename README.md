@@ -12,6 +12,46 @@
 
 ---
 
+## 📚 Daftar Isi (Table of Contents)
+
+<details open>
+<summary><b>Klik untuk Membuka / Menutup Navigasi Bab</b></summary>
+
+- [📌 Rekomendasi Pembagian Peran Tim 3 Orang](#-rekomendasi-pembagian-peran-tim-3-orang-non-mandatory--fleksibel)
+- [🗺️ Peta Alur Pengerjaan Sekuensial Fitur (A → O)](#️-peta-alur-pengerjaan-sekuensial-fitur-a--o)
+- [🛠️ FASE 1: PERSIAPAN & INFRASTRUKTUR DASAR LOKAL](#-fase-1-persiapan--infrastruktur-dasar-lokal)
+  - [Fitur A: Setup Local Environment & Workspace Project](#-fitur-a-setup-local-environment--workspace-project)
+    - [1.1. Panduan Download & Instalasi Perangkat Lunak](#11-panduan-download--instalasi-perangkat-lunak-what-to-download-first)
+    - [1.2. Alur Urutan Persiapan Lokal Tanpa Celah Logika](#12-alur-urutan-persiapan-lokal-tanpa-celah-logika-step-by-step-order-of-execution)
+    - [1.3. Konfigurasi Berkas `.env` Lokal](#13-konfigurasi-berkas-env-lokal)
+    - [1.4. Panduan Git Remote & Workflow Kolaborasi Tim 3 Orang](#14-panduan-git-remote--workflow-kolaborasi-tim-3-orang)
+  - [Fitur B: Database Architecture, Migrations & Eloquent Data Layer](#-fitur-b-database-architecture-migrations--eloquent-data-layer)
+- [🔐 FASE 2: AUTENTIKASI, KEAMANAN & RBAC](#-fase-2-autentikasi-keamanan--rbac)
+  - [Fitur C: Authentication Breeze, Sanctum & RBAC Access Control](#-fitur-c-authentication-breeze-sanctum--rbac-access-control)
+- [👥 FASE 3: MANAJEMEN DATA MASTER (CORE CRUD)](#-fase-3-manajemen-data-master-core-crud)
+  - [Fitur D: Data Master Pelanggan (Customers CRUD)](#-fitur-d-data-master-pelanggan-customers-crud)
+  - [Fitur E: Data Master Kendaraan (Vehicles CRUD)](#-fitur-e-data-master-kendaraan-vehicles-crud)
+  - [Fitur F: Data Master Mekanik (Mechanics CRUD)](#-fitur-f-data-master-mekanik-mechanics-crud)
+- [📋 FASE 4: INTI OPERASIONAL & ANALITIK](#-fase-4-inti-operasional--analitik)
+  - [Fitur G: Transaksi Servis & Tracking Status Pengerjaan](#-fitur-g-transaksi-servis--tracking-status-pengerjaan)
+  - [Fitur H: Dashboard Executive & Analytics Widget](#-fitur-h-dashboard-executive--analytics-widget)
+- [🔗 FASE 5: INTEGRASI & RESTFUL API](#-fase-5-integrasi--restful-api)
+  - [Fitur I: RESTful API Sanctum Endpoints & Postman Test](#-fitur-i-restful-api-sanctum-endpoints--postman-test)
+- [🎨 FASE 6: FRONTEND MOBILE-FIRST TAILWIND CSS](#-fase-6-frontend-mobile-first-tailwind-css)
+  - [Fitur J: Mobile-First Responsive UI/UX dengan Tailwind CSS](#-fitur-j-mobile-first-responsive-uiux-dengan-tailwind-css)
+- [🛡️ FASE 7: OTOMASI DEVSECOPS & CI/CD PIPELINE](#-fase-7-otomasi-devsecops--cicd-pipeline)
+  - [Fitur K: Complete DevSecOps Pipeline GitHub Actions](#-fitur-k-complete-devsecops-pipeline-github-actions)
+- [☁️ FASE 8: INFRASTRUKTUR VPS & CLOUDFLARE CUSTOM DOMAIN](#-fase-8-infrastruktur-vps--cloudflare-custom-domain)
+  - [Fitur L: VPS Hardening & LEMP Stack Provisioning](#-fitur-l-vps-hardening--lemp-stack-provisioning)
+  - [Fitur M: Cloudflare Security, Custom Domain & SSL/TLS Setup](#-fitur-m-cloudflare-security-custom-domain--ssltls-setup)
+  - [Fitur N: Staging, Production Deployment Execution & Live Verification](#-fitur-n-staging-production-deployment-execution--live-verification)
+- [📑 FASE 9: REKAPITULASI AKADEMIS & SUBMISSION](#-fase-9-rekapitulasi-akademis--submission)
+  - [Fitur O: Laporan PDF Akademis BAB I-V & Portal Submission](#-fitur-o-laporan-pdf-akademis-bab-i-v--portal-submission)
+
+</details>
+
+---
+
 ## 📌 Rekomendasi Pembagian Peran Tim 3 Orang (*Non-Mandatory / Fleksibel*)
 
 Dokumen ini disusun agar 3 anggota tim dapat berkolaborasi secara efisien tanpa tumpang tindih (*overlap*) pengerjaan:
