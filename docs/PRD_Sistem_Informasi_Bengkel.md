@@ -329,9 +329,44 @@ API dikembangkan menggunakan Laravel Sanctum untuk otentikasi berbasis *Bearer T
 
 ---
 
-### 9.2. Contoh Kontrak JSON Response
+### 9.2. Contoh Kontrak JSON Payload Seluruh Endpoint API
 
-#### 1. Respon Sukses: `GET /api/customers`
+#### 1. Autentikasi API: `POST /api/login` (Public)
+* **Request Payload**:
+```json
+{
+  "email": "admin@sibengkel.com",
+  "password": "password123"
+}
+```
+* **Response Sukses (HTTP 200 OK)**:
+```json
+{
+  "success": true,
+  "message": "Login API Berhasil",
+  "access_token": "1|sanctum_token_string_example_xyz...",
+  "token_type": "Bearer",
+  "user": {
+    "id": 1,
+    "name": "Admin Bengkel",
+    "email": "admin@sibengkel.com",
+    "role": "admin"
+  }
+}
+```
+
+#### 2. Revoke Token: `POST /api/logout` (Authenticated Bearer)
+* **Headers**: `Authorization: Bearer <access_token>`
+* **Response Sukses (HTTP 200 OK)**:
+```json
+{
+  "success": true,
+  "message": "Token Sanctum berhasil di-revoke/logout"
+}
+```
+
+#### 3. Data Pelanggan: `GET /api/customers` (Authenticated Bearer)
+* **Response Sukses (HTTP 200 OK)**:
 ```json
 {
   "success": true,
@@ -349,7 +384,29 @@ API dikembangkan menggunakan Laravel Sanctum untuk otentikasi berbasis *Bearer T
 }
 ```
 
-#### 2. Respon Sukses: `GET /api/services`
+#### 4. Data Kendaraan: `GET /api/vehicles` (Authenticated Bearer)
+* **Response Sukses (HTTP 200 OK)**:
+```json
+{
+  "success": true,
+  "message": "Berhasil mengambil data kendaraan",
+  "data": [
+    {
+      "id": 1,
+      "customer_id": 1,
+      "customer_name": "Budi Santoso",
+      "plate_number": "B 1234 XYZ",
+      "brand": "Honda",
+      "model": "Vario 150",
+      "year": 2022,
+      "created_at": "2026-07-20T10:05:00.000000Z"
+    }
+  ]
+}
+```
+
+#### 5. Data Transaksi Servis: `GET /api/services` (Authenticated Bearer)
+* **Response Sukses (HTTP 200 OK)**:
 ```json
 {
   "success": true,
@@ -375,7 +432,40 @@ API dikembangkan menggunakan Laravel Sanctum untuk otentikasi berbasis *Bearer T
 }
 ```
 
-#### 3. Respon Error Autentikasi (HTTP 401 Unauthorized)
+#### 6. Catat Transaksi Servis Baru: `POST /api/services` (Authenticated Bearer)
+* **Request Payload**:
+```json
+{
+  "vehicle_id": 1,
+  "mechanic_id": 1,
+  "type": "servis",
+  "complaint": "Ganti Rem Depan & Belakang",
+  "cost": 250000.00,
+  "status": "pending",
+  "transaction_date": "2026-07-21"
+}
+```
+* **Response Sukses (HTTP 201 Created)**:
+```json
+{
+  "success": true,
+  "message": "Transaksi servis baru berhasil dicatat via API",
+  "data": {
+    "id": 15,
+    "vehicle_id": 1,
+    "user_id": 1,
+    "mechanic_id": 1,
+    "type": "servis",
+    "complaint": "Ganti Rem Depan & Belakang",
+    "cost": 250000.00,
+    "status": "pending",
+    "transaction_date": "2026-07-21",
+    "created_at": "2026-07-21T10:00:00.000000Z"
+  }
+}
+```
+
+#### 7. Respon Error Autentikasi (HTTP 401 Unauthorized)
 ```json
 {
   "success": false,
