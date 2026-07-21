@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Daftar Mekanik</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "background": "#f8f9fb",
+                        "on-primary-fixed": "#001c3b",
+                        "on-tertiary-container": "#62a5f9",
+                        "on-secondary-fixed": "#2f1500",
+                        "error-container": "#ffdad6",
+                        "tertiary": "#002447",
+                        "inverse-primary": "#adc8f5",
+                        "primary-fixed-dim": "#adc8f5",
+                        "primary": "#022448",
+                        "on-tertiary": "#ffffff",
+                        "surface-tint": "#455f87",
+                        "inverse-on-surface": "#f0f1f3",
+                        "surface-variant": "#e1e2e4",
+                        "on-tertiary-fixed": "#001c39",
+                        "tertiary-container": "#003a6c",
+                        "on-tertiary-fixed-variant": "#004883",
+                        "secondary-container": "#ffa454",
+                        "secondary": "#904d00",
+                        "surface-container": "#edeef0",
+                        "on-primary-container": "#8aa4cf",
+                        "on-secondary-fixed-variant": "#6e3900",
+                        "on-background": "#191c1e",
+                        "surface-container-highest": "#e1e2e4",
+                        "on-surface-variant": "#43474e",
+                        "outline-variant": "#c4c6cf",
+                        "tertiary-fixed-dim": "#a4c9ff",
+                        "surface-dim": "#d9dadc",
+                        "secondary-fixed-dim": "#ffb77d",
+                        "on-secondary-container": "#713b00",
+                        "on-secondary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "error": "#ba1a1a",
+                        "surface-container-high": "#e7e8ea",
+                        "surface": "#f8f9fb",
+                        "on-primary-fixed-variant": "#2d486d",
+                        "surface-bright": "#f8f9fb",
+                        "on-primary": "#ffffff",
+                        "outline": "#74777f",
+                        "primary-container": "#1e3a5f",
+                        "primary-fixed": "#d5e3ff",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-low": "#f2f4f6",
+                        "inverse-surface": "#2e3132",
+                        "tertiary-fixed": "#d4e3ff",
+                        "secondary-fixed": "#ffdcc3",
+                        "on-error": "#ffffff",
+                        "on-surface": "#191c1e"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "sm": "16px",
+                        "gutter": "20px",
+                        "margin-mobile": "16px",
+                        "md": "24px",
+                        "xs": "8px",
+                        "lg": "32px",
+                        "margin-desktop": "32px",
+                        "base": "4px",
+                        "xl": "48px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Sora"],
+                        "headline-md": ["Sora"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-lg-mobile": ["Sora"],
+                        "label-sm": ["Inter"],
+                        "headline-xl": ["Sora"],
+                        "label-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+                        "headline-xl": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .pb-safe { padding-bottom: env(safe-area-inset-bottom, 20px); }
+        .pt-safe { padding-top: env(safe-area-inset-top, 20px); }
+        /* Tonal Layering / Low-Contrast Outlines */
+        .industrial-card {
+            border: 1px solid #E2E8F0;
+            background-color: #ffffff;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            transition: transform 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
+        }
+        .industrial-card:active {
+            transform: scale(0.98);
+            box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0);
+        }
+        .status-strip-green { border-left: 4px solid #10B981; }
+        .status-strip-amber { border-left: 4px solid #F59E0B; }
+        .status-strip-blue { border-left: 4px solid #3B82F6; }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col font-body-md pt-safe pb-[80px]">
+<!-- TopNavBar -->
+<header class="bg-surface text-primary font-headline-md text-headline-md font-body-md text-body-md docked full-width top-0 border-b border-outline-variant flat no shadows flex justify-between items-center px-gutter h-16 w-full z-40 fixed top-0 left-0 pt-safe">
+<div class="flex items-center gap-xs">
+<!-- Simulated Back Button for context, though intent is a top-level list, often mobile lists have back or menu -->
+<button aria-label="Menu" class="p-2 hover:bg-surface-container-high transition-colors active:scale-95 duration-150 rounded-full">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<h1 class="text-headline-md font-headline-md text-primary tracking-tight">Mekanik</h1>
+</div>
+<div class="flex items-center gap-xs">
+<button aria-label="notifications" class="p-2 hover:bg-surface-container-high transition-colors active:scale-95 duration-150 rounded-full text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow px-margin-mobile pt-20 pb-24 space-y-sm">
+<!-- Search / Filter Bar -->
+<div class="flex gap-xs mb-md">
+<div class="relative flex-grow">
+<span class="material-symbols-outlined absolute left-3 top-1/2 transform -translate-y-1/2 text-outline" data-icon="search">search</span>
+<input class="w-full pl-10 pr-4 py-3 bg-surface-container-lowest border border-outline-variant rounded-lg focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors font-body-md text-body-md h-[44px]" placeholder="Cari mekanik..." type="text"/>
+</div>
+<button class="flex items-center justify-center w-[44px] h-[44px] bg-surface-container-lowest border border-outline-variant rounded-lg text-on-surface-variant hover:bg-surface-container-high active:scale-95 transition-all">
+<span class="material-symbols-outlined" data-icon="tune">tune</span>
+</button>
+</div>
+<!-- Mechanic List -->
+<div class="space-y-xs">
+<!-- Card 1 -->
+<div class="industrial-card rounded-lg p-sm flex items-center gap-sm status-strip-green cursor-pointer">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-surface-container-high flex-shrink-0 border border-outline-variant">
+<img alt="Mechanic Avatar" class="w-full h-full object-cover" data-alt="A close-up portrait of a professional automotive mechanic in a well-lit workshop. He is wearing a clean, dark blue uniform shirt. The lighting is bright and modern, creating a clean industrial aesthetic. The background is slightly blurred showing tools and a clean white wall." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCfvPnYDToF36xETh2oE3OlgO5vsd2pc3hrp8mcmU7sId9TeV4MqUVO7rYVI43ljRVm_bpRIoIAeYKF0iSFpwuyfIBpIt-JeHzxHw_esctZtleucp5OlYaGNZdZ-7UBBeBevpXqQoal4wOQ54YdsVtUL-v_OrZaVerlc8-3WCE2QxwlmjfdaUxEKQjOywfurccZ-aAev6OEL-o1kUWKGLGXPYR-MQikl_7ARDhVtuD6GsO-z5tI2VCWwg"/>
+</div>
+<div class="flex-grow min-w-0">
+<h3 class="font-label-md text-label-md text-on-background truncate">Budi Santoso</h3>
+<p class="font-body-md text-label-sm text-on-surface-variant truncate">Spesialis Mesin &amp; Transmisi</p>
+</div>
+<div class="flex-shrink-0">
+<span class="inline-flex items-center px-2 py-1 rounded bg-[#10B981] text-white font-label-sm text-label-sm">
+                        Tersedia
+                    </span>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="industrial-card rounded-lg p-sm flex items-center gap-sm status-strip-amber cursor-pointer">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-surface-container-high flex-shrink-0 border border-outline-variant">
+<img alt="Mechanic Avatar" class="w-full h-full object-cover" data-alt="A professional portrait of a female automotive technician in a modern workshop setting. She is wearing protective glasses and a grey work shirt. The lighting is crisp and technical, emphasizing a clean, organized environment. The mood is focused and capable." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDk4QR29kr-dzxrZgVGjj5lPXJ30QhFVriiBw8sxLaDE-hlF0FHq5GVc6HWM0OLNU2R536ogvl2pEtwl3c13Mba_hMEK9urb4dudm32bY_h0Csn50w0VJgafHCTGZ6TNDzThZkOUrxR5rwgTZtroxz3E4XT3huQNcgpCadoTEoyA6AXayj-btiDl6PQQBDVkoT4wUrHJwLjzghDmfDFnKp1BLHep-bh4OqHKo9ItcKO0tyPucpKqr9l8w"/>
+</div>
+<div class="flex-grow min-w-0">
+<h3 class="font-label-md text-label-md text-on-background truncate">Siti Aminah</h3>
+<p class="font-body-md text-label-sm text-on-surface-variant truncate">Elektrikal &amp; AC</p>
+</div>
+<div class="flex-shrink-0">
+<span class="inline-flex items-center px-2 py-1 rounded bg-[#F59E0B] text-white font-label-sm text-label-sm">
+                        Sibuk
+                    </span>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="industrial-card rounded-lg p-sm flex items-center gap-sm status-strip-blue cursor-pointer">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-surface-container-high flex-shrink-0 border border-outline-variant">
+<img alt="Mechanic Avatar" class="w-full h-full object-cover" data-alt="A headshot of an experienced senior mechanic looking directly at the camera. He has a slight beard and wears a navy blue industrial uniform. The workshop background features bright, cool-toned lighting highlighting a clean, high-tech automotive workspace." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBP6hnAvffZfMlyd1eOl1CVuefPHBMg3BUz9ZeVHD67jnN_VOUMa2Mgt2VRtVPS7LsblsryRDlei45CYMjMLFaN3o5XOBY2lfy3QNgT1D4cJfyWdCS_2FcJeql2Def2ATsuZBs08SUiFaBj2QFfStXWe3VuSI1IiG7hG3jZAvR0358gX-Q7mhQDSVLBam73z46uwiRmElFl286tCy35r9MxB905dUdC_EJmdDhXUDovcAxA2Z3r_kXxMg"/>
+</div>
+<div class="flex-grow min-w-0">
+<h3 class="font-label-md text-label-md text-on-background truncate">Agus Pratama</h3>
+<p class="font-body-md text-label-sm text-on-surface-variant truncate">General Checkup</p>
+</div>
+<div class="flex-shrink-0">
+<span class="inline-flex items-center px-2 py-1 rounded bg-[#3B82F6] text-white font-label-sm text-label-sm">
+                        Istirahat
+                    </span>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="industrial-card rounded-lg p-sm flex items-center gap-sm status-strip-green cursor-pointer">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-surface-container-high flex-shrink-0 border border-outline-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-outline" data-icon="person">person</span>
+</div>
+<div class="flex-grow min-w-0">
+<h3 class="font-label-md text-label-md text-on-background truncate">Rian Hidayat</h3>
+<p class="font-body-md text-label-sm text-on-surface-variant truncate">Kaki-kaki &amp; Suspensi</p>
+</div>
+<div class="flex-shrink-0">
+<span class="inline-flex items-center px-2 py-1 rounded bg-[#10B981] text-white font-label-sm text-label-sm">
+                        Tersedia
+                    </span>
+</div>
+</div>
+</div>
+</main>
+<!-- Floating Action Button -->
+<button aria-label="Tambah Mekanik" class="fixed bottom-[88px] right-margin-mobile w-14 h-14 bg-secondary text-on-secondary rounded-full shadow-lg flex items-center justify-center active:scale-95 transition-transform z-40 hover:bg-secondary-container hover:text-on-secondary-container">
+<span class="material-symbols-outlined" data-icon="add" data-weight="fill" style="font-variation-settings: 'FILL' 1;">add</span>
+</button>
+<!-- BottomNavBar -->
+<nav class="lg:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-16 px-margin-mobile bg-surface shadow-lg border-t border-outline-variant pb-safe rounded-t-xl">
+<button aria-label="Home" class="flex flex-col items-center justify-center text-on-surface-variant active:bg-surface-container-highest scale-90 duration-100 p-2 rounded-lg">
+<span class="material-symbols-outlined mb-1" data-icon="home">home</span>
+<span class="font-label-sm text-label-sm">Home</span>
+</button>
+<button aria-label="Vehicles" class="flex flex-col items-center justify-center text-on-surface-variant active:bg-surface-container-highest scale-90 duration-100 p-2 rounded-lg">
+<span class="material-symbols-outlined mb-1" data-icon="directions_car">directions_car</span>
+<span class="font-label-sm text-label-sm">Vehicles</span>
+</button>
+<button aria-label="Jobs" class="flex flex-col items-center justify-center text-on-surface-variant active:bg-surface-container-highest scale-90 duration-100 p-2 rounded-lg">
+<span class="material-symbols-outlined mb-1" data-icon="assignment">assignment</span>
+<span class="font-label-sm text-label-sm">Jobs</span>
+</button>
+<button aria-label="More" class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-4 py-1 scale-90 duration-100">
+<span class="material-symbols-outlined mb-1" data-icon="menu" data-weight="fill" style="font-variation-settings: 'FILL' 1;">menu</span>
+<span class="font-label-sm text-label-sm">More</span>
+</button>
+</nav>
+</body></html>

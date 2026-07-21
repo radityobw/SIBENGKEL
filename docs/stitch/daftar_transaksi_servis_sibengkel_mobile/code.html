@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Daftar Transaksi Servis</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Sora:wght@100..900&display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Theme Configuration -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed-dim": "#a4c9ff",
+                        "on-primary-fixed-variant": "#2d486d",
+                        "on-surface-variant": "#43474e",
+                        "on-secondary-fixed-variant": "#6e3900",
+                        "on-error-container": "#93000a",
+                        "surface-container-low": "#f2f4f6",
+                        "secondary-fixed-dim": "#ffb77d",
+                        "on-tertiary-fixed-variant": "#004883",
+                        "on-surface": "#191c1e",
+                        "inverse-surface": "#2e3132",
+                        "outline-variant": "#c4c6cf",
+                        "on-tertiary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "on-primary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "on-secondary-fixed": "#2f1500",
+                        "primary-fixed-dim": "#adc8f5",
+                        "inverse-primary": "#adc8f5",
+                        "error": "#ba1a1a",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-container": "#003a6c",
+                        "on-primary-fixed": "#001c3b",
+                        "primary-fixed": "#d5e3ff",
+                        "surface-container-highest": "#e1e2e4",
+                        "surface-container-high": "#e7e8ea",
+                        "tertiary": "#002447",
+                        "outline": "#74777f",
+                        "on-tertiary-container": "#62a5f9",
+                        "primary": "#022448",
+                        "surface-dim": "#d9dadc",
+                        "on-tertiary-fixed": "#001c39",
+                        "tertiary-fixed": "#d4e3ff",
+                        "surface-container": "#edeef0",
+                        "surface-tint": "#455f87",
+                        "surface-bright": "#f8f9fb",
+                        "secondary": "#904d00",
+                        "secondary-fixed": "#ffdcc3",
+                        "on-primary-container": "#8aa4cf",
+                        "surface": "#f8f9fb",
+                        "primary-container": "#1e3a5f",
+                        "inverse-on-surface": "#f0f1f3",
+                        "secondary-container": "#ffa454",
+                        "on-background": "#191c1e",
+                        "background": "#f8f9fb",
+                        "surface-variant": "#e1e2e4",
+                        "on-secondary-container": "#713b00",
+                        "on-secondary": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-desktop": "32px",
+                        "lg": "32px",
+                        "sm": "16px",
+                        "margin-mobile": "16px",
+                        "gutter": "20px",
+                        "md": "24px",
+                        "xs": "8px",
+                        "base": "4px",
+                        "xl": "48px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Sora"],
+                        "headline-xl": ["Sora"],
+                        "body-lg": ["Inter"],
+                        "headline-lg-mobile": ["Sora"],
+                        "label-sm": ["Inter"],
+                        "headline-lg": ["Sora"],
+                        "body-md": ["Inter"],
+                        "label-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "headline-xl": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        /* Hide scrollbar for horizontal scrolling filter area */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        /* Padding safe for mobile notch */
+        .pb-safe {
+            padding-bottom: env(safe-area-inset-bottom, 16px);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col">
+<!-- TopNavBar (Shared Component) -->
+<nav class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-mobile md:px-margin-desktop h-16 bg-surface border-b border-outline-variant">
+<div class="font-headline-md text-headline-md font-bold text-primary">SIBENGKEL</div>
+<div class="flex gap-4 items-center">
+<button aria-label="Notifications" class="hover:bg-surface-container-low transition-colors rounded-full p-2">
+<span class="material-symbols-outlined text-primary" data-icon="notifications">notifications</span>
+</button>
+<button aria-label="Settings" class="hover:bg-surface-container-low transition-colors rounded-full p-2">
+<span class="material-symbols-outlined text-primary" data-icon="settings">settings</span>
+</button>
+</div>
+</nav>
+<!-- SideNavBar (Shared Component - Hidden on Mobile) -->
+<aside class="hidden md:flex flex-col fixed left-0 top-0 h-full p-md bg-surface-container w-[280px] border-r border-outline-variant z-40 pt-20">
+<div class="flex flex-col gap-xs flex-grow">
+<a class="flex items-center gap-sm px-4 py-3 rounded-DEFAULT text-on-surface-variant hover:bg-surface-variant transition-all font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span> Dashboard
+            </a>
+<a class="flex items-center gap-sm px-4 py-3 rounded-lg bg-primary-container text-on-primary-container font-bold transition-all font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="receipt_long">receipt_long</span> Transactions
+            </a>
+<a class="flex items-center gap-sm px-4 py-3 rounded-DEFAULT text-on-surface-variant hover:bg-surface-variant transition-all font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span> Inventory
+            </a>
+<a class="flex items-center gap-sm px-4 py-3 rounded-DEFAULT text-on-surface-variant hover:bg-surface-variant transition-all font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="person_search">person_search</span> Customers
+            </a>
+<a class="flex items-center gap-sm px-4 py-3 rounded-DEFAULT text-on-surface-variant hover:bg-surface-variant transition-all font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="home_repair_service">home_repair_service</span> Mechanics
+            </a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-grow pt-16 pb-24 px-margin-mobile md:pl-[312px] md:pr-margin-desktop md:pt-24 flex flex-col gap-sm">
+<!-- Page Title -->
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface pt-sm md:pt-0">Transaksi Servis</h1>
+<!-- Search & Filter Area -->
+<div class="flex flex-col gap-sm">
+<!-- Search Bar -->
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full min-h-[44px] pl-10 pr-4 rounded-DEFAULT border border-outline-variant bg-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none font-body-md text-body-md text-on-surface placeholder:text-outline shadow-sm" placeholder="Cari Plat Nomor atau Pelanggan..." type="text"/>
+</div>
+<!-- Compact Status Filter -->
+<div class="flex gap-2 overflow-x-auto pb-2 no-scrollbar">
+<button class="min-h-[44px] px-4 rounded-full bg-primary text-on-primary font-label-md text-label-md whitespace-nowrap shadow-sm">Semua</button>
+<button class="min-h-[44px] px-4 rounded-full bg-surface border border-outline-variant text-on-surface font-label-md text-label-md whitespace-nowrap hover:bg-surface-container-low">Menunggu</button>
+<button class="min-h-[44px] px-4 rounded-full bg-surface border border-outline-variant text-on-surface font-label-md text-label-md whitespace-nowrap hover:bg-surface-container-low">Proses</button>
+<button class="min-h-[44px] px-4 rounded-full bg-surface border border-outline-variant text-on-surface font-label-md text-label-md whitespace-nowrap hover:bg-surface-container-low">Selesai</button>
+</div>
+</div>
+<!-- Transaction Cards List -->
+<div class="flex flex-col gap-sm pb-10">
+<!-- Card 1: In Progress -->
+<div class="bg-surface rounded-lg border border-outline-variant p-4 flex flex-col gap-3 relative overflow-hidden shadow-sm">
+<!-- Status Strip -->
+<div class="absolute left-0 top-0 bottom-0 w-[4px] bg-secondary-container"></div>
+<div class="flex justify-between items-start pl-2">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-bold text-on-surface">B 1234 XYZ</span>
+<span class="font-body-md text-body-md text-on-surface-variant">Budi Santoso</span>
+</div>
+<span class="bg-secondary-container text-on-secondary-container px-2 py-1 rounded-DEFAULT font-label-sm text-label-sm font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">build_circle</span> Proses
+                    </span>
+</div>
+<div class="flex justify-between items-end pl-2 pt-2 border-t border-outline-variant">
+<span class="font-body-md text-body-md text-on-surface-variant">Servis Berkala & Ganti Oli</span>
+<span class="font-label-md text-label-md font-bold text-primary">Rp 450.000</span>
+</div>
+</div>
+<!-- Card 2: Completed -->
+<div class="bg-surface rounded-lg border border-outline-variant p-4 flex flex-col gap-3 relative overflow-hidden shadow-sm">
+<div class="absolute left-0 top-0 bottom-0 w-[4px] bg-tertiary-fixed-dim"></div>
+<div class="flex justify-between items-start pl-2">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-bold text-on-surface">D 5678 AB</span>
+<span class="font-body-md text-body-md text-on-surface-variant">Siti Aminah</span>
+</div>
+<span class="bg-surface-container-high text-on-surface px-2 py-1 rounded-DEFAULT font-label-sm text-label-sm font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">check_circle</span> Selesai
+                    </span>
+</div>
+<div class="flex justify-between items-end pl-2 pt-2 border-t border-outline-variant">
+<span class="font-body-md text-body-md text-on-surface-variant">Ganti Kampas Rem</span>
+<span class="font-label-md text-label-md font-bold text-primary">Rp 250.000</span>
+</div>
+</div>
+<!-- Card 3: Waiting -->
+<div class="bg-surface rounded-lg border border-outline-variant p-4 flex flex-col gap-3 relative overflow-hidden shadow-sm">
+<div class="absolute left-0 top-0 bottom-0 w-[4px] bg-error-container"></div>
+<div class="flex justify-between items-start pl-2">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-bold text-on-surface">F 9012 KL</span>
+<span class="font-body-md text-body-md text-on-surface-variant">Ahmad Yani</span>
+</div>
+<span class="bg-error-container text-on-error-container px-2 py-1 rounded-DEFAULT font-label-sm text-label-sm font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">pending</span> Menunggu
+                    </span>
+</div>
+<div class="flex justify-between items-end pl-2 pt-2 border-t border-outline-variant">
+<span class="font-body-md text-body-md text-on-surface-variant">Turun Mesin (Estimasi)</span>
+<span class="font-label-md text-label-md font-bold text-primary">Rp 3.500.000</span>
+</div>
+</div>
+<!-- Card 4: In Progress -->
+<div class="bg-surface rounded-lg border border-outline-variant p-4 flex flex-col gap-3 relative overflow-hidden shadow-sm">
+<div class="absolute left-0 top-0 bottom-0 w-[4px] bg-secondary-container"></div>
+<div class="flex justify-between items-start pl-2">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-bold text-on-surface">B 3344 CCD</span>
+<span class="font-body-md text-body-md text-on-surface-variant">PT. Logistik Cepat</span>
+</div>
+<span class="bg-secondary-container text-on-secondary-container px-2 py-1 rounded-DEFAULT font-label-sm text-label-sm font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">build_circle</span> Proses
+                    </span>
+</div>
+<div class="flex justify-between items-end pl-2 pt-2 border-t border-outline-variant">
+<span class="font-body-md text-body-md text-on-surface-variant">Servis Rutin Armada</span>
+<span class="font-label-md text-label-md font-bold text-primary">Rp 1.200.000</span>
+</div>
+</div>
+</div>
+</main>
+<!-- Floating Action Button (FAB) -->
+<button aria-label="Tambah Transaksi" class="fixed bottom-24 right-margin-mobile w-14 h-14 bg-secondary-container text-on-secondary-container rounded-full shadow-lg flex items-center justify-center active:scale-95 transition-transform z-40 md:right-margin-desktop">
+<span class="material-symbols-outlined text-[32px]" data-icon="add">add</span>
+</button>
+<!-- BottomNavBar (Shared Component - Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-20 px-4 pb-safe bg-surface border-t border-outline-variant shadow-lg rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-on-surface-variant active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="home">home</span>
+<span class="font-label-sm text-label-sm">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-4 py-1 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="build" data-weight="fill" style="font-variation-settings: 'FILL' 1;">build</span>
+<span class="font-label-sm text-label-sm font-bold">Service</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="list_alt">list_alt</span>
+<span class="font-label-sm text-label-sm">Inventory</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="more_horiz">more_horiz</span>
+<span class="font-label-sm text-label-sm">More</span>
+</a>
+</nav>
+</body></html>

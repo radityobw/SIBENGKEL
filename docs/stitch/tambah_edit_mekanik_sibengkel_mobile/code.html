@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>Tambah Mekanik - SIBENGKEL</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "background": "#f8f9fb",
+                        "on-primary-fixed": "#001c3b",
+                        "on-tertiary-container": "#62a5f9",
+                        "on-secondary-fixed": "#2f1500",
+                        "error-container": "#ffdad6",
+                        "tertiary": "#002447",
+                        "inverse-primary": "#adc8f5",
+                        "primary-fixed-dim": "#adc8f5",
+                        "primary": "#022448",
+                        "on-tertiary": "#ffffff",
+                        "surface-tint": "#455f87",
+                        "inverse-on-surface": "#f0f1f3",
+                        "surface-variant": "#e1e2e4",
+                        "on-tertiary-fixed": "#001c39",
+                        "tertiary-container": "#003a6c",
+                        "on-tertiary-fixed-variant": "#004883",
+                        "secondary-container": "#ffa454",
+                        "secondary": "#904d00",
+                        "surface-container": "#edeef0",
+                        "on-primary-container": "#8aa4cf",
+                        "on-secondary-fixed-variant": "#6e3900",
+                        "on-background": "#191c1e",
+                        "surface-container-highest": "#e1e2e4",
+                        "on-surface-variant": "#43474e",
+                        "outline-variant": "#c4c6cf",
+                        "tertiary-fixed-dim": "#a4c9ff",
+                        "surface-dim": "#d9dadc",
+                        "secondary-fixed-dim": "#ffb77d",
+                        "on-secondary-container": "#713b00",
+                        "on-secondary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "error": "#ba1a1a",
+                        "surface-container-high": "#e7e8ea",
+                        "surface": "#f8f9fb",
+                        "on-primary-fixed-variant": "#2d486d",
+                        "surface-bright": "#f8f9fb",
+                        "on-primary": "#ffffff",
+                        "outline": "#74777f",
+                        "primary-container": "#1e3a5f",
+                        "primary-fixed": "#d5e3ff",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-low": "#f2f4f6",
+                        "inverse-surface": "#2e3132",
+                        "tertiary-fixed": "#d4e3ff",
+                        "secondary-fixed": "#ffdcc3",
+                        "on-error": "#ffffff",
+                        "on-surface": "#191c1e"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "sm": "16px",
+                        "gutter": "20px",
+                        "margin-mobile": "16px",
+                        "md": "24px",
+                        "xs": "8px",
+                        "lg": "32px",
+                        "margin-desktop": "32px",
+                        "base": "4px",
+                        "xl": "48px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Sora"],
+                        "headline-md": ["Sora"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-lg-mobile": ["Sora"],
+                        "label-sm": ["Inter"],
+                        "headline-xl": ["Sora"],
+                        "label-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+                        "headline-xl": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.fill {
+            font-variation-settings: 'FILL' 1;
+        }
+        
+        /* Form inputs styling */
+        .form-input {
+            width: 100%;
+            height: 44px;
+            background-color: theme('colors.surface-container-lowest');
+            border: 1px solid theme('colors.outline-variant');
+            border-radius: theme('borderRadius.DEFAULT');
+            padding: 0 theme('spacing.sm');
+            color: theme('colors.on-surface');
+            transition: border-color 0.2s;
+        }
+        .form-input:focus {
+            outline: none;
+            border-color: theme('colors.primary');
+            box-shadow: 0 0 0 1px theme('colors.primary');
+        }
+        
+        /* Toggle Switch */
+        .toggle-checkbox:checked {
+            right: 0;
+            border-color: theme('colors.primary');
+        }
+        .toggle-checkbox:checked + .toggle-label {
+            background-color: theme('colors.primary');
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md h-screen flex flex-col overflow-hidden w-full max-w-md mx-auto relative shadow-2xl">
+<!-- Top Navigation (Contextual, No Global Nav Shells as this is a transactional sub-page) -->
+<header class="flex items-center px-margin-mobile h-16 bg-surface border-b border-outline-variant shrink-0 z-40 relative">
+<button aria-label="Go back" class="p-2 -ml-2 rounded-full hover:bg-surface-container-high transition-colors text-on-surface flex items-center justify-center min-h-[44px] min-w-[44px]" type="button">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="ml-2 font-headline-md text-headline-md text-on-surface font-bold tracking-tight">Tambah Mekanik</h1>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 overflow-y-auto p-margin-mobile pb-[100px]">
+<!-- Avatar/Photo Upload Section -->
+<div class="flex flex-col items-center justify-center mb-lg">
+<div class="w-24 h-24 rounded-full bg-surface-container-high border-2 border-dashed border-outline flex items-center justify-center mb-xs relative overflow-hidden group cursor-pointer">
+<span class="material-symbols-outlined text-outline text-3xl group-hover:text-primary transition-colors">add_a_photo</span>
+<input accept="image/*" class="absolute inset-0 opacity-0 cursor-pointer" type="file"/>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Foto Profil (Opsional)</span>
+</div>
+<form class="flex flex-col gap-md" id="mechanicForm">
+<!-- Nama Input -->
+<div class="flex flex-col gap-base">
+<label class="font-label-md text-label-md text-on-surface" for="nama">Nama Lengkap</label>
+<input class="form-input font-body-md text-body-md" id="nama" name="nama" placeholder="Masukkan nama mekanik" required="" type="text"/>
+</div>
+<!-- Telepon Input -->
+<div class="flex flex-col gap-base">
+<label class="font-label-md text-label-md text-on-surface" for="telepon">No. Telepon</label>
+<div class="relative">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant font-body-md">+62</span>
+<input class="form-input font-body-md text-body-md pl-12" id="telepon" name="telepon" placeholder="812 3456 7890" required="" type="tel"/>
+</div>
+</div>
+<!-- Spesialisasi Chips -->
+<div class="flex flex-col gap-xs mt-sm">
+<label class="font-label-md text-label-md text-on-surface">Spesialisasi</label>
+<div class="flex flex-wrap gap-xs">
+<!-- Chip: Mesin -->
+<label class="relative flex items-center justify-center px-4 min-h-[44px] bg-surface-container-low border border-outline-variant rounded-full cursor-pointer hover:bg-surface-container-high transition-colors has-[:checked]:bg-primary-container has-[:checked]:border-primary has-[:checked]:text-on-primary-container">
+<input class="peer sr-only" name="spesialisasi" type="checkbox" value="mesin"/>
+<span class="material-symbols-outlined text-[18px] mr-2">settings_suggest</span>
+<span class="font-label-md text-label-md">Mesin</span>
+</label>
+<!-- Chip: Kelistrikan -->
+<label class="relative flex items-center justify-center px-4 min-h-[44px] bg-surface-container-low border border-outline-variant rounded-full cursor-pointer hover:bg-surface-container-high transition-colors has-[:checked]:bg-primary-container has-[:checked]:border-primary has-[:checked]:text-on-primary-container">
+<input class="peer sr-only" name="spesialisasi" type="checkbox" value="kelistrikan"/>
+<span class="material-symbols-outlined text-[18px] mr-2">electric_bolt</span>
+<span class="font-label-md text-label-md">Kelistrikan</span>
+</label>
+<!-- Chip: AC -->
+<label class="relative flex items-center justify-center px-4 min-h-[44px] bg-surface-container-low border border-outline-variant rounded-full cursor-pointer hover:bg-surface-container-high transition-colors has-[:checked]:bg-primary-container has-[:checked]:border-primary has-[:checked]:text-on-primary-container">
+<input class="peer sr-only" name="spesialisasi" type="checkbox" value="ac"/>
+<span class="material-symbols-outlined text-[18px] mr-2">ac_unit</span>
+<span class="font-label-md text-label-md">AC &amp; Pendingin</span>
+</label>
+<!-- Chip: Kaki-kaki -->
+<label class="relative flex items-center justify-center px-4 min-h-[44px] bg-surface-container-low border border-outline-variant rounded-full cursor-pointer hover:bg-surface-container-high transition-colors has-[:checked]:bg-primary-container has-[:checked]:border-primary has-[:checked]:text-on-primary-container">
+<input class="peer sr-only" name="spesialisasi" type="checkbox" value="kakikaki"/>
+<span class="material-symbols-outlined text-[18px] mr-2">tire_repair</span>
+<span class="font-label-md text-label-md">Kaki-kaki</span>
+</label>
+</div>
+</div>
+<!-- Status Aktif Toggle -->
+<div class="flex items-center justify-between p-sm border border-outline-variant rounded-lg bg-surface mt-sm">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface">Status Aktif</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Mekanik tersedia untuk ditugaskan</span>
+</div>
+<div class="relative inline-block w-12 align-middle select-none transition duration-200 ease-in">
+<input checked="" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 border-surface-variant appearance-none cursor-pointer z-10 top-0 left-0 transition-all duration-200" id="status" name="status" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-6 rounded-full bg-surface-variant cursor-pointer transition-colors duration-200" for="status"></label>
+</div>
+</div>
+</form>
+</main>
+<!-- Sticky Bottom Action Area -->
+<div class="fixed bottom-0 left-0 w-full max-w-md left-1/2 -translate-x-1/2 bg-surface border-t border-outline-variant p-margin-mobile shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)] z-50">
+<button class="w-full h-[48px] bg-secondary text-on-secondary rounded-lg font-label-md text-label-md flex items-center justify-center gap-xs hover:bg-secondary-container hover:text-on-secondary-container transition-colors active:scale-[0.98]" form="mechanicForm" type="submit">
+<span class="material-symbols-outlined text-[20px]">save</span>
+            Simpan Mekanik
+        </button>
+</div>
+</body></html>

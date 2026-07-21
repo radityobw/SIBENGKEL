@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SIBENGKEL - Dashboard Mekanik</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Sora:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary-container": "#62a5f9",
+                    "background": "#f8f9fb",
+                    "secondary-fixed-dim": "#ffb77d",
+                    "error": "#ba1a1a",
+                    "secondary-container": "#ffa454",
+                    "tertiary-container": "#003a6c",
+                    "inverse-primary": "#adc8f5",
+                    "error-container": "#ffdad6",
+                    "on-secondary-fixed": "#2f1500",
+                    "surface-variant": "#e1e2e4",
+                    "primary-fixed": "#d5e3ff",
+                    "on-secondary-fixed-variant": "#6e3900",
+                    "on-tertiary": "#ffffff",
+                    "surface-bright": "#f8f9fb",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container-low": "#f2f4f6",
+                    "tertiary-fixed": "#d4e3ff",
+                    "inverse-on-surface": "#f0f1f3",
+                    "on-surface-variant": "#43474e",
+                    "tertiary": "#002447",
+                    "surface-container-highest": "#e1e2e4",
+                    "on-primary": "#ffffff",
+                    "secondary": "#904d00",
+                    "primary-container": "#1e3a5f",
+                    "on-primary-fixed": "#001c3b",
+                    "surface": "#f8f9fb",
+                    "on-surface": "#191c1e",
+                    "surface-dim": "#d9dadc",
+                    "surface-container-high": "#e7e8ea",
+                    "tertiary-fixed-dim": "#a4c9ff",
+                    "on-secondary": "#ffffff",
+                    "primary-fixed-dim": "#adc8f5",
+                    "on-secondary-container": "#713b00",
+                    "on-error-container": "#93000a",
+                    "on-background": "#191c1e",
+                    "on-error": "#ffffff",
+                    "surface-tint": "#455f87",
+                    "on-primary-fixed-variant": "#2d486d",
+                    "on-tertiary-fixed": "#001c39",
+                    "primary": "#022448",
+                    "outline": "#74777f",
+                    "inverse-surface": "#2e3132",
+                    "on-primary-container": "#8aa4cf",
+                    "surface-container": "#edeef0",
+                    "secondary-fixed": "#ffdcc3",
+                    "outline-variant": "#c4c6cf",
+                    "on-tertiary-fixed-variant": "#004883"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-desktop": "32px",
+                    "margin-mobile": "16px",
+                    "xs": "8px",
+                    "lg": "32px",
+                    "xl": "48px",
+                    "base": "4px",
+                    "md": "24px",
+                    "sm": "16px",
+                    "gutter": "20px"
+            },
+            "fontFamily": {
+                    "label-md": [
+                            "Inter"
+                    ],
+                    "headline-xl": [
+                            "Sora"
+                    ],
+                    "body-lg": [
+                            "Inter"
+                    ],
+                    "headline-md": [
+                            "Sora"
+                    ],
+                    "body-md": [
+                            "Inter"
+                    ],
+                    "label-sm": [
+                            "Inter"
+                    ],
+                    "headline-lg": [
+                            "Sora"
+                    ],
+                    "headline-lg-mobile": [
+                            "Sora"
+                    ]
+            },
+            "fontSize": {
+                    "label-md": [
+                            "14px",
+                            {
+                                    "lineHeight": "20px",
+                                    "letterSpacing": "0.01em",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "headline-xl": [
+                            "40px",
+                            {
+                                    "lineHeight": "48px",
+                                    "letterSpacing": "-0.02em",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "body-lg": [
+                            "18px",
+                            {
+                                    "lineHeight": "28px",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "headline-md": [
+                            "20px",
+                            {
+                                    "lineHeight": "28px",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "body-md": [
+                            "16px",
+                            {
+                                    "lineHeight": "24px",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "label-sm": [
+                            "12px",
+                            {
+                                    "lineHeight": "16px",
+                                    "letterSpacing": "0.02em",
+                                    "fontWeight": "500"
+                            }
+                    ],
+                    "headline-lg": [
+                            "32px",
+                            {
+                                    "lineHeight": "40px",
+                                    "letterSpacing": "-0.01em",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "headline-lg-mobile": [
+                            "24px",
+                            {
+                                    "lineHeight": "32px",
+                                    "fontWeight": "600"
+                            }
+                    ]
+            }
+    },
+        },
+      }
+    </script>
+<style>
+        .pb-safe { padding-bottom: env(safe-area-inset-bottom); }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen pb-[80px]">
+<!-- TopAppBar -->
+<header class="bg-surface dark:bg-on-background border-b border-outline-variant dark:border-on-surface-variant w-full top-0 z-50 sticky px-margin-mobile h-14 flex justify-between items-center">
+<button class="text-primary dark:text-primary-fixed active:scale-95 transition-transform hover:bg-surface-container-low dark:hover:bg-primary-container p-2 rounded-full flex items-center justify-center h-11 w-11">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">construction</span>
+</button>
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed">SIBENGKEL</h1>
+<button class="text-primary dark:text-primary-fixed active:scale-95 transition-transform hover:bg-surface-container-low dark:hover:bg-primary-container p-2 rounded-full flex items-center justify-center h-11 w-11">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">notifications</span>
+</button>
+</header>
+<!-- Main Content -->
+<main class="p-margin-mobile flex flex-col gap-sm">
+<h2 class="font-headline-md text-headline-md text-primary mb-xs">Tugas Servis Hari Ini</h2>
+<!-- Card 1: Pending -->
+<article class="bg-surface-container-lowest border border-outline-variant rounded-xl shadow-sm overflow-hidden flex flex-col relative">
+<!-- Status Strip -->
+<div class="absolute left-0 top-0 bottom-0 w-2 bg-[#f59e0b]"></div>
+<div class="p-sm pl-md flex flex-col gap-sm">
+<!-- Header -->
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-outline">motorcycle</span>
+<div>
+<h3 class="font-label-md text-label-md text-on-surface">B 1234 XYZ</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Budi Santoso</p>
+</div>
+</div>
+<span class="bg-[#fef3c7] text-[#b45309] font-label-sm text-label-sm px-2 py-1 rounded-full uppercase">Pending</span>
+</div>
+<!-- Body -->
+<div class="border-t border-outline-variant pt-sm">
+<div class="flex items-start gap-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-outline">build</span>
+<p class="font-body-md text-body-md">Ganti Oli &amp; Cek Rem</p>
+</div>
+</div>
+<!-- Actions -->
+<div class="pt-xs">
+<button class="w-full min-h-[44px] bg-secondary text-on-secondary font-label-md text-label-md rounded-lg flex items-center justify-center gap-xs active:scale-[0.98] transition-transform">
+<span class="material-symbols-outlined">play_circle</span>
+                        Mulai Servis
+                    </button>
+</div>
+</div>
+</article>
+<!-- Card 2: Proses -->
+<article class="bg-surface-container-lowest border border-outline-variant rounded-xl shadow-sm overflow-hidden flex flex-col relative">
+<!-- Status Strip -->
+<div class="absolute left-0 top-0 bottom-0 w-2 bg-[#3b82f6]"></div>
+<div class="p-sm pl-md flex flex-col gap-sm">
+<!-- Header -->
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-outline">directions_car</span>
+<div>
+<h3 class="font-label-md text-label-md text-on-surface">D 5678 ABC</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Siti Aminah</p>
+</div>
+</div>
+<span class="bg-[#dbeafe] text-[#1d4ed8] font-label-sm text-label-sm px-2 py-1 rounded-full uppercase">Proses</span>
+</div>
+<!-- Body -->
+<div class="border-t border-outline-variant pt-sm">
+<div class="flex items-start gap-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-outline">build</span>
+<p class="font-body-md text-body-md">Servis Berkala 10.000km, Ganti Kampas Rem Depan.</p>
+</div>
+</div>
+<!-- Actions -->
+<div class="pt-xs flex gap-xs">
+<button class="flex-1 min-h-[44px] border border-primary text-primary bg-surface-container-lowest font-label-md text-label-md rounded-lg flex items-center justify-center gap-xs active:scale-[0.98] transition-transform">
+<span class="material-symbols-outlined">pause_circle</span>
+                        Tunda
+                    </button>
+<button class="flex-1 min-h-[44px] bg-primary text-on-primary font-label-md text-label-md rounded-lg flex items-center justify-center gap-xs active:scale-[0.98] transition-transform">
+<span class="material-symbols-outlined">check_circle</span>
+                        Selesaikan
+                    </button>
+</div>
+</div>
+</article>
+<!-- Card 3: Selesai -->
+<article class="bg-surface-container-lowest border border-outline-variant rounded-xl shadow-sm overflow-hidden flex flex-col relative opacity-70">
+<!-- Status Strip -->
+<div class="absolute left-0 top-0 bottom-0 w-2 bg-[#10b981]"></div>
+<div class="p-sm pl-md flex flex-col gap-sm">
+<!-- Header -->
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-outline">motorcycle</span>
+<div>
+<h3 class="font-label-md text-label-md text-on-surface">F 9012 DEF</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Andi Wijaya</p>
+</div>
+</div>
+<span class="bg-[#d1fae5] text-[#047857] font-label-sm text-label-sm px-2 py-1 rounded-full uppercase">Selesai</span>
+</div>
+<!-- Body -->
+<div class="border-t border-outline-variant pt-sm">
+<div class="flex items-start gap-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-outline">build</span>
+<p class="font-body-md text-body-md">Tambal Ban Belakang</p>
+</div>
+</div>
+</div>
+</article>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center h-16 pb-safe bg-surface dark:bg-on-background shadow-md border-t border-outline-variant dark:border-on-surface-variant">
+<!-- Dashboard (Active) -->
+<button class="flex flex-col items-center justify-center bg-secondary-container dark:bg-on-secondary-fixed-variant text-on-secondary-container dark:text-secondary-fixed rounded-xl px-4 py-1 active:scale-90 transition-all duration-150 hover:text-primary dark:hover:text-primary-fixed">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="font-label-sm text-label-sm mt-1">Dashboard</span>
+</button>
+<!-- Transaksi (Inactive) -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant px-4 py-1 active:scale-90 transition-all duration-150 hover:text-primary dark:hover:text-primary-fixed">
+<span class="material-symbols-outlined">receipt_long</span>
+<span class="font-label-sm text-label-sm mt-1">Transaksi</span>
+</button>
+<!-- Profil (Inactive) -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant px-4 py-1 active:scale-90 transition-all duration-150 hover:text-primary dark:hover:text-primary-fixed">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-sm text-label-sm mt-1">Profil</span>
+</button>
+</nav>
+</body></html>

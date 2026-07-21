@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SIBENGKEL - Add/Edit Vehicle</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Sora:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-dim": "#d9dadc",
+                      "on-surface": "#191c1e",
+                      "outline": "#74777f",
+                      "on-tertiary": "#ffffff",
+                      "on-tertiary-fixed": "#001c39",
+                      "on-background": "#191c1e",
+                      "on-primary-fixed-variant": "#2d486d",
+                      "surface-container-low": "#f2f4f6",
+                      "secondary-fixed-dim": "#ffb77d",
+                      "on-error": "#ffffff",
+                      "surface-container-high": "#e7e8ea",
+                      "inverse-primary": "#adc8f5",
+                      "secondary": "#904d00",
+                      "outline-variant": "#c4c6cf",
+                      "on-primary": "#ffffff",
+                      "surface-container-lowest": "#ffffff",
+                      "surface-container-highest": "#e1e2e4",
+                      "surface-bright": "#f8f9fb",
+                      "primary-container": "#1e3a5f",
+                      "on-tertiary-fixed-variant": "#004883",
+                      "primary-fixed": "#d5e3ff",
+                      "on-error-container": "#93000a",
+                      "surface-variant": "#e1e2e4",
+                      "error-container": "#ffdad6",
+                      "on-primary-container": "#8aa4cf",
+                      "secondary-fixed": "#ffdcc3",
+                      "secondary-container": "#ffa454",
+                      "surface-container": "#edeef0",
+                      "primary": "#022448",
+                      "on-secondary-fixed-variant": "#6e3900",
+                      "surface-tint": "#455f87",
+                      "on-primary-fixed": "#001c3b",
+                      "tertiary": "#002447",
+                      "primary-fixed-dim": "#adc8f5",
+                      "error": "#ba1a1a",
+                      "on-surface-variant": "#43474e",
+                      "tertiary-fixed-dim": "#a4c9ff",
+                      "tertiary-container": "#003a6c",
+                      "tertiary-fixed": "#d4e3ff",
+                      "on-secondary-fixed": "#2f1500",
+                      "background": "#f8f9fb",
+                      "on-tertiary-container": "#62a5f9",
+                      "surface": "#f8f9fb",
+                      "inverse-on-surface": "#f0f1f3",
+                      "on-secondary": "#ffffff",
+                      "inverse-surface": "#2e3132",
+                      "on-secondary-container": "#713b00"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "base": "4px",
+                      "sm": "16px",
+                      "xl": "48px",
+                      "margin-mobile": "16px",
+                      "margin-desktop": "32px",
+                      "lg": "32px",
+                      "md": "24px",
+                      "xs": "8px",
+                      "gutter": "20px"
+              },
+              "fontFamily": {
+                      "headline-lg": [
+                              "Sora"
+                      ],
+                      "label-sm": [
+                              "Inter"
+                      ],
+                      "headline-md": [
+                              "Sora"
+                      ],
+                      "body-md": [
+                              "Inter"
+                      ],
+                      "body-lg": [
+                              "Inter"
+                      ],
+                      "headline-lg-mobile": [
+                              "Sora"
+                      ],
+                      "label-md": [
+                              "Inter"
+                      ],
+                      "headline-xl": [
+                              "Sora"
+                      ]
+              },
+              "fontSize": {
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "label-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.02em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "headline-md": [
+                              "20px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "label-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "letterSpacing": "0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-xl": [
+                              "40px",
+                              {
+                                      "lineHeight": "48px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+<style>
+        body {
+            -webkit-tap-highlight-color: transparent;
+        }
+        /* Custom styles for select to match inputs */
+        select {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2343474e' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            background-size: 1em;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col">
+<!-- Top App Bar (Task-Focused: Back button, no global nav/profile) -->
+<header class="docked full-width top-0 h-16 border-b border-outline-variant flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop bg-surface dark:bg-on-background sticky z-40">
+<div class="flex items-center gap-sm w-full">
+<button aria-label="Go back" class="h-[44px] w-[44px] flex items-center justify-center text-on-surface hover:bg-surface-container-high rounded-full transition-colors">
+<span class="material-symbols-outlined" style="font-variation-settings: 'wght' 300;">arrow_back</span>
+</button>
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim truncate">
+                Add Vehicle
+            </h1>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 overflow-y-auto w-full max-w-2xl mx-auto px-margin-mobile py-md flex flex-col gap-md">
+<p class="font-body-md text-body-md text-on-surface-variant">Enter vehicle details to register a new unit in the workshop system.</p>
+<form class="flex flex-col gap-md w-full bg-surface-container-lowest border border-outline-variant rounded-xl p-sm md:p-md">
+<!-- Owner (Searchable Select Mockup) -->
+<div class="flex flex-col gap-base">
+<label class="font-label-sm text-label-sm text-on-surface-variant" for="owner">Owner</label>
+<div class="relative">
+<select class="w-full h-[44px] bg-surface-container-lowest border border-outline-variant rounded-md px-sm font-body-md text-body-md text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors" id="owner" name="owner">
+<option disabled="" selected="" value="">Select or search owner</option>
+<option value="1">Budi Santoso</option>
+<option value="2">PT. Lintas Logistik</option>
+<option value="3">Siti Aminah</option>
+</select>
+</div>
+</div>
+<!-- Plat Nomor -->
+<div class="flex flex-col gap-base">
+<label class="font-label-sm text-label-sm text-on-surface-variant" for="plat_nomor">Plat Nomor</label>
+<input class="w-full h-[44px] bg-surface-container-lowest border border-outline-variant rounded-md px-sm font-body-md text-body-md text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors uppercase" id="plat_nomor" name="plat_nomor" placeholder="e.g. B 1234 CD" type="text"/>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<!-- Merk -->
+<div class="flex flex-col gap-base">
+<label class="font-label-sm text-label-sm text-on-surface-variant" for="merk">Merk</label>
+<input class="w-full h-[44px] bg-surface-container-lowest border border-outline-variant rounded-md px-sm font-body-md text-body-md text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors" id="merk" name="merk" placeholder="e.g. Toyota" type="text"/>
+</div>
+<!-- Model -->
+<div class="flex flex-col gap-base">
+<label class="font-label-sm text-label-sm text-on-surface-variant" for="model">Model</label>
+<input class="w-full h-[44px] bg-surface-container-lowest border border-outline-variant rounded-md px-sm font-body-md text-body-md text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors" id="model" name="model" placeholder="e.g. Avanza" type="text"/>
+</div>
+</div>
+<!-- Tahun -->
+<div class="flex flex-col gap-base">
+<label class="font-label-sm text-label-sm text-on-surface-variant" for="tahun">Tahun</label>
+<input class="w-full h-[44px] bg-surface-container-lowest border border-outline-variant rounded-md px-sm font-body-md text-body-md text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors" id="tahun" max="2100" min="1900" name="tahun" placeholder="e.g. 2019" type="number"/>
+</div>
+</form>
+</main>
+<!-- Bottom Action Bar (Fixed at bottom for mobile reachability) -->
+<div class="sticky bottom-0 w-full bg-surface border-t border-outline-variant p-margin-mobile mt-auto z-40 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)]">
+<button class="w-full h-[44px] bg-secondary text-on-secondary font-label-md text-label-md rounded-lg flex items-center justify-center gap-xs hover:bg-secondary-container hover:text-on-secondary-container transition-colors active:scale-[0.98]" type="button">
+<span class="material-symbols-outlined" style="font-variation-settings: 'wght' 300;">save</span>
+            Simpan Kendaraan
+        </button>
+</div>
+</body></html>

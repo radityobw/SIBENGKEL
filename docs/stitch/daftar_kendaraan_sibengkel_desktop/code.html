@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SIBENGKEL - Vehicles</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Sora:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-dim": "#d9dadc",
+                      "on-surface": "#191c1e",
+                      "outline": "#74777f",
+                      "on-tertiary": "#ffffff",
+                      "on-tertiary-fixed": "#001c39",
+                      "on-background": "#191c1e",
+                      "on-primary-fixed-variant": "#2d486d",
+                      "surface-container-low": "#f2f4f6",
+                      "secondary-fixed-dim": "#ffb77d",
+                      "on-error": "#ffffff",
+                      "surface-container-high": "#e7e8ea",
+                      "inverse-primary": "#adc8f5",
+                      "secondary": "#904d00",
+                      "outline-variant": "#c4c6cf",
+                      "on-primary": "#ffffff",
+                      "surface-container-lowest": "#ffffff",
+                      "surface-container-highest": "#e1e2e4",
+                      "surface-bright": "#f8f9fb",
+                      "primary-container": "#1e3a5f",
+                      "on-tertiary-fixed-variant": "#004883",
+                      "primary-fixed": "#d5e3ff",
+                      "on-error-container": "#93000a",
+                      "surface-variant": "#e1e2e4",
+                      "error-container": "#ffdad6",
+                      "on-primary-container": "#8aa4cf",
+                      "secondary-fixed": "#ffdcc3",
+                      "secondary-container": "#ffa454",
+                      "surface-container": "#edeef0",
+                      "primary": "#022448",
+                      "on-secondary-fixed-variant": "#6e3900",
+                      "surface-tint": "#455f87",
+                      "on-primary-fixed": "#001c3b",
+                      "tertiary": "#002447",
+                      "primary-fixed-dim": "#adc8f5",
+                      "error": "#ba1a1a",
+                      "on-surface-variant": "#43474e",
+                      "tertiary-fixed-dim": "#a4c9ff",
+                      "tertiary-container": "#003a6c",
+                      "tertiary-fixed": "#d4e3ff",
+                      "on-secondary-fixed": "#2f1500",
+                      "background": "#f8f9fb",
+                      "on-tertiary-container": "#62a5f9",
+                      "surface": "#f8f9fb",
+                      "inverse-on-surface": "#f0f1f3",
+                      "on-secondary": "#ffffff",
+                      "inverse-surface": "#2e3132",
+                      "on-secondary-container": "#713b00"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "base": "4px",
+                      "sm": "16px",
+                      "xl": "48px",
+                      "margin-mobile": "16px",
+                      "margin-desktop": "32px",
+                      "lg": "32px",
+                      "md": "24px",
+                      "xs": "8px",
+                      "gutter": "20px"
+              },
+              "fontFamily": {
+                      "headline-lg": [
+                              "Sora"
+                      ],
+                      "label-sm": [
+                              "Inter"
+                      ],
+                      "headline-md": [
+                              "Sora"
+                      ],
+                      "body-md": [
+                              "Inter"
+                      ],
+                      "body-lg": [
+                              "Inter"
+                      ],
+                      "headline-lg-mobile": [
+                              "Sora"
+                      ],
+                      "label-md": [
+                              "Inter"
+                      ],
+                      "headline-xl": [
+                              "Sora"
+                      ]
+              },
+              "fontSize": {
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "label-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.02em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "headline-md": [
+                              "20px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "label-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "letterSpacing": "0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-xl": [
+                              "40px",
+                              {
+                                      "lineHeight": "48px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ]
+              }
+            },
+          },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col md:flex-row">
+<!-- SideNavBar (Desktop) -->
+<nav class="hidden md:flex flex-col p-sm gap-xs bg-surface-container-lowest fixed h-screen w-[280px] left-0 top-0 border-r border-outline-variant z-40">
+<div class="flex items-center gap-sm px-4 py-6 mb-4">
+<img class="w-10 h-10 object-contain rounded-DEFAULT" data-alt="A small, stylized gear and wrench icon, representing an industrial automotive workshop setting, rendered in dark navy blue against a crisp white background, vector style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA_3ss9_T7gzfm8kbQvFPlXEAceGB-JXh03V_5JNIeH8NiwNU1OM5gYHyq1UnqCWvh0nKC_wzusF3PbiyLrTdHNVwaV2J8XeH6yGFZ5xUb7lVLxiOeoUOkyKHgxqzEEsvnZWxF-oSjfODs_I5I_sKk4OnjOtmL3LI-1w6ccHed3qtUoBLFmjPXfYLUxeXM80Dtg4yyzgIBPtGuA3BUmYiFHxvwQ58Zv-s6NDNYi2b-u-drjjCdUDdBcqg"/>
+<div>
+<div class="font-headline-md text-headline-md font-bold text-primary">SIBENGKEL</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant">Workshop Management</div>
+</div>
+</div>
+<button class="bg-secondary text-on-secondary font-label-md text-label-md py-3 px-4 rounded-lg flex items-center justify-center gap-2 mb-6 hover:opacity-90 transition-opacity w-full min-h-[44px]">
+<span class="material-symbols-outlined text-[20px]">add</span>
+            Create Job
+        </button>
+<div class="flex-1 overflow-y-auto space-y-1">
+<a class="flex items-center gap-sm text-on-surface-variant hover:bg-surface-container-high px-4 py-3 rounded-lg transition-colors font-label-md text-label-md min-h-[44px]" href="#">
+<span class="material-symbols-outlined text-[24px]">dashboard</span>
+                Dashboard
+            </a>
+<a class="flex items-center gap-sm text-on-surface-variant hover:bg-surface-container-high px-4 py-3 rounded-lg transition-colors font-label-md text-label-md min-h-[44px]" href="#">
+<span class="material-symbols-outlined text-[24px]">group</span>
+                Customers
+            </a>
+<a class="flex items-center gap-sm bg-secondary-container text-on-secondary-container rounded-lg px-4 py-3 font-label-md text-label-md min-h-[44px]" href="#">
+<span class="material-symbols-outlined text-[24px]">directions_car</span>
+                Vehicles
+            </a>
+<a class="flex items-center gap-sm text-on-surface-variant hover:bg-surface-container-high px-4 py-3 rounded-lg transition-colors font-label-md text-label-md min-h-[44px]" href="#">
+<span class="material-symbols-outlined text-[24px]">build</span>
+                Mechanics
+            </a>
+<a class="flex items-center gap-sm text-on-surface-variant hover:bg-surface-container-high px-4 py-3 rounded-lg transition-colors font-label-md text-label-md min-h-[44px]" href="#">
+<span class="material-symbols-outlined text-[24px]">settings_suggest</span>
+                Services
+            </a>
+</div>
+<div class="mt-auto space-y-1 pt-4 border-t border-outline-variant">
+<a class="flex items-center gap-sm text-on-surface-variant hover:bg-surface-container-high px-4 py-3 rounded-lg transition-colors font-label-md text-label-md min-h-[44px]" href="#">
+<span class="material-symbols-outlined text-[24px]">settings</span>
+                Settings
+            </a>
+<a class="flex items-center gap-sm text-on-surface-variant hover:bg-surface-container-high px-4 py-3 rounded-lg transition-colors font-label-md text-label-md min-h-[44px]" href="#">
+<span class="material-symbols-outlined text-[24px]">help</span>
+                Support
+            </a>
+</div>
+</nav>
+<!-- TopAppBar (Mobile & Desktop Content Wrapper) -->
+<div class="flex-1 flex flex-col md:ml-[280px] min-h-screen">
+<header class="docked full-width top-0 h-16 bg-surface border-b border-outline-variant flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop z-30 sticky">
+<div class="flex items-center gap-4">
+<span class="font-headline-md text-headline-md font-bold text-primary md:hidden">SIBENGKEL</span>
+<div class="hidden md:flex items-center relative w-64">
+<span class="material-symbols-outlined absolute left-3 text-on-surface-variant">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface-container-lowest border border-outline-variant rounded-DEFAULT focus:border-primary focus:ring-1 focus:ring-primary text-body-md font-body-md h-[44px] outline-none" placeholder="Search plates..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant hover:text-primary transition-colors p-2 rounded-full hover:bg-surface-container-high w-[44px] h-[44px] flex items-center justify-center">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors p-2 rounded-full hover:bg-surface-container-high w-[44px] h-[44px] flex items-center justify-center">
+<span class="material-symbols-outlined">help</span>
+</button>
+<div class="w-10 h-10 rounded-full overflow-hidden border border-outline-variant">
+<img alt="Admin Profile" class="w-full h-full object-cover" data-alt="A small, professional headshot of an administrative user in a corporate industrial setting, well-lit studio portrait, wearing a collared shirt against a neutral background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCgryfR-VKrYRCo86U8FnciH_6BQjvqOtvfltdLDfmDU86N_v9ANqWo8UPkTlPkbtSaBBbV7faBBSsqkK4tUzuOiJOk7QRNIQ-s7eU44S-tGR4ONfqdpf36ljvc1kEc1l869JWa2HFAgjHd39nRIajUDYT1gxdT8iHMGol5Q1alGG5Sw5-J8HaDIESlXta8aVx3OIL1U6nSfFqU74FViNKRgWIDpBY_5FLBMH7k3M241vOSO8Dm5RH_YA"/>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-1 p-margin-mobile md:p-margin-desktop overflow-x-hidden pb-24 md:pb-8">
+<div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
+<div>
+<h1 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-background">Vehicles</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Manage customer vehicle registry and service history.</p>
+</div>
+<button class="bg-primary text-on-primary font-label-md text-label-md py-2 px-6 rounded-DEFAULT flex items-center gap-2 hover:bg-primary-container transition-colors min-h-[44px]">
+<span class="material-symbols-outlined">add_circle</span>
+                    Tambah Kendaraan
+                </button>
+</div>
+<!-- Filters -->
+<div class="bg-surface-container-lowest p-4 rounded-lg border border-outline-variant mb-6 flex flex-col md:flex-row gap-4">
+<div class="flex-1 relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full pl-10 pr-4 py-2 border border-outline-variant rounded-DEFAULT focus:border-primary focus:ring-1 focus:ring-primary text-body-md font-body-md h-[44px] outline-none" placeholder="Cari Plat Nomor..." type="text"/>
+</div>
+<div class="w-full md:w-64">
+<select class="w-full px-4 py-2 border border-outline-variant rounded-DEFAULT focus:border-primary focus:ring-1 focus:ring-primary text-body-md font-body-md h-[44px] outline-none bg-transparent appearance-none relative">
+<option value="">Semua Merk</option>
+<option value="honda">Honda</option>
+<option value="toyota">Toyota</option>
+<option value="yamaha">Yamaha</option>
+<option value="suzuki">Suzuki</option>
+</select>
+</div>
+</div>
+<!-- Data Table -->
+<div class="bg-surface-container-lowest rounded-lg border border-outline-variant overflow-hidden">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container border-b border-outline-variant">
+<th class="font-label-md text-label-md text-on-surface py-4 px-6 font-semibold">Plat Nomor</th>
+<th class="font-label-md text-label-md text-on-surface py-4 px-6 font-semibold">Merk &amp; Model</th>
+<th class="font-label-md text-label-md text-on-surface py-4 px-6 font-semibold">Tahun</th>
+<th class="font-label-md text-label-md text-on-surface py-4 px-6 font-semibold">Nama Pemilik</th>
+<th class="font-label-md text-label-md text-on-surface py-4 px-6 font-semibold text-right">Aksi</th>
+</tr>
+</thead>
+<tbody class="font-body-md text-body-md text-on-background divide-y divide-outline-variant">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-bright transition-colors group">
+<td class="py-4 px-6">
+<div class="font-semibold text-primary">B 1234 ABC</div>
+</td>
+<td class="py-4 px-6">Honda Beat Street</td>
+<td class="py-4 px-6">2021</td>
+<td class="py-4 px-6">Budi Santoso</td>
+<td class="py-4 px-6 text-right">
+<div class="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="text-on-surface-variant hover:text-primary p-2 rounded-full hover:bg-surface-container w-10 h-10 flex items-center justify-center border border-transparent hover:border-outline-variant transition-all">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="text-on-surface-variant hover:text-error p-2 rounded-full hover:bg-error-container w-10 h-10 flex items-center justify-center border border-transparent hover:border-error-container transition-all">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-bright transition-colors group bg-surface-container-low/30">
+<td class="py-4 px-6">
+<div class="font-semibold text-primary">D 5678 DEF</div>
+</td>
+<td class="py-4 px-6">Toyota Avanza 1.3 G</td>
+<td class="py-4 px-6">2019</td>
+<td class="py-4 px-6">Siti Rahmawati</td>
+<td class="py-4 px-6 text-right">
+<div class="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="text-on-surface-variant hover:text-primary p-2 rounded-full hover:bg-surface-container w-10 h-10 flex items-center justify-center border border-transparent hover:border-outline-variant transition-all">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="text-on-surface-variant hover:text-error p-2 rounded-full hover:bg-error-container w-10 h-10 flex items-center justify-center border border-transparent hover:border-error-container transition-all">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-bright transition-colors group">
+<td class="py-4 px-6">
+<div class="font-semibold text-primary">L 9012 GHI</div>
+</td>
+<td class="py-4 px-6">Yamaha NMAX 155</td>
+<td class="py-4 px-6">2022</td>
+<td class="py-4 px-6">Agus Prasetyo</td>
+<td class="py-4 px-6 text-right">
+<div class="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="text-on-surface-variant hover:text-primary p-2 rounded-full hover:bg-surface-container w-10 h-10 flex items-center justify-center border border-transparent hover:border-outline-variant transition-all">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="text-on-surface-variant hover:text-error p-2 rounded-full hover:bg-error-container w-10 h-10 flex items-center justify-center border border-transparent hover:border-error-container transition-all">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-surface-bright transition-colors group bg-surface-container-low/30">
+<td class="py-4 px-6">
+<div class="font-semibold text-primary">AB 3456 JKL</div>
+</td>
+<td class="py-4 px-6">Honda HRV 1.5 E</td>
+<td class="py-4 px-6">2020</td>
+<td class="py-4 px-6">Dian Kusuma</td>
+<td class="py-4 px-6 text-right">
+<div class="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="text-on-surface-variant hover:text-primary p-2 rounded-full hover:bg-surface-container w-10 h-10 flex items-center justify-center border border-transparent hover:border-outline-variant transition-all">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="text-on-surface-variant hover:text-error p-2 rounded-full hover:bg-error-container w-10 h-10 flex items-center justify-center border border-transparent hover:border-error-container transition-all">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 5 -->
+<tr class="hover:bg-surface-bright transition-colors group">
+<td class="py-4 px-6">
+<div class="font-semibold text-primary">DK 7890 MNO</div>
+</td>
+<td class="py-4 px-6">Suzuki Ertiga GL</td>
+<td class="py-4 px-6">2018</td>
+<td class="py-4 px-6">I Wayan Sudana</td>
+<td class="py-4 px-6 text-right">
+<div class="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="text-on-surface-variant hover:text-primary p-2 rounded-full hover:bg-surface-container w-10 h-10 flex items-center justify-center border border-transparent hover:border-outline-variant transition-all">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="text-on-surface-variant hover:text-error p-2 rounded-full hover:bg-error-container w-10 h-10 flex items-center justify-center border border-transparent hover:border-error-container transition-all">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="px-6 py-4 border-t border-outline-variant flex items-center justify-between bg-surface-container-lowest">
+<div class="font-label-sm text-label-sm text-on-surface-variant">
+                        Showing 1 to 5 of 24 entries
+                    </div>
+<div class="flex items-center gap-2">
+<button class="p-2 border border-outline-variant rounded-DEFAULT text-on-surface-variant hover:bg-surface-container-high disabled:opacity-50 min-w-[40px] h-[40px] flex items-center justify-center" disabled="">
+<span class="material-symbols-outlined text-[20px]">chevron_left</span>
+</button>
+<button class="w-10 h-10 bg-primary text-on-primary rounded-DEFAULT font-label-md text-label-md flex items-center justify-center">1</button>
+<button class="w-10 h-10 border border-outline-variant text-on-surface hover:bg-surface-container-high rounded-DEFAULT font-label-md text-label-md flex items-center justify-center transition-colors">2</button>
+<button class="w-10 h-10 border border-outline-variant text-on-surface hover:bg-surface-container-high rounded-DEFAULT font-label-md text-label-md flex items-center justify-center transition-colors">3</button>
+<button class="p-2 border border-outline-variant rounded-DEFAULT text-on-surface-variant hover:bg-surface-container-high min-w-[40px] h-[40px] flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-[20px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- BottomNavBar (Mobile) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-2 bg-surface-container border-t border-outline-variant h-20 rounded-t-xl shadow-lg">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-colors w-16 h-full rounded-lg" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-sm text-label-sm mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-4 py-1 mt-1" href="#">
+<span class="material-symbols-outlined">directions_car</span>
+<span class="font-label-sm text-label-sm mt-1">Cars</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-colors w-16 h-full rounded-lg" href="#">
+<span class="material-symbols-outlined">assignment</span>
+<span class="font-label-sm text-label-sm mt-1">Jobs</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-colors w-16 h-full rounded-lg" href="#">
+<span class="material-symbols-outlined">extension</span>
+<span class="font-label-sm text-label-sm mt-1">Parts</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-colors w-16 h-full rounded-lg" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-sm text-label-sm mt-1">User</span>
+</a>
+</nav>
+</body></html>

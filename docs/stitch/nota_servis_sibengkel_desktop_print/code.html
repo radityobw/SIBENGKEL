@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SIBENGKEL - Invoice / Service Note</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Sora:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-high": "#e7e8ea",
+                    "on-error-container": "#93000a",
+                    "on-secondary": "#ffffff",
+                    "error-container": "#ffdad6",
+                    "surface-container": "#edeef0",
+                    "on-surface-variant": "#43474e",
+                    "surface-variant": "#e1e2e4",
+                    "primary-container": "#1e3a5f",
+                    "background": "#f8f9fb",
+                    "secondary-container": "#ffa454",
+                    "on-secondary-fixed": "#2f1500",
+                    "on-primary": "#ffffff",
+                    "outline-variant": "#c4c6cf",
+                    "tertiary-container": "#003a6c",
+                    "on-background": "#191c1e",
+                    "on-primary-fixed": "#001c3b",
+                    "surface-container-highest": "#e1e2e4",
+                    "outline": "#74777f",
+                    "secondary-fixed": "#ffdcc3",
+                    "primary-fixed-dim": "#adc8f5",
+                    "on-tertiary-fixed": "#001c39",
+                    "tertiary-fixed-dim": "#a4c9ff",
+                    "on-tertiary": "#ffffff",
+                    "secondary-fixed-dim": "#ffb77d",
+                    "tertiary-fixed": "#d4e3ff",
+                    "surface-bright": "#f8f9fb",
+                    "on-tertiary-container": "#62a5f9",
+                    "inverse-surface": "#2e3132",
+                    "on-tertiary-fixed-variant": "#004883",
+                    "surface-container-low": "#f2f4f6",
+                    "surface-tint": "#455f87",
+                    "surface-dim": "#d9dadc",
+                    "on-primary-fixed-variant": "#2d486d",
+                    "on-primary-container": "#8aa4cf",
+                    "tertiary": "#002447",
+                    "on-secondary-container": "#713b00",
+                    "on-error": "#ffffff",
+                    "inverse-on-surface": "#f0f1f3",
+                    "inverse-primary": "#adc8f5",
+                    "on-surface": "#191c1e",
+                    "surface": "#ffffff", /* Override for print */
+                    "surface-container-lowest": "#ffffff",
+                    "primary-fixed": "#d5e3ff",
+                    "secondary": "#904d00",
+                    "primary": "#022448",
+                    "on-secondary-fixed-variant": "#6e3900",
+                    "error": "#ba1a1a"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "xs": "8px",
+                    "md": "24px",
+                    "lg": "32px",
+                    "gutter": "20px",
+                    "margin-desktop": "32px",
+                    "xl": "48px",
+                    "base": "4px",
+                    "margin-mobile": "16px",
+                    "sm": "16px"
+            },
+            "fontFamily": {
+                    "headline-xl": ["Sora"],
+                    "body-md": ["Inter"],
+                    "label-md": ["Inter"],
+                    "headline-lg-mobile": ["Sora"],
+                    "body-lg": ["Inter"],
+                    "headline-md": ["Sora"],
+                    "label-sm": ["Inter"],
+                    "headline-lg": ["Sora"]
+            },
+            "fontSize": {
+                    "headline-xl": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        @media print {
+            body {
+                background-color: white;
+                -webkit-print-color-adjust: exact;
+                color-adjust: exact;
+            }
+            .no-print {
+                display: none !important;
+            }
+            /* Ensure thin borders print well */
+            * {
+                border-color: #000 !important;
+            }
+            .text-on-surface-variant {
+                color: #000 !important;
+            }
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface min-h-screen flex justify-center py-md print:py-0">
+<!-- Action Bar (No Print) -->
+<div class="fixed top-4 right-4 flex gap-xs no-print">
+<button class="h-[44px] px-sm bg-primary text-on-primary rounded-DEFAULT text-label-md font-label-md flex items-center gap-xs hover:bg-on-primary-fixed-variant transition-colors border border-primary" onclick="window.print()">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">print</span>
+            Print Invoice
+        </button>
+</div>
+<!-- A4 Container -->
+<div class="w-full max-w-[210mm] bg-surface mx-auto p-[20mm] flex flex-col gap-lg print:p-0">
+<!-- Header Section -->
+<header class="flex justify-between items-start border-b border-on-surface pb-sm">
+<div class="flex items-center gap-sm">
+<!-- Workshop Logo -->
+<div class="w-16 h-16 bg-surface-container flex items-center justify-center border border-on-surface">
+<span class="material-symbols-outlined text-[32px] text-primary" style="font-variation-settings: 'FILL' 1;">build</span>
+</div>
+<div>
+<h1 class="text-headline-lg font-headline-lg text-primary tracking-tight">SIBENGKEL</h1>
+<p class="text-label-sm font-label-sm text-on-surface-variant mt-base">INVOICE / SERVICE NOTE</p>
+</div>
+</div>
+<div class="text-right text-label-md font-label-md text-on-surface-variant flex flex-col gap-base">
+<p>SIBENGKEL</p>
+<p>Jl. Industri No. 123</p>
+<p>Jakarta, Indonesia</p>
+<p>+62 21 555 1234</p>
+</div>
+</header>
+<!-- Metadata Row -->
+<div class="flex justify-between items-center text-body-md font-body-md border border-on-surface p-xs">
+<div class="flex gap-md">
+<div><span class="text-label-md font-label-md mr-base">Invoice No:</span> INV-2023-0892</div>
+</div>
+<div class="flex gap-md">
+<div><span class="text-label-md font-label-md mr-base">Date:</span> 24 Oct 2023</div>
+<div><span class="text-label-md font-label-md mr-base">Time:</span> 14:30 WIB</div>
+</div>
+</div>
+<!-- Section 1: Customer & Vehicle Info -->
+<div class="grid grid-cols-2 gap-sm border-t border-b border-on-surface py-sm">
+<div class="flex flex-col gap-base">
+<h2 class="text-label-md font-label-md text-on-surface-variant uppercase tracking-wider mb-xs">Customer Information</h2>
+<div class="grid grid-cols-[100px_1fr] text-body-md font-body-md">
+<span class="text-label-md font-label-md">Name:</span>
+<span>Budi Santoso</span>
+</div>
+<div class="grid grid-cols-[100px_1fr] text-body-md font-body-md">
+<span class="text-label-md font-label-md">Phone:</span>
+<span>+62 812 3456 7890</span>
+</div>
+</div>
+<div class="flex flex-col gap-base border-l border-on-surface pl-sm">
+<h2 class="text-label-md font-label-md text-on-surface-variant uppercase tracking-wider mb-xs">Vehicle Information</h2>
+<div class="grid grid-cols-[100px_1fr] text-body-md font-body-md">
+<span class="text-label-md font-label-md">Plate:</span>
+<span>B 1234 ABC</span>
+</div>
+<div class="grid grid-cols-[100px_1fr] text-body-md font-body-md">
+<span class="text-label-md font-label-md">Model:</span>
+<span>Toyota Avanza 2019</span>
+</div>
+</div>
+</div>
+<!-- Section 2: Service / Sparepart Details -->
+<div class="flex-grow">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-on-surface">
+<th class="py-xs px-base text-label-md font-label-md text-on-surface-variant uppercase tracking-wider w-[60%]">Description</th>
+<th class="py-xs px-base text-label-md font-label-md text-on-surface-variant uppercase tracking-wider w-[10%] text-center">Qty</th>
+<th class="py-xs px-base text-label-md font-label-md text-on-surface-variant uppercase tracking-wider w-[15%] text-right">Unit Price</th>
+<th class="py-xs px-base text-label-md font-label-md text-on-surface-variant uppercase tracking-wider w-[15%] text-right">Cost (IDR)</th>
+</tr>
+</thead>
+<tbody class="text-body-md font-body-md border-b border-on-surface">
+<tr class="border-b border-outline-variant/30">
+<td class="py-xs px-base">Standard Oil Change (Synthetic 10W-40)</td>
+<td class="py-xs px-base text-center">1</td>
+<td class="py-xs px-base text-right">450,000</td>
+<td class="py-xs px-base text-right">450,000</td>
+</tr>
+<tr class="border-b border-outline-variant/30">
+<td class="py-xs px-base">Oil Filter Replacement</td>
+<td class="py-xs px-base text-center">1</td>
+<td class="py-xs px-base text-right">85,000</td>
+<td class="py-xs px-base text-right">85,000</td>
+</tr>
+<tr class="border-b border-outline-variant/30">
+<td class="py-xs px-base">Brake Pad Set (Front) - OEM</td>
+<td class="py-xs px-base text-center">1</td>
+<td class="py-xs px-base text-right">320,000</td>
+<td class="py-xs px-base text-right">320,000</td>
+</tr>
+<tr class="border-b border-outline-variant/30">
+<td class="py-xs px-base">Service Charge / Labor - Brake Installation</td>
+<td class="py-xs px-base text-center">-</td>
+<td class="py-xs px-base text-right">-</td>
+<td class="py-xs px-base text-right">150,000</td>
+</tr>
+<tr class="">
+<td class="py-xs px-base">General Checkup</td>
+<td class="py-xs px-base text-center">-</td>
+<td class="py-xs px-base text-right">-</td>
+<td class="py-xs px-base text-right">Free</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Section 3: Summary -->
+<div class="flex justify-end pt-sm border-b border-on-surface pb-sm">
+<div class="w-1/2 flex flex-col gap-base">
+<div class="flex justify-between text-body-md font-body-md px-base">
+<span>Subtotal</span>
+<span>1,005,000</span>
+</div>
+<div class="flex justify-between text-body-md font-body-md px-base text-on-surface-variant">
+<span>Tax (11%)</span>
+<span>110,550</span>
+</div>
+<div class="flex justify-between text-headline-md font-headline-md text-primary mt-xs pt-xs border-t border-on-surface px-base">
+<span>Total Amount</span>
+<span>IDR 1,115,550</span>
+</div>
+</div>
+</div>
+<!-- Section 4: Signatures -->
+<div class="flex justify-between mt-xl pt-lg px-lg">
+<div class="flex flex-col items-center gap-xl w-48">
+<span class="text-label-md font-label-md text-on-surface-variant">Customer</span>
+<div class="w-full border-b border-on-surface"></div>
+<span class="text-body-md font-body-md">( Budi Santoso )</span>
+</div>
+<div class="flex flex-col items-center gap-xl w-48">
+<span class="text-label-md font-label-md text-on-surface-variant">Authorized Mechanic</span>
+<div class="w-full border-b border-on-surface"></div>
+<span class="text-body-md font-body-md">( Joko W. )</span>
+</div>
+</div>
+<!-- Footer Note -->
+<div class="text-center mt-auto pt-lg pb-sm text-label-sm font-label-sm text-on-surface-variant border-t border-on-surface">
+<p>Thank you for trusting SIBENGKEL with your vehicle.</p>
+<p>All parts carry a 30-day warranty unless otherwise specified.</p>
+</div>
+</div>
+</body></html>

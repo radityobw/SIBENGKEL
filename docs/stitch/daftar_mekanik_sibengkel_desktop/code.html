@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Daftar Mekanik - SIBENGKEL</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "background": "#f8f9fb",
+                        "on-primary-fixed": "#001c3b",
+                        "on-tertiary-container": "#62a5f9",
+                        "on-secondary-fixed": "#2f1500",
+                        "error-container": "#ffdad6",
+                        "tertiary": "#002447",
+                        "inverse-primary": "#adc8f5",
+                        "primary-fixed-dim": "#adc8f5",
+                        "primary": "#022448",
+                        "on-tertiary": "#ffffff",
+                        "surface-tint": "#455f87",
+                        "inverse-on-surface": "#f0f1f3",
+                        "surface-variant": "#e1e2e4",
+                        "on-tertiary-fixed": "#001c39",
+                        "tertiary-container": "#003a6c",
+                        "on-tertiary-fixed-variant": "#004883",
+                        "secondary-container": "#ffa454",
+                        "secondary": "#904d00",
+                        "surface-container": "#edeef0",
+                        "on-primary-container": "#8aa4cf",
+                        "on-secondary-fixed-variant": "#6e3900",
+                        "on-background": "#191c1e",
+                        "surface-container-highest": "#e1e2e4",
+                        "on-surface-variant": "#43474e",
+                        "outline-variant": "#c4c6cf",
+                        "tertiary-fixed-dim": "#a4c9ff",
+                        "surface-dim": "#d9dadc",
+                        "secondary-fixed-dim": "#ffb77d",
+                        "on-secondary-container": "#713b00",
+                        "on-secondary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "error": "#ba1a1a",
+                        "surface-container-high": "#e7e8ea",
+                        "surface": "#f8f9fb",
+                        "on-primary-fixed-variant": "#2d486d",
+                        "surface-bright": "#f8f9fb",
+                        "on-primary": "#ffffff",
+                        "outline": "#74777f",
+                        "primary-container": "#1e3a5f",
+                        "primary-fixed": "#d5e3ff",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-low": "#f2f4f6",
+                        "inverse-surface": "#2e3132",
+                        "tertiary-fixed": "#d4e3ff",
+                        "secondary-fixed": "#ffdcc3",
+                        "on-error": "#ffffff",
+                        "on-surface": "#191c1e"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "sm": "16px",
+                        "gutter": "20px",
+                        "margin-mobile": "16px",
+                        "md": "24px",
+                        "xs": "8px",
+                        "lg": "32px",
+                        "margin-desktop": "32px",
+                        "base": "4px",
+                        "xl": "48px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Sora"],
+                        "headline-md": ["Sora"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-lg-mobile": ["Sora"],
+                        "label-sm": ["Inter"],
+                        "headline-xl": ["Sora"],
+                        "label-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+                        "headline-xl": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .icon-fill {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md text-body-md antialiased min-h-screen">
+<!-- TopNavBar -->
+<header class="bg-surface border-b border-outline-variant flex justify-between items-center px-gutter h-16 w-full z-40 fixed top-0 lg:hidden">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-on-surface-variant">menu</span>
+<span class="font-headline-md text-headline-md text-primary tracking-tight">SIBENGKEL</span>
+</div>
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:bg-surface-container-high transition-colors p-2 rounded-full">notifications</span>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:bg-surface-container-high transition-colors p-2 rounded-full">settings</span>
+<img alt="User profile" class="w-8 h-8 rounded-full object-cover border border-outline-variant" data-alt="A small, professional headshot of a mechanic in a clean workshop environment. High-quality lighting, industrial modern setting. The subject is wearing a navy blue work shirt." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_EEh0yj_UQTGzySNz5dTNXylJnbxJNgAiHTIWjXaLQZy5PB2UyfREF_SRjdBNrNDK83AAvQG1esx0mTLWK68fSA_hEFbxKYKUO0v8ON51ZcUXjEe9vA4FjcwYad3cZkCqR7ybayz18H8TEaSJiNnw0oz9swaFx_ndGMO0lGXnkmz22T6MhCpJFh9jRyr2esqC4nguaRn1KxS8rRN0PTIRydp_VGvq18xLyzv0Np7qei9P3rKaoU5P4A"/>
+</div>
+</header>
+<div class="flex h-screen pt-16 lg:pt-0">
+<!-- SideNavBar -->
+<aside class="hidden lg:flex flex-col p-md gap-xs bg-surface-container-low border-r border-outline-variant fixed left-0 top-0 h-full w-[280px] z-50 transition-all duration-200 ease-in-out">
+<div class="flex items-center gap-sm mb-lg">
+<img alt="Workshop Logo" class="w-10 h-10 rounded-lg object-cover" data-alt="A sleek, modern logo for an automotive workshop named SIBENGKEL. Industrial aesthetic, minimalist design with precise geometric shapes, metallic silver and navy blue accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAmobL02IOSl4q6I14EWfYF1eSw4ud95myxgJLBf0wa0z9T8oSG5dNZSF1WTEtmn7_DmPQYX7N_0pelT2RXuCr3mcghiteM3i-ISS_MkRc2YHrKcRRIq6HoxR7370YnSZWzd4d2wd7pvbCOPqNaNjr7Tuhi_uKTyv5-0GM-WbTjUe4HcJ12MHxjYKArwe0iktlnQg-iQ1vab_QJvhVLzsAO1PJhS9pXO15XEuhcbPlIvWS-seb90cWVXQ"/>
+<div>
+<h1 class="font-headline-md text-headline-md text-on-primary-fixed">SIBENGKEL</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Workshop Management</p>
+</div>
+</div>
+<nav class="flex flex-col gap-xs flex-grow">
+<a class="flex items-center gap-sm px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+                    Dashboard
+                </a>
+<a class="flex items-center gap-sm px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">person</span>
+                    Customers
+                </a>
+<a class="flex items-center gap-sm px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">directions_car</span>
+                    Vehicles
+                </a>
+<a class="flex items-center gap-sm px-4 py-3 rounded-lg bg-primary-container text-on-primary-container font-label-md text-label-md font-bold" href="#">
+<span class="material-symbols-outlined icon-fill">build</span>
+                    Mechanics
+                </a>
+<a class="flex items-center gap-sm px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">engineering</span>
+                    Services
+                </a>
+</nav>
+<button class="bg-secondary text-on-secondary font-label-md text-label-md py-3 px-4 rounded-lg w-full flex items-center justify-center gap-2 hover:opacity-90 transition-opacity mt-auto mb-4 min-h-[44px]">
+<span class="material-symbols-outlined">add</span>
+                New Service Job
+            </button>
+<div class="flex flex-col gap-xs pt-4 border-t border-outline-variant">
+<a class="flex items-center gap-sm px-4 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">settings</span>
+                    Settings
+                </a>
+<a class="flex items-center gap-sm px-4 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">logout</span>
+                    Logout
+                </a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 lg:ml-[280px] p-gutter md:p-margin-desktop overflow-y-auto">
+<!-- Page Header -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-lg gap-4">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-1">Daftar Mekanik</h2>
+<p class="text-on-surface-variant font-body-md text-body-md">Kelola tim teknisi dan spesialisasi bengkel Anda.</p>
+</div>
+<button class="bg-secondary text-on-secondary font-label-md text-label-md px-6 py-3 rounded-lg flex items-center gap-2 hover:bg-secondary-container hover:text-on-secondary-container transition-colors shadow-sm min-h-[44px]">
+<span class="material-symbols-outlined text-sm">add</span>
+                    Tambah Mekanik
+                </button>
+</div>
+<!-- Content Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-md">
+<!-- Card 1 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden flex flex-col hover:shadow-md transition-shadow">
+<div class="p-sm flex flex-col items-center text-center relative">
+<span class="absolute top-sm right-sm px-2 py-1 rounded bg-[#dcfce7] text-[#166534] font-label-sm text-[10px] uppercase font-bold tracking-wider">Aktif</span>
+<div class="w-20 h-20 rounded-full border-2 border-surface-variant overflow-hidden mb-3 mt-4">
+<img alt="Budi Santoso" class="w-full h-full object-cover" data-alt="Portrait of an experienced senior mechanic with a friendly smile, wearing a dark blue workshop uniform. Well-lit indoor garage setting with tools subtly blurred in the background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCeVm7-BnNYX76dKN8Bvjk6eVuiWLePo-PiD6FwccXYTD3NwG5uUcg2Ti2hSLXNU6tChRE5WGiP3PGCmJQUL4j4w-xwrn-tBD5FdRPvAeHTS0iObX7Q-WGEi4Oq0g1jH_n2Nr7P8FrJhwIEfhc3LEsjwh10HqNFt9yHBMFjOFPaj8h9Pwr2W4rpniIB8THFfeNOtLCETsot3D9_jaGE630N5P3MKQ6oJKcW676Mm4CtcfVUpGNwuA0LqA"/>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-1">Budi Santoso</h3>
+<p class="text-on-surface-variant font-body-sm text-sm mb-4">Ahli Mesin &amp; Transmisi</p>
+<div class="flex items-center gap-4 text-on-surface-variant text-sm mb-2 w-full justify-center">
+<div class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">engineering</span> 15th Exp</div>
+<div class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">star</span> 4.9</div>
+</div>
+</div>
+<div class="border-t border-outline-variant mt-auto flex">
+<button class="flex-1 py-3 font-label-md text-label-md text-primary hover:bg-surface-container-low transition-colors min-h-[44px] flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">edit</span> Edit Profil
+                        </button>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden flex flex-col hover:shadow-md transition-shadow">
+<div class="p-sm flex flex-col items-center text-center relative">
+<span class="absolute top-sm right-sm px-2 py-1 rounded bg-[#dcfce7] text-[#166534] font-label-sm text-[10px] uppercase font-bold tracking-wider">Aktif</span>
+<div class="w-20 h-20 rounded-full border-2 border-surface-variant overflow-hidden mb-3 mt-4">
+<img alt="Agus Setiawan" class="w-full h-full object-cover" data-alt="Portrait of a focused young mechanic inspecting a spark plug. Wearing professional industrial safety glasses and a navy blue uniform. Bright, clean workshop environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYbEhxQ3tVGiI6PHG1i-yJfgFmeHWX0wtLnucWBGKIkpZKoQhbT0sj1eN8EnY2dpedxmBzf-BVsGUyKBDhJVfQ2dDCxQ6K3-LDP9tVDYycgK-Y6ieYGEj3aEUd00zCzWP4dFaoKwKICNtjqr1D9AtpdZ0rgmNgDjDccdr3AYrs2k_eZvQg60IFTFPqQ1r3SR23evTI9udLSjWpiMiEeN0AcypRPdE_mD4oP4naQie4J9zvAdDO4uHc1Q"/>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-1">Agus Setiawan</h3>
+<p class="text-on-surface-variant font-body-sm text-sm mb-4">Spesialis Kelistrikan</p>
+<div class="flex items-center gap-4 text-on-surface-variant text-sm mb-2 w-full justify-center">
+<div class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">engineering</span> 8th Exp</div>
+<div class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">star</span> 4.7</div>
+</div>
+</div>
+<div class="border-t border-outline-variant mt-auto flex">
+<button class="flex-1 py-3 font-label-md text-label-md text-primary hover:bg-surface-container-low transition-colors min-h-[44px] flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">edit</span> Edit Profil
+                        </button>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden flex flex-col hover:shadow-md transition-shadow">
+<div class="p-sm flex flex-col items-center text-center relative">
+<span class="absolute top-sm right-sm px-2 py-1 rounded bg-surface-variant text-on-surface-variant font-label-sm text-[10px] uppercase font-bold tracking-wider">Nonaktif</span>
+<div class="w-20 h-20 rounded-full border-2 border-surface-variant overflow-hidden mb-3 mt-4 opacity-60">
+<img alt="Joko Haryanto" class="w-full h-full object-cover grayscale" data-alt="Headshot of a mechanic with short hair, wearing a clean work shirt, looking directly at the camera with a neutral expression. Automotive shop setting with soft, diffused industrial lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCae435Mm91KYBWmzO5ONGy4V0YWxBFwBiBXm6VfFe-rGXqKXSXNMg9P6VbXYvEs5n3TFSUz7Hxd9wev8NIA7ZZG1UwMYnEk2Qn9vFeTei65nJU_IL2j9_fvV-Z9GgGS_2oojQ3jGlT_VLFLS5ZYA-NBVYe-yiVTd7QTmCw8zN4Zav8FMG5vzIwOCgf9_Diy8S9t4ayL0Fu5aS-U0FvVHSY0VJJ_IzFpe8hLuHhqAnXj6oq7lWJX6m7Wg"/>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-1 opacity-70">Joko Haryanto</h3>
+<p class="text-on-surface-variant font-body-sm text-sm mb-4 opacity-70">Teknisi Umum &amp; AC</p>
+<div class="flex items-center gap-4 text-on-surface-variant text-sm mb-2 w-full justify-center opacity-70">
+<div class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">engineering</span> 5th Exp</div>
+<div class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">star</span> 4.5</div>
+</div>
+</div>
+<div class="border-t border-outline-variant mt-auto flex bg-surface-container-low">
+<button class="flex-1 py-3 font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors min-h-[44px] flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">edit</span> Edit Profil
+                        </button>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden flex flex-col hover:shadow-md transition-shadow">
+<div class="p-sm flex flex-col items-center text-center relative">
+<span class="absolute top-sm right-sm px-2 py-1 rounded bg-[#dcfce7] text-[#166534] font-label-sm text-[10px] uppercase font-bold tracking-wider">Aktif</span>
+<div class="w-20 h-20 rounded-full border-2 border-surface-variant overflow-hidden mb-3 mt-4">
+<img alt="Siti Rahma" class="w-full h-full object-cover" data-alt="Female mechanic in a modern, well-lit automotive workshop. She is smiling confidently, wearing a dark blue mechanic uniform with small reflective details. Professional, clean industrial environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBNDzYUAMDGY0N1SrA2MBfXJOlJV4cThEKH74LHJkJfEwWOnsvanJ6hjnp8JqerA8FPTf7orz9ezTL9fhAO8txOmy7L8h-4pcZ2T43OBe9F1LuXD97m4mMscx6o661YARZ7Sj1y342P-qiRw3XXkinV2Z1Jo81SNdh4vlz0UOdtmCN2rgoadwWC7i_khPfgDKXihxHjag4QAsrW-iKh-20Q_mz96T5zLe99DHKPBsFTl3MrHFhBbEcTdQ"/>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-1">Siti Rahma</h3>
+<p class="text-on-surface-variant font-body-sm text-sm mb-4">Diagnosis Komputer &amp; ECU</p>
+<div class="flex items-center gap-4 text-on-surface-variant text-sm mb-2 w-full justify-center">
+<div class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">engineering</span> 6th Exp</div>
+<div class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">star</span> 5.0</div>
+</div>
+</div>
+<div class="border-t border-outline-variant mt-auto flex">
+<button class="flex-1 py-3 font-label-md text-label-md text-primary hover:bg-surface-container-low transition-colors min-h-[44px] flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">edit</span> Edit Profil
+                        </button>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

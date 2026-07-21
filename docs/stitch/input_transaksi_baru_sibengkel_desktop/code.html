@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Input Transaksi Baru - SIBENGKEL</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Sora:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "error-container": "#ffdad6",
+                    "on-primary": "#ffffff",
+                    "surface-variant": "#e1e2e4",
+                    "outline": "#74777f",
+                    "on-primary-container": "#8aa4cf",
+                    "on-primary-fixed-variant": "#2d486d",
+                    "inverse-on-surface": "#f0f1f3",
+                    "secondary-container": "#ffa454",
+                    "on-tertiary-fixed": "#001c39",
+                    "surface": "#f8f9fb",
+                    "primary-fixed": "#d5e3ff",
+                    "surface-container-highest": "#e1e2e4",
+                    "secondary-fixed-dim": "#ffb77d",
+                    "secondary-fixed": "#ffdcc3",
+                    "surface-bright": "#f8f9fb",
+                    "on-error": "#ffffff",
+                    "error": "#ba1a1a",
+                    "surface-container-high": "#e7e8ea",
+                    "on-tertiary-fixed-variant": "#004883",
+                    "on-tertiary-container": "#62a5f9",
+                    "tertiary-fixed-dim": "#a4c9ff",
+                    "on-secondary-fixed": "#2f1500",
+                    "on-primary-fixed": "#001c3b",
+                    "on-error-container": "#93000a",
+                    "inverse-surface": "#2e3132",
+                    "inverse-primary": "#adc8f5",
+                    "primary-container": "#1e3a5f",
+                    "on-secondary-container": "#713b00",
+                    "surface-container-low": "#f2f4f6",
+                    "surface-container": "#edeef0",
+                    "tertiary": "#002447",
+                    "primary": "#022448",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "surface-dim": "#d9dadc",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary-fixed-variant": "#6e3900",
+                    "background": "#f8f9fb",
+                    "tertiary-container": "#003a6c",
+                    "surface-tint": "#455f87",
+                    "on-surface": "#191c1e",
+                    "secondary": "#904d00",
+                    "on-surface-variant": "#43474e",
+                    "tertiary-fixed": "#d4e3ff",
+                    "on-background": "#191c1e",
+                    "primary-fixed-dim": "#adc8f5",
+                    "outline-variant": "#c4c6cf"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "lg": "32px",
+                    "xs": "8px",
+                    "md": "24px",
+                    "sm": "16px",
+                    "margin-mobile": "16px",
+                    "gutter": "20px",
+                    "xl": "48px",
+                    "margin-desktop": "32px",
+                    "base": "4px"
+            },
+            "fontFamily": {
+                    "headline-lg-mobile": [
+                            "Sora"
+                    ],
+                    "body-md": [
+                            "Inter"
+                    ],
+                    "headline-md": [
+                            "Sora"
+                    ],
+                    "headline-lg": [
+                            "Sora"
+                    ],
+                    "body-lg": [
+                            "Inter"
+                    ],
+                    "label-sm": [
+                            "Inter"
+                    ],
+                    "label-md": [
+                            "Inter"
+                    ],
+                    "headline-xl": [
+                            "Sora"
+                    ]
+            },
+            "fontSize": {
+                    "headline-lg-mobile": [
+                            "24px",
+                            {
+                                    "lineHeight": "32px",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "body-md": [
+                            "16px",
+                            {
+                                    "lineHeight": "24px",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "headline-md": [
+                            "20px",
+                            {
+                                    "lineHeight": "28px",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "headline-lg": [
+                            "32px",
+                            {
+                                    "lineHeight": "40px",
+                                    "letterSpacing": "-0.01em",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "body-lg": [
+                            "18px",
+                            {
+                                    "lineHeight": "28px",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "label-sm": [
+                            "12px",
+                            {
+                                    "lineHeight": "16px",
+                                    "letterSpacing": "0.02em",
+                                    "fontWeight": "500"
+                            }
+                    ],
+                    "label-md": [
+                            "14px",
+                            {
+                                    "lineHeight": "20px",
+                                    "letterSpacing": "0.01em",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "headline-xl": [
+                            "40px",
+                            {
+                                    "lineHeight": "48px",
+                                    "letterSpacing": "-0.02em",
+                                    "fontWeight": "700"
+                            }
+                    ]
+            }
+          },
+        },
+      }
+    </script>
+</head>
+<body class="bg-surface text-on-surface antialiased min-h-screen flex flex-col md:flex-row">
+<!-- Note: TopNavBar and SideNavBar are suppressed because this is a focused, transactional "Input Form" sub-page (Destination Rule). The user is in a focused journey. -->
+<!-- Top App Bar for Mobile (Basic Header to allow return) -->
+<header class="md:hidden flex items-center justify-between h-16 px-margin-mobile border-b border-outline-variant bg-surface sticky top-0 z-40">
+<button class="text-on-surface hover:bg-surface-container-high rounded-full p-2 -ml-2 flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">arrow_back</span>
+</button>
+<h1 class="font-headline-md text-headline-md text-primary font-bold">New Service</h1>
+<div class="w-10"></div> <!-- Spacer for centering -->
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 w-full max-w-4xl mx-auto p-margin-mobile md:p-margin-desktop md:pt-16 pb-24 md:pb-margin-desktop">
+<!-- Header -->
+<div class="mb-8 hidden md:flex items-center gap-4">
+<button class="text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest rounded-full p-2 transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">arrow_back</span>
+</button>
+<div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface mb-1">Input Transaksi Baru</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Catat rincian layanan atau penjualan bengkel.</p>
+</div>
+</div>
+<!-- Form Card -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl shadow-sm overflow-hidden">
+<div class="p-6 md:p-8">
+<form action="#" class="space-y-8" method="POST">
+<!-- Section 1: Vehicle & Customer -->
+<section>
+<h2 class="font-headline-md text-headline-md text-primary mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">directions_car</span>
+                            Detail Kendaraan
+                        </h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Vehicle Selection (Searchable) -->
+<div class="col-span-1 md:col-span-2">
+<label class="block font-label-md text-label-md text-on-surface mb-2" for="vehicle_select">Pilih Kendaraan <span class="text-error">*</span></label>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-outline" style="font-variation-settings: 'FILL' 0;">search</span>
+</div>
+<input class="block w-full pl-10 pr-3 py-3 border border-outline rounded-lg bg-surface-container-lowest text-on-surface focus:ring-2 focus:ring-primary focus:border-primary font-body-md text-body-md min-h-[44px]" id="vehicle_select" name="vehicle_select" placeholder="Cari Plat Nomor atau Nama Pemilik..." type="text"/>
+<p class="mt-2 font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">info</span>
+                                        Ketik minimal 3 karakter untuk mencari.
+                                    </p>
+</div>
+</div>
+</div>
+</section>
+<hr class="border-t border-outline-variant"/>
+<!-- Section 2: Service Details -->
+<section>
+<h2 class="font-headline-md text-headline-md text-primary mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">build</span>
+                            Informasi Layanan
+                        </h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Transaction Type (Radio) -->
+<div class="col-span-1 md:col-span-2">
+<label class="block font-label-md text-label-md text-on-surface mb-3">Jenis Transaksi <span class="text-error">*</span></label>
+<div class="flex flex-col sm:flex-row gap-4">
+<label class="relative flex cursor-pointer rounded-lg border border-outline p-4 focus:outline-none w-full hover:bg-surface-container-low transition-colors has-[:checked]:bg-primary-container has-[:checked]:border-primary has-[:checked]:text-on-primary-container min-h-[44px] items-center">
+<input checked="" class="sr-only" name="transaction_type" type="radio" value="servis"/>
+<span class="material-symbols-outlined mr-3">home_repair_service</span>
+<span class="font-label-md text-label-md flex-1">Servis / Perbaikan</span>
+<span class="material-symbols-outlined opacity-0 check-icon">check_circle</span>
+</label>
+<label class="relative flex cursor-pointer rounded-lg border border-outline p-4 focus:outline-none w-full hover:bg-surface-container-low transition-colors has-[:checked]:bg-primary-container has-[:checked]:border-primary has-[:checked]:text-on-primary-container min-h-[44px] items-center">
+<input class="sr-only" name="transaction_type" type="radio" value="penjualan"/>
+<span class="material-symbols-outlined mr-3">shopping_cart</span>
+<span class="font-label-md text-label-md flex-1">Penjualan Sparepart</span>
+<span class="material-symbols-outlined opacity-0 check-icon">check_circle</span>
+</label>
+</div>
+<style>
+                                    input:checked ~ .check-icon { opacity: 1; }
+                                </style>
+</div>
+<!-- Mechanic Assignment -->
+<div class="col-span-1">
+<label class="block font-label-md text-label-md text-on-surface mb-2" for="mechanic">Mekanik Bertugas</label>
+<div class="relative">
+<select class="block w-full pl-3 pr-10 py-3 border border-outline rounded-lg bg-surface-container-lowest text-on-surface focus:ring-2 focus:ring-primary focus:border-primary font-body-md text-body-md appearance-none min-h-[44px]" id="mechanic" name="mechanic">
+<option value="">-- Pilih Mekanik --</option>
+<option value="m1">Budi Santoso</option>
+<option value="m2">Agus Riyadi</option>
+<option value="m3">Hendra (Junior)</option>
+</select>
+<div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-outline">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">expand_more</span>
+</div>
+</div>
+</div>
+<!-- Transaction Date -->
+<div class="col-span-1">
+<label class="block font-label-md text-label-md text-on-surface mb-2" for="trans_date">Tanggal Transaksi <span class="text-error">*</span></label>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-outline" style="font-variation-settings: 'FILL' 0;">calendar_today</span>
+</div>
+<input class="block w-full pl-10 pr-3 py-3 border border-outline rounded-lg bg-surface-container-lowest text-on-surface focus:ring-2 focus:ring-primary focus:border-primary font-body-md text-body-md min-h-[44px]" id="trans_date" name="trans_date" type="date"/>
+</div>
+</div>
+<!-- Description/Complaint -->
+<div class="col-span-1 md:col-span-2">
+<label class="block font-label-md text-label-md text-on-surface mb-2" for="description">Keluhan / Deskripsi Layanan</label>
+<textarea class="block w-full p-3 border border-outline rounded-lg bg-surface-container-lowest text-on-surface focus:ring-2 focus:ring-primary focus:border-primary font-body-md text-body-md" id="description" name="description" placeholder="Jelaskan keluhan pelanggan atau rincian pekerjaan yang akan dilakukan..." rows="4"></textarea>
+</div>
+<!-- Estimated Cost -->
+<div class="col-span-1 md:col-span-2">
+<label class="block font-label-md text-label-md text-on-surface mb-2" for="est_cost">Estimasi Biaya</label>
+<div class="relative mt-1 rounded-md shadow-sm">
+<div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+<span class="text-on-surface-variant font-body-md sm:text-sm">Rp</span>
+</div>
+<input class="block w-full rounded-lg border border-outline pl-10 pr-12 py-3 bg-surface-container-lowest focus:ring-2 focus:ring-primary focus:border-primary font-body-md text-body-md text-right min-h-[44px]" id="est_cost" name="est_cost" placeholder="0" type="text"/>
+</div>
+<p class="mt-2 font-label-sm text-label-sm text-on-surface-variant">Kosongkan jika belum diketahui kepastiannya.</p>
+</div>
+</div>
+</section>
+</form>
+</div>
+<!-- Footer Actions -->
+<div class="bg-surface-container px-6 py-4 flex flex-col-reverse sm:flex-row justify-end items-center gap-3 border-t border-outline-variant rounded-b-xl">
+<button class="w-full sm:w-auto px-6 py-3 border border-outline text-on-surface bg-transparent rounded-lg font-label-md text-label-md font-semibold hover:bg-surface-container-highest transition-colors min-h-[44px]" type="button">
+                    Batal
+                </button>
+<button class="w-full sm:w-auto px-6 py-3 bg-secondary text-on-secondary rounded-lg font-label-md text-label-md font-semibold hover:bg-[#a65a00] transition-colors shadow-sm min-h-[44px] flex items-center justify-center gap-2" type="submit">
+<span class="material-symbols-outlined text-[18px]">save</span>
+                    Simpan Transaksi
+                </button>
+</div>
+</div>
+</main>
+</body></html>

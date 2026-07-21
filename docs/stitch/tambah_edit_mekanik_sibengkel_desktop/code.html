@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SIBENGKEL - Form Tambah/Edit Mekanik</title>
+<!-- Google Fonts: Sora and Inter -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Sora:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config injected from prompt -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "background": "#f8f9fb",
+                    "on-primary-fixed": "#001c3b",
+                    "on-tertiary-container": "#62a5f9",
+                    "on-secondary-fixed": "#2f1500",
+                    "error-container": "#ffdad6",
+                    "tertiary": "#002447",
+                    "inverse-primary": "#adc8f5",
+                    "primary-fixed-dim": "#adc8f5",
+                    "primary": "#022448",
+                    "on-tertiary": "#ffffff",
+                    "surface-tint": "#455f87",
+                    "inverse-on-surface": "#f0f1f3",
+                    "surface-variant": "#e1e2e4",
+                    "on-tertiary-fixed": "#001c39",
+                    "tertiary-container": "#003a6c",
+                    "on-tertiary-fixed-variant": "#004883",
+                    "secondary-container": "#ffa454",
+                    "secondary": "#904d00",
+                    "surface-container": "#edeef0",
+                    "on-primary-container": "#8aa4cf",
+                    "on-secondary-fixed-variant": "#6e3900",
+                    "on-background": "#191c1e",
+                    "surface-container-highest": "#e1e2e4",
+                    "on-surface-variant": "#43474e",
+                    "outline-variant": "#c4c6cf",
+                    "tertiary-fixed-dim": "#a4c9ff",
+                    "surface-dim": "#d9dadc",
+                    "secondary-fixed-dim": "#ffb77d",
+                    "on-secondary-container": "#713b00",
+                    "on-secondary": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "error": "#ba1a1a",
+                    "surface-container-high": "#e7e8ea",
+                    "surface": "#f8f9fb",
+                    "on-primary-fixed-variant": "#2d486d",
+                    "surface-bright": "#f8f9fb",
+                    "on-primary": "#ffffff",
+                    "outline": "#74777f",
+                    "primary-container": "#1e3a5f",
+                    "primary-fixed": "#d5e3ff",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container-low": "#f2f4f6",
+                    "inverse-surface": "#2e3132",
+                    "tertiary-fixed": "#d4e3ff",
+                    "secondary-fixed": "#ffdcc3",
+                    "on-error": "#ffffff",
+                    "on-surface": "#191c1e"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "sm": "16px",
+                    "gutter": "20px",
+                    "margin-mobile": "16px",
+                    "md": "24px",
+                    "xs": "8px",
+                    "lg": "32px",
+                    "margin-desktop": "32px",
+                    "base": "4px",
+                    "xl": "48px"
+            },
+            "fontFamily": {
+                    "headline-lg": ["Sora"],
+                    "headline-md": ["Sora"],
+                    "body-md": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "headline-lg-mobile": ["Sora"],
+                    "label-sm": ["Inter"],
+                    "headline-xl": ["Sora"],
+                    "label-md": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "headline-xl": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: theme('colors.background');
+            color: theme('colors.on-background');
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.fill {
+            font-variation-settings: 'FILL' 1;
+        }
+        
+        /* Custom Toggle Switch Styles */
+        .toggle-checkbox:checked {
+            right: 0;
+            border-color: theme('colors.secondary');
+        }
+        .toggle-checkbox:checked + .toggle-label {
+            background-color: theme('colors.secondary');
+        }
+    </style>
+</head>
+<body class="flex h-screen overflow-hidden antialiased selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- SideNavBar Component -->
+<aside class="fixed left-0 top-0 h-full w-[280px] bg-surface-container-low border-r border-outline-variant hidden lg:flex flex-col p-md gap-xs z-50">
+<!-- Header -->
+<div class="flex items-center gap-sm mb-lg px-xs">
+<div class="w-10 h-10 rounded-lg bg-primary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-on-primary-container fill">handyman</span>
+</div>
+<div>
+<h1 class="font-headline-md text-headline-md text-primary tracking-tight">SIBENGKEL</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Workshop Management</p>
+</div>
+</div>
+<!-- CTA -->
+<button class="w-full h-[44px] mb-md bg-secondary hover:bg-secondary-container text-on-secondary hover:text-on-secondary-container font-label-md text-label-md rounded-lg flex items-center justify-center gap-xs transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[20px]">add</span>
+            New Service Job
+        </button>
+<!-- Navigation Tabs -->
+<nav class="flex-1 flex flex-col gap-base">
+<a class="flex items-center gap-sm px-sm py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 ease-in-out group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-sm px-sm py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 ease-in-out group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">person</span>
+<span class="font-label-md text-label-md">Customers</span>
+</a>
+<a class="flex items-center gap-sm px-sm py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 ease-in-out group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">directions_car</span>
+<span class="font-label-md text-label-md">Vehicles</span>
+</a>
+<!-- Active Tab: Mechanics -->
+<a class="flex items-center gap-sm px-sm py-3 rounded-lg bg-primary-container text-on-primary-container transition-all duration-200 ease-in-out shadow-sm" href="#">
+<span class="material-symbols-outlined fill">build</span>
+<span class="font-label-md text-label-md font-bold">Mechanics</span>
+</a>
+<a class="flex items-center gap-sm px-sm py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 ease-in-out group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">engineering</span>
+<span class="font-label-md text-label-md">Services</span>
+</a>
+</nav>
+<!-- Footer Navigation -->
+<div class="mt-auto pt-md border-t border-outline-variant flex flex-col gap-base">
+<a class="flex items-center gap-sm px-sm py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 ease-in-out group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</a>
+<a class="flex items-center gap-sm px-sm py-3 rounded-lg text-error hover:bg-error-container hover:text-on-error-container transition-all duration-200 ease-in-out group" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-label-md text-label-md">Logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 ml-0 lg:ml-[280px] h-full overflow-y-auto bg-background p-gutter lg:p-lg relative">
+<!-- Subtle decorative background element for depth -->
+<div class="absolute top-0 right-0 w-96 h-96 bg-primary-fixed-dim/20 rounded-full blur-3xl -z-10 pointer-events-none transform translate-x-1/3 -translate-y-1/3"></div>
+<!-- Page Header -->
+<header class="mb-lg flex items-center justify-between">
+<div class="flex items-center gap-sm">
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container border border-outline-variant text-on-surface-variant transition-colors">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Data Mekanik</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Tambah atau perbarui profil teknisi bengkel.</p>
+</div>
+</div>
+</header>
+<!-- Form Card Container -->
+<div class="max-w-4xl mx-auto bg-surface border border-outline-variant rounded-xl shadow-sm overflow-hidden relative">
+<!-- Card Decorator Line -->
+<div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary to-secondary"></div>
+<div class="p-lg">
+<form action="#" method="POST">
+<!-- Form Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-lg mb-xl">
+<!-- Input: Nama Lengkap -->
+<div class="flex flex-col gap-xs col-span-1 md:col-span-2">
+<label class="font-label-md text-label-md text-on-surface flex items-center gap-xs" for="nama_lengkap">
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant">badge</span>
+                                Nama Lengkap
+                            </label>
+<input class="w-full h-[44px] px-sm bg-surface rounded-lg border border-outline-variant text-body-md text-on-surface placeholder:text-outline focus:border-primary focus:ring-1 focus:ring-primary transition-colors outline-none shadow-sm" id="nama_lengkap" name="nama_lengkap" placeholder="Masukkan nama lengkap mekanik" type="text"/>
+</div>
+<!-- Input: No. Telepon -->
+<div class="flex flex-col gap-xs col-span-1">
+<label class="font-label-md text-label-md text-on-surface flex items-center gap-xs" for="no_telepon">
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant">call</span>
+                                No. Telepon
+                            </label>
+<div class="relative flex items-center">
+<span class="absolute left-sm font-body-md text-body-md text-on-surface-variant pointer-events-none">+62</span>
+<input class="w-full h-[44px] pl-[52px] pr-sm bg-surface rounded-lg border border-outline-variant text-body-md text-on-surface placeholder:text-outline focus:border-primary focus:ring-1 focus:ring-primary transition-colors outline-none shadow-sm" id="no_telepon" name="no_telepon" placeholder="812-3456-7890" type="tel"/>
+</div>
+</div>
+<!-- Placeholder for visual balance in grid -->
+<div class="hidden md:block col-span-1"></div>
+<!-- Chips: Spesialisasi -->
+<div class="flex flex-col gap-sm col-span-1 md:col-span-2">
+<label class="font-label-md text-label-md text-on-surface flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant">psychology</span>
+                                Spesialisasi
+                            </label>
+<div class="flex flex-wrap gap-sm">
+<!-- Chip: Mesin (Selected state example) -->
+<label class="cursor-pointer relative">
+<input checked="" class="peer sr-only" name="spesialisasi" type="checkbox" value="mesin"/>
+<div class="h-[44px] px-md rounded-full flex items-center justify-center border border-primary bg-primary text-on-primary font-label-md text-label-md transition-all peer-checked:shadow-sm hover:opacity-90">
+                                        Mesin
+                                    </div>
+</label>
+<!-- Chip: Kelistrikan -->
+<label class="cursor-pointer relative">
+<input class="peer sr-only" name="spesialisasi" type="checkbox" value="kelistrikan"/>
+<div class="h-[44px] px-md rounded-full flex items-center justify-center border border-outline-variant bg-surface text-on-surface-variant font-label-md text-label-md transition-all hover:bg-surface-container peer-checked:border-primary peer-checked:bg-primary peer-checked:text-on-primary">
+                                        Kelistrikan
+                                    </div>
+</label>
+<!-- Chip: Body Repair -->
+<label class="cursor-pointer relative">
+<input class="peer sr-only" name="spesialisasi" type="checkbox" value="body_repair"/>
+<div class="h-[44px] px-md rounded-full flex items-center justify-center border border-outline-variant bg-surface text-on-surface-variant font-label-md text-label-md transition-all hover:bg-surface-container peer-checked:border-primary peer-checked:bg-primary peer-checked:text-on-primary">
+                                        Body Repair
+                                    </div>
+</label>
+<!-- Chip: AC -->
+<label class="cursor-pointer relative">
+<input class="peer sr-only" name="spesialisasi" type="checkbox" value="ac"/>
+<div class="h-[44px] px-md rounded-full flex items-center justify-center border border-outline-variant bg-surface text-on-surface-variant font-label-md text-label-md transition-all hover:bg-surface-container peer-checked:border-primary peer-checked:bg-primary peer-checked:text-on-primary">
+                                        AC
+                                    </div>
+</label>
+<!-- Chip: Kaki-kaki (Selected state example) -->
+<label class="cursor-pointer relative">
+<input checked="" class="peer sr-only" name="spesialisasi" type="checkbox" value="kaki_kaki"/>
+<div class="h-[44px] px-md rounded-full flex items-center justify-center border border-primary bg-primary text-on-primary font-label-md text-label-md transition-all peer-checked:shadow-sm hover:opacity-90">
+                                        Kaki-kaki
+                                    </div>
+</label>
+</div>
+</div>
+</div>
+<!-- Toggle: Status Aktif & Footer Actions Divider -->
+<div class="pt-lg border-t border-outline-variant flex flex-col md:flex-row items-start md:items-center justify-between gap-lg">
+<!-- Toggle Switch -->
+<div class="flex items-center gap-md">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface">Status Aktif</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Mekanik tersedia untuk penugasan</span>
+</div>
+<div class="relative inline-block w-12 mr-2 align-middle select-none transition duration-200 ease-in">
+<input checked="" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 border-outline appearance-none cursor-pointer z-10 transition-all duration-300 top-0" id="status_aktif" name="status_aktif" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-6 rounded-full bg-surface-variant cursor-pointer transition-colors duration-300" for="status_aktif"></label>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="flex items-center gap-sm w-full md:w-auto mt-sm md:mt-0">
+<button class="flex-1 md:flex-none h-[44px] px-lg rounded-lg border border-primary text-primary font-label-md text-label-md hover:bg-primary-container transition-colors flex items-center justify-center" type="button">
+                                Batal
+                            </button>
+<button class="flex-1 md:flex-none h-[44px] px-lg rounded-lg bg-secondary text-on-secondary font-label-md text-label-md hover:bg-secondary-container hover:text-on-secondary-container transition-colors shadow-sm flex items-center justify-center gap-xs" type="submit">
+<span class="material-symbols-outlined text-[18px]">save</span>
+                                Simpan Data Mekanik
+                            </button>
+</div>
+</div>
+</form>
+</div>
+</div>
+</main>
+</body></html>

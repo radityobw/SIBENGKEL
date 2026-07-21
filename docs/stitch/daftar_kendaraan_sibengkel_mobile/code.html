@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SIBENGKEL - Vehicle List</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-dim": "#d9dadc",
+                        "on-surface": "#191c1e",
+                        "outline": "#74777f",
+                        "on-tertiary": "#ffffff",
+                        "on-tertiary-fixed": "#001c39",
+                        "on-background": "#191c1e",
+                        "on-primary-fixed-variant": "#2d486d",
+                        "surface-container-low": "#f2f4f6",
+                        "secondary-fixed-dim": "#ffb77d",
+                        "on-error": "#ffffff",
+                        "surface-container-high": "#e7e8ea",
+                        "inverse-primary": "#adc8f5",
+                        "secondary": "#904d00",
+                        "outline-variant": "#c4c6cf",
+                        "on-primary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-highest": "#e1e2e4",
+                        "surface-bright": "#f8f9fb",
+                        "primary-container": "#1e3a5f",
+                        "on-tertiary-fixed-variant": "#004883",
+                        "primary-fixed": "#d5e3ff",
+                        "on-error-container": "#93000a",
+                        "surface-variant": "#e1e2e4",
+                        "error-container": "#ffdad6",
+                        "on-primary-container": "#8aa4cf",
+                        "secondary-fixed": "#ffdcc3",
+                        "secondary-container": "#ffa454",
+                        "surface-container": "#edeef0",
+                        "primary": "#022448",
+                        "on-secondary-fixed-variant": "#6e3900",
+                        "surface-tint": "#455f87",
+                        "on-primary-fixed": "#001c3b",
+                        "tertiary": "#002447",
+                        "primary-fixed-dim": "#adc8f5",
+                        "error": "#ba1a1a",
+                        "on-surface-variant": "#43474e",
+                        "tertiary-fixed-dim": "#a4c9ff",
+                        "tertiary-container": "#003a6c",
+                        "tertiary-fixed": "#d4e3ff",
+                        "on-secondary-fixed": "#2f1500",
+                        "background": "#f8f9fb",
+                        "on-tertiary-container": "#62a5f9",
+                        "surface": "#f8f9fb",
+                        "inverse-on-surface": "#f0f1f3",
+                        "on-secondary": "#ffffff",
+                        "inverse-surface": "#2e3132",
+                        "on-secondary-container": "#713b00"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base": "4px",
+                        "sm": "16px",
+                        "xl": "48px",
+                        "margin-mobile": "16px",
+                        "margin-desktop": "32px",
+                        "lg": "32px",
+                        "md": "24px",
+                        "xs": "8px",
+                        "gutter": "20px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Sora"],
+                        "label-sm": ["Inter"],
+                        "headline-md": ["Sora"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-lg-mobile": ["Sora"],
+                        "label-md": ["Inter"],
+                        "headline-xl": ["Sora"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+                        "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+                        "headline-xl": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, h4, h5, h6, .font-headline { font-family: 'Sora', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col md:flex-row pb-20 md:pb-0">
+<!-- SideNav (Desktop) -->
+<nav class="hidden md:flex flex-col p-sm gap-xs bg-surface-container-lowest dark:bg-inverse-surface fixed h-screen w-[280px] left-0 top-0 border-r border-outline-variant z-40">
+<div class="px-4 py-6">
+<h1 class="text-headline-md font-headline-md font-bold text-primary dark:text-primary-fixed-dim">SIBENGKEL</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Workshop Management</p>
+</div>
+<button class="mx-4 mb-4 bg-secondary-container text-on-secondary-container font-label-md text-label-md py-3 px-4 rounded-lg flex items-center justify-center gap-2 hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined">add</span> Create Job
+        </button>
+<div class="flex-1 overflow-y-auto">
+<ul class="space-y-1 px-2">
+<li><a class="flex items-center gap-sm text-on-surface-variant hover:bg-surface-container-high px-4 py-3 rounded-lg transition-colors" href="#"><span class="material-symbols-outlined">dashboard</span> <span class="font-label-md text-label-md">Dashboard</span></a></li>
+<li><a class="flex items-center gap-sm text-on-surface-variant hover:bg-surface-container-high px-4 py-3 rounded-lg transition-colors" href="#"><span class="material-symbols-outlined">group</span> <span class="font-label-md text-label-md">Customers</span></a></li>
+<li><a class="flex items-center gap-sm bg-secondary-container text-on-secondary-container rounded-lg px-4 py-3 opacity-90 transition-all duration-200" href="#"><span class="material-symbols-outlined">directions_car</span> <span class="font-label-md text-label-md">Vehicles</span></a></li>
+<li><a class="flex items-center gap-sm text-on-surface-variant hover:bg-surface-container-high px-4 py-3 rounded-lg transition-colors" href="#"><span class="material-symbols-outlined">build</span> <span class="font-label-md text-label-md">Mechanics</span></a></li>
+<li><a class="flex items-center gap-sm text-on-surface-variant hover:bg-surface-container-high px-4 py-3 rounded-lg transition-colors" href="#"><span class="material-symbols-outlined">settings_suggest</span> <span class="font-label-md text-label-md">Services</span></a></li>
+</ul>
+</div>
+<div class="mt-auto pb-4">
+<ul class="space-y-1 px-2">
+<li><a class="flex items-center gap-sm text-on-surface-variant hover:bg-surface-container-high px-4 py-3 rounded-lg transition-colors" href="#"><span class="material-symbols-outlined">settings</span> <span class="font-label-md text-label-md">Settings</span></a></li>
+<li><a class="flex items-center gap-sm text-on-surface-variant hover:bg-surface-container-high px-4 py-3 rounded-lg transition-colors" href="#"><span class="material-symbols-outlined">help</span> <span class="font-label-md text-label-md">Support</span></a></li>
+</ul>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-1 w-full md:ml-[280px] min-h-screen">
+<!-- TopAppBar -->
+<header class="docked full-width top-0 h-16 border-b border-outline-variant flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop bg-surface dark:bg-on-background z-30 sticky">
+<div class="flex items-center gap-4">
+<h1 class="md:hidden font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim">SIBENGKEL</h1>
+<div class="hidden md:flex relative w-64 lg:w-96">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full h-10 pl-10 pr-4 bg-surface-container rounded-lg border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary font-body-md text-body-md text-on-surface" placeholder="Search plates, owners..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined">notifications</span></button>
+<div class="w-8 h-8 rounded-full overflow-hidden bg-surface-container-high">
+<img alt="Admin Profile" class="w-full h-full object-cover" data-alt="A small, professional portrait photograph of an admin user in an industrial setting, soft lighting, sharp focus, neutral tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAtgLXOtTXQTcp9QhJFZ2-7AvUyN4yce9i_pFKdsRqOK0SHCb8Svro_BUDfi26a11b7VlVbCdD04f2Xjv7G96CoUzNjISTOrj6cFvHjwDgOt7hNA8x4SupVFKpvWSdS-_rWVYHSHvzSgoyNqfX_jmw7bYb3MiPP31VQ8UkazsPsneEIdGXZfEtbfisKVpIe4ILkKbvfQz9Iu3g7hjLfX9Ld8wUo8x5hwJJpkGSTCXiDYRawdWEWwcraVQ"/>
+</div>
+</div>
+</header>
+<!-- Page Content -->
+<div class="p-margin-mobile md:p-margin-desktop max-w-5xl mx-auto">
+<div class="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4">
+<div>
+<h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary">Kendaraan</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Kelola daftar kendaraan pelanggan.</p>
+</div>
+<div class="md:hidden relative w-full">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full h-12 pl-10 pr-4 bg-surface-container rounded-lg border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary font-body-md text-body-md text-on-surface" placeholder="Cari Plat Nomor..." type="text"/>
+</div>
+</div>
+<!-- Vehicle Card List -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+<!-- Card 1 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-4 flex flex-col relative overflow-hidden group hover:shadow-md transition-shadow">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-secondary-container"></div>
+<div class="flex justify-between items-start mb-2 pl-2">
+<h3 class="font-headline-md text-headline-md text-primary tracking-wider">B 1234 XYZ</h3>
+<span class="material-symbols-outlined text-outline">more_vert</span>
+</div>
+<div class="pl-2 space-y-1">
+<p class="font-body-md text-body-md text-on-surface font-medium">Toyota Avanza 1.5 G</p>
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-sm">person</span>
+<span class="font-label-md text-label-md">Budi Santoso</span>
+</div>
+</div>
+<div class="mt-4 pt-3 border-t border-outline-variant flex justify-between items-center pl-2">
+<span class="font-label-sm text-label-sm text-outline">Last Visit: 12 Oct 2023</span>
+<button class="text-primary font-label-md text-label-md hover:underline flex items-center gap-1">Details <span class="material-symbols-outlined text-sm">arrow_forward</span></button>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-4 flex flex-col relative overflow-hidden group hover:shadow-md transition-shadow">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-surface-variant"></div>
+<div class="flex justify-between items-start mb-2 pl-2">
+<h3 class="font-headline-md text-headline-md text-primary tracking-wider">D 8899 AB</h3>
+<span class="material-symbols-outlined text-outline">more_vert</span>
+</div>
+<div class="pl-2 space-y-1">
+<p class="font-body-md text-body-md text-on-surface font-medium">Honda CR-V 2.0</p>
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-sm">person</span>
+<span class="font-label-md text-label-md">Siti Aminah</span>
+</div>
+</div>
+<div class="mt-4 pt-3 border-t border-outline-variant flex justify-between items-center pl-2">
+<span class="font-label-sm text-label-sm text-outline">Last Visit: 05 Sep 2023</span>
+<button class="text-primary font-label-md text-label-md hover:underline flex items-center gap-1">Details <span class="material-symbols-outlined text-sm">arrow_forward</span></button>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-4 flex flex-col relative overflow-hidden group hover:shadow-md transition-shadow">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-error-container"></div>
+<div class="flex justify-between items-start mb-2 pl-2">
+<h3 class="font-headline-md text-headline-md text-primary tracking-wider">L 456 CD</h3>
+<span class="material-symbols-outlined text-outline">more_vert</span>
+</div>
+<div class="pl-2 space-y-1">
+<p class="font-body-md text-body-md text-on-surface font-medium">Mitsubishi Pajero Sport</p>
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-sm">person</span>
+<span class="font-label-md text-label-md">CV. Maju Jaya</span>
+</div>
+</div>
+<div class="mt-4 pt-3 border-t border-outline-variant flex justify-between items-center pl-2">
+<span class="font-label-sm text-label-sm text-error">Overdue Service</span>
+<button class="text-primary font-label-md text-label-md hover:underline flex items-center gap-1">Details <span class="material-symbols-outlined text-sm">arrow_forward</span></button>
+</div>
+</div>
+</div>
+<!-- Floating Action Button (Mobile) -->
+<button class="md:hidden fixed bottom-24 right-4 w-14 h-14 bg-secondary-container text-on-secondary-container rounded-xl shadow-lg flex items-center justify-center hover:opacity-90 transition-opacity z-40">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">add</span>
+</button>
+</div>
+</main>
+<!-- BottomNavBar (Mobile) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-2 bg-surface-container dark:bg-inverse-surface border-t border-outline-variant h-20 rounded-t-xl shadow-lg">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-colors w-16 h-16 rounded-lg" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-sm text-label-sm mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-4 py-1 scale-90 transition-all duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">directions_car</span>
+<span class="font-label-sm text-label-sm mt-1">Cars</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-colors w-16 h-16 rounded-lg" href="#">
+<span class="material-symbols-outlined">assignment</span>
+<span class="font-label-sm text-label-sm mt-1">Jobs</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-colors w-16 h-16 rounded-lg" href="#">
+<span class="material-symbols-outlined">extension</span>
+<span class="font-label-sm text-label-sm mt-1">Parts</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-colors w-16 h-16 rounded-lg" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-sm text-label-sm mt-1">User</span>
+</a>
+</nav>
+</body></html>
