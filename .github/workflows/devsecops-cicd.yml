@@ -35,10 +35,10 @@ jobs:
           severity: 'CRITICAL,HIGH'
 
       # 3. PHP Setup & Composer Security Audit
-      - name: Setup PHP 8.2
+      - name: Setup PHP 8.3
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.2'
+          php-version: '8.3'
           tools: composer
 
       - name: Composer Audit Security Check
@@ -51,10 +51,10 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Setup PHP 8.2
+      - name: Setup PHP 8.3
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.2'
+          php-version: '8.3'
           extensions: mbstring, pdo, pdo_mysql
 
       - name: Copy .env.testing
@@ -94,7 +94,7 @@ jobs:
             php artisan view:cache
             npm install
             npm run build
-            sudo systemctl restart php8.2-fpm
+            sudo systemctl restart php8.3-fpm
 
   production-deployment:
     name: 🚀 Production CD Deployment to VPS
@@ -118,4 +118,4 @@ jobs:
             php artisan view:cache
             npm install
             npm run build
-            sudo systemctl restart php8.2-fpm
+            sudo systemctl restart php8.3-fpm
