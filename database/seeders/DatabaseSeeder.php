@@ -2,16 +2,14 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\User;
-use App\Models\Customer;
-use App\Models\Vehicle;
-use App\Models\Mechanic;
-use App\Models\ServiceTransaction;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
+    use WithoutModelEvents;
+
     /**
      * Seed the application's database.
      */
@@ -53,15 +51,9 @@ class DatabaseSeeder extends Seeder
             'expertise' => 'Spesialis Mesin & Injeksi'
         ]);
 
-        ServiceTransaction::create([
-            'vehicle_id' => $vehicle->id,
-            'user_id' => 1,
-            'mechanic_id' => $mechanic->id,
-            'type' => 'servis',
-            'complaint' => 'Ganti Oli Mesin & Tune Up Rutin',
-            'cost' => 350000.00,
-            'status' => 'proses',
-            'transaction_date' => now()->toDateString()
+        User::factory()->create([
+            'name' => 'Test User',
+            'email' => 'test@example.com',
         ]);
     }
 }
