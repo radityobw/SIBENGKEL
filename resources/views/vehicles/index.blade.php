@@ -19,15 +19,15 @@
                 </select>
             </form>
             <!-- Action Button -->
-            <a href="{{ route('vehicles.create') }}" class="bg-secondary text-on-secondary h-11 px-6 rounded-lg font-semibold flex items-center gap-2 whitespace-nowrap hover:opacity-90 transition-opacity shadow-sm">
+            <a href="{{ route('vehicles.create') }}" class="hidden md:flex bg-secondary text-on-secondary h-11 px-6 rounded-lg font-semibold items-center gap-2 whitespace-nowrap hover:opacity-90 transition-opacity shadow-sm">
                 <span class="material-symbols-outlined text-[20px]">add</span>
                 Tambah Kendaraan
             </a>
         </div>
     </div>
 
-    <!-- Data Table Card -->
-    <div class="bg-surface rounded-xl border border-outline-variant overflow-hidden shadow-sm">
+    <!-- Desktop Table (Sembunyi di HP) -->
+    <div class="hidden md:block bg-surface rounded-xl border border-outline-variant overflow-hidden shadow-sm mb-6">
         <div class="overflow-x-auto">
             <table class="w-full text-left border-collapse">
                 <thead>
@@ -83,4 +83,51 @@
             {{ $vehicles->links() }}
         </div>
     </div>
+
+    <!-- Mobile Card List (Hanya Muncul di HP) -->
+    <div class="md:hidden grid grid-cols-1 gap-4 mb-6">
+        @forelse($vehicles as $vehicle)
+        <div class="bg-surface p-4 rounded-xl shadow-sm border border-outline-variant flex flex-col gap-2">
+            <div class="flex justify-between items-start">
+                <div>
+                    <span class="bg-surface-container-high px-2 py-1 rounded border border-outline-variant/50 font-sora tracking-wide text-on-surface font-medium">
+                        {{ $vehicle->plate_number }}
+                    </span>
+                    <h3 class="font-sora font-semibold text-on-surface text-lg mt-2">{{ $vehicle->brand }} {{ $vehicle->model }}</h3>
+                </div>
+                <div class="text-right">
+                    <span class="text-sm text-on-surface-variant">Tahun</span><br>
+                    <span class="font-bold text-on-surface">{{ $vehicle->year }}</span>
+                </div>
+            </div>
+            
+            <div class="mt-2 text-sm text-on-surface-variant flex items-center gap-1">
+                <span class="material-symbols-outlined text-[16px]">person</span> {{ $vehicle->customer->name }}
+            </div>
+            
+            <div class="flex justify-end gap-2 mt-2 pt-3 border-t border-outline-variant/50">
+                <a href="{{ route('vehicles.edit', $vehicle->id) }}" class="p-2 text-primary hover:bg-primary-container rounded-lg">
+                    <span class="material-symbols-outlined text-[20px]">edit</span>
+                </a>
+                <form action="{{ route('vehicles.destroy', $vehicle->id) }}" method="POST" onsubmit="return confirm('Hapus kendaraan ini?');">
+                    @csrf @method('DELETE')
+                    <button type="submit" class="p-2 text-error hover:bg-error-container rounded-lg">
+                        <span class="material-symbols-outlined text-[20px]">delete</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+        @empty
+        <div class="text-center p-8 bg-surface rounded-xl border border-outline-variant text-on-surface-variant">Belum ada kendaraan.</div>
+        @endforelse
+        
+        <!-- Mobile Pagination -->
+        <div class="mt-2">
+            {{ $vehicles->links() }}
+        </div>
+    </div>
+
+    <!-- FAB -->
+    <x-fab route="{{ route('vehicles.create') }}" icon="add_box" />
+
 </x-app-layout>

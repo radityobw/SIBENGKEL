@@ -9,7 +9,7 @@
                 <input name="search" value="{{ $search }}" class="w-full h-11 pl-10 pr-4 bg-surface border border-outline-variant rounded-lg text-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-shadow" placeholder="Cari mekanik atau keahlian..." type="text"/>
             </form>
             <!-- Action Button -->
-            <a href="{{ route('mechanics.create') }}" class="bg-secondary text-on-secondary h-11 px-6 rounded-lg font-semibold flex items-center gap-2 whitespace-nowrap hover:opacity-90 transition-opacity shadow-sm">
+            <a href="{{ route('mechanics.create') }}" class="hidden md:flex bg-secondary text-on-secondary h-11 px-6 rounded-lg font-semibold items-center gap-2 whitespace-nowrap hover:opacity-90 transition-opacity shadow-sm">
                 <span class="material-symbols-outlined text-[20px]">add</span>
                 Tambah Mekanik
             </a>
@@ -70,4 +70,6 @@
         {{ $mechanics->links() }}
     </div>
     @endif
+
+    <x-fab route="{{ route('mechanics.create') }}" icon="engineering" />
 </x-app-layout>

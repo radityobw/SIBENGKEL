@@ -91,13 +91,15 @@
             </div>
         </div>
 
-        <!-- Right: Recent Transactions Table -->
-        <div class="xl:col-span-2 bg-surface rounded-lg border border-outline-variant shadow-sm flex flex-col overflow-hidden h-[400px]">
+        <!-- Right: Recent Transactions -->
+        <div class="xl:col-span-2 bg-surface rounded-lg border border-outline-variant shadow-sm flex flex-col overflow-hidden h-auto xl:h-[400px]">
             <div class="p-6 border-b border-outline-variant flex justify-between items-center bg-surface-bright">
                 <h3 class="text-lg font-sora font-semibold text-on-surface">Transaksi Servis Terkini</h3>
                 <a href="#" class="text-sm font-semibold text-primary hover:underline h-8 px-2 flex items-center">Lihat Semua</a>
             </div>
-            <div class="overflow-x-auto">
+            
+            <!-- Desktop Table -->
+            <div class="hidden md:block overflow-x-auto flex-1">
                 <table class="w-full text-left border-collapse min-w-[700px]">
                     <thead>
                         <tr class="border-b border-outline-variant bg-surface-container-low text-sm text-on-surface-variant">
@@ -120,13 +122,7 @@
                                 {{ $transaction->mechanic->name ?? '-' }}
                             </td>
                             <td class="p-4">
-                                @if($transaction->status === 'selesai')
-                                    <span class="inline-flex items-center px-2 py-1 rounded text-xs font-medium bg-[#dcfce7] text-[#166534]">Selesai</span>
-                                @elseif($transaction->status === 'proses')
-                                    <span class="inline-flex items-center px-2 py-1 rounded text-xs font-medium bg-[#e0f2fe] text-[#0369a1]">Proses</span>
-                                @else
-                                    <span class="inline-flex items-center px-2 py-1 rounded text-xs font-medium bg-[#fef3c7] text-[#92400e]">Pending</span>
-                                @endif
+                                <x-badge :status="$transaction->status" />
                             </td>
                             <td class="p-4 text-right font-medium">Rp {{ number_format($transaction->cost, 0, ',', '.') }}</td>
                         </tr>
@@ -137,6 +133,30 @@
                         @endforelse
                     </tbody>
                 </table>
+            </div>
+
+            <!-- Mobile Card List -->
+            <div class="md:hidden flex flex-col">
+                @forelse($latestTransactions as $transaction)
+                <div class="p-4 border-b border-outline-variant flex justify-between items-center bg-surface hover:bg-surface-container-lowest transition-colors">
+                    <div class="flex flex-col gap-1">
+                        <div class="flex items-center gap-2">
+                            <span class="font-sora font-semibold text-on-surface">{{ $transaction->vehicle->plate_number ?? '-' }}</span>
+                            <x-badge :status="$transaction->status" />
+                        </div>
+                        <span class="text-sm text-on-surface-variant">{{ $transaction->vehicle->customer->name ?? '-' }}</span>
+                        <div class="text-xs text-on-surface-variant flex items-center gap-1">
+                            <span class="material-symbols-outlined text-[14px]">engineering</span>
+                            {{ $transaction->mechanic->name ?? '-' }}
+                        </div>
+                    </div>
+                    <div class="font-semibold text-primary">
+                        Rp {{ number_format($transaction->cost, 0, ',', '.') }}
+                    </div>
+                </div>
+                @empty
+                <div class="p-4 text-center text-on-surface-variant">Belum ada transaksi servis.</div>
+                @endforelse
             </div>
         </div>
     </div>

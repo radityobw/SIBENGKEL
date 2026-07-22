@@ -71,7 +71,7 @@
         </header>
 
         <!-- Page Content -->
-        <div class="p-4 lg:p-8 flex flex-col gap-6">
+        <div class="p-4 pb-24 lg:p-8 flex flex-col gap-6">
             @if(session('success'))
                 <div class="bg-[#dcfce7] text-[#166534] p-4 rounded-lg font-medium border border-[#bbf7d0]">
                     {{ session('success') }}

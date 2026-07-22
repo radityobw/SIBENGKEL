@@ -9,15 +9,15 @@
                 <input name="search" value="{{ $search }}" class="w-full h-11 pl-10 pr-4 bg-surface border border-outline-variant rounded-lg text-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-shadow" placeholder="Cari pelanggan..." type="text"/>
             </form>
             <!-- Action Button -->
-            <a href="{{ route('customers.create') }}" class="bg-secondary text-on-secondary h-11 px-6 rounded-lg font-semibold flex items-center gap-2 whitespace-nowrap hover:opacity-90 transition-opacity shadow-sm">
+            <a href="{{ route('customers.create') }}" class="hidden md:flex bg-secondary text-on-secondary h-11 px-6 rounded-lg font-semibold items-center gap-2 hover:opacity-90 transition-opacity shadow-sm">
                 <span class="material-symbols-outlined text-[20px]">add</span>
                 Tambah Pelanggan
             </a>
         </div>
     </div>
 
-    <!-- Data Table Card -->
-    <div class="bg-surface rounded-xl border border-outline-variant overflow-hidden shadow-sm">
+    <!-- Desktop Table (Sembunyi di HP) -->
+    <div class="hidden md:block bg-surface rounded-xl border border-outline-variant overflow-hidden shadow-sm mb-6">
         <div class="overflow-x-auto">
             <table class="w-full text-left border-collapse">
                 <thead>
@@ -66,4 +66,46 @@
             {{ $customers->links() }}
         </div>
     </div>
+
+    <!-- Mobile Card List (Hanya Muncul di HP) -->
+    <div class="md:hidden grid grid-cols-1 gap-4 mb-6">
+        @forelse($customers as $customer)
+        <div class="bg-surface p-4 rounded-xl shadow-sm border border-outline-variant flex flex-col gap-2">
+            <div class="flex justify-between items-start">
+                <div>
+                    <h3 class="font-sora font-semibold text-on-surface text-lg">{{ $customer->name }}</h3>
+                    <p class="text-sm text-on-surface-variant flex items-center gap-1">
+                        <span class="material-symbols-outlined text-[16px]">call</span> {{ $customer->phone }}
+                    </p>
+                </div>
+                <div class="bg-primary-container text-on-primary-container px-2 py-1 rounded-md text-xs font-bold text-center">
+                    {{ $customer->vehicles_count }}<br><span class="font-normal text-[10px]">Mobil/Motor</span>
+                </div>
+            </div>
+            
+            <div class="flex justify-end gap-2 mt-2 pt-3 border-t border-outline-variant/50">
+                <a href="{{ route('customers.edit', $customer->id) }}" class="p-2 text-primary hover:bg-primary-container rounded-lg">
+                    <span class="material-symbols-outlined text-[20px]">edit</span>
+                </a>
+                <form action="{{ route('customers.destroy', $customer->id) }}" method="POST" onsubmit="return confirm('Hapus pelanggan ini?');">
+                    @csrf @method('DELETE')
+                    <button type="submit" class="p-2 text-error hover:bg-error-container rounded-lg">
+                        <span class="material-symbols-outlined text-[20px]">delete</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+        @empty
+        <div class="text-center p-8 bg-surface rounded-xl border border-outline-variant text-on-surface-variant">Belum ada pelanggan.</div>
+        @endforelse
+        
+        <!-- Mobile Pagination -->
+        <div class="mt-2">
+            {{ $customers->links() }}
+        </div>
+    </div>
+
+    <!-- Tambahkan Komponen FAB di paling bawah -->
+    <x-fab route="{{ route('customers.create') }}" icon="person_add" />
+
 </x-app-layout>
