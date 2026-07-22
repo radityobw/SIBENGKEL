@@ -16,9 +16,14 @@
         h1, h2, h3, h4, h5, h6, .font-sora { font-family: 'Sora', sans-serif; }
     </style>
 </head>
-<body class="bg-background min-h-screen flex text-on-surface antialiased">
-    <!-- SideNavBar (Hidden on Mobile) -->
-    <aside class="w-[280px] h-screen fixed left-0 top-0 bg-primary dark:bg-tertiary border-r border-outline-variant/20 shadow-md hidden lg:flex flex-col py-6 px-4 gap-2 z-50">
+<body class="bg-background min-h-screen flex text-on-surface antialiased" x-data="{ sidebarOpen: false }">
+    <!-- Mobile Sidebar Overlay -->
+    <div x-show="sidebarOpen" 
+         x-transition.opacity 
+         @click="sidebarOpen = false"
+         class="fixed inset-0 z-40 bg-black/50 lg:hidden" style="display: none;"></div>
+    <!-- SideNavBar -->
+    <aside :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'" class="w-[280px] h-screen fixed left-0 top-0 bg-primary dark:bg-tertiary border-r border-outline-variant/20 shadow-md flex flex-col py-6 px-4 gap-2 z-50 transition-transform duration-300 ease-in-out">
         <div class="px-4 mb-8">
             <div class="flex items-center gap-2">
                 <img src="{{ asset('logobengkel.png') }}" alt="SIBENGKEL Logo" class="h-8 object-contain">
@@ -68,25 +73,25 @@
     <!-- Main Content Area -->
     <main class="flex-1 flex flex-col min-w-0 lg:ml-[280px]">
         <!-- TopNavBar (Visible on Mobile & Desktop) -->
-        <header class="flex justify-between items-center px-4 lg:px-8 w-full h-16 sticky top-0 z-40 bg-surface border-b border-outline-variant">
+        <header class="flex justify-between items-center px-4 lg:px-8 w-full h-16 sticky top-0 z-40 bg-primary lg:bg-surface border-b border-outline-variant">
             <div class="flex items-center gap-6">
                 <!-- Mobile Menu Button -->
-                <button class="lg:hidden p-2 rounded-full text-on-surface-variant hover:bg-surface-container-high transition-colors">
+                <button @click="sidebarOpen = true" class="lg:hidden p-2 rounded-full text-on-primary hover:bg-primary-container/20 transition-colors">
                     <span class="material-symbols-outlined">menu</span>
                 </button>
                 <div class="lg:hidden flex items-center gap-2">
-                    <img src="{{ asset('logobengkel.png') }}" alt="SIBENGKEL Logo" class="h-6 object-contain">
-                    <h2 class="text-xl font-sora font-bold text-primary tracking-tight">SIBENGKEL</h2>
+                    <img src="{{ asset('logobengkel.png') }}" alt="SIBENGKEL Logo" class="h-6 object-contain brightness-0 invert">
+                    <h2 class="text-xl font-sora font-bold text-on-primary tracking-tight">SIBENGKEL</h2>
                 </div>
             </div>
             <div class="flex items-center gap-2">
-                <div class="font-medium text-sm text-on-surface-variant truncate max-w-[100px] sm:max-w-[200px]">
+                <div class="font-medium text-sm text-on-primary lg:text-on-surface-variant truncate max-w-[100px] sm:max-w-[200px]">
                     Halo, {{ Auth::user()->name ?? 'Admin' }}
                 </div>
                 <!-- Mobile Logout -->
                 <form method="POST" action="{{ route('logout') }}" class="lg:hidden flex items-center ml-2">
                     @csrf
-                    <button type="submit" class="p-2 rounded-full text-error hover:bg-error-container/50 transition-colors" title="Logout">
+                    <button type="submit" class="p-2 rounded-full text-error-container hover:bg-error/20 transition-colors" title="Logout">
                         <span class="material-symbols-outlined">logout</span>
                     </button>
                 </form>

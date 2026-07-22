@@ -37,15 +37,16 @@
         </div>
 
         <!-- Right Side: Login Form -->
-        <div class="w-full lg:w-[45%] flex items-center justify-center p-sm md:p-lg bg-surface relative z-10">
-            <!-- Mobile Logo (visible only on small screens) -->
-            <div class="absolute top-sm left-sm lg:hidden flex items-center gap-2 text-primary">
-                <img src="{{ asset('logobengkel.png') }}" alt="SIBENGKEL Logo" class="h-8 object-contain">
-                <span class="font-headline-md text-headline-md font-bold">SIBENGKEL</span>
-            </div>
+        <div class="w-full lg:w-[45%] flex flex-col bg-surface relative z-10 min-h-screen">
+            <!-- Mobile Navbar (visible only on small screens) -->
+            <header class="lg:hidden flex items-center gap-2 px-4 h-16 w-full bg-primary shrink-0 shadow-sm">
+                <img src="{{ asset('logobengkel.png') }}" alt="SIBENGKEL Logo" class="h-6 object-contain brightness-0 invert">
+                <h2 class="text-xl font-sora font-bold text-on-primary tracking-tight">SIBENGKEL</h2>
+            </header>
 
-            <div class="w-full max-w-md bg-surface-container-lowest border border-outline-variant rounded-xl shadow-sm p-lg md:p-xl mt-12 lg:mt-0">
-                <div class="mb-lg">
+            <div class="flex-1 flex items-center justify-center p-4 md:p-lg">
+                <div class="w-full max-w-md bg-surface-container-lowest border border-outline-variant rounded-xl shadow-sm p-6 md:p-12">
+                    <div class="mb-lg">
                     <h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-2">Selamat Datang</h2>
                     <p class="font-body-md text-body-md text-on-surface-variant">Silakan masuk ke akun manajemen bengkel Anda.</p>
                 </div>
@@ -133,7 +134,6 @@
                     @endif
                 </form>
 
-                <!-- System Status Indicator -->
                 <div class="mt-lg pt-sm border-t border-outline-variant flex items-center justify-center gap-2">
                     <span class="relative flex h-3 w-3">
                         <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary opacity-75"></span>
