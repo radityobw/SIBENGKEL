@@ -11,3 +11,6 @@ Before executing any implementation, code modification, database migration, UI b
 
 > [!IMPORTANT]
 > Never guess database schemas, color hex codes, API routes, or business domain rules. Always view the corresponding reference file before performing work.
+
+## UI / BRANDING RULES
+1. **Logo Standardization**: ALL AI agents MUST use the official image logo referenced at `public/logobengkel.png` (using `asset('logobengkel.png')` in Blade) for any UI components that require a brand logo. DO NOT use material icons (e.g., `build`) as a replacement for the logo. However, since the image `logobengkel.png` contains ONLY the visual logo mark and no text, you MUST KEEP the "SIBENGKEL" typography text next to the image logo in headers, auth screens, or invoices.

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Cek Status Servis - SIBENGKEL</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Sora:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config Injection -->
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-tertiary-container": "#62a5f9",
+                      "background": "#f8f9fb",
+                      "on-secondary-fixed-variant": "#6e3900",
+                      "surface-container-high": "#e7e8ea",
+                      "secondary-container": "#ffa454",
+                      "inverse-surface": "#2e3132",
+                      "primary-fixed": "#d5e3ff",
+                      "surface-container-lowest": "#ffffff",
+                      "error-container": "#ffdad6",
+                      "surface-container-low": "#f2f4f6",
+                      "outline-variant": "#c4c6cf",
+                      "on-secondary-container": "#713b00",
+                      "inverse-primary": "#adc8f5",
+                      "on-primary-fixed": "#001c3b",
+                      "on-error-container": "#93000a",
+                      "on-secondary-fixed": "#2f1500",
+                      "on-surface-variant": "#43474e",
+                      "surface-variant": "#e1e2e4",
+                      "on-primary-fixed-variant": "#2d486d",
+                      "tertiary-fixed-dim": "#a4c9ff",
+                      "primary-fixed-dim": "#adc8f5",
+                      "primary": "#022448",
+                      "on-secondary": "#ffffff",
+                      "secondary-fixed-dim": "#ffb77d",
+                      "surface": "#f8f9fb",
+                      "tertiary-fixed": "#d4e3ff",
+                      "tertiary-container": "#003a6c",
+                      "surface-bright": "#f8f9fb",
+                      "secondary": "#904d00",
+                      "primary-container": "#1e3a5f",
+                      "on-primary": "#ffffff",
+                      "surface-container": "#edeef0",
+                      "inverse-on-surface": "#f0f1f3",
+                      "outline": "#74777f",
+                      "on-error": "#ffffff",
+                      "tertiary": "#002447",
+                      "on-tertiary-fixed": "#001c39",
+                      "surface-dim": "#d9dadc",
+                      "on-surface": "#191c1e",
+                      "on-primary-container": "#8aa4cf",
+                      "error": "#ba1a1a",
+                      "on-tertiary-fixed-variant": "#004883",
+                      "surface-container-highest": "#e1e2e4",
+                      "secondary-fixed": "#ffdcc3",
+                      "on-background": "#191c1e",
+                      "surface-tint": "#455f87",
+                      "on-tertiary": "#ffffff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "sm": "16px",
+                      "margin-mobile": "16px",
+                      "margin-desktop": "32px",
+                      "base": "4px",
+                      "md": "24px",
+                      "xl": "48px",
+                      "lg": "32px",
+                      "gutter": "20px",
+                      "xs": "8px"
+              },
+              "fontFamily": {
+                      "label-sm": ["Inter"],
+                      "headline-md": ["Sora"],
+                      "headline-lg": ["Sora"],
+                      "headline-lg-mobile": ["Sora"],
+                      "headline-xl": ["Sora"],
+                      "label-md": ["Inter"],
+                      "body-md": ["Inter"],
+                      "body-lg": ["Inter"]
+              },
+              "fontSize": {
+                      "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+                      "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                      "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                      "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                      "headline-xl": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                      "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+                      "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                      "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background min-h-screen flex flex-col font-sans text-on-background">
+<!-- TopNavBar Component -->
+<header class="bg-surface text-primary font-body-md flex justify-between items-center px-margin-desktop w-full h-16 sticky top-0 z-40 border-b border-outline-variant">
+<div class="flex items-center gap-xs cursor-pointer active:scale-95">
+<span class="material-symbols-outlined text-primary text-[28px]" style="font-variation-settings: 'FILL' 1;">build_circle</span>
+<span class="font-headline-md text-headline-md text-primary tracking-tight">SIBENGKEL</span>
+</div>
+<div class="flex items-center gap-md">
+<!-- Navigation items suppressed for this transactional portal, keeping only global actions -->
+<button aria-label="notifications" class="w-10 h-10 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-surface-container-high transition-colors cursor-pointer active:scale-95">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button aria-label="settings" class="w-10 h-10 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-surface-container-high transition-colors cursor-pointer active:scale-95">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="w-10 h-10 rounded-full bg-surface-container-highest border border-outline-variant overflow-hidden ml-sm cursor-pointer active:scale-95">
+<img alt="User profile avatar" class="w-full h-full object-cover" data-alt="A professional headshot of a workshop user or mechanic looking forward against a neutral grey studio background, well-lit with soft white light. The portrait has a clean, corporate light-mode aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD1S7q2hHLS-WA3rjt4-vAKpyn1Sq3Tx2goIuCxZzJxykHDwRCKMConbECNqTg8Jf8K5_eNYM0a9WvsU3W1cXCN8MagmRvfw7tfqBpXTbfBlx6SgnRz40Ex-qqP2-Fr5zjuxoU7_svpj1_XhA3m3MiADUOm5YYtrriYD39RcYti1mg_aPDH1D_fNiRAgZqsmjKI1b_pTA7bV6DFrL9_qpzO8QzDPvPiMmvRLaCRuwSOT0udoG1O-6ePCQ"/>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 flex flex-col items-center justify-center p-margin-mobile md:p-margin-desktop">
+<!-- Centered Card Container (Industrial Minimalism & Tonal Layering) -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl shadow-md w-full max-w-5xl flex flex-col md:flex-row overflow-hidden relative">
+<!-- Left Side: Interactive Form Area -->
+<div class="w-full md:w-1/2 p-lg md:p-xl flex flex-col justify-center z-10">
+<div class="mb-lg">
+<h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-xs">Cek Status Servis</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Lacak progres pengerjaan dan estimasi biaya kendaraan Anda secara real-time.</p>
+</div>
+<!-- Input Toggle (Pill Shape) -->
+<div class="flex p-base bg-surface-container rounded-lg border border-outline-variant w-max mb-lg">
+<button class="px-md py-xs rounded bg-primary text-on-primary font-label-md text-label-md shadow-sm transition-all" id="btn-nopol">
+                        No. Polisi
+                    </button>
+<button class="px-md py-xs rounded text-on-surface-variant font-label-md text-label-md hover:text-on-surface transition-all" id="btn-notelp">
+                        No. Telepon
+                    </button>
+</div>
+<!-- Search Form -->
+<form class="flex flex-col gap-md" onsubmit="event.preventDefault();">
+<div class="flex flex-col gap-base">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider" for="search-input" id="search-label">Nomor Polisi</label>
+<div class="relative flex items-center h-[44px]">
+<span class="material-symbols-outlined absolute left-sm text-outline">directions_car</span>
+<input class="w-full h-full bg-surface-container-lowest border border-outline-variant rounded-lg pl-[44px] pr-sm font-body-md text-body-md text-on-surface placeholder:text-outline focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors uppercase" id="search-input" placeholder="Contoh: B 1234 ABC" type="text"/>
+</div>
+</div>
+<!-- Prominent Action Button (Primary) -->
+<button class="mt-sm h-[44px] bg-primary text-on-primary font-label-md text-label-md rounded-lg flex items-center justify-center gap-xs hover:bg-primary-container transition-colors active:scale-[0.98]" type="submit">
+<span class="material-symbols-outlined" style="font-variation-settings: 'wght' 300;">search</span>
+                        Cek Status
+                    </button>
+</form>
+<!-- Helpful links / Info -->
+<div class="mt-xl border-t border-outline-variant pt-md flex items-start gap-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-outline mt-[2px]">info</span>
+<p class="font-label-sm text-label-sm">Pastikan nomor yang dimasukkan sesuai dengan data yang terdaftar pada faktur penerimaan kendaraan (Work Order).</p>
+</div>
+</div>
+<!-- Right Side: Lightweight Illustration & Esthetics -->
+<div class="w-full md:w-1/2 bg-surface-container-low border-t md:border-t-0 md:border-l border-outline-variant relative hidden md:block overflow-hidden min-h-[400px]">
+<!-- Subtle geometric pattern background for industrial feel -->
+<div class="absolute inset-0 opacity-20 pointer-events-none" style="background-image: radial-gradient(circle at 2px 2px, #c4c6cf 1px, transparent 0); background-size: 24px 24px;"></div>
+<!-- Main Illustration Image -->
+<div class="absolute inset-0 w-full h-full flex items-center justify-center p-xl">
+<div class="w-full h-full bg-contain bg-center bg-no-repeat drop-shadow-sm" data-alt="A clean, modern, flat-vector industrial illustration of a stylized car inside a high-tech workshop bay. The scene is bright and airy, utilizing a corporate light-mode color palette with crisp whites, slate grays, and bold navy blue accents. Minimalist line-art tools like a wrench and diagnostic tablet float subtly in the background, conveying precision, technology, and professional automotive service." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuARxwLWsbGAXlZFbwb8TrFEcn5PmSPO3Oan8-LgFsEwW3xZkoMV06ON9AkTC4-9lJEiuk0WRKRqvDR9vxKQxriVaTXQiMBSQstH8leFDJS8dc5bnEdov4lrBLc1EgArrzKTNWuJJxTnY-dZf-G2KiZF2lkh-XLHrfqLokrCxjb_DAxJiabN7zvPxa7dVd5oUlCASWT78blAlVkKK1rGXlDl4bmYzeualm98jlsOKHYCRSFztieAmq_5bg')"></div>
+</div>
+<!-- Decorative floating status chip -->
+<div class="absolute top-xl right-xl bg-surface-container-lowest border border-outline-variant px-sm py-xs rounded-full shadow-sm flex items-center gap-xs">
+<div class="w-2 h-2 rounded-full bg-[#10b981]"></div>
+<span class="font-label-sm text-label-sm text-on-surface">Sistem Online</span>
+</div>
+</div>
+</div>
+</main>
+<!-- Minimalist Footer -->
+<footer class="w-full py-md border-t border-outline-variant bg-surface flex flex-col md:flex-row items-center justify-center gap-sm md:gap-md px-margin-mobile text-on-surface-variant">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">business</span>
+<span class="font-label-sm text-label-sm font-semibold text-primary">SIBENGKEL HQ</span>
+</div>
+<span class="hidden md:inline text-outline-variant">•</span>
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">location_on</span>
+<span class="font-label-sm text-label-sm">Jl. Raya Otomotif No. 88, Jakarta Selatan</span>
+</div>
+<span class="hidden md:inline text-outline-variant">•</span>
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">call</span>
+<span class="font-label-sm text-label-sm">(021) 555-0198</span>
+</div>
+</footer>
+<!-- Simple JS for micro-interactions (Toggle behavior) -->
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const btnNopol = document.getElementById('btn-nopol');
+            const btnNotelp = document.getElementById('btn-notelp');
+            const inputField = document.getElementById('search-input');
+            const label = document.getElementById('search-label');
+            const icon = inputField.previousElementSibling;
+
+            const activeClasses = ['bg-primary', 'text-on-primary', 'shadow-sm'];
+            const inactiveClasses = ['text-on-surface-variant', 'hover:text-on-surface', 'bg-transparent'];
+
+            function setToggle(activeBtn, inactiveBtn, labelText, placeholderText, iconName) {
+                // Update buttons
+                activeBtn.classList.remove(...inactiveClasses);
+                activeBtn.classList.add(...activeClasses);
+                inactiveBtn.classList.remove(...activeClasses);
+                inactiveBtn.classList.add(...inactiveClasses);
+                
+                // Update Input UI
+                label.textContent = labelText;
+                inputField.placeholder = placeholderText;
+                icon.textContent = iconName;
+                inputField.value = '';
+                inputField.focus();
+            }
+
+            btnNopol.addEventListener('click', () => {
+                setToggle(btnNopol, btnNotelp, 'NOMOR POLISI', 'Contoh: B 1234 ABC', 'directions_car');
+                inputField.classList.add('uppercase');
+            });
+
+            btnNotelp.addEventListener('click', () => {
+                setToggle(btnNotelp, btnNopol, 'NOMOR TELEPON', 'Contoh: 081234567890', 'phone_iphone');
+                inputField.classList.remove('uppercase');
+            });
+        });
+    </script>
+</body></html>

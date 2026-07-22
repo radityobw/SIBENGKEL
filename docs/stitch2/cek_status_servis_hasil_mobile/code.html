@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+
+<html class="light" lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Status Servis Anda - SIBENGKEL</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Sora:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-tertiary-container": "#62a5f9",
+                        "background": "#f8f9fb",
+                        "on-secondary-fixed-variant": "#6e3900",
+                        "surface-container-high": "#e7e8ea",
+                        "secondary-container": "#ffa454",
+                        "inverse-surface": "#2e3132",
+                        "primary-fixed": "#d5e3ff",
+                        "surface-container-lowest": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "surface-container-low": "#f2f4f6",
+                        "outline-variant": "#c4c6cf",
+                        "on-secondary-container": "#713b00",
+                        "inverse-primary": "#adc8f5",
+                        "on-primary-fixed": "#001c3b",
+                        "on-error-container": "#93000a",
+                        "on-secondary-fixed": "#2f1500",
+                        "on-surface-variant": "#43474e",
+                        "surface-variant": "#e1e2e4",
+                        "on-primary-fixed-variant": "#2d486d",
+                        "tertiary-fixed-dim": "#a4c9ff",
+                        "primary-fixed-dim": "#adc8f5",
+                        "primary": "#022448",
+                        "on-secondary": "#ffffff",
+                        "secondary-fixed-dim": "#ffb77d",
+                        "surface": "#f8f9fb",
+                        "tertiary-fixed": "#d4e3ff",
+                        "tertiary-container": "#003a6c",
+                        "surface-bright": "#f8f9fb",
+                        "secondary": "#904d00",
+                        "primary-container": "#1e3a5f",
+                        "on-primary": "#ffffff",
+                        "surface-container": "#edeef0",
+                        "inverse-on-surface": "#f0f1f3",
+                        "outline": "#74777f",
+                        "on-error": "#ffffff",
+                        "tertiary": "#002447",
+                        "on-tertiary-fixed": "#001c39",
+                        "surface-dim": "#d9dadc",
+                        "on-surface": "#191c1e",
+                        "on-primary-container": "#8aa4cf",
+                        "error": "#ba1a1a",
+                        "on-tertiary-fixed-variant": "#004883",
+                        "surface-container-highest": "#e1e2e4",
+                        "secondary-fixed": "#ffdcc3",
+                        "on-background": "#191c1e",
+                        "surface-tint": "#455f87",
+                        "on-tertiary": "#ffffff"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    spacing: {
+                        "sm": "16px",
+                        "margin-mobile": "16px",
+                        "margin-desktop": "32px",
+                        "base": "4px",
+                        "md": "24px",
+                        "xl": "48px",
+                        "lg": "32px",
+                        "gutter": "20px",
+                        "xs": "8px"
+                    },
+                    fontFamily: {
+                        "label-sm": ["Inter"],
+                        "headline-md": ["Sora"],
+                        "headline-lg": ["Sora"],
+                        "headline-lg-mobile": ["Sora"],
+                        "headline-xl": ["Sora"],
+                        "label-md": ["Inter"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"]
+                    },
+                    fontSize: {
+                        "label-sm": ["12px", { lineHeight: "16px", letterSpacing: "0.02em", fontWeight: "500" }],
+                        "headline-md": ["20px", { lineHeight: "28px", fontWeight: "600" }],
+                        "headline-lg": ["32px", { lineHeight: "40px", letterSpacing: "-0.01em", fontWeight: "600" }],
+                        "headline-lg-mobile": ["24px", { lineHeight: "32px", fontWeight: "600" }],
+                        "headline-xl": ["40px", { lineHeight: "48px", letterSpacing: "-0.02em", fontWeight: "700" }],
+                        "label-md": ["14px", { lineHeight: "20px", letterSpacing: "0.01em", fontWeight: "600" }],
+                        "body-md": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+                        "body-lg": ["18px", { lineHeight: "28px", fontWeight: "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col font-body-md antialiased selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- Task-Focused Header (Suppressed Main Nav) -->
+<header class="w-full h-16 bg-surface border-b border-outline-variant flex items-center px-margin-mobile sticky top-0 z-40 shrink-0">
+<button aria-label="Kembali" class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container-high transition-colors text-on-surface">
+<span class="material-symbols-outlined text-[24px]">arrow_back</span>
+</button>
+<h1 class="font-headline-md text-headline-md text-on-surface ml-xs">Status Servis Anda</h1>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 w-full max-w-lg mx-auto p-margin-mobile flex flex-col gap-sm pb-xl">
+<!-- Primary Vehicle & Status Card -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-sm shadow-[0_2px_8px_-2px_rgba(0,0,0,0.05)] relative overflow-hidden flex flex-col gap-md border-l-4 border-l-primary-fixed">
+<div class="flex justify-between items-start w-full">
+<div class="inline-flex items-center gap-1 bg-primary-fixed text-on-primary-fixed px-2 py-1 rounded font-label-sm text-label-sm uppercase tracking-wider">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">build_circle</span>
+                    Dalam Pengerjaan
+                </div>
+<span class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">tag</span>
+                    JOB-9284
+                </span>
+</div>
+<div class="flex flex-col gap-1">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface font-bold tracking-tight">B 1234 XYZ</h2>
+<p class="font-body-md text-body-md text-on-surface-variant flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">directions_car</span>
+                    Toyota Kijang Innova Reborn 2.4 G
+                </p>
+</div>
+</div>
+<!-- Details Bento Grid -->
+<div class="grid grid-cols-1 gap-sm mt-xs">
+<!-- Mechanic Info -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-sm flex items-center gap-sm">
+<div class="w-12 h-12 rounded bg-surface-container-high flex items-center justify-center text-primary shrink-0 border border-outline-variant">
+<span class="material-symbols-outlined text-[24px]">engineering</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Mekanik Kepala</span>
+<span class="font-label-md text-label-md text-on-surface">Budi Santoso</span>
+</div>
+</div>
+<!-- Time & Cost Grid -->
+<div class="grid grid-cols-2 gap-sm">
+<!-- Est Time -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-sm flex flex-col gap-1">
+<div class="flex items-center gap-1 text-on-surface-variant mb-1">
+<span class="material-symbols-outlined text-[16px]">schedule</span>
+<span class="font-label-sm text-label-sm">Est. Selesai</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface">14:30 WIB</span>
+<span class="font-label-sm text-label-sm text-secondary-container mt-auto">Hari ini</span>
+</div>
+<!-- Est Cost -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-sm flex flex-col gap-1">
+<div class="flex items-center gap-1 text-on-surface-variant mb-1">
+<span class="material-symbols-outlined text-[16px]">payments</span>
+<span class="font-label-sm text-label-sm">Estimasi Biaya</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface">Rp 1.250.000</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant mt-auto">Servis Berkala 40k</span>
+</div>
+</div>
+</div>
+<!-- Progress Timeline (Decorative/Structural) -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-sm mt-xs">
+<h3 class="font-label-md text-label-md text-on-surface mb-sm flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">checklist</span>
+                Tahapan Pengerjaan
+            </h3>
+<div class="flex flex-col gap-4 relative before:absolute before:inset-y-2 before:left-[11px] before:w-[2px] before:bg-surface-variant">
+<div class="flex gap-sm relative z-10">
+<div class="w-6 h-6 rounded-full bg-primary flex items-center justify-center text-on-primary shrink-0">
+<span class="material-symbols-outlined text-[14px]">check</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface">Inspeksi Awal</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Selesai 09:15 WIB</span>
+</div>
+</div>
+<div class="flex gap-sm relative z-10">
+<div class="w-6 h-6 rounded-full bg-primary-fixed border-2 border-primary flex items-center justify-center shrink-0">
+<div class="w-2 h-2 rounded-full bg-primary"></div>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-primary">Servis Mesin</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Sedang berlangsung...</span>
+</div>
+</div>
+<div class="flex gap-sm relative z-10">
+<div class="w-6 h-6 rounded-full bg-surface-container-high border-2 border-outline-variant flex items-center justify-center shrink-0">
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-outline">Final Check &amp; Cuci</span>
+<span class="font-label-sm text-label-sm text-outline-variant">Menunggu</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Action Button -->
+<button class="w-full min-h-[44px] mt-sm bg-secondary text-on-secondary rounded flex items-center justify-center gap-xs font-label-md text-label-md py-3 shadow-md hover:bg-on-secondary-fixed transition-colors active:scale-[0.98]">
+<span class="material-symbols-outlined text-[20px]">forum</span>
+            Hubungi Bengkel
+        </button>
+</main>
+</body></html>

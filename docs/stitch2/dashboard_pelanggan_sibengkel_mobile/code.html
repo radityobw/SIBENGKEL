@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Customer Dashboard - SIBENGKEL</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Sora:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-tertiary": "#ffffff",
+                      "on-secondary-fixed-variant": "#6e3900",
+                      "tertiary-fixed-dim": "#a4c9ff",
+                      "inverse-surface": "#2e3132",
+                      "surface-container-lowest": "#ffffff",
+                      "surface": "#f8f9fb",
+                      "surface-dim": "#d9dadc",
+                      "on-primary-container": "#8aa4cf",
+                      "surface-container-high": "#e7e8ea",
+                      "on-error-container": "#93000a",
+                      "tertiary": "#002447",
+                      "secondary-container": "#ffa454",
+                      "secondary": "#904d00",
+                      "on-error": "#ffffff",
+                      "surface-container-highest": "#e1e2e4",
+                      "primary-fixed-dim": "#adc8f5",
+                      "on-secondary": "#ffffff",
+                      "error-container": "#ffdad6",
+                      "on-secondary-fixed": "#2f1500",
+                      "outline-variant": "#c4c6cf",
+                      "on-background": "#191c1e",
+                      "surface-bright": "#f8f9fb",
+                      "outline": "#74777f",
+                      "on-tertiary-container": "#62a5f9",
+                      "on-primary": "#ffffff",
+                      "tertiary-fixed": "#d4e3ff",
+                      "on-primary-fixed-variant": "#2d486d",
+                      "inverse-primary": "#adc8f5",
+                      "primary-fixed": "#d5e3ff",
+                      "surface-container-low": "#f2f4f6",
+                      "on-surface": "#191c1e",
+                      "primary": "#022448",
+                      "on-primary-fixed": "#001c3b",
+                      "inverse-on-surface": "#f0f1f3",
+                      "surface-container": "#edeef0",
+                      "error": "#ba1a1a",
+                      "background": "#f8f9fb",
+                      "surface-variant": "#e1e2e4",
+                      "on-secondary-container": "#713b00",
+                      "on-tertiary-fixed-variant": "#004883",
+                      "on-surface-variant": "#43474e",
+                      "surface-tint": "#455f87",
+                      "secondary-fixed": "#ffdcc3",
+                      "tertiary-container": "#003a6c",
+                      "primary-container": "#1e3a5f",
+                      "on-tertiary-fixed": "#001c39",
+                      "secondary-fixed-dim": "#ffb77d"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "base": "4px",
+                      "xs": "8px",
+                      "sm": "16px",
+                      "lg": "32px",
+                      "margin-mobile": "16px",
+                      "gutter": "20px",
+                      "md": "24px",
+                      "margin-desktop": "32px",
+                      "xl": "48px"
+              },
+              "fontFamily": {
+                      "label-sm": ["Inter"],
+                      "label-md": ["Inter"],
+                      "headline-lg": ["Sora"],
+                      "headline-xl": ["Sora"],
+                      "headline-lg-mobile": ["Sora"],
+                      "body-md": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "headline-md": ["Sora"]
+              },
+              "fontSize": {
+                      "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                      "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "headline-xl": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .icon-filled {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        /* Utility for 1px solid border matching the industrial aesthetic */
+        .industrial-card {
+            border: 1px solid theme('colors.outline-variant');
+            background-color: theme('colors.surface-container-lowest');
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen pb-24 font-body-md text-body-md antialiased">
+<!-- TopAppBar -->
+<header class="w-full top-0 sticky bg-surface border-b border-outline-variant flex justify-between items-center px-margin-mobile md:px-margin-desktop h-16 w-full z-40 flat no shadows">
+<div class="flex items-center gap-sm">
+<div class="w-10 h-10 rounded-full bg-surface-container-high border border-outline-variant overflow-hidden flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-outline">person</span>
+</div>
+<h1 class="text-headline-md font-headline-md text-primary font-bold tracking-tight">Halo, Alex!</h1>
+</div>
+<button aria-label="Notifications" class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-colors active:opacity-80 active:scale-95 transition-transform">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+</header>
+<main class="max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop pt-md pb-xl flex flex-col gap-lg">
+<!-- Booking Aktif Section -->
+<section class="flex flex-col gap-sm">
+<div class="flex justify-between items-end">
+<h2 class="text-headline-lg-mobile md:text-headline-lg font-headline-lg-mobile md:font-headline-lg text-on-background">Booking Aktif</h2>
+</div>
+<div class="industrial-card rounded-lg p-sm md:p-md relative overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+<!-- Status Strip -->
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-secondary-container"></div>
+<div class="flex justify-between items-start mb-md">
+<div>
+<div class="flex items-center gap-xs mb-base">
+<span class="px-2 py-1 bg-secondary-container text-on-secondary-container rounded text-[10px] font-bold uppercase tracking-wider">Sedang Berlangsung</span>
+<span class="text-label-sm font-label-sm text-on-surface-variant">ID: #SB-8924</span>
+</div>
+<h3 class="text-body-lg font-body-lg font-semibold text-primary">Servis Berkala 20.000 KM</h3>
+<p class="text-body-md font-body-md text-on-surface-variant">Toyota Avanza (B 1234 CD)</p>
+</div>
+<div class="text-right">
+<p class="text-label-sm font-label-sm text-on-surface-variant">Estimasi Selesai</p>
+<p class="text-body-lg font-body-lg font-semibold text-primary">14:30 WIB</p>
+</div>
+</div>
+<!-- Timeline -->
+<div class="relative pt-sm">
+<!-- Progress Line Background -->
+<div class="absolute top-[26px] left-[10%] right-[10%] h-[2px] bg-surface-container-high z-0"></div>
+<!-- Progress Line Active (10% to 35% roughly for step 1 active) -->
+<div class="absolute top-[26px] left-[10%] w-[25%] h-[2px] bg-secondary-container z-0"></div>
+<div class="flex justify-between relative z-10">
+<!-- Step 1 -->
+<div class="flex flex-col items-center gap-xs w-1/4 text-center group cursor-pointer">
+<div class="w-8 h-8 rounded-full bg-secondary-container text-on-secondary-container border-2 border-surface-container-lowest flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-[16px] icon-filled">pending_actions</span>
+</div>
+<span class="text-[10px] md:text-label-sm font-label-sm text-on-background font-semibold leading-tight">Menunggu<br/>Konfirmasi</span>
+</div>
+<!-- Step 2 -->
+<div class="flex flex-col items-center gap-xs w-1/4 text-center group cursor-pointer opacity-60">
+<div class="w-8 h-8 rounded-full bg-surface-container-high text-on-surface-variant border-2 border-surface-container-lowest flex items-center justify-center">
+<span class="material-symbols-outlined text-[16px]">thumb_up</span>
+</div>
+<span class="text-[10px] md:text-label-sm font-label-sm text-on-surface-variant leading-tight">Disetujui</span>
+</div>
+<!-- Step 3 -->
+<div class="flex flex-col items-center gap-xs w-1/4 text-center group cursor-pointer opacity-60">
+<div class="w-8 h-8 rounded-full bg-surface-container-high text-on-surface-variant border-2 border-surface-container-lowest flex items-center justify-center">
+<span class="material-symbols-outlined text-[16px]">build</span>
+</div>
+<span class="text-[10px] md:text-label-sm font-label-sm text-on-surface-variant leading-tight">Sedang<br/>Dikerjakan</span>
+</div>
+<!-- Step 4 -->
+<div class="flex flex-col items-center gap-xs w-1/4 text-center group cursor-pointer opacity-60">
+<div class="w-8 h-8 rounded-full bg-surface-container-high text-on-surface-variant border-2 border-surface-container-lowest flex items-center justify-center">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+</div>
+<span class="text-[10px] md:text-label-sm font-label-sm text-on-surface-variant leading-tight">Selesai</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Kendaraan Saya Section -->
+<section class="flex flex-col gap-sm">
+<div class="flex justify-between items-end">
+<h2 class="text-headline-lg-mobile md:text-headline-lg font-headline-lg-mobile md:font-headline-lg text-on-background">Kendaraan Saya</h2>
+<button class="text-label-md font-label-md text-primary hover:text-primary-container flex items-center gap-base transition-colors min-h-[44px]">
+                    Lihat Semua
+                    <span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-sm">
+<!-- Vehicle Card 1 -->
+<div class="industrial-card rounded-lg p-sm flex items-center gap-sm cursor-pointer hover:shadow-md transition-all active:scale-[0.98]">
+<div class="w-16 h-16 rounded bg-surface-container-low border border-outline-variant flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[32px] text-outline">directions_car</span>
+</div>
+<div class="flex-grow">
+<h3 class="text-body-lg font-body-lg font-semibold text-primary">Toyota Avanza</h3>
+<p class="text-body-md font-body-md text-on-surface-variant mb-xs">Tahun 2018 • Silver</p>
+<div class="inline-flex px-2 py-0.5 border border-outline-variant rounded bg-surface text-label-md font-label-md font-bold text-on-background tracking-widest">
+                            B 1234 CD
+                        </div>
+</div>
+<div class="shrink-0 text-outline-variant">
+<span class="material-symbols-outlined">more_vert</span>
+</div>
+</div>
+<!-- Vehicle Card 2 -->
+<div class="industrial-card rounded-lg p-sm flex items-center gap-sm cursor-pointer hover:shadow-md transition-all active:scale-[0.98]">
+<div class="w-16 h-16 rounded bg-surface-container-low border border-outline-variant flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[32px] text-outline">two_wheeler</span>
+</div>
+<div class="flex-grow">
+<h3 class="text-body-lg font-body-lg font-semibold text-primary">Honda Vario 150</h3>
+<p class="text-body-md font-body-md text-on-surface-variant mb-xs">Tahun 2020 • Hitam</p>
+<div class="inline-flex px-2 py-0.5 border border-outline-variant rounded bg-surface text-label-md font-label-md font-bold text-on-background tracking-widest">
+                            D 5678 EF
+                        </div>
+</div>
+<div class="shrink-0 text-outline-variant">
+<span class="material-symbols-outlined">more_vert</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Prominent FAB (Desktop & Mobile) -->
+<div class="fixed bottom-24 md:bottom-8 right-4 md:right-8 z-40">
+<button class="bg-secondary text-on-secondary rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all flex items-center gap-xs px-sm md:px-md min-h-[56px] min-w-[56px] group active:scale-95">
+<span class="material-symbols-outlined text-[24px]">add</span>
+<span class="text-label-md font-label-md font-semibold whitespace-nowrap">Booking Servis Baru</span>
+</button>
+</div>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center h-20 px-2 pb-safe bg-surface border-t border-outline-variant shadow-md z-50 md:hidden">
+<!-- Active Tab: Dashboard -->
+<a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-xl px-4 py-1.5 active:scale-90 transition-all duration-150 min-h-[44px]" href="#">
+<span class="material-symbols-outlined icon-filled" data-icon="dashboard">dashboard</span>
+<span class="text-label-sm font-label-sm mt-1">Dashboard</span>
+</a>
+<!-- Inactive Tab: Booking -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1.5 hover:text-primary min-h-[44px]" href="#">
+<span class="material-symbols-outlined" data-icon="calendar_month">calendar_month</span>
+<span class="text-label-sm font-label-sm mt-1">Booking</span>
+</a>
+<!-- Inactive Tab: Sparepart -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1.5 hover:text-primary min-h-[44px]" href="#">
+<span class="material-symbols-outlined" data-icon="settings_input_component">settings_input_component</span>
+<span class="text-label-sm font-label-sm mt-1">Sparepart</span>
+</a>
+<!-- Inactive Tab: Profil -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1.5 hover:text-primary min-h-[44px]" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="text-label-sm font-label-sm mt-1">Profil</span>
+</a>
+</nav>
+<!-- Desktop Sidebar (Hidden on Mobile) -->
+<aside class="hidden md:flex flex-col fixed left-0 top-16 bottom-0 w-[280px] bg-surface border-r border-outline-variant p-md gap-sm z-30">
+<a class="flex items-center gap-sm px-sm py-xs bg-secondary-container text-on-secondary-container rounded-lg transition-colors font-label-md min-h-[44px]" href="#">
+<span class="material-symbols-outlined icon-filled">dashboard</span>
+            Dashboard
+        </a>
+<a class="flex items-center gap-sm px-sm py-xs text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-colors font-label-md min-h-[44px]" href="#">
+<span class="material-symbols-outlined">calendar_month</span>
+            Booking
+        </a>
+<a class="flex items-center gap-sm px-sm py-xs text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-colors font-label-md min-h-[44px]" href="#">
+<span class="material-symbols-outlined">settings_input_component</span>
+            Sparepart
+        </a>
+<a class="flex items-center gap-sm px-sm py-xs text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-colors font-label-md min-h-[44px]" href="#">
+<span class="material-symbols-outlined">person</span>
+            Profil
+        </a>
+</aside>
+<!-- Adjust main content padding for desktop sidebar -->
+<style>
+        @media (min-width: 768px) {
+            main {
+                padding-left: calc(280px + 32px); /* Sidebar width + Desktop margin */
+            }
+        }
+    </style>
+</body></html>

@@ -28,6 +28,7 @@
   - [Fitur B: Database Architecture, Migrations & Eloquent Data Layer](#-fitur-b-database-architecture-migrations--eloquent-data-layer)
 - [🔐 FASE 2: AUTENTIKASI, KEAMANAN & RBAC](#-fase-2-autentikasi-keamanan--rbac)
   - [Fitur C: Authentication Breeze, Sanctum & RBAC Access Control](#-fitur-c-authentication-breeze-sanctum--rbac-access-control)
+  - [Fitur C.2: Manajemen Akun Admin & Penutupan Registrasi Publik](#-fitur-c2-manajemen-akun-admin--penutupan-registrasi-publik)
 - [👥 FASE 3: MANAJEMEN DATA MASTER (CORE CRUD)](#-fase-3-manajemen-data-master-core-crud)
   - [Fitur D: Data Master Pelanggan (Customers CRUD)](#-fitur-d-data-master-pelanggan-customers-crud)
   - [Fitur E: Data Master Kendaraan (Vehicles CRUD)](#-fitur-e-data-master-kendaraan-vehicles-crud)
@@ -457,6 +458,7 @@ return new class extends Migration {
     public function up(): void {
         Schema::create('mechanics', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->string('name');
             $table->string('phone', 30)->nullable();
             $table->string('expertise', 150)->nullable();
@@ -511,13 +513,14 @@ Isikan kode berikut:
 ```php
 public function up(): void {
     Schema::table('users', function (Blueprint $table) {
+        $table->string('username')->unique()->after('name');
         $table->enum('role', ['admin', 'mekanik'])->default('mekanik')->after('email');
     });
 }
 
 public function down(): void {
     Schema::table('users', function (Blueprint $table) {
-        $table->dropColumn('role');
+        $table->dropColumn(['username', 'role']);
     });
 }
 ```
@@ -582,7 +585,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Mechanic extends Model {
     use HasFactory;
-    protected $fillable = ['name', 'phone', 'expertise'];
+    protected $fillable = ['user_id', 'name', 'phone', 'expertise'];
+
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
 
     public function transactions() {
         return $this->hasMany(ServiceTransaction::class);
@@ -640,13 +647,15 @@ class DatabaseSeeder extends Seeder {
         // Admin & Mekanik User Account
         User::create([
             'name' => 'Admin Bengkel',
+            'username' => 'adminbengkel',
             'email' => 'admin@sibengkel.com',
             'password' => Hash::make('password123'),
             'role' => 'admin',
         ]);
 
-        User::create([
+        $mekanikUser = User::create([
             'name' => 'Mekanik Budi',
+            'username' => 'mekanikbengkel',
             'email' => 'mekanik@sibengkel.com',
             'password' => Hash::make('password123'),
             'role' => 'mekanik',
@@ -668,7 +677,8 @@ class DatabaseSeeder extends Seeder {
         ]);
 
         $mechanic = Mechanic::create([
-            'name' => 'Agus Teknis',
+            'user_id' => $mekanikUser->id,
+            'name' => 'Mekanik Budi',
             'phone' => '089876543210',
             'expertise' => 'Spesialis Mesin & Injeksi'
         ]);
@@ -740,6 +750,29 @@ protected $middlewareAliases = [
     // ...
     'role' => \App\Http\Middleware\CheckRole::class,
 ];
+```
+
+### 3.3. Menonaktifkan Rute Registrasi Publik (`routes/auth.php`)
+Sistem SIBENGKEL tidak mengizinkan pendaftaran dari luar. Buka `routes/auth.php` dan berikan komentar pada rute pendaftaran bawaan Breeze:
+```php
+Route::middleware('guest')->group(function () {
+    // Route::get('register', [RegisteredUserController::class, 'create'])->name('register');
+    // Route::post('register', [RegisteredUserController::class, 'store']);
+    
+    // ...
+});
+```
+
+### 3.4. Membuat Admin Controller (CRUD Admin)
+Jalankan perintah:
+```bash
+php artisan make:controller AdminController --resource
+```
+Di dalam `AdminController`, buat logika untuk membuat pengguna baru dengan peran mutlak `'admin'`. Jangan lupa memodifikasi *method* `destroy` agar Admin tidak bisa menghapus dirinya sendiri:
+```php
+if ($admin->id === request()->user()->id) {
+    return redirect()->route('admins.index')->with('error', 'Tidak dapat menghapus akun sendiri!');
+}
 ```
 
 ---

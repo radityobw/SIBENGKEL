@@ -20,8 +20,11 @@
     <!-- SideNavBar (Hidden on Mobile) -->
     <aside class="w-[280px] h-screen fixed left-0 top-0 bg-primary dark:bg-tertiary border-r border-outline-variant/20 shadow-md hidden lg:flex flex-col py-6 px-4 gap-2 z-50">
         <div class="px-4 mb-8">
-            <h1 class="text-2xl font-sora font-bold text-on-primary">SIBENGKEL</h1>
-            <p class="text-sm text-on-primary/70">Workshop Management</p>
+            <div class="flex items-center gap-2">
+                <img src="{{ asset('logobengkel.png') }}" alt="SIBENGKEL Logo" class="h-8 object-contain">
+                <h1 class="text-2xl font-sora font-bold text-on-primary">SIBENGKEL</h1>
+            </div>
+            <p class="text-sm text-on-primary/70 mt-1">Workshop Management</p>
         </div>
         <nav class="flex-1 flex flex-col gap-2">
             <a class="flex items-center gap-4 px-4 py-2 {{ request()->routeIs('dashboard') ? 'bg-secondary-container text-on-secondary-container' : 'text-on-primary/70 hover:text-on-primary hover:bg-primary-container/50' }} rounded-lg font-semibold transition-all duration-200 ease-in-out h-11" href="{{ route('dashboard') }}">
@@ -36,10 +39,16 @@
                 <span class="material-symbols-outlined">directions_car</span>
                 <span>Kendaraan</span>
             </a>
+            @if(Auth::user()->role === 'admin')
+            <a class="flex items-center gap-4 px-4 py-2 {{ request()->routeIs('admins.*') ? 'bg-secondary-container text-on-secondary-container' : 'text-on-primary/70 hover:text-on-primary hover:bg-primary-container/50' }} rounded-lg font-semibold transition-all duration-200 ease-in-out h-11" href="{{ route('admins.index') }}">
+                <span class="material-symbols-outlined">admin_panel_settings</span>
+                <span>Manajemen Admin</span>
+            </a>
             <a class="flex items-center gap-4 px-4 py-2 {{ request()->routeIs('mechanics.*') ? 'bg-secondary-container text-on-secondary-container' : 'text-on-primary/70 hover:text-on-primary hover:bg-primary-container/50' }} rounded-lg font-semibold transition-all duration-200 ease-in-out h-11" href="{{ route('mechanics.index') }}">
                 <span class="material-symbols-outlined">build</span>
                 <span>Mekanik</span>
             </a>
+            @endif
             <a class="flex items-center gap-4 px-4 py-2 {{ request()->routeIs('transactions.*') ? 'bg-secondary-container text-on-secondary-container' : 'text-on-primary/70 hover:text-on-primary hover:bg-primary-container/50' }} rounded-lg font-semibold transition-all duration-200 ease-in-out h-11" href="{{ route('transactions.index') }}">
                 <span class="material-symbols-outlined">receipt_long</span>
                 <span>Transaksi</span>
@@ -65,7 +74,10 @@
                 <button class="lg:hidden p-2 rounded-full text-on-surface-variant hover:bg-surface-container-high transition-colors">
                     <span class="material-symbols-outlined">menu</span>
                 </button>
-                <h2 class="lg:hidden text-xl font-sora font-bold text-primary tracking-tight">SIBENGKEL</h2>
+                <div class="lg:hidden flex items-center gap-2">
+                    <img src="{{ asset('logobengkel.png') }}" alt="SIBENGKEL Logo" class="h-6 object-contain">
+                    <h2 class="text-xl font-sora font-bold text-primary tracking-tight">SIBENGKEL</h2>
+                </div>
             </div>
             <div class="flex items-center gap-2">
                 <div class="font-medium text-sm text-on-surface-variant truncate max-w-[100px] sm:max-w-[200px]">
@@ -107,10 +119,16 @@
             <span class="material-symbols-outlined mb-1">directions_car</span>
             <span class="text-xs">Veh</span>
         </a>
-        <a href="{{ route('mechanics.index') }}" class="flex flex-col items-center justify-center {{ request()->routeIs('mechanics.*') ? 'text-secondary' : 'text-on-surface-variant' }} font-bold h-full w-full max-w-[80px] touch-none active:scale-90 active:bg-surface-container rounded-lg">
-            <span class="material-symbols-outlined mb-1">build</span>
-            <span class="text-xs">Mech</span>
+        @if(Auth::user()->role === 'admin')
+        <a href="{{ route('admins.index') }}" class="flex flex-col items-center justify-center {{ request()->routeIs('admins.*') ? 'text-secondary' : 'text-on-surface-variant' }} font-bold h-full w-full max-w-[80px] touch-none active:scale-90 active:bg-surface-container rounded-lg">
+            <span class="material-symbols-outlined text-2xl {{ request()->routeIs('admins.*') ? 'icon-filled' : '' }}">admin_panel_settings</span>
+            <span class="text-[10px] mt-1">Admin</span>
         </a>
+        <a href="{{ route('mechanics.index') }}" class="flex flex-col items-center justify-center {{ request()->routeIs('mechanics.*') ? 'text-secondary' : 'text-on-surface-variant' }} font-bold h-full w-full max-w-[80px] touch-none active:scale-90 active:bg-surface-container rounded-lg">
+            <span class="material-symbols-outlined text-2xl {{ request()->routeIs('mechanics.*') ? 'icon-filled' : '' }}">build</span>
+            <span class="text-[10px] mt-1">Mekanik</span>
+        </a>
+        @endif
         <a href="{{ route('transactions.index') }}" class="flex flex-col items-center justify-center {{ request()->routeIs('transactions.*') ? 'text-secondary' : 'text-on-surface-variant' }} font-bold h-full w-full max-w-[80px] touch-none active:scale-90 active:bg-surface-container rounded-lg">
             <span class="material-symbols-outlined mb-1">receipt_long</span>
             <span class="text-xs">Tx</span>

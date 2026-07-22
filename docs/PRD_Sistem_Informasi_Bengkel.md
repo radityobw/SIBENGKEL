@@ -103,7 +103,9 @@ Bengkel kendaraan skala kecil hingga menengah mayoritas masih bergantung pada pe
 | Modul / Fitur | Hak Akses Admin | Hak Akses Mekanik | Pelanggan *(Entitas Data)* |
 | :--- | :---: | :---: | :---: |
 | **Login / Logout Sistem** |  Ya |  Ya | ❌ Tidak (opsional portal) |
-| **Kelola Pengguna / Mekanik** |  Full CRUD | ❌ No Access | ❌ No Access |
+| **Pendaftaran Publik (Register)** | ❌ Ditutup | ❌ Ditutup | ❌ Ditutup |
+| **Kelola Pengguna Admin** |  Full CRUD | ❌ No Access | ❌ No Access |
+| **Kelola Data Mekanik** |  Full CRUD | ❌ No Access | ❌ No Access |
 | **Kelola Data Pelanggan** |  Full CRUD |  View & Create | ❌ Read Only (via laporan) |
 | **Kelola Data Kendaraan** |  Full CRUD |  Full CRUD | ❌ Read Only (via laporan) |
 | **Kelola Transaksi Servis** |  Full CRUD |  Create & Update Status | ❌ Read Only |
@@ -121,6 +123,7 @@ Sistem mengimplementasikan basis data relasional dengan 4 entitas utama (ditamba
 ```mermaid
 erDiagram
     USERS ||--o{ TRANSACTIONS : "menangani (user_id / mechanic_id)"
+    USERS ||--|| MECHANICS : "memiliki profil (user_id)"
     CUSTOMERS ||--o{ VEHICLES : "memiliki (customer_id)"
     VEHICLES ||--o{ TRANSACTIONS : "menerima servis (vehicle_id)"
     CUSTOMERS ||--o{ TRANSACTIONS : "pemilik transaksi (opsional relasi)"
@@ -128,6 +131,7 @@ erDiagram
     USERS {
         bigint id PK
         string name
+        string username UK
         string email UK
         string password
         enum role "admin, mekanik"
@@ -157,6 +161,7 @@ erDiagram
 
     MECHANICS {
         bigint id PK
+        bigint user_id FK
         string name
         string phone
         string expertise
@@ -189,6 +194,7 @@ Memuat akun kredensial pengguna internal (Admin & Mekanik).
 | :--- | :--- | :--- | :--- |
 | `id` | `bigint` | Primary Key, Auto Increment | Identitas unik pengguna |
 | `name` | `varchar(255)` | Not Null | Nama lengkap pengguna |
+| `username` | `varchar(255)` | Unique, Not Null | Username untuk alternatif login |
 | `email` | `varchar(255)` | Unique, Not Null | Email untuk login |
 | `password` | `varchar(255)` | Not Null (Hashed Bcrypt) | Password terenkripsi |
 | `role` | `enum` | `'admin'`, `'mekanik'` | Hak akses peran pengguna |
@@ -223,6 +229,7 @@ Memuat data spesifikasi kendaraan yang terhubung ke pelanggan.
 | Nama Kolom | Tipe Data | Atribut / Constraint | Keterangan |
 | :--- | :--- | :--- | :--- |
 | `id` | `bigint` | Primary Key, Auto Increment | ID Mekanik |
+| `user_id` | `bigint` | Foreign Key → `users.id` | Tautan ke kredensial akun pengguna |
 | `name` | `varchar(255)` | Not Null | Nama mekanik |
 | `phone` | `varchar(30)` | Nullable | Kontak mekanik |
 | `expertise` | `varchar(150)` | Nullable | Keahlian (Mesin, Kelistrikan, Rem) |
@@ -253,7 +260,8 @@ Tabel fakta utama yang mencatat seluruh aktivitas transaksi pengerjaan servis at
 * **FR-01 [Wajib]**: Login pengguna dengan email & password yang tervalidasi.
 * **FR-02 [Wajib]**: Logout pengguna serta penghapusan sesi / revocation token Sanctum.
 * **FR-03 [Wajib]**: Pendaftaran akun mekanik/petugas baru oleh Admin.
-* **FR-04 [Wajib]**: Middleware proteksi rute halaman berbasis role (Admin vs Mekanik).
+* **FR-04 [Wajib]**: Pendaftaran & manajemen (CRUD) akun Admin baru oleh Admin (Penutupan rute registrasi publik `/register`).
+* **FR-05 [Wajib]**: Middleware proteksi rute halaman berbasis role (Admin vs Mekanik).
 
 ### 7.2. Modul Manajemen Pelanggan (Customers)
 * **FR-05 [Wajib]**: Tambah data pelanggan baru (Nama, No Telepon, Alamat).

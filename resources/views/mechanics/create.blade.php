@@ -15,13 +15,47 @@
                 @endif
 
                 <div class="space-y-2">
-                    <label for="name" class="block text-sm font-semibold text-on-surface">Nama Lengkap <span class="text-error">*</span></label>
+                    <label for="name" class="block text-sm font-semibold text-on-surface">Nama Lengkap Mekanik <span class="text-error">*</span></label>
                     <input type="text" id="name" name="name" value="{{ old('name', $mechanic->name ?? '') }}" required
                         class="w-full h-11 px-4 bg-surface border border-outline-variant rounded-lg focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-shadow" 
                         placeholder="Contoh: Agus Teknis">
                     @error('name')
                         <p class="text-error text-sm mt-1">{{ $message }}</p>
                     @enderror
+                </div>
+
+                <div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-4 lg:p-6 space-y-4">
+                    <h3 class="text-lg font-sora font-semibold text-on-surface border-b border-outline-variant pb-2">Informasi Akun Login (Otomatis Dibuat)</h3>
+                    
+                    <div class="space-y-2">
+                        <label for="username" class="block text-sm font-semibold text-on-surface">Username {{ isset($mechanic) ? '(Kosongkan jika tidak ingin diubah)' : '<span class="text-error">*</span>' }}</label>
+                        <input type="text" id="username" name="username" value="{{ old('username', $mechanic->user->username ?? '') }}" {{ isset($mechanic) ? '' : 'required' }}
+                            class="w-full h-11 px-4 bg-surface border border-outline-variant rounded-lg focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-shadow" 
+                            placeholder="Contoh: agusteknis">
+                        @error('username')
+                            <p class="text-error text-sm mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <div class="space-y-2">
+                        <label for="email" class="block text-sm font-semibold text-on-surface">Alamat Email {{ isset($mechanic) ? '(Kosongkan jika tidak ingin diubah)' : '<span class="text-error">*</span>' }}</label>
+                        <input type="email" id="email" name="email" value="{{ old('email', $mechanic->user->email ?? '') }}" {{ isset($mechanic) ? '' : 'required' }}
+                            class="w-full h-11 px-4 bg-surface border border-outline-variant rounded-lg focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-shadow" 
+                            placeholder="Contoh: agus@sibengkel.com">
+                        @error('email')
+                            <p class="text-error text-sm mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <div class="space-y-2">
+                        <label for="password" class="block text-sm font-semibold text-on-surface">Password {{ isset($mechanic) ? '(Kosongkan jika tidak ingin diubah)' : '<span class="text-error">*</span>' }}</label>
+                        <input type="password" id="password" name="password" {{ isset($mechanic) ? '' : 'required' }}
+                            class="w-full h-11 px-4 bg-surface border border-outline-variant rounded-lg focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-shadow" 
+                            placeholder="{{ isset($mechanic) ? '••••••••' : 'Minimal 8 karakter' }}">
+                        @error('password')
+                            <p class="text-error text-sm mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
                 </div>
 
                 <div class="space-y-2">

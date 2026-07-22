@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Checkout - SIBENGKEL</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Sora:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "outline-variant": "#c4c6cf",
+                        "surface-variant": "#e1e2e4",
+                        "surface-container-highest": "#e1e2e4",
+                        "on-primary-container": "#8aa4cf",
+                        "surface-container": "#edeef0",
+                        "outline": "#74777f",
+                        "on-secondary-fixed": "#2f1500",
+                        "tertiary-fixed-dim": "#a4c9ff",
+                        "on-secondary": "#ffffff",
+                        "tertiary-fixed": "#d4e3ff",
+                        "secondary-fixed-dim": "#ffb77d",
+                        "surface-container-low": "#f2f4f6",
+                        "on-surface": "#191c1e",
+                        "surface-tint": "#455f87",
+                        "surface": "#f8f9fb",
+                        "on-surface-variant": "#43474e",
+                        "inverse-primary": "#adc8f5",
+                        "error-container": "#ffdad6",
+                        "background": "#f8f9fb",
+                        "primary-container": "#1e3a5f",
+                        "on-primary": "#ffffff",
+                        "primary-fixed-dim": "#adc8f5",
+                        "surface-container-high": "#e7e8ea",
+                        "primary-fixed": "#d5e3ff",
+                        "on-secondary-container": "#713b00",
+                        "on-primary-fixed-variant": "#2d486d",
+                        "secondary": "#904d00",
+                        "inverse-on-surface": "#f0f1f3",
+                        "surface-dim": "#d9dadc",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-bright": "#f8f9fb",
+                        "secondary-fixed": "#ffdcc3",
+                        "on-primary-fixed": "#001c3b",
+                        "on-secondary-fixed-variant": "#6e3900",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-container": "#003a6c",
+                        "primary": "#022448",
+                        "on-background": "#191c1e",
+                        "error": "#ba1a1a",
+                        "on-error-container": "#93000a",
+                        "tertiary": "#002447",
+                        "on-tertiary-fixed": "#001c39",
+                        "secondary-container": "#ffa454",
+                        "inverse-surface": "#2e3132",
+                        "on-tertiary-container": "#62a5f9",
+                        "on-error": "#ffffff",
+                        "on-tertiary-fixed-variant": "#004883"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    spacing: {
+                        "gutter": "20px",
+                        "margin-desktop": "32px",
+                        "xs": "8px",
+                        "md": "24px",
+                        "margin-mobile": "16px",
+                        "lg": "32px",
+                        "base": "4px",
+                        "xl": "48px",
+                        "sm": "16px"
+                    },
+                    fontFamily: {
+                        "body-lg": ["Inter"],
+                        "headline-lg-mobile": ["Sora"],
+                        "body-md": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-xl": ["Sora"],
+                        "headline-lg": ["Sora"],
+                        "label-sm": ["Inter"],
+                        "headline-md": ["Sora"]
+                    },
+                    fontSize: {
+                        "body-lg": ["18px", { lineHeight: "28px", fontWeight: "400" }],
+                        "headline-lg-mobile": ["24px", { lineHeight: "32px", fontWeight: "600" }],
+                        "body-md": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+                        "label-md": ["14px", { lineHeight: "20px", letterSpacing: "0.01em", fontWeight: "600" }],
+                        "headline-xl": ["40px", { lineHeight: "48px", letterSpacing: "-0.02em", fontWeight: "700" }],
+                        "headline-lg": ["32px", { lineHeight: "40px", letterSpacing: "-0.01em", fontWeight: "600" }],
+                        "label-sm": ["12px", { lineHeight: "16px", letterSpacing: "0.02em", fontWeight: "500" }],
+                        "headline-md": ["20px", { lineHeight: "28px", fontWeight: "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .pb-safe { padding-bottom: env(safe-area-inset-bottom, 20px); }
+        /* Custom radio button styles for better industrial feel */
+        input[type="radio"]:checked + div > .radio-indicator {
+            border-color: #022448; /* primary */
+            border-width: 6px;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen font-body-md antialiased flex flex-col">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-surface border-b border-outline-variant transition-colors duration-200 flex justify-between items-center h-14 px-4">
+<button class="text-on-surface-variant hover:bg-surface-container rounded-full w-10 h-10 flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined" style="font-variation-settings: 'wght' 300;">settings_suggest</span>
+</button>
+<span class="font-headline-md text-headline-md font-bold text-primary">SIBENGKEL</span>
+<button class="text-on-surface-variant hover:bg-surface-container rounded-full w-10 h-10 flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined" style="font-variation-settings: 'wght' 300;">shopping_cart</span>
+</button>
+</header>
+<!-- Main Content Area -->
+<!-- Note: BottomNavBar is suppressed per the Semantic Shell Mandate for Checkout (Transactional) screens -->
+<main class="flex-1 w-full max-w-3xl mx-auto pt-20 pb-32 px-margin-mobile md:px-margin-desktop flex flex-col gap-lg">
+<!-- Page Header -->
+<section class="flex flex-col gap-xs">
+<h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-background">Checkout</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Selesaikan pesanan servis kendaraan Anda.</p>
+</section>
+<!-- Order Summary Card -->
+<section class="bg-surface border border-outline-variant rounded-lg flex flex-col relative overflow-hidden shadow-sm">
+<!-- Industrial Status Strip -->
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-primary"></div>
+<div class="p-md border-b border-outline-variant bg-surface-container-lowest ml-1">
+<h2 class="font-label-md text-label-md text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-outline" style="font-size: 20px;">receipt_long</span>
+                    Ringkasan Pesanan
+                </h2>
+</div>
+<div class="flex flex-col p-md gap-md ml-1">
+<!-- Item List -->
+<div class="flex flex-col gap-sm">
+<div class="flex justify-between items-start gap-4">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface">Paket Servis Berkala 10.000 KM</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant mt-1">Jasa Pemeriksaan, Ganti Oli Mesin, Filter Oli</span>
+</div>
+<span class="font-body-md text-body-md text-on-surface whitespace-nowrap">Rp 450.000</span>
+</div>
+<div class="flex justify-between items-start gap-4">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface">Pembersih Injektor (Chemical)</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant mt-1">Sparepart Tambahan</span>
+</div>
+<span class="font-body-md text-body-md text-on-surface whitespace-nowrap">Rp 85.000</span>
+</div>
+</div>
+<!-- Divider -->
+<hr class="border-t border-outline-variant"/>
+<!-- Totals -->
+<div class="flex flex-col gap-xs">
+<div class="flex justify-between items-center text-on-surface-variant">
+<span class="font-body-md text-body-md">Subtotal</span>
+<span class="font-body-md text-body-md">Rp 535.000</span>
+</div>
+<div class="flex justify-between items-center text-on-surface-variant">
+<span class="font-body-md text-body-md">PPN (11%)</span>
+<span class="font-body-md text-body-md">Rp 58.850</span>
+</div>
+<div class="flex justify-between items-center mt-xs pt-xs border-t border-outline-variant border-dashed">
+<span class="font-label-md text-label-md text-on-surface">Total Tagihan</span>
+<span class="font-headline-md text-headline-md font-bold text-primary">Rp 593.850</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Payment Methods -->
+<section class="flex flex-col gap-md">
+<h2 class="font-label-md text-label-md text-on-background uppercase tracking-wider text-sm">Metode Pembayaran</h2>
+<div class="flex flex-col gap-sm">
+<!-- Option 1 -->
+<label class="relative flex p-md border border-outline-variant rounded-lg bg-surface cursor-pointer hover:bg-surface-container transition-colors group">
+<input checked="" class="peer sr-only" name="payment_method" type="radio" value="transfer"/>
+<!-- Custom Radio Visual -->
+<div class="min-w-[24px] h-[24px] rounded-full border-2 border-outline-variant mr-4 flex items-center justify-center transition-all peer-checked:border-primary peer-checked:border-[6px]"></div>
+<div class="flex flex-col flex-1">
+<div class="flex justify-between items-center">
+<span class="font-label-md text-label-md text-on-surface">Transfer Bank Manual</span>
+<span class="material-symbols-outlined text-outline" style="font-variation-settings: 'wght' 300;">account_balance</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm mt-1">Transfer langsung ke rekening BCA atau Mandiri. Verifikasi dilakukan manual dalam 1x24 jam kerja.</p>
+<!-- Expandable content (simulated via CSS peer state if needed, keeping simple here) -->
+<div class="mt-4 p-sm bg-surface-container-low border border-outline-variant rounded hidden peer-checked:block">
+<div class="flex items-center gap-2 mb-2">
+<div class="w-8 h-5 bg-outline-variant rounded-sm flex items-center justify-center text-[8px] font-bold text-white">BCA</div>
+<span class="font-label-sm text-label-sm text-on-surface">1234 5678 90 a/n PT Sibengkel</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-8 h-5 bg-outline-variant rounded-sm flex items-center justify-center text-[8px] font-bold text-white">MND</div>
+<span class="font-label-sm text-label-sm text-on-surface">0987 6543 21 a/n PT Sibengkel</span>
+</div>
+</div>
+</div>
+</label>
+<!-- Option 2 -->
+<label class="relative flex p-md border border-outline-variant rounded-lg bg-surface cursor-pointer hover:bg-surface-container transition-colors group">
+<input class="peer sr-only" name="payment_method" type="radio" value="cod"/>
+<!-- Custom Radio Visual -->
+<div class="min-w-[24px] h-[24px] rounded-full border-2 border-outline-variant mr-4 flex items-center justify-center transition-all peer-checked:border-primary peer-checked:border-[6px]"></div>
+<div class="flex flex-col flex-1">
+<div class="flex justify-between items-center">
+<span class="font-label-md text-label-md text-on-surface">Bayar di Bengkel (COD)</span>
+<span class="material-symbols-outlined text-outline" style="font-variation-settings: 'wght' 300;">storefront</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm mt-1">Lakukan pembayaran menggunakan Tunai, Debit, atau QRIS setelah pengerjaan kendaraan selesai di lokasi.</p>
+</div>
+</label>
+</div>
+</section>
+</main>
+<!-- Sticky Footer -->
+<footer class="fixed bottom-0 w-full bg-surface border-t border-outline-variant z-40 pb-safe">
+<div class="max-w-3xl mx-auto px-margin-mobile md:px-margin-desktop py-4 flex items-center justify-between gap-4">
+<div class="flex flex-col hidden sm:flex">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Total Pembayaran</span>
+<span class="font-headline-md text-headline-md font-bold text-primary">Rp 593.850</span>
+</div>
+<!-- Secondary Action Button (Workshop Orange variant as per guidelines) -->
+<button class="flex-1 sm:flex-none min-w-[200px] h-[44px] bg-secondary-container text-on-secondary-container hover:bg-secondary hover:text-on-secondary transition-colors duration-200 rounded font-label-md text-label-md flex items-center justify-center gap-2 shadow-sm" type="button">
+<span class="material-symbols-outlined" style="font-size: 20px;">check_circle</span>
+                Buat Pesanan
+            </button>
+</div>
+</footer>
+</body></html>

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SIBENGKEL - Digitalisasi Servis Bengkel Masa Depan</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Sora:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-container": "#1e3a5f",
+                        "error": "#ba1a1a",
+                        "on-secondary-fixed": "#2f1500",
+                        "on-secondary-container": "#713b00",
+                        "on-surface-variant": "#43474e",
+                        "tertiary-fixed": "#d4e3ff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "surface-dim": "#d9dadc",
+                        "outline": "#74777f",
+                        "primary-fixed-dim": "#adc8f5",
+                        "error-container": "#ffdad6",
+                        "surface-container": "#edeef0",
+                        "on-error": "#ffffff",
+                        "on-tertiary-fixed-variant": "#004883",
+                        "background": "#f8f9fb",
+                        "surface-container-low": "#f2f4f6",
+                        "inverse-primary": "#adc8f5",
+                        "secondary-container": "#ffa454",
+                        "surface-container-highest": "#e1e2e4",
+                        "on-surface": "#191c1e",
+                        "surface-tint": "#455f87",
+                        "secondary-fixed-dim": "#ffb77d",
+                        "secondary-fixed": "#ffdcc3",
+                        "primary-fixed": "#d5e3ff",
+                        "on-primary-container": "#8aa4cf",
+                        "inverse-surface": "#2e3132",
+                        "secondary": "#904d00",
+                        "on-primary-fixed-variant": "#2d486d",
+                        "inverse-on-surface": "#f0f1f3",
+                        "on-secondary": "#ffffff",
+                        "outline-variant": "#c4c6cf",
+                        "surface-container-high": "#e7e8ea",
+                        "on-background": "#191c1e",
+                        "on-tertiary": "#ffffff",
+                        "on-tertiary-fixed": "#001c39",
+                        "on-primary": "#ffffff",
+                        "surface-bright": "#f8f9fb",
+                        "primary": "#022448",
+                        "on-secondary-fixed-variant": "#6e3900",
+                        "surface": "#f8f9fb",
+                        "on-tertiary-container": "#62a5f9",
+                        "tertiary-fixed-dim": "#a4c9ff",
+                        "tertiary": "#002447",
+                        "surface-variant": "#e1e2e4",
+                        "on-primary-fixed": "#001c3b",
+                        "tertiary-container": "#003a6c"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "md": "24px",
+                        "xl": "48px",
+                        "margin-mobile": "16px",
+                        "lg": "32px",
+                        "margin-desktop": "32px",
+                        "xs": "8px",
+                        "base": "4px",
+                        "gutter": "20px",
+                        "sm": "16px"
+                    },
+                    "fontFamily": {
+                        "headline-xl": ["Sora"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-lg": ["Sora"],
+                        "label-sm": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-md": ["Sora"],
+                        "headline-lg-mobile": ["Sora"]
+                    },
+                    "fontSize": {
+                        "headline-xl": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+                        "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .industrial-grid {
+            background-image: linear-gradient(to right, #E2E8F0 1px, transparent 1px), linear-gradient(to bottom, #E2E8F0 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md antialiased min-h-screen flex flex-col">
+<!-- TopNavBar Component -->
+<nav class="flex justify-between items-center w-full px-margin-desktop py-4 sticky top-0 z-50 bg-surface/90 backdrop-blur-md border-b border-outline-variant dark:border-outline">
+<div class="font-headline-md text-headline-md text-primary dark:text-inverse-primary tracking-tighter">SIBENGKEL</div>
+<div class="hidden md:flex gap-6 items-center">
+<a class="text-primary dark:text-inverse-primary font-bold border-b-2 border-primary font-body-md text-body-md pb-1 active:scale-95 duration-200" href="#">Home</a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-secondary dark:hover:text-secondary-fixed transition-colors font-body-md text-body-md pb-1 active:scale-95 duration-200" href="#services">Services</a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-secondary dark:hover:text-secondary-fixed transition-colors font-body-md text-body-md pb-1 active:scale-95 duration-200" href="#features">Features</a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-secondary dark:hover:text-secondary-fixed transition-colors font-body-md text-body-md pb-1 active:scale-95 duration-200" href="#pricing">Pricing</a>
+</div>
+<div class="flex gap-4 items-center">
+<button class="text-primary hover:text-secondary transition-colors font-label-md text-label-md h-[44px] px-4 rounded">Login</button>
+<button class="bg-secondary-container text-on-secondary-container hover:bg-secondary hover:text-on-secondary transition-colors font-label-md text-label-md h-[44px] px-6 rounded shadow-sm border border-transparent">Get Started</button>
+</div>
+</nav>
+<!-- Hero Section -->
+<section class="relative bg-primary text-on-primary py-xl md:py-[80px] px-margin-mobile md:px-margin-desktop overflow-hidden flex-grow flex items-center">
+<!-- Abstract Industrial Background Pattern -->
+<div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 32px 32px;"></div>
+<div class="max-w-5xl mx-auto relative z-10 grid md:grid-cols-2 gap-xl items-center">
+<div class="space-y-md">
+<h1 class="font-headline-lg-mobile md:font-headline-xl text-headline-lg-mobile md:text-headline-xl text-on-primary">
+                    Digitalisasi Servis Bengkel Masa Depan
+                </h1>
+<p class="font-body-lg text-body-lg text-on-primary/90 max-w-lg">
+                    Kelola servis kendaraan Anda dengan transparansi penuh dan kemudahan akses digital.
+                </p>
+<div class="flex flex-col sm:flex-row gap-sm pt-sm">
+<button class="bg-secondary-container text-on-secondary-container hover:bg-secondary hover:text-on-secondary transition-colors font-label-md text-label-md h-[44px] px-6 rounded shadow-sm flex items-center justify-center gap-2">
+                        Masuk sebagai Staff
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">arrow_forward</span>
+</button>
+<button class="border border-on-primary text-on-primary hover:bg-on-primary/10 transition-colors font-label-md text-label-md h-[44px] px-6 rounded flex items-center justify-center">
+                        Cek Status Servis
+                    </button>
+</div>
+</div>
+<!-- Hero Image/Graphic Placeholder -->
+<div class="relative h-[400px] w-full rounded-xl overflow-hidden border border-on-primary/20 bg-primary-container shadow-2xl">
+<div class="w-full h-full bg-cover bg-center mix-blend-luminosity opacity-80" data-alt="A modern automotive workshop environment, bright and highly organized. Mechanics using tablets for vehicle diagnostics. The lighting is clean and industrial, with sharp shadows and highlights on polished metal surfaces. The overall aesthetic is professional, technical, and digital-first, integrating industrial workshop elements with modern SaaS UI overlays." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBZvM-U3Ofp6TpN3dc9SL0HVpySEVtAjhcpDWNmCYHbxssKlVYrqSLf9qLGElWxt8rNSmXw40by1BWeiH1q2sUo1QqA2I1F7EE9RTUmP1GWid0VI8_TmyedVO45y1FoXNyxMb2Qq-NKeserCEzwTOqZPiQJoKyvgsVILTVJ-94D3gFnMk_dR6XAv1ZP03AkSsLujx8hbudGQMvY5G9E3nNuVoNB4Ct00Uhp-fa4gDhXs66TNS28UGyM8w')"></div>
+<!-- Stylized Overlay Elements -->
+<div class="absolute bottom-4 left-4 right-4 bg-surface/90 backdrop-blur-sm p-4 rounded-lg border border-outline-variant flex items-center gap-4 text-on-surface">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container">
+<span class="material-symbols-outlined">speed</span>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Status Kendaraan</p>
+<p class="font-label-md text-label-md font-bold">B 1234 XYZ - Servis Selesai</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Services Section -->
+<section class="py-xl bg-surface px-margin-mobile md:px-margin-desktop industrial-grid relative" id="services">
+<div class="max-w-7xl mx-auto relative z-10">
+<div class="mb-lg">
+<h2 class="font-headline-lg text-headline-lg text-on-background mb-xs">Layanan Kami</h2>
+<div class="w-16 h-1 bg-secondary-container"></div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-md">
+<!-- Card 1 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded p-lg hover:shadow-md transition-shadow group h-full flex flex-col relative overflow-hidden">
+<div class="absolute top-0 left-0 w-1 h-full bg-primary"></div>
+<div class="w-12 h-12 bg-surface-container rounded flex items-center justify-center mb-md group-hover:bg-primary-container group-hover:text-on-primary-container transition-colors">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 0;">build</span>
+</div>
+<h3 class="font-headline-md text-headline-md mb-2">Servis Rutin</h3>
+<p class="font-body-md text-body-md text-on-surface-variant flex-grow">Perawatan berkala dengan standar industri tertinggi untuk performa optimal.</p>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded p-lg hover:shadow-md transition-shadow group h-full flex flex-col relative overflow-hidden">
+<div class="absolute top-0 left-0 w-1 h-full bg-primary"></div>
+<div class="w-12 h-12 bg-surface-container rounded flex items-center justify-center mb-md group-hover:bg-primary-container group-hover:text-on-primary-container transition-colors">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 0;">settings</span>
+</div>
+<h3 class="font-headline-md text-headline-md mb-2">Ganti Sparepart</h3>
+<p class="font-body-md text-body-md text-on-surface-variant flex-grow">Suku cadang orisinal dengan jaminan kualitas dan garansi resmi.</p>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded p-lg hover:shadow-md transition-shadow group h-full flex flex-col relative overflow-hidden">
+<div class="absolute top-0 left-0 w-1 h-full bg-secondary-container"></div>
+<div class="w-12 h-12 bg-surface-container rounded flex items-center justify-center mb-md group-hover:bg-secondary-container group-hover:text-on-secondary-container transition-colors">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 0;">calendar_month</span>
+</div>
+<h3 class="font-headline-md text-headline-md mb-2">Booking Online</h3>
+<p class="font-body-md text-body-md text-on-surface-variant flex-grow">Jadwalkan servis tanpa antre melalui sistem manajemen kami.</p>
+</div>
+<!-- Card 4 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded p-lg hover:shadow-md transition-shadow group h-full flex flex-col relative overflow-hidden">
+<div class="absolute top-0 left-0 w-1 h-full bg-secondary-container"></div>
+<div class="w-12 h-12 bg-surface-container rounded flex items-center justify-center mb-md group-hover:bg-secondary-container group-hover:text-on-secondary-container transition-colors">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 0;">history</span>
+</div>
+<h3 class="font-headline-md text-headline-md mb-2">Riwayat Terlacak</h3>
+<p class="font-body-md text-body-md text-on-surface-variant flex-grow">Akses penuh ke data historis servis kendaraan Anda kapan saja.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Showcase Section -->
+<section class="py-xl bg-surface-container-low px-margin-mobile md:px-margin-desktop" id="features">
+<div class="max-w-7xl mx-auto flex flex-col lg:flex-row gap-xl items-center">
+<div class="lg:w-1/2 space-y-md">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-background mb-xs">Kenapa SIBENGKEL</h2>
+<div class="w-16 h-1 bg-secondary-container"></div>
+</div>
+<div class="space-y-6 mt-lg">
+<div class="flex gap-4">
+<div class="w-10 h-10 rounded bg-primary-container text-on-primary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined">receipt_long</span>
+</div>
+<div>
+<h4 class="font-headline-md text-headline-md mb-1">Transparansi Biaya</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">Estimasi biaya detail sebelum pengerjaan. Tidak ada biaya tersembunyi, semua tercatat secara digital.</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="w-10 h-10 rounded bg-primary-container text-on-primary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined">track_changes</span>
+</div>
+<div>
+<h4 class="font-headline-md text-headline-md mb-1">Tracking Real-time</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">Pantau progres pengerjaan kendaraan Anda secara langsung melalui dashboard pelanggan yang terintegrasi.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="lg:w-1/2 w-full">
+<!-- Bento Grid style showcase -->
+<div class="grid grid-cols-2 gap-4 h-[400px]">
+<div class="col-span-1 row-span-2 rounded bg-surface-container-lowest border border-outline-variant p-4 relative overflow-hidden group">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" data-alt="A close-up shot of a mechanic's gloved hand holding a modern rugged tablet showing a digital diagnostic report. In the blurred background, an engine bay of a modern car is visible. The lighting is crisp, professional, and slightly cool-toned to emphasize the tech-forward, industrial setting." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBqcFyfSaGZkAhCtijRJkrnP6PUW7V-24XDxsWZXgXekVLt5P1DbMak7qb1FnRHTch5HqA9JrtpbrFB-I8HWTrdgs_IW8uBHKcjpmYl6_DAqtx_bPRobMMLplGCY4MMepnV1ApYOjjIu8cKQCw-kAEWMOUGGJk80w7qvpjYDw-79hG9Stpou345AExteGRoggQax9SZ8K1PyJiIitezCajqNplnm537UTTL1Wgbd7iDLRY1SuNRR-K4Ow')"></div>
+</div>
+<div class="col-span-1 row-span-1 rounded bg-surface-container-lowest border border-outline-variant p-6 flex flex-col justify-center items-center text-center">
+<div class="text-secondary-container mb-2">
+<span class="material-symbols-outlined text-4xl">verified_user</span>
+</div>
+<h5 class="font-label-md text-label-md uppercase tracking-wider text-on-surface-variant mb-1">Keamanan Data</h5>
+<p class="font-body-md text-body-md font-bold">Terjamin</p>
+</div>
+<div class="col-span-1 row-span-1 rounded bg-primary text-on-primary p-6 flex flex-col justify-end">
+<h5 class="font-headline-md text-headline-md mb-1">10k+</h5>
+<p class="font-label-sm text-label-sm text-on-primary/80">Kendaraan Terservis</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer Component -->
+<footer class="flex flex-col md:flex-row justify-between items-center w-full px-margin-desktop py-12 gap-6 bg-primary dark:bg-tertiary-container border-t border-outline-variant/20 mt-auto">
+<div class="font-headline-md text-headline-md text-on-primary">SIBENGKEL</div>
+<div class="flex flex-wrap gap-4 justify-center">
+<a class="font-label-sm text-label-sm text-secondary-container hover:text-secondary-fixed transition-colors cursor-pointer" href="#">Privacy Policy</a>
+<a class="font-label-sm text-label-sm text-on-primary/80 hover:text-secondary-fixed transition-colors cursor-pointer" href="#">Terms of Service</a>
+<a class="font-label-sm text-label-sm text-on-primary/80 hover:text-secondary-fixed transition-colors cursor-pointer" href="#">Contact Us</a>
+<a class="font-label-sm text-label-sm text-on-primary/80 hover:text-secondary-fixed transition-colors cursor-pointer" href="#">Support</a>
+</div>
+<div class="font-label-sm text-label-sm text-on-primary/80">
+            © 2024 SIBENGKEL Industrial Systems. All rights reserved.
+        </div>
+</footer>
+</body></html>

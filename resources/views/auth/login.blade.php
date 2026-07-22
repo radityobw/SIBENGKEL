@@ -25,7 +25,7 @@
             <div class="relative z-10 p-xl flex flex-col h-full justify-between">
                 <div>
                     <div class="flex items-center gap-2 text-on-primary">
-                        <span class="material-symbols-outlined text-headline-xl">build</span>
+                        <img src="{{ asset('logobengkel.png') }}" alt="SIBENGKEL Logo" class="h-10 md:h-12 object-contain brightness-0 invert">
                         <h1 class="font-headline-xl text-headline-xl text-on-primary tracking-tight">SIBENGKEL</h1>
                     </div>
                     <p class="font-headline-md text-headline-md text-primary-fixed mt-4 max-w-md">Digitalisasi Bengkel Masa Kini. Efisiensi Tanpa Batas.</p>
@@ -40,7 +40,7 @@
         <div class="w-full lg:w-[45%] flex items-center justify-center p-sm md:p-lg bg-surface relative z-10">
             <!-- Mobile Logo (visible only on small screens) -->
             <div class="absolute top-sm left-sm lg:hidden flex items-center gap-2 text-primary">
-                <span class="material-symbols-outlined text-headline-md">build</span>
+                <img src="{{ asset('logobengkel.png') }}" alt="SIBENGKEL Logo" class="h-8 object-contain">
                 <span class="font-headline-md text-headline-md font-bold">SIBENGKEL</span>
             </div>
 
@@ -58,22 +58,22 @@
                     
                     <!-- Email Field -->
                     <div>
-                        <label class="block font-label-md text-label-md text-on-surface mb-2" for="email">Email atau Username</label>
+                        <label class="block font-label-md text-label-md text-on-surface mb-2" for="login">Email atau Username</label>
                         <div class="relative">
                             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                <span class="material-symbols-outlined @error('email') text-error @else text-on-surface-variant @enderror">person</span>
+                                <span class="material-symbols-outlined @error('login') text-error @else text-on-surface-variant @enderror">person</span>
                             </div>
-                            <input class="block w-full pl-10 pr-3 py-3 min-h-[44px] border @error('email') border-error @else border-outline-variant @enderror rounded-lg bg-surface-container-lowest text-on-surface focus:ring-1 focus:ring-primary focus:border-primary font-body-md text-body-md transition-colors placeholder-on-surface-variant/50" 
-                                id="email" 
-                                name="email" 
-                                placeholder="Masukkan email Anda" 
+                            <input class="block w-full pl-10 pr-3 py-3 min-h-[44px] border @error('login') border-error @else border-outline-variant @enderror rounded-lg bg-surface-container-lowest text-on-surface focus:ring-1 focus:ring-primary focus:border-primary font-body-md text-body-md transition-colors placeholder-on-surface-variant/50" 
+                                id="login" 
+                                name="login" 
+                                placeholder="Masukkan email atau username Anda" 
                                 required 
-                                type="email" 
-                                value="{{ old('email') }}" 
+                                type="text" 
+                                value="{{ old('login') }}" 
                                 autofocus 
                                 autocomplete="username" />
                         </div>
-                        @error('email')
+                        @error('login')
                             <p class="mt-1 font-label-sm text-label-sm text-error">{{ $message }}</p>
                         @enderror
                     </div>
