@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SIBENGKEL - Cek Status Servis</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Sora:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-container": "#62a5f9",
+                        "background": "#f8f9fb",
+                        "on-secondary-fixed-variant": "#6e3900",
+                        "surface-container-high": "#e7e8ea",
+                        "secondary-container": "#ffa454",
+                        "inverse-surface": "#2e3132",
+                        "primary-fixed": "#d5e3ff",
+                        "surface-container-lowest": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "surface-container-low": "#f2f4f6",
+                        "outline-variant": "#c4c6cf",
+                        "on-secondary-container": "#713b00",
+                        "inverse-primary": "#adc8f5",
+                        "on-primary-fixed": "#001c3b",
+                        "on-error-container": "#93000a",
+                        "on-secondary-fixed": "#2f1500",
+                        "on-surface-variant": "#43474e",
+                        "surface-variant": "#e1e2e4",
+                        "on-primary-fixed-variant": "#2d486d",
+                        "tertiary-fixed-dim": "#a4c9ff",
+                        "primary-fixed-dim": "#adc8f5",
+                        "primary": "#022448",
+                        "on-secondary": "#ffffff",
+                        "secondary-fixed-dim": "#ffb77d",
+                        "surface": "#f8f9fb",
+                        "tertiary-fixed": "#d4e3ff",
+                        "tertiary-container": "#003a6c",
+                        "surface-bright": "#f8f9fb",
+                        "secondary": "#904d00",
+                        "primary-container": "#1e3a5f",
+                        "on-primary": "#ffffff",
+                        "surface-container": "#edeef0",
+                        "inverse-on-surface": "#f0f1f3",
+                        "outline": "#74777f",
+                        "on-error": "#ffffff",
+                        "tertiary": "#002447",
+                        "on-tertiary-fixed": "#001c39",
+                        "surface-dim": "#d9dadc",
+                        "on-surface": "#191c1e",
+                        "on-primary-container": "#8aa4cf",
+                        "error": "#ba1a1a",
+                        "on-tertiary-fixed-variant": "#004883",
+                        "surface-container-highest": "#e1e2e4",
+                        "secondary-fixed": "#ffdcc3",
+                        "on-background": "#191c1e",
+                        "surface-tint": "#455f87",
+                        "on-tertiary": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "sm": "16px",
+                        "margin-mobile": "16px",
+                        "margin-desktop": "32px",
+                        "base": "4px",
+                        "md": "24px",
+                        "xl": "48px",
+                        "lg": "32px",
+                        "gutter": "20px",
+                        "xs": "8px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Inter"],
+                        "headline-md": ["Sora"],
+                        "headline-lg": ["Sora"],
+                        "headline-lg-mobile": ["Sora"],
+                        "headline-xl": ["Sora"],
+                        "label-md": ["Inter"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+                        "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-xl": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-md h-screen flex flex-col antialiased">
+<!-- Content Canvas -->
+<main class="flex-1 overflow-y-auto w-full max-w-md mx-auto bg-surface relative">
+<!-- Animated Background Header -->
+<div class="relative h-64 bg-primary rounded-b-3xl overflow-hidden flex flex-col justify-center items-center px-margin-mobile">
+<!-- decorative overlay -->
+<div class="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white to-transparent"></div>
+<div class="relative z-10 text-center flex flex-col items-center">
+<span class="material-symbols-outlined text-on-primary text-5xl mb-2" style="font-variation-settings: 'FILL' 1;">build_circle</span>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-on-primary">SIBENGKEL</h1>
+<p class="font-body-md text-body-md text-on-primary/80 mt-1">Lacak Status Servis Kendaraan Anda</p>
+</div>
+</div>
+<!-- Search Form Card -->
+<div class="relative z-20 -mt-12 px-margin-mobile pb-xl">
+<div class="bg-surface-container-lowest rounded-xl shadow-lg border border-outline-variant p-md">
+<!-- Toggle Tabs -->
+<div class="flex p-1 bg-surface-container-low rounded-lg mb-md">
+<button class="flex-1 py-2 px-4 rounded-md font-label-md text-label-md bg-surface-container-lowest text-on-surface shadow-sm border border-outline-variant/50 transition-all text-center">
+                        No. Polisi
+                    </button>
+<button class="flex-1 py-2 px-4 rounded-md font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-all text-center">
+                        No. Telepon
+                    </button>
+</div>
+<!-- Input Group -->
+<div class="mb-md">
+<label class="block font-label-md text-label-md text-on-surface mb-xs" for="search_input">Masukkan No. Polisi</label>
+<div class="relative">
+<span class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-outline">
+<span class="material-symbols-outlined">directions_car</span>
+</span>
+<input class="w-full h-[48px] pl-10 pr-4 rounded-lg border border-outline-variant bg-surface-container-lowest text-on-surface font-body-md text-body-md focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors uppercase placeholder-on-surface-variant/50" id="search_input" placeholder="B 1234 XYZ" type="text"/>
+</div>
+</div>
+<!-- Action Button -->
+<button class="w-full h-[48px] bg-secondary-container text-on-secondary-container font-label-md text-label-md rounded-lg flex items-center justify-center gap-xs hover:bg-secondary-fixed transition-colors active:scale-[0.98]">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">search</span>
+                    Cek Status
+                </button>
+<!-- Help Text -->
+<div class="mt-xs text-center">
+<p class="font-label-sm text-label-sm text-on-surface-variant flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-[14px]">info</span>
+                        Pastikan nomor sesuai dengan STNK
+                    </p>
+</div>
+</div>
+<!-- Recent Searches / Quick Links (Optional Context) -->
+<div class="mt-lg">
+<h3 class="font-label-md text-label-md text-on-surface mb-sm">Pencarian Terakhir</h3>
+<div class="space-y-sm">
+<button class="w-full flex items-center justify-between p-sm bg-surface-container-low rounded-lg border border-outline-variant/50 hover:bg-surface-container transition-colors text-left">
+<div class="flex items-center gap-sm">
+<div class="w-10 h-10 rounded-full bg-primary-container/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">history</span>
+</div>
+<div>
+<div class="font-label-md text-label-md text-on-surface">D 4567 ABC</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant">Kemarin, 14:30</div>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+</body></html>

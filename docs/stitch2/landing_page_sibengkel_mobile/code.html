@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SIBENGKEL - Mobile Landing Page</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-container": "#1e3a5f",
+                        "error": "#ba1a1a",
+                        "on-secondary-fixed": "#2f1500",
+                        "on-secondary-container": "#713b00",
+                        "on-surface-variant": "#43474e",
+                        "tertiary-fixed": "#d4e3ff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "surface-dim": "#d9dadc",
+                        "outline": "#74777f",
+                        "primary-fixed-dim": "#adc8f5",
+                        "error-container": "#ffdad6",
+                        "surface-container": "#edeef0",
+                        "on-error": "#ffffff",
+                        "on-tertiary-fixed-variant": "#004883",
+                        "background": "#f8f9fb",
+                        "surface-container-low": "#f2f4f6",
+                        "inverse-primary": "#adc8f5",
+                        "secondary-container": "#ffa454",
+                        "surface-container-highest": "#e1e2e4",
+                        "on-surface": "#191c1e",
+                        "surface-tint": "#455f87",
+                        "secondary-fixed-dim": "#ffb77d",
+                        "secondary-fixed": "#ffdcc3",
+                        "primary-fixed": "#d5e3ff",
+                        "on-primary-container": "#8aa4cf",
+                        "inverse-surface": "#2e3132",
+                        "secondary": "#904d00",
+                        "on-primary-fixed-variant": "#2d486d",
+                        "inverse-on-surface": "#f0f1f3",
+                        "on-secondary": "#ffffff",
+                        "outline-variant": "#c4c6cf",
+                        "surface-container-high": "#e7e8ea",
+                        "on-background": "#191c1e",
+                        "on-tertiary": "#ffffff",
+                        "on-tertiary-fixed": "#001c39",
+                        "on-primary": "#ffffff",
+                        "surface-bright": "#f8f9fb",
+                        "primary": "#022448",
+                        "on-secondary-fixed-variant": "#6e3900",
+                        "surface": "#f8f9fb",
+                        "on-tertiary-container": "#62a5f9",
+                        "tertiary-fixed-dim": "#a4c9ff",
+                        "tertiary": "#002447",
+                        "surface-variant": "#e1e2e4",
+                        "on-primary-fixed": "#001c3b",
+                        "tertiary-container": "#003a6c"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "md": "24px",
+                        "xl": "48px",
+                        "margin-mobile": "16px",
+                        "lg": "32px",
+                        "margin-desktop": "32px",
+                        "xs": "8px",
+                        "base": "4px",
+                        "gutter": "20px",
+                        "sm": "16px"
+                    },
+                    "fontFamily": {
+                        "headline-xl": ["Sora"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-lg": ["Sora"],
+                        "label-sm": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-md": ["Sora"],
+                        "headline-lg-mobile": ["Sora"]
+                    },
+                    "fontSize": {
+                        "headline-xl": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+                        "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md antialiased md:hidden flex flex-col min-h-screen">
+<!-- TopNavBar (Shared Component) -->
+<nav class="flex justify-between items-center w-full px-margin-desktop py-4 sticky top-0 z-50 bg-surface/90 backdrop-blur-md border-b border-outline-variant flat no shadows">
+<div class="font-headline-md text-headline-md text-primary tracking-tighter">SIBENGKEL</div>
+<!-- Search bar hidden as per JSON -->
+</nav>
+<main class="flex-grow">
+<!-- Hero Section -->
+<section class="px-margin-mobile py-xl flex flex-col gap-lg items-center text-center">
+<div class="flex flex-col gap-sm">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary">Digitalisasi Servis Bengkel</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Kelola operasional bengkel lebih mudah, cepat, dan transparan dalam satu aplikasi.</p>
+</div>
+<div class="w-full h-64 rounded-xl overflow-hidden border border-outline relative">
+<img class="object-cover w-full h-full" data-alt="A modern automotive workshop environment seen from a low angle. Mechanics in neat dark blue uniforms are working on a car using advanced digital tablets. The scene is brightly lit with cool, industrial lighting, emphasizing cleanliness and high-tech efficiency. The color palette features stark whites, grays, and prominent navy blue and safety orange accents. The overall mood is professional, precise, and contemporary." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-NSSNT3N4elblBg7sWB-dDF3XEBlF7WOs-q-pRL7gDz0EH_PtzeiAWldia6_FrL829FfyzllgmVmydY2SwW9dwWlFMFVpUvGjdRA7syfTtLaSr1f3zzg8oufJ29zAZCQ_-LNwrmRgWACYwzRc0PqloXn2NDjLlsw6uUtJjbo6DMGVfY0043bnh6Xs0uXd0NdhSHfnIiW6XFuunkqIaimtNhkgrM9WmKl_xIadDzBAKMj5s6S0yb6QOg"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent flex items-end p-sm">
+<span class="font-label-md text-label-md text-on-primary bg-secondary/90 px-xs py-base rounded">Sistem Online 24/7</span>
+</div>
+</div>
+<div class="flex flex-col w-full gap-sm">
+<button class="w-full bg-primary text-on-primary font-label-md text-label-md h-[44px] rounded flex items-center justify-center gap-xs shadow-sm active:scale-95 transition-transform duration-200">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">login</span>
+                    Masuk sebagai Staff
+                </button>
+<button class="w-full bg-secondary-container text-on-secondary-container font-label-md text-label-md h-[44px] rounded flex items-center justify-center gap-xs shadow-sm active:scale-95 transition-transform duration-200">
+<span class="material-symbols-outlined">build_circle</span>
+                    Cek Status Servis
+                </button>
+</div>
+</section>
+<!-- Services Section (Horizontal Scroll) -->
+<section class="py-lg bg-surface-container-low border-t border-b border-outline-variant">
+<div class="px-margin-mobile mb-sm">
+<h2 class="font-headline-md text-headline-md text-primary">Layanan Kami</h2>
+</div>
+<div class="flex overflow-x-auto gap-sm px-margin-mobile pb-sm hide-scrollbar snap-x">
+<!-- Card 1 -->
+<div class="min-w-[240px] bg-surface rounded-lg border border-outline p-sm flex flex-col gap-xs snap-center shadow-sm">
+<div class="w-10 h-10 rounded bg-primary-container text-on-primary-container flex items-center justify-center mb-xs">
+<span class="material-symbols-outlined">oil_barrel</span>
+</div>
+<h3 class="font-label-md text-label-md text-on-surface">Servis Rutin</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Perawatan berkala kendaraan Anda agar selalu prima.</p>
+</div>
+<!-- Card 2 -->
+<div class="min-w-[240px] bg-surface rounded-lg border border-outline p-sm flex flex-col gap-xs snap-center shadow-sm">
+<div class="w-10 h-10 rounded bg-secondary-container text-on-secondary-container flex items-center justify-center mb-xs">
+<span class="material-symbols-outlined">settings</span>
+</div>
+<h3 class="font-label-md text-label-md text-on-surface">Ganti Sparepart</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Suku cadang asli dengan jaminan kualitas terbaik.</p>
+</div>
+<!-- Card 3 -->
+<div class="min-w-[240px] bg-surface rounded-lg border border-outline p-sm flex flex-col gap-xs snap-center shadow-sm">
+<div class="w-10 h-10 rounded bg-tertiary-container text-on-tertiary-container flex items-center justify-center mb-xs">
+<span class="material-symbols-outlined">event_available</span>
+</div>
+<h3 class="font-label-md text-label-md text-on-surface">Booking Online</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Pesan jadwal servis tanpa perlu antri panjang.</p>
+</div>
+<!-- Card 4 -->
+<div class="min-w-[240px] bg-surface rounded-lg border border-outline p-sm flex flex-col gap-xs snap-center shadow-sm">
+<div class="w-10 h-10 rounded bg-surface-variant text-on-surface-variant flex items-center justify-center mb-xs border border-outline-variant">
+<span class="material-symbols-outlined">history</span>
+</div>
+<h3 class="font-label-md text-label-md text-on-surface">Riwayat Terlacak</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Akses penuh ke catatan servis kendaraan Anda.</p>
+</div>
+</div>
+</section>
+<!-- Showcase Section -->
+<section class="px-margin-mobile py-xl flex flex-col gap-md">
+<h2 class="font-headline-md text-headline-md text-primary">Kenapa SIBENGKEL</h2>
+<div class="flex flex-col gap-sm">
+<!-- Point 1 -->
+<div class="flex gap-sm items-start p-sm bg-surface rounded-lg border border-outline">
+<div class="text-secondary mt-xs">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div class="flex flex-col">
+<h4 class="font-label-md text-label-md text-on-surface">Transparansi Harga</h4>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Estimasi biaya yang jelas sebelum pengerjaan dimulai.</p>
+</div>
+</div>
+<!-- Point 2 -->
+<div class="flex gap-sm items-start p-sm bg-surface rounded-lg border border-outline">
+<div class="text-secondary mt-xs">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+</div>
+<div class="flex flex-col">
+<h4 class="font-label-md text-label-md text-on-surface">Mekanik Handal</h4>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Dikerjakan oleh tenaga ahli bersertifikasi.</p>
+</div>
+</div>
+<!-- Point 3 -->
+<div class="flex gap-sm items-start p-sm bg-surface rounded-lg border border-outline">
+<div class="text-secondary mt-xs">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">timer</span>
+</div>
+<div class="flex flex-col">
+<h4 class="font-label-md text-label-md text-on-surface">Pengerjaan Tepat Waktu</h4>
+<p class="font-label-sm text-label-sm text-on-surface-variant">SLA yang terukur untuk setiap jenis layanan.</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer (Shared Component) -->
+<footer class="flex flex-col md:flex-row justify-between items-center w-full px-margin-desktop py-12 gap-6 bg-primary border-t border-outline-variant/20 flat no shadows mt-auto">
+<div class="font-headline-md text-headline-md text-on-primary">SIBENGKEL</div>
+<div class="flex flex-col items-center gap-sm">
+<a class="text-on-primary/80 hover:text-secondary-fixed transition-colors font-label-sm text-label-sm cursor-pointer" href="#">Privacy Policy</a>
+<a class="text-on-primary/80 hover:text-secondary-fixed transition-colors font-label-sm text-label-sm cursor-pointer" href="#">Terms of Service</a>
+<a class="text-on-primary/80 hover:text-secondary-fixed transition-colors font-label-sm text-label-sm cursor-pointer" href="#">Contact Us</a>
+<a class="text-on-primary/80 hover:text-secondary-fixed transition-colors font-label-sm text-label-sm cursor-pointer" href="#">Support</a>
+</div>
+<div class="font-label-sm text-label-sm text-on-primary/80 text-center">
+            © 2024 SIBENGKEL Industrial Systems. All rights reserved.
+        </div>
+</footer>
+</body></html>

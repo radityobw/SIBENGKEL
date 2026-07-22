@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SIBENGKEL - Customer Login</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Sora:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error-container": "#ffdad6",
+                        "inverse-on-surface": "#f0f1f3",
+                        "primary": "#022448",
+                        "on-error": "#ffffff",
+                        "surface-variant": "#e1e2e4",
+                        "on-error-container": "#93000a",
+                        "tertiary": "#002447",
+                        "primary-fixed-dim": "#adc8f5",
+                        "secondary-fixed-dim": "#ffb77d",
+                        "on-secondary-fixed-variant": "#6e3900",
+                        "on-tertiary-fixed-variant": "#004883",
+                        "primary-container": "#1e3a5f",
+                        "on-surface": "#191c1e",
+                        "on-primary": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "inverse-surface": "#2e3132",
+                        "surface-container-low": "#f2f4f6",
+                        "secondary-container": "#ffa454",
+                        "secondary": "#904d00",
+                        "on-surface-variant": "#43474e",
+                        "tertiary-fixed-dim": "#a4c9ff",
+                        "surface-tint": "#455f87",
+                        "primary-fixed": "#d5e3ff",
+                        "secondary-fixed": "#ffdcc3",
+                        "on-secondary-container": "#713b00",
+                        "surface-bright": "#f8f9fb",
+                        "outline-variant": "#c4c6cf",
+                        "on-tertiary-fixed": "#001c39",
+                        "error": "#ba1a1a",
+                        "background": "#f8f9fb",
+                        "surface-container-lowest": "#ffffff",
+                        "on-background": "#191c1e",
+                        "surface": "#f8f9fb",
+                        "inverse-primary": "#adc8f5",
+                        "on-primary-fixed": "#001c3b",
+                        "tertiary-container": "#003a6c",
+                        "tertiary-fixed": "#d4e3ff",
+                        "outline": "#74777f",
+                        "on-primary-fixed-variant": "#2d486d",
+                        "surface-container-highest": "#e1e2e4",
+                        "on-secondary-fixed": "#2f1500",
+                        "surface-dim": "#d9dadc",
+                        "on-tertiary-container": "#62a5f9",
+                        "on-tertiary": "#ffffff",
+                        "surface-container": "#edeef0",
+                        "on-primary-container": "#8aa4cf",
+                        "surface-container-high": "#e7e8ea"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "md": "24px",
+                        "xl": "48px",
+                        "margin-mobile": "16px",
+                        "xs": "8px",
+                        "lg": "32px",
+                        "sm": "16px",
+                        "base": "4px",
+                        "margin-desktop": "32px",
+                        "gutter": "20px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Sora"],
+                        "body-lg": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "label-md": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-lg": ["Sora"],
+                        "headline-xl": ["Sora"],
+                        "headline-lg-mobile": ["Sora"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+        }
+    </style>
+</head>
+<body class="bg-surface min-h-screen flex items-center justify-center font-sans antialiased text-on-surface relative overflow-hidden">
+<!-- Background Decor (Light/Welcoming) -->
+<div class="absolute inset-0 z-0 pointer-events-none opacity-20">
+<div class="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-primary-fixed rounded-full blur-[100px]"></div>
+<div class="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-secondary-fixed rounded-full blur-[100px]"></div>
+</div>
+<!-- Login Container -->
+<div class="w-full max-w-md px-margin-mobile md:px-0 z-10">
+<!-- Brand Header -->
+<div class="text-center mb-lg">
+<h1 class="font-headline-xl text-[40px] leading-[48px] font-bold tracking-[-0.02em] text-primary mb-xs">SIBENGKEL</h1>
+<p class="font-body-md text-[16px] leading-[24px] font-normal text-on-surface-variant">Solusi andal untuk kendaraan Anda.</p>
+</div>
+<!-- Login Card -->
+<div class="glass-card rounded-xl p-lg md:p-xl border border-outline-variant shadow-sm">
+<form action="#" class="space-y-md" method="POST">
+<div class="space-y-xs">
+<label class="block font-label-md text-[14px] leading-[20px] font-semibold text-on-surface" for="email">Email atau Nomor Telepon</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline" style="font-variation-settings: 'FILL' 0;">person</span>
+<input class="w-full pl-10 pr-3 py-3 rounded border border-outline-variant bg-surface-container-lowest focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors h-[44px] font-body-md text-on-surface placeholder:text-outline" id="email" name="email" placeholder="Masukkan email atau no telp" type="text"/>
+</div>
+</div>
+<div class="space-y-xs">
+<div class="flex justify-between items-center">
+<label class="block font-label-md text-[14px] leading-[20px] font-semibold text-on-surface" for="password">Kata Sandi</label>
+<a class="font-label-sm text-[12px] leading-[16px] font-medium text-primary hover:text-primary-container transition-colors" href="#">Lupa sandi?</a>
+</div>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline" style="font-variation-settings: 'FILL' 0;">lock</span>
+<input class="w-full pl-10 pr-10 py-3 rounded border border-outline-variant bg-surface-container-lowest focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors h-[44px] font-body-md text-on-surface placeholder:text-outline" id="password" name="password" placeholder="••••••••" type="password"/>
+<button class="absolute right-3 top-1/2 -translate-y-1/2 text-outline hover:text-on-surface transition-colors focus:outline-none" type="button">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">visibility_off</span>
+</button>
+</div>
+</div>
+<div class="pt-sm">
+<button class="w-full bg-primary hover:bg-primary-container text-on-primary font-label-md text-[14px] leading-[20px] font-semibold py-3 px-4 rounded h-[44px] transition-colors active:scale-[0.98] flex items-center justify-center gap-2" type="submit">
+                        Masuk
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">arrow_forward</span>
+</button>
+</div>
+<div class="text-center mt-md">
+<p class="font-body-md text-[16px] leading-[24px] font-normal text-on-surface-variant">
+                        Belum punya akun? 
+                        <a class="text-primary hover:text-primary-container font-semibold transition-colors" href="#">Daftar di sini</a>
+</p>
+</div>
+</form>
+</div>
+</div>
+</body></html>

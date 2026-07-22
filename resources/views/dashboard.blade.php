@@ -6,7 +6,7 @@
     </div>
 
     <!-- KPI Cards Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 mb-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 {{ Auth::user()->role === 'admin' ? 'xl:grid-cols-4' : 'xl:grid-cols-3' }} gap-6 mb-6">
         <!-- KPI 1 -->
         <div class="bg-surface rounded-lg p-6 border border-outline-variant shadow-sm flex flex-col justify-between h-[120px]">
             <div class="flex justify-between items-start">
@@ -41,6 +41,7 @@
             <div class="text-4xl font-sora font-bold text-on-surface pl-2">{{ number_format($totalMechanics) }}</div>
         </div>
 
+        @if(Auth::user()->role === 'admin')
         <!-- KPI 4 -->
         <div class="bg-surface rounded-lg p-6 border border-outline-variant shadow-sm flex flex-col justify-between h-[120px]">
             <div class="flex justify-between items-start">
@@ -52,10 +53,12 @@
             </div>
             <div class="text-2xl font-sora font-bold text-primary mt-auto">Rp {{ number_format($totalRevenue, 0, ',', '.') }}</div>
         </div>
+        @endif
     </div>
 
     <!-- Bento Grid Content (Charts & Tables) -->
     <div class="grid grid-cols-1 xl:grid-cols-3 gap-6">
+        @if(Auth::user()->role === 'admin')
         <!-- Left: Line Chart Placeholder -->
         <div class="xl:col-span-1 bg-surface rounded-lg border border-outline-variant shadow-sm flex flex-col h-[400px]">
             <div class="p-6 border-b border-outline-variant flex justify-between items-center">
@@ -90,9 +93,10 @@
                 </div>
             </div>
         </div>
+        @endif
 
         <!-- Right: Recent Transactions -->
-        <div class="xl:col-span-2 bg-surface rounded-lg border border-outline-variant shadow-sm flex flex-col overflow-hidden h-auto xl:h-[400px]">
+        <div class="{{ Auth::user()->role === 'admin' ? 'xl:col-span-2' : 'xl:col-span-3' }} bg-surface rounded-lg border border-outline-variant shadow-sm flex flex-col overflow-hidden h-auto xl:h-[400px]">
             <div class="p-6 border-b border-outline-variant flex justify-between items-center bg-surface-bright">
                 <h3 class="text-lg font-sora font-semibold text-on-surface">Transaksi Servis Terkini</h3>
                 <a href="#" class="text-sm font-semibold text-primary hover:underline h-8 px-2 flex items-center">Lihat Semua</a>

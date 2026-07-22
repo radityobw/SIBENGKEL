@@ -20,13 +20,15 @@ class DatabaseSeeder extends Seeder
         // Admin & Mekanik User Account
         User::create([
             'name' => 'Admin Bengkel',
+            'username' => 'adminbengkel',
             'email' => 'admin@sibengkel.web.id',
             'password' => Hash::make('password123'),
             'role' => 'admin',
         ]);
 
-        User::create([
-            'name' => 'Mekanik Budi',
+        $mekanikUser = User::create([
+            'name' => 'Mekanik Bengkel',
+            'username' => 'mekanikbengkel',
             'email' => 'mekanik@sibengkel.web.id',
             'password' => Hash::make('password123'),
             'role' => 'mekanik',
@@ -48,7 +50,8 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $mechanic = Mechanic::create([
-            'name' => 'Agus Teknis',
+            'user_id' => $mekanikUser->id,
+            'name' => 'Mekanik Bengkel',
             'phone' => '089876543210',
             'expertise' => 'Spesialis Mesin & Injeksi'
         ]);

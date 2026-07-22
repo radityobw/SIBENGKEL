@@ -9,7 +9,12 @@ class Mechanic extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'phone', 'expertise'];
+    protected $fillable = ['user_id', 'name', 'phone', 'expertise'];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
     public function transactions()
     {

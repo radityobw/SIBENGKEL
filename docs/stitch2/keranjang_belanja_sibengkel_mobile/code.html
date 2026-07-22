@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Keranjang Saya - SIBENGKEL</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Sora:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .pb-safe { padding-bottom: env(safe-area-inset-bottom); }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline-variant": "#c4c6cf",
+                        "surface-variant": "#e1e2e4",
+                        "surface-container-highest": "#e1e2e4",
+                        "on-primary-container": "#8aa4cf",
+                        "surface-container": "#edeef0",
+                        "outline": "#74777f",
+                        "on-secondary-fixed": "#2f1500",
+                        "tertiary-fixed-dim": "#a4c9ff",
+                        "on-secondary": "#ffffff",
+                        "tertiary-fixed": "#d4e3ff",
+                        "secondary-fixed-dim": "#ffb77d",
+                        "surface-container-low": "#f2f4f6",
+                        "on-surface": "#191c1e",
+                        "surface-tint": "#455f87",
+                        "surface": "#f8f9fb",
+                        "on-surface-variant": "#43474e",
+                        "inverse-primary": "#adc8f5",
+                        "error-container": "#ffdad6",
+                        "background": "#f8f9fb",
+                        "primary-container": "#1e3a5f",
+                        "on-primary": "#ffffff",
+                        "primary-fixed-dim": "#adc8f5",
+                        "surface-container-high": "#e7e8ea",
+                        "primary-fixed": "#d5e3ff",
+                        "on-secondary-container": "#713b00",
+                        "on-primary-fixed-variant": "#2d486d",
+                        "secondary": "#904d00",
+                        "inverse-on-surface": "#f0f1f3",
+                        "surface-dim": "#d9dadc",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-bright": "#f8f9fb",
+                        "secondary-fixed": "#ffdcc3",
+                        "on-primary-fixed": "#001c3b",
+                        "on-secondary-fixed-variant": "#6e3900",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-container": "#003a6c",
+                        "primary": "#022448",
+                        "on-background": "#191c1e",
+                        "error": "#ba1a1a",
+                        "on-error-container": "#93000a",
+                        "tertiary": "#002447",
+                        "on-tertiary-fixed": "#001c39",
+                        "secondary-container": "#ffa454",
+                        "inverse-surface": "#2e3132",
+                        "on-tertiary-container": "#62a5f9",
+                        "on-error": "#ffffff",
+                        "on-tertiary-fixed-variant": "#004883"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "20px",
+                        "margin-desktop": "32px",
+                        "xs": "8px",
+                        "md": "24px",
+                        "margin-mobile": "16px",
+                        "lg": "32px",
+                        "base": "4px",
+                        "xl": "48px",
+                        "sm": "16px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Inter"],
+                        "headline-lg-mobile": ["Sora"],
+                        "body-md": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-xl": ["Sora"],
+                        "headline-lg": ["Sora"],
+                        "label-sm": ["Inter"],
+                        "headline-md": ["Sora"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                        "headline-xl": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                        "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col font-body-md antialiased md:hidden pt-14 pb-[140px]"> <!-- pt-14 for TopAppBar, pb for BottomNav + Checkout Bar -->
+<!-- TopAppBar -->
+<header class="bg-surface dark:bg-surface-dim fixed top-0 w-full z-50 flat no shadows border-b border-outline-variant dark:border-outline">
+<div class="flex justify-between items-center h-14 px-4 w-full">
+<button aria-label="settings_suggest" class="text-on-surface-variant dark:text-surface-variant hover:bg-surface-container dark:hover:bg-surface-container-high transition-colors duration-200 p-2 rounded-full flex items-center justify-center min-h-[44px] min-w-[44px]">
+<span class="material-symbols-outlined" data-icon="settings_suggest">settings_suggest</span>
+</button>
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed">SIBENGKEL</h1>
+<button aria-label="shopping_cart" class="text-primary dark:text-primary-fixed hover:bg-surface-container dark:hover:bg-surface-container-high transition-colors duration-200 p-2 rounded-full flex items-center justify-center min-h-[44px] min-w-[44px]">
+<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+</button>
+</div>
+</header>
+<main class="flex-grow px-margin-mobile flex flex-col gap-sm mt-sm">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-background mb-xs">Keranjang Saya</h2>
+<!-- Cart Items List -->
+<div class="flex flex-col gap-sm">
+<!-- Item 1 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-sm flex flex-col gap-sm">
+<div class="flex items-start gap-sm">
+<img alt="Spark Plug" class="w-20 h-20 object-cover rounded border border-outline-variant bg-surface-container-low" data-alt="A clean, studio-lit photograph of a high-performance automotive spark plug on a pristine white background. The metal components gleam with precision engineering, fitting perfectly into the industrial-technical aesthetic of the SIBENGKEL workshop app. Light mode lighting, sharp focus." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDpjw9450o_3XiJl6YFoFegw3RUXajbUuSFsnR3Y2gRz45rCcMTQlfnkh3iWr03XnwzGQ1CvIUpBPHLzLGF1lKuI9_Wn25kdzodqQoICD7LXMff_jYhVfc4zqcZRrIJRoEVQu5GMAfOsdRXx0opheDYcdh0tIiJJyRBIt4nH6mljsxBBugeWmnKSQoIPRWlTQGDOjVW5f8c0E0Tmy9Sio5W6vR60prJVRa6nyzdV6GYFMZb7Kv2vcIMiw"/>
+<div class="flex-grow">
+<h3 class="font-label-md text-label-md text-on-surface">NGK Iridium Spark Plug CR9EIX</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Rp 125.000</p>
+</div>
+</div>
+<div class="flex items-center justify-between border-t border-outline-variant pt-sm">
+<div class="flex items-center border border-outline-variant rounded bg-surface">
+<button aria-label="Decrease quantity" class="w-10 h-10 flex items-center justify-center text-on-surface-variant hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined" data-icon="remove">remove</span>
+</button>
+<span class="w-10 text-center font-label-md text-label-md text-on-surface">4</span>
+<button aria-label="Increase quantity" class="w-10 h-10 flex items-center justify-center text-on-surface-variant hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+</button>
+</div>
+<div class="text-right">
+<p class="font-label-sm text-label-sm text-on-surface-variant">Subtotal</p>
+<p class="font-label-md text-label-md text-on-surface font-bold">Rp 500.000</p>
+</div>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-sm flex flex-col gap-sm">
+<div class="flex items-start gap-sm">
+<img alt="Motor Oil" class="w-20 h-20 object-cover rounded border border-outline-variant bg-surface-container-low" data-alt="A clear, professional product shot of a bottle of premium synthetic motor oil, 10W-40. The packaging is sleek and modern, resting on a stark white surface under bright, even studio lighting. The image conveys reliability and technical superiority, aligning with a corporate minimalist design system." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCT7TFaEpmwED7GTWwsR7iUxo9FPwYBHV9nwlBwSIvWlpMWzPDhX2Ijb3SDkHXixCOP3ToiSbmgTfns-rRW57U9uB6oVVdBGMRZwl5m6YlMQ6_1S9K1cYtB1j0i2grC4U5MLmnqxND_n685HrC2Iy586iKdV3qgECgAYRv3e0-ohWWtq0isxJ0mHVvQsxaPJpJLv0oaoLI_NYSs3rBxe0XHdve6lU-EoLwZiD08wlUvkzsbFNPtmo2WXA"/>
+<div class="flex-grow">
+<h3 class="font-label-md text-label-md text-on-surface">Motul 5100 4T 10W-40 1L</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Rp 180.000</p>
+</div>
+</div>
+<div class="flex items-center justify-between border-t border-outline-variant pt-sm">
+<div class="flex items-center border border-outline-variant rounded bg-surface">
+<button aria-label="Decrease quantity" class="w-10 h-10 flex items-center justify-center text-on-surface-variant hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined" data-icon="remove">remove</span>
+</button>
+<span class="w-10 text-center font-label-md text-label-md text-on-surface">2</span>
+<button aria-label="Increase quantity" class="w-10 h-10 flex items-center justify-center text-on-surface-variant hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+</button>
+</div>
+<div class="text-right">
+<p class="font-label-sm text-label-sm text-on-surface-variant">Subtotal</p>
+<p class="font-label-md text-label-md text-on-surface font-bold">Rp 360.000</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Order Summary -->
+<div class="mt-md bg-surface-container border border-outline-variant rounded-lg p-sm">
+<h3 class="font-label-md text-label-md text-on-surface mb-sm">Ringkasan Total</h3>
+<div class="flex justify-between items-center mb-xs">
+<span class="font-body-md text-body-md text-on-surface-variant">Total Item (6)</span>
+<span class="font-body-md text-body-md text-on-surface">Rp 860.000</span>
+</div>
+<div class="flex justify-between items-center border-t border-outline-variant mt-sm pt-sm">
+<span class="font-label-md text-label-md text-on-surface font-bold">Total Pesanan</span>
+<span class="font-label-md text-label-md text-primary font-bold">Rp 860.000</span>
+</div>
+</div>
+</main>
+<!-- Sticky Checkout Footer -->
+<div class="fixed bottom-16 w-full z-40 bg-surface border-t border-outline-variant p-4 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)]">
+<button class="w-full bg-secondary text-on-secondary font-label-md text-label-md h-12 rounded flex items-center justify-center hover:bg-opacity-90 transition-colors active:scale-[0.98]">
+            Lanjut ke Checkout
+        </button>
+</div>
+<!-- BottomNavBar -->
+<nav class="bg-surface dark:bg-surface-dim fixed bottom-0 w-full z-50 border-t border-outline-variant dark:border-outline shadow-lg flex justify-around items-center h-16 pb-safe w-full">
+<!-- Dashboard (Inactive) -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant px-4 py-1 hover:text-primary dark:hover:text-primary-fixed active:scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-sm text-label-sm mt-1">Dashboard</span>
+</a>
+<!-- Booking (Inactive) -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant px-4 py-1 hover:text-primary dark:hover:text-primary-fixed active:scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
+<span class="font-label-sm text-label-sm mt-1">Booking</span>
+</a>
+<!-- Spareparts (Active context for Cart) -->
+<a class="flex flex-col items-center justify-center bg-secondary-container dark:bg-secondary text-on-secondary-container dark:text-on-secondary rounded-full px-4 py-1 hover:text-primary dark:hover:text-primary-fixed active:scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="build_circle">build_circle</span>
+<span class="font-label-sm text-label-sm mt-1">Spareparts</span>
+</a>
+<!-- Profile (Inactive) -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant px-4 py-1 hover:text-primary dark:hover:text-primary-fixed active:scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-label-sm text-label-sm mt-1">Profile</span>
+</a>
+</nav>
+</body></html>

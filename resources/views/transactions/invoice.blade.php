@@ -48,8 +48,8 @@
         <!-- Header Section -->
         <header class="flex justify-between items-start border-b border-black pb-4">
             <div class="flex items-center gap-4">
-                <div class="w-16 h-16 bg-surface-container flex items-center justify-center border border-black">
-                    <span class="material-symbols-outlined text-[32px] text-primary" style="font-variation-settings: 'FILL' 1;">build</span>
+                <div class="flex items-center gap-3">
+                    <img src="{{ asset('logobengkel.png') }}" alt="SIBENGKEL Logo" class="h-10 object-contain">
                 </div>
                 <div>
                     <h1 class="text-3xl font-sora font-bold text-primary tracking-tight uppercase">SIBENGKEL</h1>
@@ -57,7 +57,7 @@
                 </div>
             </div>
             <div class="text-right text-sm font-semibold text-black flex flex-col gap-1">
-                <p>SIBENGKEL</p>
+                <p class="font-bold">SIBENGKEL</p>
                 <p>Jl. Industri No. 123</p>
                 <p>Jakarta, Indonesia</p>
                 <p>+62 21 555 1234</p>

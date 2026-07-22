@@ -26,7 +26,9 @@
                         <th class="py-4 px-6 text-sm text-on-surface-variant font-semibold whitespace-nowrap">No. Telepon</th>
                         <th class="py-4 px-6 text-sm text-on-surface-variant font-semibold whitespace-nowrap">Alamat</th>
                         <th class="py-4 px-6 text-sm text-on-surface-variant font-semibold text-center whitespace-nowrap">Jumlah Kendaraan</th>
+                        @if(Auth::user()->role === 'admin')
                         <th class="py-4 px-6 text-sm text-on-surface-variant font-semibold text-right whitespace-nowrap">Aksi</th>
+                        @endif
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-outline-variant">
@@ -38,6 +40,7 @@
                         <td class="py-4 px-6 text-center">
                             <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-primary-container text-on-primary-container font-semibold text-sm">{{ $customer->vehicles_count }}</span>
                         </td>
+                        @if(Auth::user()->role === 'admin')
                         <td class="py-4 px-6 text-right">
                             <div class="flex justify-end gap-2">
                                 <a href="{{ route('customers.edit', $customer->id) }}" class="p-2 text-primary hover:bg-primary-container rounded-lg transition-colors" title="Edit">
@@ -52,10 +55,11 @@
                                 </form>
                             </div>
                         </td>
+                        @endif
                     </tr>
                     @empty
                     <tr>
-                        <td colspan="5" class="py-8 px-6 text-center text-on-surface-variant">Belum ada data pelanggan.</td>
+                        <td colspan="{{ Auth::user()->role === 'admin' ? 5 : 4 }}" class="py-8 px-6 text-center text-on-surface-variant">Belum ada data pelanggan.</td>
                     </tr>
                     @endforelse
                 </tbody>
@@ -83,6 +87,7 @@
                 </div>
             </div>
             
+            @if(Auth::user()->role === 'admin')
             <div class="flex justify-end gap-2 mt-2 pt-3 border-t border-outline-variant/50">
                 <a href="{{ route('customers.edit', $customer->id) }}" class="p-2 text-primary hover:bg-primary-container rounded-lg">
                     <span class="material-symbols-outlined text-[20px]">edit</span>
@@ -94,6 +99,7 @@
                     </button>
                 </form>
             </div>
+            @endif
         </div>
         @empty
         <div class="text-center p-8 bg-surface rounded-xl border border-outline-variant text-on-surface-variant">Belum ada pelanggan.</div>
