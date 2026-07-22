@@ -68,9 +68,16 @@
                 <h2 class="lg:hidden text-xl font-sora font-bold text-primary tracking-tight">SIBENGKEL</h2>
             </div>
             <div class="flex items-center gap-2">
-                <div class="ml-2 font-medium text-sm">
+                <div class="font-medium text-sm text-on-surface-variant truncate max-w-[100px] sm:max-w-[200px]">
                     Halo, {{ Auth::user()->name ?? 'Admin' }}
                 </div>
+                <!-- Mobile Logout -->
+                <form method="POST" action="{{ route('logout') }}" class="lg:hidden flex items-center ml-2">
+                    @csrf
+                    <button type="submit" class="p-2 rounded-full text-error hover:bg-error-container/50 transition-colors" title="Logout">
+                        <span class="material-symbols-outlined">logout</span>
+                    </button>
+                </form>
             </div>
         </header>
 
