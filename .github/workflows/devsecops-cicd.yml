@@ -16,6 +16,8 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
       # 1. Secret Scanning via Gitleaks
       - name: Gitleaks Secret Scan
@@ -59,7 +61,7 @@ jobs:
         run: php -r "file_exists('.env') || copy('.env.example', '.env');"
 
       - name: Install Dependencies
-        run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+        run: composer update -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
 
       - name: Generate App Key
         run: php artisan key:generate
@@ -85,7 +87,7 @@ jobs:
           script: |
             cd /var/www/staging-sibengkel
             git pull origin dev
-            composer install --no-dev --optimize-autoloader
+            composer update --no-dev --optimize-autoloader
             php artisan migrate --force
             php artisan config:cache
             php artisan route:cache
@@ -109,7 +111,7 @@ jobs:
           script: |
             cd /var/www/sibengkel
             git pull origin main
-            composer install --no-dev --optimize-autoloader
+            composer update --no-dev --optimize-autoloader
             php artisan migrate --force
             php artisan config:cache
             php artisan route:cache
