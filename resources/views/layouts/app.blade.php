@@ -40,6 +40,10 @@
                 <span class="material-symbols-outlined">build</span>
                 <span>Mekanik</span>
             </a>
+            <a class="flex items-center gap-4 px-4 py-2 {{ request()->routeIs('transactions.*') ? 'bg-secondary-container text-on-secondary-container' : 'text-on-primary/70 hover:text-on-primary hover:bg-primary-container/50' }} rounded-lg font-semibold transition-all duration-200 ease-in-out h-11" href="{{ route('transactions.index') }}">
+                <span class="material-symbols-outlined">receipt_long</span>
+                <span>Transaksi</span>
+            </a>
         </nav>
         <div class="mt-auto pt-6">
             <form method="POST" action="{{ route('logout') }}">
@@ -99,6 +103,10 @@
         <a href="{{ route('mechanics.index') }}" class="flex flex-col items-center justify-center {{ request()->routeIs('mechanics.*') ? 'text-secondary' : 'text-on-surface-variant' }} font-bold h-full w-full max-w-[80px] touch-none active:scale-90 active:bg-surface-container rounded-lg">
             <span class="material-symbols-outlined mb-1">build</span>
             <span class="text-xs">Mech</span>
+        </a>
+        <a href="{{ route('transactions.index') }}" class="flex flex-col items-center justify-center {{ request()->routeIs('transactions.*') ? 'text-secondary' : 'text-on-surface-variant' }} font-bold h-full w-full max-w-[80px] touch-none active:scale-90 active:bg-surface-container rounded-lg">
+            <span class="material-symbols-outlined mb-1">receipt_long</span>
+            <span class="text-xs">Tx</span>
         </a>
     </nav>
 </body>
