@@ -20,14 +20,14 @@ class DatabaseSeeder extends Seeder
         // Admin & Mekanik User Account
         User::create([
             'name' => 'Admin Bengkel',
-            'email' => 'admin@sibengkel.com',
+            'email' => 'admin@sibengkel.web.id',
             'password' => Hash::make('password123'),
             'role' => 'admin',
         ]);
 
         User::create([
             'name' => 'Mekanik Budi',
-            'email' => 'mekanik@sibengkel.com',
+            'email' => 'mekanik@sibengkel.web.id',
             'password' => Hash::make('password123'),
             'role' => 'mekanik',
         ]);
