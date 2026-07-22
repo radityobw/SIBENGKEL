@@ -1343,7 +1343,31 @@ jobs:
           DB_DATABASE: ':memory:'
         run: vendor/bin/phpunit
 
-  deployment:
+  staging-deployment:
+    name: 🚀 Staging CD Deployment to VPS
+    needs: automated-testing
+    if: github.ref == 'refs/heads/dev'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Execute Remote SSH Deploy Script
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.STAGING_VPS_HOST }}
+          username: ${{ secrets.STAGING_VPS_USERNAME }}
+          key: ${{ secrets.STAGING_VPS_SSH_KEY }}
+          script: |
+            cd /var/www/staging-sibengkel
+            git pull origin dev
+            composer install --no-dev --optimize-autoloader
+            php artisan migrate --force
+            php artisan config:cache
+            php artisan route:cache
+            php artisan view:cache
+            npm install
+            npm run build
+            sudo systemctl restart php8.2-fpm
+
+  production-deployment:
     name: 🚀 Production CD Deployment to VPS
     needs: automated-testing
     if: github.ref == 'refs/heads/main'

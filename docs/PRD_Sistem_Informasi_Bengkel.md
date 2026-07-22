@@ -619,9 +619,9 @@ sistem-informasi-bengkel/
 
 ## 14. Rencana Deployment & Infrastruktur
 
-1. **Version Control System**: Gunakan GitHub dengan *branching model* sederhana: `main` (production build) dan `dev` (development).
-2. **Pengaturan Environment**: Siapkan konfigurasi `.env` produksi (`APP_ENV=production`, `APP_DEBUG=false`, DB credentials, Sanctum stateful domains).
-3. **Penyedia Hosting**: Gunakan shared hosting/VPS/cloud platform yang mendukung PHP 8.2+ dan MySQL/MariaDB.
+1. **Version Control System**: Gunakan GitHub dengan *branching model* sederhana: `main` (production build) dan `dev` (staging/development).
+2. **Pengaturan Dual Environment**: Siapkan konfigurasi `.env` terpisah untuk Staging dan Production (`APP_ENV=production`/`staging`, `APP_DEBUG=false`, DB credentials, Sanctum stateful domains).
+3. **Penyedia Hosting**: Gunakan shared hosting/VPS/cloud platform yang mendukung PHP 8.2+ dan MySQL/MariaDB (disarankan memisahkan direktori Staging dan Production).
 4. **Domain & SSL**: Pasang domain/subdomain aktif dan pastikan sertifikat HTTPS (SSL) aktif.
 5. **Checklist Pra-Presentasi**:
    - [ ] Database Migration & Seeders berhasil dieksekusi di server hosting.
