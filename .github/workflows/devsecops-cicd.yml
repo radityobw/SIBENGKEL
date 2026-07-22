@@ -10,6 +10,9 @@ jobs:
   security-and-linting:
     name: 🔍 DevSecOps Audit & SAST Scanning
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: read
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
@@ -37,7 +40,7 @@ jobs:
           tools: composer
 
       - name: Composer Audit Security Check
-        run: composer audit
+        run: composer audit --locked
 
   automated-testing:
     name: 🧪 Automated Unit & Feature Testing
