@@ -217,7 +217,38 @@ Semua kolom baru bersifat `nullable` agar tidak merusak data existing:
 
 ---
 
-## 8. Yang Masih Out-of-Scope
+## 8. Prompt Google Stitch — Referensi Desain Landing Page & Portal Pelanggan
+
+Melanjutkan design system dari master prompt (warna biru-dongker industrial `#022448` + aksen oranye `#FF6B00`, badge status pending/proses/selesai). Prompt di bawah disusun per tier sebagai referensi jika perlu regenerasi atau iterasi ulang desain via Google Stitch.
+
+### 8.1. Landing Page (Tier 1)
+```
+Lanjutkan design system yang sama (biru-dongker industrial + aksen oranye). Buat Landing Page publik SIBENGKEL: hero section dengan headline besar tentang digitalisasi servis bengkel, sub-headline singkat, dan dua tombol CTA berdampingan — "Cek Status Servis" (sekunder, outline) dan "Masuk sebagai Staff" (primer, solid) yang mengarah ke halaman login staff terpisah. Di bawah hero: section "Layanan Kami" dengan 3-4 card ikon (Servis Rutin, Ganti Sparepart, Booking Online, Riwayat Terlacak). Section berikutnya: showcase singkat "Kenapa SIBENGKEL" dengan poin transparansi biaya & tracking real-time. Footer sederhana dengan info kontak bengkel. Mobile: hero dan CTA stack vertikal, section layanan jadi scroll horizontal card.
+```
+
+### 8.2. Cek Status Servis Publik (Tier 2)
+```
+Lanjutkan design system yang sama. Buat halaman "Cek Status Servis" yang bisa diakses tanpa login: form sederhana satu kolom input (toggle antara No. Polisi atau No. Telepon) dengan tombol besar "Cek Status". Setelah submit, tampilkan halaman hasil: card besar berisi info kendaraan (plat nomor, merk/model), status terkini dengan badge besar dan jelas (pending/proses/selesai sesuai warna token yang sudah ditentukan), nama mekanik penanggung jawab, dan estimasi biaya jika ada. Jika data tidak ditemukan, tampilkan empty state yang ramah dengan saran menghubungi bengkel langsung. Mobile-first, karena pelanggan kemungkinan besar akses dari HP saat menunggu.
+```
+
+### 8.3. Portal Pelanggan — Login/Register (Tier 3)
+```
+Lanjutkan design system yang sama. Buat halaman Login & Register khusus Pelanggan (terpisah dari login staff, gunakan aksen warna yang sedikit lebih ramah/approachable dibanding sisi admin — tetap dalam keluarga warna yang sama tapi lebih terang). Form Register: Nama, No. Telepon, Email (opsional), Password, Konfirmasi Password. Form Login: Email/No.Telepon + Password (field tunggal "login" yang auto-detect). Sertakan link silang "Sudah punya akun? Masuk di sini" dan sebaliknya.
+```
+
+### 8.4. Dashboard & Booking Pelanggan (Tier 3)
+```
+Lanjutkan design system yang sama. Buat Dashboard Portal Pelanggan: sapaan personal di atas, lalu grid card kendaraan terdaftar milik pelanggan, section "Booking Aktif" menampilkan status booking dengan timeline visual sederhana (Menunggu Konfirmasi → Disetujui → Sedang Dikerjakan → Selesai), dan tombol besar "Booking Servis Baru". Buat juga form Booking Servis Baru: pilih kendaraan (dropdown dari kendaraan miliknya), date picker tanggal diinginkan, time picker jam diinginkan, textarea keluhan. Setelah submit, tampilkan konfirmasi bahwa booking menunggu persetujuan admin. Mobile-first dengan bottom navigation (Dashboard, Booking, Sparepart, Profil).
+```
+
+### 8.5. Katalog & Checkout Sparepart (Tier 4)
+```
+Lanjutkan design system yang sama. Buat halaman Katalog Sparepart: grid produk dengan gambar, nama, kategori, harga, dan tombol "Tambah ke Keranjang". Ada search bar dan filter kategori (chip/tag di atas grid). Buat juga halaman Keranjang: list item dengan quantity stepper, subtotal per item, total keseluruhan di bawah, tombol "Checkout". Halaman Checkout: ringkasan pesanan, pilihan metode konfirmasi pembayaran (Transfer Manual / COD di Bengkel — tanpa payment gateway asli), tombol "Buat Pesanan". Mobile: grid produk 2 kolom, keranjang dan checkout full-screen dengan sticky total di bawah.
+```
+
+---
+
+## 9. Yang Masih Out-of-Scope
 
 | Fitur | Alasan |
 | :--- | :--- |
