@@ -369,10 +369,22 @@ API dikembangkan menggunakan Laravel Sanctum untuk otentikasi berbasis *Bearer T
 | :--- | :--- | :--- | :--- | :--- |
 | `POST` | `/api/login` | Login user & penerbitan Bearer Token | Public (Tanpa Token) | Wajib |
 | `POST` | `/api/logout` | Revoke token Sanctum aktif | Authenticated (Bearer) | Recommended |
-| `GET` | `/api/customers` | Mengambil seluruh daftar data pelanggan | Authenticated (Bearer) | **Wajib** |
-| `GET` | `/api/services` | Mengambil seluruh daftar transaksi servis | Authenticated (Bearer) | **Wajib** |
+| `GET` | `/api/customers` | Mengambil seluruh daftar data pelanggan | Authenticated (Bearer) | Wajib |
+| `POST` | `/api/customers` | Menambah data pelanggan baru | Authenticated (Bearer) | Recommended |
+| `GET` | `/api/customers/{id}` | Mengambil detail pelanggan | Authenticated (Bearer) | Recommended |
+| `PUT` | `/api/customers/{id}` | Memperbarui data pelanggan | Authenticated (Bearer) | Recommended |
+| `DELETE` | `/api/customers/{id}` | Menghapus data pelanggan | Authenticated (Bearer) | Recommended |
+| `GET` | `/api/vehicles` | Mengambil daftar kendaraan terdaftar | Authenticated (Bearer) | Wajib |
+| `POST` | `/api/vehicles` | Menambah kendaraan baru | Authenticated (Bearer) | Recommended |
+| `GET` | `/api/vehicles/{id}` | Mengambil detail kendaraan | Authenticated (Bearer) | Recommended |
+| `PUT` | `/api/vehicles/{id}` | Memperbarui data kendaraan | Authenticated (Bearer) | Recommended |
+| `DELETE` | `/api/vehicles/{id}` | Menghapus data kendaraan | Authenticated (Bearer) | Recommended |
+| `GET` | `/api/services` | Mengambil seluruh daftar transaksi servis | Authenticated (Bearer) | Wajib |
 | `POST` | `/api/services` | Mencatat transaksi servis baru via API | Authenticated (Bearer) | Recommended |
-| `GET` | `/api/vehicles` | Mengambil daftar kendaraan terdaftar | Authenticated (Bearer) | Recommended |
+| `GET` | `/api/services/{id}` | Mengambil detail transaksi servis | Authenticated (Bearer) | Recommended |
+| `PUT` | `/api/services/{id}` | Memperbarui transaksi servis | Authenticated (Bearer) | Recommended |
+| `PATCH` | `/api/services/{id}/status`| Memperbarui status transaksi servis | Authenticated (Bearer) | Recommended |
+| `DELETE` | `/api/services/{id}` | Menghapus transaksi servis | Authenticated (Bearer) | Recommended |
 
 ---
 
@@ -382,7 +394,7 @@ API dikembangkan menggunakan Laravel Sanctum untuk otentikasi berbasis *Bearer T
 * **Request Payload**:
 ```json
 {
-  "email": "admin@sibengkel.com",
+  "login": "adminbengkel", // bisa menggunakan username atau email
   "password": "password123"
 }
 ```
@@ -396,7 +408,8 @@ API dikembangkan menggunakan Laravel Sanctum untuk otentikasi berbasis *Bearer T
   "user": {
     "id": 1,
     "name": "Admin Bengkel",
-    "email": "admin@sibengkel.com",
+    "username": "adminbengkel",
+    "email": "admin@sibengkel.web.id",
     "role": "admin"
   }
 }
@@ -512,7 +525,151 @@ API dikembangkan menggunakan Laravel Sanctum untuk otentikasi berbasis *Bearer T
 }
 ```
 
-#### 7. Respon Error Autentikasi (HTTP 401 Unauthorized)
+#### 7. Detail Pelanggan: `GET /api/customers/{id}` (Authenticated Bearer)
+* **Response Sukses (HTTP 200 OK)**:
+```json
+{
+  "success": true,
+  "message": "Detail pelanggan",
+  "data": { /* Object Pelanggan */ }
+}
+```
+
+#### 8. Tambah Pelanggan Baru: `POST /api/customers` (Authenticated Bearer)
+* **Request Payload**:
+```json
+{
+  "name": "Siti Aminah",
+  "phone": "081999888777",
+  "address": "Jl. Sudirman No. 45"
+}
+```
+* **Response Sukses (HTTP 201 Created)**:
+```json
+{
+  "success": true,
+  "message": "Berhasil menambah pelanggan baru",
+  "data": { /* Object Pelanggan Baru */ }
+}
+```
+
+#### 9. Update Pelanggan: `PUT /api/customers/{id}` (Authenticated Bearer)
+* **Request Payload**: (Sama seperti POST)
+* **Response Sukses (HTTP 200 OK)**:
+```json
+{
+  "success": true,
+  "message": "Berhasil memperbarui data pelanggan",
+  "data": { /* Object Pelanggan Terupdate */ }
+}
+```
+
+#### 10. Hapus Pelanggan: `DELETE /api/customers/{id}` (Authenticated Bearer)
+* **Response Sukses (HTTP 200 OK)**:
+```json
+{
+  "success": true,
+  "message": "Berhasil menghapus data pelanggan"
+}
+```
+
+#### 11. Detail Kendaraan: `GET /api/vehicles/{id}` (Authenticated Bearer)
+* **Response Sukses (HTTP 200 OK)**:
+```json
+{
+  "success": true,
+  "message": "Detail kendaraan",
+  "data": { /* Object Kendaraan */ }
+}
+```
+
+#### 12. Tambah Kendaraan Baru: `POST /api/vehicles` (Authenticated Bearer)
+* **Request Payload**:
+```json
+{
+  "customer_id": 2,
+  "plate_number": "D 4567 ABC",
+  "brand": "Toyota",
+  "model": "Avanza",
+  "year": 2021
+}
+```
+* **Response Sukses (HTTP 201 Created)**:
+```json
+{
+  "success": true,
+  "message": "Berhasil menambah kendaraan baru",
+  "data": { /* Object Kendaraan Baru */ }
+}
+```
+
+#### 13. Update Kendaraan: `PUT /api/vehicles/{id}` (Authenticated Bearer)
+* **Request Payload**: (Sama seperti POST)
+* **Response Sukses (HTTP 200 OK)**:
+```json
+{
+  "success": true,
+  "message": "Berhasil memperbarui data kendaraan",
+  "data": { /* Object Kendaraan Terupdate */ }
+}
+```
+
+#### 14. Hapus Kendaraan: `DELETE /api/vehicles/{id}` (Authenticated Bearer)
+* **Response Sukses (HTTP 200 OK)**:
+```json
+{
+  "success": true,
+  "message": "Berhasil menghapus data kendaraan"
+}
+```
+
+#### 15. Detail Transaksi Servis: `GET /api/services/{id}` (Authenticated Bearer)
+* **Response Sukses (HTTP 200 OK)**:
+```json
+{
+  "success": true,
+  "message": "Detail transaksi servis",
+  "data": { /* Object Servis */ }
+}
+```
+
+#### 16. Update Transaksi Servis: `PUT /api/services/{id}` (Authenticated Bearer)
+* **Request Payload**: (Sama seperti POST Transaksi Servis)
+* **Response Sukses (HTTP 200 OK)**:
+```json
+{
+  "success": true,
+  "message": "Berhasil memperbarui transaksi servis",
+  "data": { /* Object Servis Terupdate */ }
+}
+```
+
+#### 17. Update Status Servis: `PATCH /api/services/{id}/status` (Authenticated Bearer)
+* **Request Payload**:
+```json
+{
+  "status": "selesai"
+}
+```
+* **Response Sukses (HTTP 200 OK)**:
+```json
+{
+  "success": true,
+  "message": "Status pengerjaan servis berhasil diperbarui via API",
+  "data": { /* Object Servis Terupdate */ }
+}
+```
+
+#### 18. Hapus Transaksi Servis: `DELETE /api/services/{id}` (Authenticated Bearer)
+* **Response Sukses (HTTP 200 OK)**:
+```json
+{
+  "success": true,
+  "message": "Transaksi servis berhasil dihapus"
+}
+```
+
+#### 19. Respon Error Autentikasi (HTTP 401 Unauthorized)
 ```json
 {
   "success": false,
