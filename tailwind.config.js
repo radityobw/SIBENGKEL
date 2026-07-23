@@ -71,7 +71,7 @@ export default {
                 "primary-fixed-dim": "#adc8f5",
                 "primary": "#022448",
                 "secondary-fixed": "#ffdcc3",
-                "secondary": "#904d00",
+                "secondary": "#FF6B00",
                 "tertiary-fixed": "#d4e3ff",
                 "on-primary-fixed-variant": "#2d486d",
                 "surface-tint": "#455f87",

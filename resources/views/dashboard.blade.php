@@ -31,7 +31,7 @@
 
         <!-- KPI 3 -->
         <div class="bg-surface rounded-lg p-6 border border-outline-variant shadow-sm flex flex-col justify-between h-[120px] relative overflow-hidden">
-            <div class="absolute left-0 top-0 bottom-0 w-1 bg-secondary-container"></div>
+            <div class="absolute left-0 top-0 bottom-0 w-1 bg-secondary"></div>
             <div class="flex justify-between items-start pl-2">
                 <span class="text-sm font-semibold text-on-surface-variant uppercase tracking-wider">Mekanik Aktif</span>
                 <div class="w-8 h-8 rounded bg-secondary-fixed text-on-secondary-fixed flex items-center justify-center">
@@ -59,40 +59,87 @@
     <!-- Bento Grid Content (Charts & Tables) -->
     <div class="grid grid-cols-1 xl:grid-cols-3 gap-6">
         @if(Auth::user()->role === 'admin')
-        <!-- Left: Line Chart Placeholder -->
+        <!-- Left: Line Chart Placeholder / Real Chart -->
         <div class="xl:col-span-1 bg-surface rounded-lg border border-outline-variant shadow-sm flex flex-col h-[400px]">
             <div class="p-6 border-b border-outline-variant flex justify-between items-center">
-                <h3 class="text-lg font-sora font-semibold text-on-surface">Tren Pendapatan</h3>
-                <span class="material-symbols-outlined text-outline">more_vert</span>
+                <h3 class="text-lg font-sora font-semibold text-on-surface">Tren Pendapatan (7 Hari)</h3>
             </div>
-            <div class="p-6 flex-1 relative flex flex-col items-center justify-center">
-                <!-- Simple visual placeholder for a chart -->
-                <div class="w-full h-full flex items-end justify-between px-2 gap-1 relative opacity-70">
-                    <!-- Background Grid Lines -->
-                    <div class="absolute inset-0 flex flex-col justify-between pointer-events-none opacity-20 border-b border-outline-variant">
-                        <div class="border-t border-outline-variant w-full h-0"></div>
-                        <div class="border-t border-outline-variant w-full h-0"></div>
-                        <div class="border-t border-outline-variant w-full h-0"></div>
-                        <div class="border-t border-outline-variant w-full h-0"></div>
-                    </div>
-                    <!-- Bars simulating line chart points -->
-                    <div class="w-full bg-primary/20 rounded-t-sm h-[30%] relative group"><div class="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-primary"></div></div>
-                    <div class="w-full bg-primary/30 rounded-t-sm h-[45%] relative group"><div class="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-primary"></div></div>
-                    <div class="w-full bg-primary/40 rounded-t-sm h-[40%] relative group"><div class="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-primary"></div></div>
-                    <div class="w-full bg-primary/50 rounded-t-sm h-[60%] relative group"><div class="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-primary"></div></div>
-                    <div class="w-full bg-primary/60 rounded-t-sm h-[55%] relative group"><div class="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-primary"></div></div>
-                    <div class="w-full bg-primary/70 rounded-t-sm h-[80%] relative group"><div class="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-primary"></div></div>
-                    <div class="w-full bg-primary/80 rounded-t-sm h-[95%] relative group"><div class="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-primary"></div></div>
-                    
-                    <svg class="absolute inset-0 w-full h-full pointer-events-none" preserveAspectRatio="none" viewBox="0 0 100 100">
-                        <polyline fill="none" points="7,70 21,55 35,60 50,40 64,45 78,20 92,5" stroke="#022448" stroke-linejoin="round" stroke-width="2"></polyline>
-                    </svg>
-                </div>
-                <div class="flex justify-between w-full text-xs text-on-surface-variant mt-4">
-                    <span>Sen</span><span>Sel</span><span>Rab</span><span>Kam</span><span>Jum</span><span>Sab</span><span>Min</span>
-                </div>
+            <div class="p-6 flex-1 relative w-full h-full">
+                <canvas id="revenueTrendChart"></canvas>
             </div>
         </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const ctx = document.getElementById('revenueTrendChart');
+                if(!ctx) return;
+                
+                const labels = {!! json_encode($revenueTrend['labels'] ?? []) !!};
+                const dataPoints = {!! json_encode($revenueTrend['data'] ?? []) !!};
+                
+                new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Pendapatan (Rp)',
+                            data: dataPoints,
+                            borderColor: '#0A192F',
+                            backgroundColor: 'rgba(10, 25, 47, 0.1)',
+                            borderWidth: 2,
+                            fill: true,
+                            tension: 0.4,
+                            pointBackgroundColor: '#0A192F',
+                            pointBorderColor: '#fff',
+                            pointBorderWidth: 2,
+                            pointRadius: 4,
+                            pointHoverRadius: 6
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        let label = context.dataset.label || '';
+                                        if (label) {
+                                            label += ': ';
+                                        }
+                                        if (context.parsed.y !== null) {
+                                            label += new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(context.parsed.y);
+                                        }
+                                        return label;
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    callback: function(value) {
+                                        if (value === 0) return '0';
+                                        return 'Rp ' + (value/1000) + 'k';
+                                    }
+                                },
+                                grid: {
+                                    color: 'rgba(0,0,0,0.05)'
+                                }
+                            },
+                            x: {
+                                grid: {
+                                    display: false
+                                }
+                            }
+                        }
+                    }
+                });
+            });
+        </script>
         @endif
 
         <!-- Right: Recent Transactions -->

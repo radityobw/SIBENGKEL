@@ -24,6 +24,7 @@ class User extends Authenticatable
         'email',
         'password',
         'role',
+        'profile_photo',
     ];
 
     /**
@@ -47,5 +48,13 @@ class User extends Authenticatable
     public function transactions()
     {
         return $this->hasMany(ServiceTransaction::class);
+    }
+
+    public function getProfilePhotoUrlAttribute()
+    {
+        if ($this->profile_photo) {
+            return asset('storage/avatars/' . $this->profile_photo);
+        }
+        return null; // Return null so we can show initials if no photo
     }
 }
