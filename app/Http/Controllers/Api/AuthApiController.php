@@ -9,19 +9,27 @@ use App\Models\User;
 
 class AuthApiController extends Controller {
     public function login(Request $request) {
-        $credentials = $request->validate([
-            'email' => 'required|email',
+        $request->validate([
+            'login' => 'required|string',
             'password' => 'required',
         ]);
+
+        $login = $request->input('login');
+        $fieldType = filter_var($login, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+        
+        $credentials = [
+            $fieldType => $login,
+            'password' => $request->input('password')
+        ];
 
         if (!Auth::attempt($credentials)) {
             return response()->json([
                 'success' => false,
-                'message' => 'Email atau password salah.'
+                'message' => 'Username/Email atau password salah.'
             ], 401);
         }
 
-        $user = User::where('email', $request->email)->firstOrFail();
+        $user = User::where($fieldType, $login)->firstOrFail();
         $token = $user->createToken('auth_token')->plainTextToken;
 
         return response()->json([
@@ -32,6 +40,7 @@ class AuthApiController extends Controller {
             'user' => [
                 'id' => $user->id,
                 'name' => $user->name,
+                'username' => $user->username,
                 'email' => $user->email,
                 'role' => $user->role,
             ]
