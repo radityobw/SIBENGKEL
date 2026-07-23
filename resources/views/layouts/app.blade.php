@@ -74,7 +74,7 @@
     <main class="flex-1 flex flex-col min-w-0 lg:ml-[280px]">
         <!-- TopNavBar (Visible on Mobile & Desktop) -->
         <header class="flex justify-between items-center px-4 lg:px-8 w-full h-16 sticky top-0 z-40 bg-primary lg:bg-surface border-b border-outline-variant">
-            <div class="flex items-center gap-6">
+            <div class="flex items-center gap-2">
                 <!-- Mobile Menu Button -->
                 <button @click="sidebarOpen = true" class="lg:hidden p-2 rounded-full text-on-primary hover:bg-primary-container/20 transition-colors">
                     <span class="material-symbols-outlined">menu</span>
