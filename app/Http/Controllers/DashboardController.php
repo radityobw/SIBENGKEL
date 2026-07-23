@@ -19,8 +19,19 @@ class DashboardController extends Controller {
             ->take(5)
             ->get();
 
+        // Calculate revenue trend for the last 7 days
+        $revenueTrend = [];
+        for ($i = 6; $i >= 0; $i--) {
+            $date = \Carbon\Carbon::now()->subDays($i)->format('Y-m-d');
+            $dailyRevenue = ServiceTransaction::whereDate('transaction_date', $date)
+                                ->where('status', 'selesai')
+                                ->sum('cost');
+            $revenueTrend['labels'][] = \Carbon\Carbon::parse($date)->translatedFormat('D');
+            $revenueTrend['data'][] = $dailyRevenue;
+        }
+
         return view('dashboard', compact(
-            'totalCustomers', 'totalVehicles', 'totalMechanics', 'totalRevenue', 'latestTransactions'
+            'totalCustomers', 'totalVehicles', 'totalMechanics', 'totalRevenue', 'latestTransactions', 'revenueTrend'
         ));
     }
 }

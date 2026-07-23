@@ -13,9 +13,43 @@
         @csrf
     </form>
 
-    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6">
+    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6" enctype="multipart/form-data">
         @csrf
         @method('patch')
+
+        <div>
+            <x-input-label for="profile_photo" :value="__('Profile Photo')" />
+            <div class="mt-2 flex items-center gap-4">
+                <div class="w-16 h-16 rounded-full bg-gray-200 overflow-hidden shrink-0 flex items-center justify-center">
+                    @if($user->profile_photo_url)
+                        <img id="photo-preview" src="{{ $user->profile_photo_url }}" class="w-full h-full object-cover">
+                    @else
+                        <div id="photo-preview-placeholder" class="w-full h-full flex items-center justify-center text-gray-500 font-bold text-xl">
+                            {{ substr($user->name, 0, 1) }}
+                        </div>
+                        <img id="photo-preview" src="" class="w-full h-full object-cover hidden">
+                    @endif
+                </div>
+                <input id="profile_photo" name="profile_photo" type="file" accept="image/*" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-gray-100 file:text-gray-700 hover:file:bg-gray-200 focus:outline-none" onchange="previewPhoto(event)" />
+            </div>
+            <x-input-error class="mt-2" :messages="$errors->get('profile_photo')" />
+        </div>
+
+        <script>
+            function previewPhoto(event) {
+                if (event.target.files.length > 0) {
+                    const reader = new FileReader();
+                    reader.onload = function(){
+                        const preview = document.getElementById('photo-preview');
+                        const placeholder = document.getElementById('photo-preview-placeholder');
+                        preview.src = reader.result;
+                        preview.classList.remove('hidden');
+                        if(placeholder) placeholder.classList.add('hidden');
+                    };
+                    reader.readAsDataURL(event.target.files[0]);
+                }
+            }
+        </script>
 
         <div>
             <x-input-label for="name" :value="__('Name')" />

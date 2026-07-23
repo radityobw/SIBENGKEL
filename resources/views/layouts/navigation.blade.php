@@ -15,6 +15,25 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    @if(auth()->user()->role === 'admin' || auth()->user()->role === 'mekanik')
+                        <x-nav-link :href="route('customers.index')" :active="request()->routeIs('customers.*')">
+                            Pelanggan
+                        </x-nav-link>
+                        <x-nav-link :href="route('transactions.index')" :active="request()->routeIs('transactions.*')">
+                            Servis Aktif
+                        </x-nav-link>
+                    @endif
+                    @if(auth()->user()->role === 'admin')
+                        <x-nav-link :href="route('admin.bookings.index')" :active="request()->routeIs('admin.bookings.*')">
+                            Booking
+                        </x-nav-link>
+                        <x-nav-link :href="route('admin.spareparts.index')" :active="request()->routeIs('admin.spareparts.*')">
+                            Katalog Sparepart
+                        </x-nav-link>
+                        <x-nav-link :href="route('admin.orders.index')" :active="request()->routeIs('admin.orders.*')">
+                            Pesanan
+                        </x-nav-link>
+                    @endif
                 </div>
             </div>
 
@@ -70,6 +89,25 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+            @if(auth()->user()->role === 'admin' || auth()->user()->role === 'mekanik')
+                <x-responsive-nav-link :href="route('customers.index')" :active="request()->routeIs('customers.*')">
+                    Pelanggan
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('transactions.index')" :active="request()->routeIs('transactions.*')">
+                    Servis Aktif
+                </x-responsive-nav-link>
+            @endif
+            @if(auth()->user()->role === 'admin')
+                <x-responsive-nav-link :href="route('admin.bookings.index')" :active="request()->routeIs('admin.bookings.*')">
+                    Booking
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('admin.spareparts.index')" :active="request()->routeIs('admin.spareparts.*')">
+                    Katalog Sparepart
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('admin.orders.index')" :active="request()->routeIs('admin.orders.*')">
+                    Pesanan
+                </x-responsive-nav-link>
+            @endif
         </div>
 
         <!-- Responsive Settings Options -->

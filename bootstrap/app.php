@@ -16,6 +16,13 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'role' => \App\Http\Middleware\CheckRole::class,
         ]);
+        $middleware->redirectGuestsTo(fn (Request $request) => '/');
+        $middleware->redirectUsersTo(function (Request $request) {
+            if (\Illuminate\Support\Facades\Auth::guard('customer')->check()) {
+                return route('public.dashboard');
+            }
+            return route('dashboard');
+        });
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->shouldRenderJsonWhen(
