@@ -25,17 +25,25 @@
                 <div class="industrial-card rounded-lg p-sm md:p-md relative overflow-hidden shadow-sm hover:shadow-md transition-shadow">
                     <!-- Status Strip -->
                     @php
-                        $stripColor = match($booking->status) {
+                        $actualStatus = $booking->status;
+                        if ($actualStatus == 'disetujui' && $booking->transaction) {
+                            $actualStatus = 'transaksi_' . $booking->transaction->status;
+                        }
+
+                        $stripColor = match($actualStatus) {
                             'menunggu_konfirmasi' => 'bg-secondary',
-                            'disetujui' => 'bg-primary',
-                            'dikonversi' => 'bg-green-500',
+                            'disetujui', 'transaksi_pending' => 'bg-primary',
+                            'transaksi_proses' => 'bg-amber-500',
+                            'transaksi_selesai', 'dikonversi' => 'bg-green-500',
                             'ditolak' => 'bg-error',
                             default => 'bg-outline'
                         };
-                        $statusText = match($booking->status) {
+                        $statusText = match($actualStatus) {
                             'menunggu_konfirmasi' => 'Menunggu',
-                            'disetujui' => 'Disetujui',
-                            'dikonversi' => 'Dikonversi ke Transaksi',
+                            'disetujui', 'transaksi_pending' => 'Disetujui',
+                            'transaksi_proses' => 'Sedang Dikerjakan',
+                            'transaksi_selesai' => 'Servis Selesai',
+                            'dikonversi' => 'Dikonversi',
                             'ditolak' => 'Ditolak',
                             default => 'Unknown'
                         };
