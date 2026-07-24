@@ -40,7 +40,8 @@
                         };
                         $statusText = match($actualStatus) {
                             'menunggu_konfirmasi' => 'Menunggu',
-                            'disetujui', 'transaksi_pending' => 'Disetujui',
+                            'disetujui' => 'Disetujui',
+                            'transaksi_pending' => 'Menunggu Mekanik',
                             'transaksi_proses' => 'Sedang Dikerjakan',
                             'transaksi_selesai' => 'Servis Selesai',
                             'dikonversi' => 'Dikonversi',
