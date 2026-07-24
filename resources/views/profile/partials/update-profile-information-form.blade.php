@@ -1,10 +1,10 @@
 <section>
     <header>
-        <h2 class="text-lg font-medium text-gray-900">
+        <h2 class="text-lg font-medium text-on-surface">
             {{ __('Profile Information') }}
         </h2>
 
-        <p class="mt-1 text-sm text-gray-600">
+        <p class="mt-1 text-sm text-on-surface-variant">
             {{ __("Update your account's profile information and email address.") }}
         </p>
     </header>
@@ -20,17 +20,17 @@
         <div>
             <x-input-label for="profile_photo" :value="__('Profile Photo')" />
             <div class="mt-2 flex items-center gap-4">
-                <div class="w-16 h-16 rounded-full bg-gray-200 overflow-hidden shrink-0 flex items-center justify-center">
+                <div class="w-16 h-16 rounded-full bg-surface-container-low overflow-hidden shrink-0 flex items-center justify-center border border-outline-variant">
                     @if($user->profile_photo_url)
                         <img id="photo-preview" src="{{ $user->profile_photo_url }}" class="w-full h-full object-cover">
                     @else
-                        <div id="photo-preview-placeholder" class="w-full h-full flex items-center justify-center text-gray-500 font-bold text-xl">
+                        <div id="photo-preview-placeholder" class="w-full h-full flex items-center justify-center text-on-surface-variant font-bold text-xl">
                             {{ substr($user->name, 0, 1) }}
                         </div>
                         <img id="photo-preview" src="" class="w-full h-full object-cover hidden">
                     @endif
                 </div>
-                <input id="profile_photo" name="profile_photo" type="file" accept="image/*" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-gray-100 file:text-gray-700 hover:file:bg-gray-200 focus:outline-none" onchange="previewPhoto(event)" />
+                <input id="profile_photo" name="profile_photo" type="file" accept="image/*" class="block w-full text-sm text-on-surface-variant file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-primary-container file:text-on-primary-container hover:file:bg-primary/20 focus:outline-none" onchange="previewPhoto(event)" />
             </div>
             <x-input-error class="mt-2" :messages="$errors->get('profile_photo')" />
         </div>
@@ -70,10 +70,10 @@
 
             @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! $user->hasVerifiedEmail())
                 <div>
-                    <p class="text-sm mt-2 text-gray-800">
+                    <p class="text-sm mt-2 text-on-surface">
                         {{ __('Your email address is unverified.') }}
 
-                        <button form="send-verification" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        <button form="send-verification" class="underline text-sm text-on-surface-variant hover:text-on-surface rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
                             {{ __('Click here to re-send the verification email.') }}
                         </button>
                     </p>
@@ -96,7 +96,7 @@
                     x-show="show"
                     x-transition
                     x-init="setTimeout(() => show = false, 2000)"
-                    class="text-sm text-gray-600"
+                    class="text-sm text-on-surface-variant"
                 >{{ __('Saved.') }}</p>
             @endif
         </div>

@@ -8,7 +8,7 @@
     <!-- KPI Cards Grid -->
     <div class="grid grid-cols-1 md:grid-cols-2 {{ Auth::user()->role === 'admin' ? 'xl:grid-cols-4' : 'xl:grid-cols-3' }} gap-6 mb-6">
         <!-- KPI 1 -->
-        <div class="bg-surface rounded-lg p-6 border border-outline-variant shadow-sm flex flex-col justify-between h-[120px]">
+        <div class="bg-surface dark:bg-[#111111] rounded-lg p-6 border border-outline-variant dark:border-[#3E3E3A] shadow-sm flex flex-col justify-between h-[120px]">
             <div class="flex justify-between items-start">
                 <span class="text-sm font-semibold text-on-surface-variant uppercase tracking-wider">Total Pelanggan</span>
                 <div class="w-8 h-8 rounded bg-primary-fixed text-on-primary-fixed flex items-center justify-center">
@@ -19,7 +19,7 @@
         </div>
 
         <!-- KPI 2 -->
-        <div class="bg-surface rounded-lg p-6 border border-outline-variant shadow-sm flex flex-col justify-between h-[120px]">
+        <div class="bg-surface dark:bg-[#111111] rounded-lg p-6 border border-outline-variant dark:border-[#3E3E3A] shadow-sm flex flex-col justify-between h-[120px]">
             <div class="flex justify-between items-start">
                 <span class="text-sm font-semibold text-on-surface-variant uppercase tracking-wider">Kendaraan Terdaftar</span>
                 <div class="w-8 h-8 rounded bg-tertiary-fixed text-on-tertiary-fixed flex items-center justify-center">
@@ -30,7 +30,7 @@
         </div>
 
         <!-- KPI 3 -->
-        <div class="bg-surface rounded-lg p-6 border border-outline-variant shadow-sm flex flex-col justify-between h-[120px] relative overflow-hidden">
+        <div class="bg-surface dark:bg-[#111111] rounded-lg p-6 border border-outline-variant dark:border-[#3E3E3A] shadow-sm flex flex-col justify-between h-[120px] relative overflow-hidden">
             <div class="absolute left-0 top-0 bottom-0 w-1 bg-secondary"></div>
             <div class="flex justify-between items-start pl-2">
                 <span class="text-sm font-semibold text-on-surface-variant uppercase tracking-wider">Mekanik Aktif</span>
@@ -43,7 +43,7 @@
 
         @if(Auth::user()->role === 'admin')
         <!-- KPI 4 -->
-        <div class="bg-surface rounded-lg p-6 border border-outline-variant shadow-sm flex flex-col justify-between h-[120px]">
+        <div class="bg-surface dark:bg-[#111111] rounded-lg p-6 border border-outline-variant dark:border-[#3E3E3A] shadow-sm flex flex-col justify-between h-[120px]">
             <div class="flex justify-between items-start">
                 <span class="text-sm font-semibold text-on-surface-variant uppercase tracking-wider">Pendapatan (Bulan Ini)</span>
                 <div class="flex items-center gap-1 text-[12px] font-semibold text-[#166534] bg-[#dcfce7] px-2 py-1 rounded">
@@ -51,7 +51,7 @@
                     Aktif
                 </div>
             </div>
-            <div class="text-2xl font-sora font-bold text-primary mt-auto">Rp {{ number_format($totalRevenue, 0, ',', '.') }}</div>
+            <div class="text-2xl font-sora font-bold text-on-surface mt-auto">Rp {{ number_format($totalRevenue, 0, ',', '.') }}</div>
         </div>
         @endif
     </div>
@@ -60,8 +60,8 @@
     <div class="grid grid-cols-1 xl:grid-cols-3 gap-6">
         @if(Auth::user()->role === 'admin')
         <!-- Left: Line Chart Placeholder / Real Chart -->
-        <div class="xl:col-span-1 bg-surface rounded-lg border border-outline-variant shadow-sm flex flex-col h-[400px]">
-            <div class="p-6 border-b border-outline-variant flex justify-between items-center">
+        <div class="xl:col-span-1 bg-surface dark:bg-[#111111] rounded-lg border border-outline-variant dark:border-[#3E3E3A] shadow-sm flex flex-col h-[400px]">
+            <div class="p-6 border-b border-outline-variant dark:border-[#3E3E3A] flex justify-between items-center">
                 <h3 class="text-lg font-sora font-semibold text-on-surface">Tren Pendapatan (7 Hari)</h3>
             </div>
             <div class="p-6 flex-1 relative w-full h-full">
@@ -143,17 +143,17 @@
         @endif
 
         <!-- Right: Recent Transactions -->
-        <div class="{{ Auth::user()->role === 'admin' ? 'xl:col-span-2' : 'xl:col-span-3' }} bg-surface rounded-lg border border-outline-variant shadow-sm flex flex-col overflow-hidden h-auto xl:h-[400px]">
-            <div class="p-6 border-b border-outline-variant flex justify-between items-center bg-surface-bright">
+        <div class="{{ Auth::user()->role === 'admin' ? 'xl:col-span-2' : 'xl:col-span-3' }} bg-surface dark:bg-[#111111] rounded-lg border border-outline-variant dark:border-[#3E3E3A] shadow-sm flex flex-col overflow-hidden h-auto xl:h-[400px]">
+            <div class="p-6 border-b border-outline-variant dark:border-[#3E3E3A] flex justify-between items-center bg-surface-bright dark:bg-[#161615]">
                 <h3 class="text-lg font-sora font-semibold text-on-surface">Transaksi Servis Terkini</h3>
-                <a href="{{ route('transactions.index') }}" class="text-sm font-semibold text-primary hover:underline h-8 px-2 flex items-center">Lihat Semua</a>
+                <a href="{{ route('transactions.index') }}" class="text-sm font-semibold text-on-surface hover:underline h-8 px-2 flex items-center">Lihat Semua</a>
             </div>
             
             <!-- Desktop Table -->
             <div class="hidden md:block overflow-x-auto flex-1">
                 <table class="w-full text-left border-collapse min-w-[700px]">
                     <thead>
-                        <tr class="border-b border-outline-variant bg-surface-container-low text-sm text-on-surface-variant">
+                        <tr class="border-b border-outline-variant dark:border-[#3E3E3A] bg-surface-container-low dark:bg-[#0a0a0a] text-sm text-on-surface-variant dark:text-gray-400">
                             <th class="p-4 font-semibold">No. Polisi</th>
                             <th class="p-4 font-semibold">Pelanggan</th>
                             <th class="p-4 font-semibold">Mekanik</th>
@@ -163,11 +163,11 @@
                     </thead>
                     <tbody class="text-sm text-on-surface">
                         @forelse($latestTransactions as $transaction)
-                        <tr class="border-b border-outline-variant/50 hover:bg-surface-container-low transition-colors h-14">
+                        <tr class="border-b border-outline-variant/50 dark:border-[#3E3E3A]/50 hover:bg-surface-container-low dark:hover:bg-[#161615] transition-colors h-14">
                             <td class="p-4 font-medium">{{ $transaction->vehicle->plate_number ?? '-' }}</td>
                             <td class="p-4">{{ $transaction->vehicle->customer->name ?? '-' }}</td>
                             <td class="p-4 flex items-center gap-2">
-                                <div class="w-6 h-6 rounded bg-primary/10 flex items-center justify-center text-primary text-xs font-bold">
+                                <div class="w-6 h-6 rounded bg-surface-container-high flex items-center justify-center text-on-surface text-xs font-bold">
                                     {{ substr($transaction->mechanic->name ?? 'M', 0, 1) }}
                                 </div>
                                 {{ $transaction->mechanic->name ?? '-' }}
@@ -189,7 +189,7 @@
             <!-- Mobile Card List -->
             <div class="md:hidden flex flex-col">
                 @forelse($latestTransactions as $transaction)
-                <div class="p-4 border-b border-outline-variant flex justify-between items-center bg-surface hover:bg-surface-container-lowest transition-colors">
+                <div class="p-4 border-b border-outline-variant dark:border-[#3E3E3A] flex justify-between items-center bg-surface dark:bg-[#111111] hover:bg-surface-container-lowest dark:hover:bg-[#161615] transition-colors">
                     <div class="flex flex-col gap-1">
                         <div class="flex items-center gap-2">
                             <span class="font-sora font-semibold text-on-surface">{{ $transaction->vehicle->plate_number ?? '-' }}</span>
@@ -201,7 +201,7 @@
                             {{ $transaction->mechanic->name ?? '-' }}
                         </div>
                     </div>
-                    <div class="font-semibold text-primary">
+                    <div class="font-semibold text-on-surface">
                         Rp {{ number_format($transaction->cost, 0, ',', '.') }}
                     </div>
                 </div>

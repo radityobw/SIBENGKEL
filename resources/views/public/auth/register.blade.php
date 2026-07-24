@@ -44,7 +44,7 @@
         <div class="flex-1 flex flex-col justify-center px-margin-mobile py-12 sm:px-12 md:px-24 lg:px-16 xl:px-32 bg-surface overflow-y-auto">
             <!-- Mobile Brand Header (Visible only on small screens) -->
             <div class="lg:hidden flex items-center gap-2 text-primary mb-12 justify-center mt-8">
-                <img src="{{ asset('logobengkel.png') }}" alt="Logo" class="h-8">
+                <img src="{{ asset('logobengkel.png') }}" alt="Logo" class="h-8 brightness-0">
                 <span class="font-headline-lg-mobile text-headline-lg-mobile tracking-tighter">SIBENGKEL</span>
             </div>
             

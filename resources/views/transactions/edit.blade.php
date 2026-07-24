@@ -10,14 +10,14 @@
     </div>
 
     <!-- Form Card -->
-    <div class="bg-surface-container-lowest border border-outline-variant rounded-xl shadow-sm overflow-hidden w-full max-w-4xl">
+    <div class="bg-surface-container-lowest border border-outline-variant rounded-xl shadow-sm overflow-hidden w-full max-w-4xl mx-auto">
         <form action="{{ route('transactions.update', $transaction->id) }}" class="space-y-8" method="POST">
             @csrf
             @method('PUT')
             <div class="p-6 md:p-8 space-y-8">
                 <!-- Section 1: Vehicle & Customer -->
                 <section>
-                    <h2 class="font-headline-md text-headline-md text-primary mb-4 flex items-center gap-2">
+                    <h2 class="font-headline-md text-headline-md text-on-surface mb-4 flex items-center gap-2">
                         <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">directions_car</span>
                         Detail Kendaraan
                     </h2>
@@ -45,7 +45,7 @@
 
                 <!-- Section 2: Service Details -->
                 <section>
-                    <h2 class="font-headline-md text-headline-md text-primary mb-4 flex items-center gap-2">
+                    <h2 class="font-headline-md text-headline-md text-on-surface mb-4 flex items-center gap-2">
                         <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">build</span>
                         Informasi Layanan
                     </h2>

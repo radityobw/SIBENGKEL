@@ -4,12 +4,12 @@
             <a href="{{ route('admins.index') }}" class="text-on-surface-variant hover:text-primary transition-colors">
                 <span class="material-symbols-outlined">arrow_back</span>
             </a>
-            <h2 class="text-2xl md:text-3xl font-sora font-bold text-primary">Tambah Admin Baru</h2>
+            <h2 class="text-2xl md:text-3xl font-sora font-bold text-on-surface">Tambah Admin Baru</h2>
         </div>
         <p class="text-on-surface-variant text-sm ml-8">Buat akun administrator baru untuk sistem SIBENGKEL.</p>
     </div>
 
-    <div class="bg-surface-container-lowest border border-outline-variant rounded-xl shadow-sm overflow-hidden max-w-3xl">
+    <div class="bg-surface-container-lowest border border-outline-variant rounded-xl shadow-sm overflow-hidden max-w-3xl mx-auto w-full">
         <form action="{{ route('admins.store') }}" method="POST" class="p-6 md:p-8 flex flex-col gap-6">
             @csrf
             

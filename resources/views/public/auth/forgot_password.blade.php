@@ -45,7 +45,7 @@
                 <div class="w-16 h-16 rounded-full bg-primary-container/30 text-primary mx-auto mb-3 flex items-center justify-center">
                     <span class="material-symbols-outlined text-3xl">phone_locked</span>
                 </div>
-                <h1 class="font-headline-xl text-2xl font-bold tracking-tight text-primary mb-xs font-sora">Lupa Password Akun</h1>
+                <h1 class="font-headline-xl text-2xl font-bold tracking-tight text-on-surface mb-xs font-sora">Lupa Password Akun</h1>
                 <p class="font-body-md text-sm text-on-surface-variant">Langkah 1 dari 2: Masukkan nomor Telepon/WhatsApp terdaftar untuk meminta Kode OTP Verifikasi.</p>
             </div>
             

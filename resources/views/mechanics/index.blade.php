@@ -45,7 +45,7 @@
             </div>
             
             <div class="bg-surface-container-low border-t border-outline-variant p-3 flex justify-around">
-                <a href="{{ route('mechanics.edit', $mechanic->id) }}" class="flex-1 flex items-center justify-center gap-2 text-primary font-semibold text-sm hover:bg-primary-container py-2 rounded-lg transition-colors">
+                <a href="{{ route('mechanics.edit', $mechanic->id) }}" class="flex-1 flex items-center justify-center gap-2 text-on-surface font-semibold text-sm hover:bg-surface-variant py-2 rounded-lg transition-colors">
                     <span class="material-symbols-outlined text-[18px]">edit</span>
                     Edit
                 </a>

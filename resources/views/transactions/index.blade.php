@@ -1,7 +1,7 @@
 <x-app-layout>
     <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
         <div>
-            <h2 class="text-2xl md:text-3xl font-sora font-bold text-primary">Daftar Transaksi</h2>
+            <h2 class="text-2xl md:text-3xl font-sora font-bold text-on-surface">Daftar Transaksi</h2>
             <p class="text-on-surface-variant mt-1 text-sm">Kelola dan pantau semua transaksi servis kendaraan.</p>
         </div>
         <a href="{{ route('transactions.create') }}" class="bg-secondary hover:bg-secondary/90 text-on-secondary py-2 px-4 rounded-lg flex items-center justify-center gap-2 shadow-sm border border-secondary transition-all active:scale-95 duration-200 min-h-[44px] shrink-0 font-medium text-sm">
@@ -54,7 +54,7 @@
                     @forelse($transactions as $tx)
                     <tr class="hover:bg-surface-container-low/50 transition-colors group {{ $loop->even ? 'bg-surface-bright' : '' }}">
                         <td class="p-4 whitespace-nowrap">{{ \Carbon\Carbon::parse($tx->transaction_date)->format('d M Y') }}</td>
-                        <td class="p-4 font-medium text-primary whitespace-nowrap">{{ $tx->vehicle->plate_number }} <span class="text-xs text-on-surface-variant font-normal block">{{ $tx->vehicle->brand }} {{ $tx->vehicle->model }}</span></td>
+                        <td class="p-4 font-medium text-on-surface whitespace-nowrap">{{ $tx->vehicle->plate_number }} <span class="text-xs text-on-surface-variant font-normal block">{{ $tx->vehicle->brand }} {{ $tx->vehicle->model }}</span></td>
                         <td class="p-4">
                             <span class="truncate max-w-[150px] font-medium text-on-surface block">{{ $tx->vehicle->customer->name }}</span>
                             <span class="text-xs text-on-surface-variant">{{ $tx->vehicle->customer->phone ?? '-' }}</span>

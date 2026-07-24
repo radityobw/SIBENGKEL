@@ -1,7 +1,7 @@
 <x-app-layout>
     <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
         <div>
-            <h2 class="text-2xl md:text-3xl font-sora font-bold text-primary">Manajemen Admin</h2>
+            <h2 class="text-2xl md:text-3xl font-sora font-bold text-on-surface">Manajemen Admin</h2>
             <p class="text-on-surface-variant mt-1 text-sm">Kelola akun administrator sistem.</p>
         </div>
         <a href="{{ route('admins.create') }}" class="bg-secondary hover:bg-secondary/90 text-on-secondary py-2 px-4 rounded-lg flex items-center justify-center gap-2 shadow-sm border border-secondary transition-all active:scale-95 duration-200 min-h-[44px] shrink-0 font-medium text-sm">

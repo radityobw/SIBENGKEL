@@ -13,8 +13,26 @@
         .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
         .icon-filled { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
     </style>
+    <script>
+        // Dark mode setup
+        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+        
+        function toggleTheme() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+    </script>
 </head>
-<body class="bg-background min-h-screen flex text-on-surface antialiased" x-data="{ sidebarOpen: false }">
+<body class="bg-background dark:bg-[#0a0a0a] min-h-screen flex text-on-surface dark:text-[#EDEDEC] antialiased transition-colors duration-300" x-data="{ sidebarOpen: false }">
     <!-- Mobile Sidebar Overlay -->
     <div x-show="sidebarOpen" 
          x-transition.opacity 
@@ -22,11 +40,11 @@
          class="fixed inset-0 z-40 bg-black/50 md:hidden" style="display: none;"></div>
 
     <!-- SideNavBar -->
-    <aside :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'" class="hidden md:flex w-[280px] h-screen fixed left-0 top-0 bg-primary border-r border-outline-variant/20 shadow-md flex-col py-6 px-4 gap-2 z-50 transition-transform duration-300 ease-in-out">
+    <aside :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'" class="hidden md:flex w-[280px] h-screen fixed left-0 top-0 bg-primary dark:bg-[#111111] border-r border-outline-variant/20 dark:border-[#3E3E3A]/50 shadow-md flex-col py-6 px-4 gap-2 z-50 transition-transform duration-300 ease-in-out">
         <div class="px-4 mb-8">
             <a href="{{ url('/') }}" class="group block hover:opacity-90 transition-opacity">
                 <div class="flex items-center gap-2">
-                    <img src="{{ asset('logobengkel.png') }}" alt="SIBENGKEL Logo" class="h-8 object-contain">
+                    <img src="{{ asset('logobengkel.png') }}" alt="SIBENGKEL Logo" class="h-8 object-contain brightness-0 invert">
                     <h1 class="text-2xl font-sora font-bold text-on-primary">SIBENGKEL</h1>
                 </div>
                 <p class="text-sm text-on-primary/70 mt-1">Customer Portal</p>
@@ -53,7 +71,7 @@
     <!-- Main Content Area -->
     <main class="flex-1 flex flex-col min-w-0 md:ml-[280px]">
         <!-- TopNavBar (Identical to Dashboard) -->
-        <header class="flex justify-between items-center px-4 md:px-8 w-full h-16 sticky top-0 z-40 bg-primary md:bg-surface border-b border-outline-variant">
+        <header class="flex justify-between items-center px-4 md:px-8 w-full h-16 sticky top-0 z-40 bg-primary md:bg-surface dark:bg-[#161615] border-b border-outline-variant dark:border-[#3E3E3A]">
             <div class="flex items-center gap-2">
                 <a href="{{ url('/') }}" class="md:hidden flex items-center gap-2 hover:opacity-90 transition-opacity">
                     <img src="{{ asset('logobengkel.png') }}" alt="SIBENGKEL Logo" class="h-6 object-contain brightness-0 invert">
@@ -62,6 +80,11 @@
             </div>
             
             <div class="flex items-center gap-3">
+                <!-- Theme Toggle -->
+                <button onclick="toggleTheme()" class="w-10 h-10 rounded-full flex items-center justify-center text-on-primary md:text-on-surface-variant hover:bg-primary-container/20 md:hover:bg-surface-container-high transition-colors" title="Toggle Dark Mode">
+                    <span class="material-symbols-outlined dark:hidden">dark_mode</span>
+                    <span class="material-symbols-outlined hidden dark:block text-amber-400">light_mode</span>
+                </button>
                 @if(Auth::guard('customer')->check())
                 <!-- Notification Dropdown -->
                 <div x-data="{ notifOpen: false }" class="relative">
@@ -83,7 +106,7 @@
                             @if($unreadCount > 0)
                                 <form action="{{ route('public.notifications.readAll') }}" method="POST">
                                     @csrf
-                                    <button type="submit" class="text-xs text-primary hover:underline">Tandai semua dibaca</button>
+                                    <button type="submit" class="text-xs text-on-surface hover:underline">Tandai semua dibaca</button>
                                 </form>
                             @endif
                         </div>
@@ -99,14 +122,14 @@
                                         @if(is_null($notif->read_at))
                                             <form action="{{ route('public.notifications.read', $notif->id) }}" method="POST">
                                                 @csrf
-                                                <button type="submit" class="w-6 h-6 rounded-full hover:bg-surface-container flex items-center justify-center text-primary" title="Tandai dibaca">
+                                                <button type="submit" class="w-6 h-6 rounded-full hover:bg-surface-container flex items-center justify-center text-on-surface" title="Tandai dibaca">
                                                     <span class="material-symbols-outlined text-[14px]">check</span>
                                                 </button>
                                             </form>
                                         @endif
                                     </div>
                                     @if(isset($notif->data['action_url']))
-                                        <a href="{{ $notif->data['action_url'] }}" class="inline-block mt-2 text-xs text-primary font-semibold hover:underline">Lihat Detail</a>
+                                        <a href="{{ $notif->data['action_url'] }}" class="inline-block mt-2 text-xs text-on-surface font-semibold hover:underline">Lihat Detail</a>
                                     @endif
                                 </div>
                             @empty
@@ -117,7 +140,7 @@
                         </div>
                     </div>
                 </div>
-                    <a href="{{ route('public.profile') }}" class="font-medium text-sm text-on-primary md:text-on-surface-variant truncate max-w-[140px] sm:max-w-[200px] hover:opacity-80 transition-opacity flex items-center gap-2" title="Edit Profil Saya">
+                    <a href="{{ route('public.profile') }}" class="font-medium text-sm text-on-primary md:text-on-surface-variant dark:text-[#EDEDEC] truncate max-w-[140px] sm:max-w-[200px] hover:opacity-80 transition-opacity flex items-center gap-2" title="Edit Profil Saya">
                         @if(Auth::guard('customer')->user()->profile_photo_url)
                             <img src="{{ Auth::guard('customer')->user()->profile_photo_url }}" class="w-8 h-8 rounded-full object-cover border border-outline-variant/30">
                         @else
@@ -166,7 +189,7 @@
     @endif
 
     <!-- BottomNavBar (Visible only on Mobile - Flex-1 Auto-Stretch to Fill Space) -->
-    <nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-between items-center bg-surface px-2 pb-safe h-20 rounded-t-2xl border-t border-outline-variant shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)]">
+    <nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-between items-center bg-surface dark:bg-[#161615] px-2 pb-safe h-20 rounded-t-2xl border-t border-outline-variant dark:border-[#3E3E3A] shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)]">
         <a class="flex flex-col items-center justify-center flex-1 min-w-[72px] text-center {{ request()->routeIs('public.dashboard') ? 'text-secondary font-bold' : 'text-on-surface-variant font-medium' }} h-full active:scale-90 rounded-lg px-1" href="{{ route('public.dashboard') }}">
             <span class="material-symbols-outlined text-2xl mb-1" {{ request()->routeIs('public.dashboard') ? "data-weight=fill style=font-variation-settings:'FILL' 1;" : '' }}>dashboard</span>
             <span class="text-xs">Dashboard</span>
