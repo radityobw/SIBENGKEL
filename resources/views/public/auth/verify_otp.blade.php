@@ -27,7 +27,7 @@
             <img src="{{ asset('logobengkel.png') }}" alt="Logo" class="h-8 filter invert"> SIBENGKEL
         </a>
         <a href="{{ route('public.forgot_password') }}" class="text-sm font-semibold text-primary hover:underline flex items-center gap-1">
-            <span class="material-symbols-outlined text-sm">arrow_back</span> Ubah Nomor HP
+            <span class="material-symbols-outlined text-sm">arrow_back</span> Ubah Email
         </a>
     </nav>
 
@@ -46,7 +46,7 @@
                     <span class="material-symbols-outlined text-3xl">mark_email_read</span>
                 </div>
                 <h1 class="font-headline-xl text-2xl font-bold tracking-tight text-primary mb-xs font-sora">Verifikasi Kode OTP</h1>
-                <p class="font-body-md text-sm text-on-surface-variant">Langkah 2 dari 2: Masukkan kode OTP 6-digit untuk nomor <span class="font-bold text-primary">{{ $phone }}</span>.</p>
+                <p class="font-body-md text-sm text-on-surface-variant">Langkah 2 dari 2: Masukkan kode OTP 6-digit untuk email <span class="font-bold text-primary">{{ $email }}</span>.</p>
             </div>
 
             @if(session('info'))

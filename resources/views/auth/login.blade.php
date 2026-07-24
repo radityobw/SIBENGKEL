@@ -68,7 +68,7 @@
                         <label class="block font-label-md text-[14px] leading-[20px] font-semibold text-on-surface" for="login">Username atau Email</label>
                         <div class="relative">
                             <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">person</span>
-                            <input class="w-full pl-10 pr-3 py-3 rounded border border-outline-variant bg-surface-container-lowest focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors h-[44px] font-body-md text-on-surface placeholder:text-outline" 
+                            <input class="w-full pl-10 pr-3 py-3 rounded border border-outline-variant bg-surface-container-lowest focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors font-body-md text-on-surface placeholder:text-outline" 
                                 id="login" name="login" placeholder="Masukkan username/email" type="text" value="{{ old('login') }}" required autofocus/>
                         </div>
                     </div>
@@ -82,7 +82,7 @@
                         </div>
                         <div class="relative">
                             <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">lock</span>
-                            <input class="w-full pl-10 pr-10 py-3 rounded border border-outline-variant bg-surface-container-lowest focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors h-[44px] font-body-md text-on-surface placeholder:text-outline" 
+                            <input class="w-full pl-10 pr-10 py-3 rounded border border-outline-variant bg-surface-container-lowest focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors font-body-md text-on-surface placeholder:text-outline" 
                                 id="password" name="password" placeholder="••••••••" type="password" required/>
                         </div>
                     </div>
