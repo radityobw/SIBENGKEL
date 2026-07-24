@@ -27,7 +27,7 @@ class CustomerAuthPortalController extends Controller
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'phone' => ['required', 'string', 'max:20', 'unique:customers'],
-            'email' => ['nullable', 'string', 'email', 'max:255', 'unique:customers'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:customers'],
             'address' => ['required', 'string'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);

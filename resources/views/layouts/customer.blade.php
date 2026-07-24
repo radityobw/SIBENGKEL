@@ -32,7 +32,7 @@
                 <p class="text-sm text-on-primary/70 mt-1">Customer Portal</p>
             </a>
         </div>
-        <nav class="flex-1 flex flex-col gap-2">
+        <nav class="flex-1 flex flex-col gap-2 overflow-y-auto pr-2 custom-scrollbar">
             <a class="flex items-center gap-4 px-4 py-2 {{ request()->routeIs('public.dashboard') ? 'bg-secondary text-white font-semibold' : 'text-on-primary/70 hover:text-on-primary hover:bg-primary-container/50 font-medium' }} rounded-lg transition-all duration-200 ease-in-out h-11" href="{{ route('public.dashboard') }}">
                 <span class="material-symbols-outlined {{ request()->routeIs('public.dashboard') ? 'icon-filled' : '' }}">dashboard</span>
                 <span>Dashboard</span>
@@ -47,15 +47,7 @@
             </a>
         </nav>
         
-        <div class="mt-auto pt-6">
-            <form method="POST" action="{{ route('public.logout') }}">
-                @csrf
-                <button type="submit" class="w-full h-11 bg-error text-on-error font-medium rounded-lg flex items-center justify-center gap-2 shadow-sm hover:opacity-90 transition-opacity">
-                    <span class="material-symbols-outlined">logout</span>
-                    Logout
-                </button>
-            </form>
-        </div>
+
     </aside>
 
     <!-- Main Content Area -->
@@ -93,10 +85,10 @@
                         <span>Halo, <span class="font-bold underline decoration-secondary decoration-2 underline-offset-4">{{ Auth::guard('customer')->user()->name }}</span></span>
                     </a>
                 @endif
-                <!-- Mobile Logout -->
-                <form method="POST" action="{{ route('public.logout') }}" class="md:hidden flex items-center ml-1">
+                <!-- Logout -->
+                <form method="POST" action="{{ route('public.logout') }}" class="flex items-center ml-2 border-l border-outline-variant/30 pl-4">
                     @csrf
-                    <button type="submit" class="p-2 rounded-full text-error-container hover:bg-error/20 transition-colors" title="Logout">
+                    <button type="submit" class="p-2 rounded-full text-error md:text-error hover:bg-error/10 transition-colors" title="Logout">
                         <span class="material-symbols-outlined">logout</span>
                     </button>
                 </form>
@@ -105,12 +97,6 @@
 
         <!-- Page Content -->
         <div class="p-4 pb-24 md:p-8 flex flex-col gap-6">
-            @if(session('success'))
-                <div class="bg-[#dcfce7] text-[#166534] p-4 rounded-lg font-medium border border-[#bbf7d0]" role="alert">
-                    <span>{{ session('success') }}</span>
-                </div>
-            @endif
-            
             @if ($errors->any())
                 <div class="bg-error-container text-on-error-container p-4 rounded-lg text-sm border border-outline-variant">
                     <ul>
@@ -123,6 +109,7 @@
 
             @yield('content')
         </div>
+        <x-toast />
     </main>
 
     <!-- Prominent FAB (Visible only on Customer Dashboard) -->
@@ -136,19 +123,48 @@
     @endif
 
     <!-- BottomNavBar (Visible only on Mobile - Flex-1 Auto-Stretch to Fill Space) -->
-    <nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-between items-center bg-surface px-2 pb-safe h-16 rounded-t-xl border-t border-outline-variant shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)]">
-        <a class="flex flex-col items-center justify-center flex-1 min-w-[60px] text-center {{ request()->routeIs('public.dashboard') ? 'text-secondary font-bold' : 'text-on-surface-variant font-medium' }} h-full active:scale-90 rounded-lg px-1" href="{{ route('public.dashboard') }}">
-            <span class="material-symbols-outlined mb-1" {{ request()->routeIs('public.dashboard') ? 'data-weight=fill style=font-variation-settings:\'FILL\'1;' : '' }}>dashboard</span>
+    <nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-between items-center bg-surface px-2 pb-safe h-20 rounded-t-2xl border-t border-outline-variant shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)]">
+        <a class="flex flex-col items-center justify-center flex-1 min-w-[72px] text-center {{ request()->routeIs('public.dashboard') ? 'text-secondary font-bold' : 'text-on-surface-variant font-medium' }} h-full active:scale-90 rounded-lg px-1" href="{{ route('public.dashboard') }}">
+            <span class="material-symbols-outlined text-2xl mb-1" {{ request()->routeIs('public.dashboard') ? "data-weight=fill style=font-variation-settings:'FILL' 1;" : '' }}>dashboard</span>
             <span class="text-xs">Dashboard</span>
         </a>
-        <a class="flex flex-col items-center justify-center flex-1 min-w-[60px] text-center {{ request()->routeIs('public.booking.*') ? 'text-secondary font-bold' : 'text-on-surface-variant font-medium' }} h-full active:scale-90 rounded-lg px-1" href="{{ route('public.booking.form') }}">
-            <span class="material-symbols-outlined mb-1" {{ request()->routeIs('public.booking.*') ? 'data-weight=fill style=font-variation-settings:\'FILL\'1;' : '' }}>calendar_month</span>
+        <a class="flex flex-col items-center justify-center flex-1 min-w-[72px] text-center {{ request()->routeIs('public.booking.*') ? 'text-secondary font-bold' : 'text-on-surface-variant font-medium' }} h-full active:scale-90 rounded-lg px-1" href="{{ route('public.booking.form') }}">
+            <span class="material-symbols-outlined text-2xl mb-1" {{ request()->routeIs('public.booking.*') ? "data-weight=fill style=font-variation-settings:'FILL' 1;" : '' }}>calendar_month</span>
             <span class="text-xs">Booking</span>
         </a>
-        <a class="flex flex-col items-center justify-center flex-1 min-w-[60px] text-center {{ request()->routeIs('public.sparepart.*') || request()->routeIs('public.cart') || request()->routeIs('public.checkout') || request()->routeIs('public.orders.*') ? 'text-secondary font-bold' : 'text-on-surface-variant font-medium' }} h-full active:scale-90 rounded-lg px-1" href="{{ route('public.sparepart.index') }}">
-            <span class="material-symbols-outlined mb-1" {{ request()->routeIs('public.sparepart.*') ? 'data-weight=fill style=font-variation-settings:\'FILL\'1;' : '' }}>settings_input_component</span>
+        <a class="flex flex-col items-center justify-center flex-1 min-w-[72px] text-center {{ request()->routeIs('public.sparepart.*') || request()->routeIs('public.cart') || request()->routeIs('public.checkout') || request()->routeIs('public.orders.*') ? 'text-secondary font-bold' : 'text-on-surface-variant font-medium' }} h-full active:scale-90 rounded-lg px-1" href="{{ route('public.sparepart.index') }}">
+            <span class="material-symbols-outlined text-2xl mb-1" {{ request()->routeIs('public.sparepart.*') ? "data-weight=fill style=font-variation-settings:'FILL' 1;" : '' }}>settings_input_component</span>
             <span class="text-xs">Sparepart</span>
         </a>
+        <a class="flex flex-col items-center justify-center flex-1 min-w-[72px] text-center {{ request()->routeIs('public.profile') ? 'text-secondary font-bold' : 'text-on-surface-variant font-medium' }} h-full active:scale-90 rounded-lg px-1" href="{{ route('public.profile') }}">
+            <span class="material-symbols-outlined text-2xl mb-1" {{ request()->routeIs('public.profile') ? "data-weight=fill style=font-variation-settings:'FILL' 1;" : '' }}>account_circle</span>
+            <span class="text-xs">Profil</span>
+        </a>
     </nav>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('input[type="password"]').forEach((input, idx) => {
+        const parent = input.parentElement;
+        const wrapper = document.createElement('div');
+        wrapper.className = 'relative';
+        parent.insertBefore(wrapper, input);
+        wrapper.appendChild(input);
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.id = 'pw-toggle-' + idx;
+        btn.setAttribute('aria-label', 'Toggle visibility');
+        btn.className = 'absolute inset-y-0 right-0 flex items-center px-3 text-on-surface-variant hover:text-secondary transition-colors';
+        btn.innerHTML = '<span class="material-symbols-outlined text-[20px] select-none" style="font-variation-settings:\'FILL\' 0;">visibility</span>';
+        wrapper.appendChild(btn);
+        input.style.paddingRight = '2.5rem';
+        btn.addEventListener('click', () => {
+            const isHidden = input.type === 'password';
+            input.type = isHidden ? 'text' : 'password';
+            btn.querySelector('span').textContent = isHidden ? 'visibility_off' : 'visibility';
+        });
+    });
+});
+</script>
 </body>
 </html>

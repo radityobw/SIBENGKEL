@@ -82,9 +82,9 @@
                     
                     <!-- Email -->
                     <div class="flex flex-col gap-base">
-                        <label class="font-label-md text-label-md text-on-surface" for="email">Alamat Email (Opsional)</label>
+                        <label class="font-label-md text-label-md text-on-surface" for="email">Alamat Email <span class="text-secondary">*</span></label>
                         <input class="w-full min-h-[44px] px-sm py-2 bg-surface-container-lowest border border-outline-variant rounded focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary text-body-md font-body-md text-on-surface transition-colors" 
-                            id="email" name="email" placeholder="Contoh: email@domain.com" value="{{ old('email') }}" type="email"/>
+                            id="email" name="email" placeholder="Contoh: email@domain.com" value="{{ old('email') }}" type="email" required/>
                     </div>
                     
                     <!-- Address -->
@@ -121,9 +121,11 @@
                             Sudah punya akun? <a class="text-primary font-bold hover:underline" href="{{ route('public.login') }}">Masuk di sini</a>
                         </div>
                     </div>
-                </form>
-            </div>
-        </div>
     </div>
+</div>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded',()=>{document.querySelectorAll('input[type="password"]').forEach((e,t)=>{let n=e.parentElement,r=document.createElement('div');r.className='relative',n.insertBefore(r,e),r.appendChild(e);let o=document.createElement('button');o.type='button',o.id='pw-toggle-'+t,o.setAttribute('aria-label','Toggle visibility'),o.className='absolute inset-y-0 right-0 flex items-center px-3 text-on-surface-variant hover:text-secondary transition-colors',o.innerHTML='<span class="material-symbols-outlined text-[20px] select-none" style="font-variation-settings:\'FILL\' 0;">visibility</span>',r.appendChild(o),e.style.paddingRight='2.5rem',o.addEventListener('click',()=>{let s=e.type==='password';e.type=s?'text':'password',o.querySelector('span').textContent=s?'visibility_off':'visibility'})})});
+</script>
 </body>
 </html>

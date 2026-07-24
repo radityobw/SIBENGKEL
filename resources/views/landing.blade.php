@@ -392,7 +392,7 @@
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
                 @foreach($spareparts as $item)
                     <div class="bg-surface rounded-2xl p-4 shadow-sm border border-outline-variant hover:shadow-lg transition-all group flex flex-col h-full relative overflow-hidden">
-                        <a href="{{ route('public.sparepart.index') }}" class="aspect-square bg-surface-container-lowest rounded-xl mb-4 relative overflow-hidden flex items-center justify-center block">
+                        <a href="{{ Auth::guard('customer')->check() ? route('public.sparepart.index') : route('public.login') }}" class="aspect-square bg-surface-container-lowest rounded-xl mb-4 relative overflow-hidden flex items-center justify-center block">
                             @if($item->image_path)
                                 <img src="{{ Storage::url($item->image_path) }}" alt="{{ $item->name }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                             @else
@@ -402,7 +402,7 @@
                         </a>
                         <div class="flex flex-col flex-grow">
                             <span class="text-[10px] md:text-xs font-bold text-secondary uppercase tracking-widest mb-1">{{ $item->category }}</span>
-                            <a href="{{ route('public.sparepart.index') }}" class="font-bold text-on-surface line-clamp-2 mb-2 flex-grow hover:text-primary transition-colors">
+                            <a href="{{ Auth::guard('customer')->check() ? route('public.sparepart.index') : route('public.login') }}" class="font-bold text-on-surface line-clamp-2 mb-2 flex-grow hover:text-primary transition-colors">
                                 {{ $item->name }}
                             </a>
                             <div class="flex items-center justify-between mt-auto pt-2">

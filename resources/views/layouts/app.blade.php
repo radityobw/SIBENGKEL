@@ -33,7 +33,7 @@
                 <p class="text-sm text-on-primary/70 mt-1">Workshop Management</p>
             </a>
         </div>
-        <nav class="flex-1 flex flex-col gap-2">
+        <nav class="flex-1 flex flex-col gap-2 overflow-y-auto pr-2 custom-scrollbar">
             <a class="flex items-center gap-4 px-4 py-2 {{ request()->routeIs('dashboard') ? 'bg-secondary text-white' : 'text-on-primary/70 hover:text-on-primary hover:bg-primary-container/50' }} rounded-lg font-semibold transition-all duration-200 ease-in-out h-11" href="{{ route('dashboard') }}">
                 <span class="material-symbols-outlined" data-weight="fill" style="font-variation-settings: 'FILL' 1;">dashboard</span>
                 <span>Dashboard</span>
@@ -75,6 +75,16 @@
                     <span class="bg-secondary text-on-secondary text-xs px-2 py-0.5 rounded-full font-bold">{{ $pendingBookingCount }}</span>
                 @endif
             </a>
+            <a class="flex items-center justify-between px-4 py-2 {{ request()->routeIs('admin.orders.*') ? 'bg-secondary text-white' : 'text-on-primary/70 hover:text-on-primary hover:bg-primary-container/50' }} rounded-lg font-semibold transition-all duration-200 ease-in-out h-11" href="{{ route('admin.orders.index') }}">
+                <div class="flex items-center gap-4">
+                    <span class="material-symbols-outlined {{ request()->routeIs('admin.orders.*') ? 'icon-filled' : '' }}">shopping_bag</span>
+                    <span>Pesanan Online</span>
+                </div>
+                @php $pendingOrderCount = \App\Models\Order::where('status', 'menunggu_pembayaran')->count(); @endphp
+                @if($pendingOrderCount > 0)
+                    <span class="bg-white text-secondary text-xs px-2 py-0.5 rounded-full font-bold">{{ $pendingOrderCount }}</span>
+                @endif
+            </a>
             <a class="flex items-center gap-4 px-4 py-2 {{ request()->routeIs('transactions.*') ? 'bg-secondary text-white' : 'text-on-primary/70 hover:text-on-primary hover:bg-primary-container/50' }} rounded-lg font-semibold transition-all duration-200 ease-in-out h-11" href="{{ route('transactions.index') }}">
                 <span class="material-symbols-outlined">receipt_long</span>
                 <span>Transaksi</span>
@@ -90,15 +100,7 @@
             </a>
             @endif
         </nav>
-        <div class="mt-auto pt-6">
-            <form method="POST" action="{{ route('logout') }}">
-                @csrf
-                <button type="submit" class="w-full h-11 bg-error text-on-error font-medium rounded-lg flex items-center justify-center gap-2 shadow-sm hover:opacity-90 transition-opacity">
-                    <span class="material-symbols-outlined">logout</span>
-                    Logout
-                </button>
-            </form>
-        </div>
+
     </aside>
 
     <!-- Main Content Area -->
@@ -133,10 +135,10 @@
                     @endif
                     <span>Halo, <span class="font-bold underline decoration-secondary decoration-2 underline-offset-4">{{ Auth::user()->name ?? 'Admin' }}</span></span>
                 </a>
-                <!-- Mobile Logout -->
-                <form method="POST" action="{{ route('logout') }}" class="lg:hidden flex items-center ml-2">
+                <!-- Logout -->
+                <form method="POST" action="{{ route('logout') }}" class="flex items-center ml-2 border-l border-outline-variant/30 pl-4">
                     @csrf
-                    <button type="submit" class="p-2 rounded-full text-error-container hover:bg-error/20 transition-colors" title="Logout">
+                    <button type="submit" class="p-2 rounded-full text-error lg:text-error hover:bg-error/10 transition-colors" title="Logout">
                         <span class="material-symbols-outlined">logout</span>
                     </button>
                 </form>
@@ -145,70 +147,75 @@
 
         <!-- Page Content -->
         <div class="p-4 pb-24 lg:p-8 flex flex-col gap-6">
-            @if(session('success'))
-                <div class="bg-[#dcfce7] text-[#166534] p-4 rounded-lg font-medium border border-[#bbf7d0]">
-                    {{ session('success') }}
-                </div>
-            @endif
-
             {{ $slot }}
         </div>
+        <x-toast />
     </main>
 
     <!-- BottomNavBar (Visible only on Mobile - Flex-1 Auto-Stretch to Fill Space) -->
-    <nav class="lg:hidden fixed bottom-0 left-0 w-full z-50 flex items-center justify-between bg-surface px-2 pb-safe h-16 rounded-t-xl border-t border-outline-variant shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] overflow-x-auto gap-1 scroll-smooth shrink-0 no-scrollbar">
+    <nav class="lg:hidden fixed bottom-0 left-0 w-full z-50 flex items-center justify-between bg-surface px-1 pb-safe h-20 rounded-t-2xl border-t border-outline-variant shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] overflow-x-auto gap-0.5 scroll-smooth shrink-0 no-scrollbar">
         <!-- 1. Home -->
-        <a href="{{ route('dashboard') }}" class="flex flex-col items-center justify-center flex-1 min-w-[60px] shrink-0 text-center {{ request()->routeIs('dashboard') ? 'text-secondary font-bold' : 'text-on-surface-variant font-medium' }} h-full active:scale-90 rounded-lg px-1">
-            <span class="material-symbols-outlined text-xl {{ request()->routeIs('dashboard') ? 'icon-filled' : '' }}">home</span>
-            <span class="text-[10px] mt-0.5 whitespace-nowrap">Home</span>
+        <a href="{{ route('dashboard') }}" class="flex flex-col items-center justify-center flex-1 min-w-[64px] shrink-0 text-center {{ request()->routeIs('dashboard') ? 'text-secondary font-bold' : 'text-on-surface-variant font-medium' }} h-full active:scale-90 rounded-lg px-1">
+            <span class="material-symbols-outlined text-2xl {{ request()->routeIs('dashboard') ? 'icon-filled' : '' }}">home</span>
+            <span class="text-[11px] mt-1 whitespace-nowrap">Home</span>
         </a>
 
         <!-- 2. Pelanggan -->
-        <a href="{{ route('customers.index') }}" class="flex flex-col items-center justify-center flex-1 min-w-[60px] shrink-0 text-center {{ request()->routeIs('customers.*') ? 'text-secondary font-bold' : 'text-on-surface-variant font-medium' }} h-full active:scale-90 rounded-lg px-1">
-            <span class="material-symbols-outlined text-xl {{ request()->routeIs('customers.*') ? 'icon-filled' : '' }}">person_book</span>
-            <span class="text-[10px] mt-0.5 whitespace-nowrap">Pelanggan</span>
+        <a href="{{ route('customers.index') }}" class="flex flex-col items-center justify-center flex-1 min-w-[64px] shrink-0 text-center {{ request()->routeIs('customers.*') ? 'text-secondary font-bold' : 'text-on-surface-variant font-medium' }} h-full active:scale-90 rounded-lg px-1">
+            <span class="material-symbols-outlined text-2xl {{ request()->routeIs('customers.*') ? 'icon-filled' : '' }}">person_book</span>
+            <span class="text-[11px] mt-1 whitespace-nowrap">Pelanggan</span>
         </a>
 
         <!-- 3. Kendaraan -->
-        <a href="{{ route('vehicles.index') }}" class="flex flex-col items-center justify-center flex-1 min-w-[60px] shrink-0 text-center {{ request()->routeIs('vehicles.*') ? 'text-secondary font-bold' : 'text-on-surface-variant font-medium' }} h-full active:scale-90 rounded-lg px-1">
-            <span class="material-symbols-outlined text-xl {{ request()->routeIs('vehicles.*') ? 'icon-filled' : '' }}">directions_car</span>
-            <span class="text-[10px] mt-0.5 whitespace-nowrap">Kendaraan</span>
+        <a href="{{ route('vehicles.index') }}" class="flex flex-col items-center justify-center flex-1 min-w-[64px] shrink-0 text-center {{ request()->routeIs('vehicles.*') ? 'text-secondary font-bold' : 'text-on-surface-variant font-medium' }} h-full active:scale-90 rounded-lg px-1">
+            <span class="material-symbols-outlined text-2xl {{ request()->routeIs('vehicles.*') ? 'icon-filled' : '' }}">directions_car</span>
+            <span class="text-[11px] mt-1 whitespace-nowrap">Kendaraan</span>
         </a>
 
         @if(Auth::user()->role === 'admin')
         <!-- 4. Manajemen Admin -->
-        <a href="{{ route('admins.index') }}" class="flex flex-col items-center justify-center flex-1 min-w-[60px] shrink-0 text-center {{ request()->routeIs('admins.*') ? 'text-secondary font-bold' : 'text-on-surface-variant font-medium' }} h-full active:scale-90 rounded-lg px-1">
-            <span class="material-symbols-outlined text-xl {{ request()->routeIs('admins.*') ? 'icon-filled' : '' }}">admin_panel_settings</span>
-            <span class="text-[10px] mt-0.5 whitespace-nowrap">Admin</span>
+        <a href="{{ route('admins.index') }}" class="flex flex-col items-center justify-center flex-1 min-w-[64px] shrink-0 text-center {{ request()->routeIs('admins.*') ? 'text-secondary font-bold' : 'text-on-surface-variant font-medium' }} h-full active:scale-90 rounded-lg px-1">
+            <span class="material-symbols-outlined text-2xl {{ request()->routeIs('admins.*') ? 'icon-filled' : '' }}">admin_panel_settings</span>
+            <span class="text-[11px] mt-1 whitespace-nowrap">Admin</span>
         </a>
 
         <!-- 5. Ulasan Pelanggan -->
-        <a href="{{ route('pages.index') }}" class="flex flex-col items-center justify-center flex-1 min-w-[60px] shrink-0 text-center {{ request()->routeIs('pages.*') || request()->routeIs('admin.testimonials.*') ? 'text-secondary font-bold' : 'text-on-surface-variant font-medium' }} h-full active:scale-90 rounded-lg px-1">
-            <span class="material-symbols-outlined text-xl">web</span>
-            <span class="text-[10px] mt-0.5 whitespace-nowrap">Halaman</span>
+        <a href="{{ route('pages.index') }}" class="flex flex-col items-center justify-center flex-1 min-w-[64px] shrink-0 text-center {{ request()->routeIs('pages.*') || request()->routeIs('admin.testimonials.*') ? 'text-secondary font-bold' : 'text-on-surface-variant font-medium' }} h-full active:scale-90 rounded-lg px-1">
+            <span class="material-symbols-outlined text-2xl">web</span>
+            <span class="text-[11px] mt-1 whitespace-nowrap">Halaman</span>
         </a>
-        <a href="{{ route('admin.settings.index') }}" class="flex flex-col items-center justify-center flex-1 min-w-[60px] shrink-0 text-center {{ request()->routeIs('admin.settings.*') ? 'text-secondary font-bold' : 'text-on-surface-variant font-medium' }} h-full active:scale-90 rounded-lg px-1">
-            <span class="material-symbols-outlined text-xl">settings</span>
-            <span class="text-[10px] mt-0.5 whitespace-nowrap">Pengaturan</span>
+        <a href="{{ route('admin.settings.index') }}" class="flex flex-col items-center justify-center flex-1 min-w-[64px] shrink-0 text-center {{ request()->routeIs('admin.settings.*') ? 'text-secondary font-bold' : 'text-on-surface-variant font-medium' }} h-full active:scale-90 rounded-lg px-1">
+            <span class="material-symbols-outlined text-2xl">settings</span>
+            <span class="text-[11px] mt-1 whitespace-nowrap">Pengaturan</span>
         </a>
 
         <!-- 6. Mekanik -->
-        <a href="{{ route('mechanics.index') }}" class="flex flex-col items-center justify-center flex-1 min-w-[60px] shrink-0 text-center {{ request()->routeIs('mechanics.*') ? 'text-secondary font-bold' : 'text-on-surface-variant font-medium' }} h-full active:scale-90 rounded-lg px-1">
-            <span class="material-symbols-outlined text-xl {{ request()->routeIs('mechanics.*') ? 'icon-filled' : '' }}">build</span>
-            <span class="text-[10px] mt-0.5 whitespace-nowrap">Mekanik</span>
+        <a href="{{ route('mechanics.index') }}" class="flex flex-col items-center justify-center flex-1 min-w-[64px] shrink-0 text-center {{ request()->routeIs('mechanics.*') ? 'text-secondary font-bold' : 'text-on-surface-variant font-medium' }} h-full active:scale-90 rounded-lg px-1">
+            <span class="material-symbols-outlined text-2xl {{ request()->routeIs('mechanics.*') ? 'icon-filled' : '' }}">build</span>
+            <span class="text-[11px] mt-1 whitespace-nowrap">Mekanik</span>
         </a>
         @endif
 
         <!-- 7. Sparepart -->
-        <a href="{{ route('admin.spareparts.index') }}" class="flex flex-col items-center justify-center flex-1 min-w-[60px] shrink-0 text-center {{ request()->routeIs('admin.spareparts.*') ? 'text-secondary font-bold' : 'text-on-surface-variant font-medium' }} h-full active:scale-90 rounded-lg px-1">
-            <span class="material-symbols-outlined text-xl {{ request()->routeIs('admin.spareparts.*') ? 'icon-filled' : '' }}">inventory_2</span>
-            <span class="text-[10px] mt-0.5 whitespace-nowrap">Sparepart</span>
+        <a href="{{ route('admin.spareparts.index') }}" class="flex flex-col items-center justify-center flex-1 min-w-[64px] shrink-0 text-center {{ request()->routeIs('admin.spareparts.*') ? 'text-secondary font-bold' : 'text-on-surface-variant font-medium' }} h-full active:scale-90 rounded-lg px-1">
+            <span class="material-symbols-outlined text-2xl {{ request()->routeIs('admin.spareparts.*') ? 'icon-filled' : '' }}">inventory_2</span>
+            <span class="text-[11px] mt-1 whitespace-nowrap">Sparepart</span>
         </a>
 
-        <!-- 8. Booking Servis -->
-        <a href="{{ route('admin.bookings.index') }}" class="flex flex-col items-center justify-center flex-1 min-w-[60px] shrink-0 text-center {{ request()->routeIs('admin.bookings.*') ? 'text-secondary font-bold' : 'text-on-surface-variant font-medium' }} h-full active:scale-90 rounded-lg px-1 relative">
-            <span class="material-symbols-outlined text-xl {{ request()->routeIs('admin.bookings.*') ? 'icon-filled' : '' }}">calendar_month</span>
-            <span class="text-[10px] mt-0.5 whitespace-nowrap">Booking</span>
+        <!-- 8. Pesanan Online -->
+        <a href="{{ route('admin.orders.index') }}" class="flex flex-col items-center justify-center flex-1 min-w-[64px] shrink-0 text-center {{ request()->routeIs('admin.orders.*') ? 'text-secondary font-bold' : 'text-on-surface-variant font-medium' }} h-full active:scale-90 rounded-lg px-1 relative">
+            <span class="material-symbols-outlined text-2xl {{ request()->routeIs('admin.orders.*') ? 'icon-filled' : '' }}">shopping_bag</span>
+            <span class="text-[11px] mt-1 whitespace-nowrap">Pesanan</span>
+            @php $pendingMobileOrders = \App\Models\Order::where('status', 'menunggu_pembayaran')->count(); @endphp
+            @if($pendingMobileOrders > 0)
+                <span class="absolute top-1 right-1 bg-secondary text-white text-[9px] font-bold px-1 rounded-full">{{ $pendingMobileOrders }}</span>
+            @endif
+        </a>
+
+        <!-- 8b. Booking Servis -->
+        <a href="{{ route('admin.bookings.index') }}" class="flex flex-col items-center justify-center flex-1 min-w-[64px] shrink-0 text-center {{ request()->routeIs('admin.bookings.*') ? 'text-secondary font-bold' : 'text-on-surface-variant font-medium' }} h-full active:scale-90 rounded-lg px-1 relative">
+            <span class="material-symbols-outlined text-2xl {{ request()->routeIs('admin.bookings.*') ? 'icon-filled' : '' }}">calendar_month</span>
+            <span class="text-[11px] mt-1 whitespace-nowrap">Booking</span>
             @php $pendingCount = \App\Models\Booking::where('status', 'menunggu_konfirmasi')->count(); @endphp
             @if($pendingCount > 0)
                 <span class="absolute top-1 right-2 bg-secondary text-on-secondary text-[9px] font-bold px-1 rounded-full animate-pulse">{{ $pendingCount }}</span>
@@ -216,18 +223,50 @@
         </a>
 
         <!-- 9. Transaksi -->
-        <a href="{{ route('transactions.index') }}" class="flex flex-col items-center justify-center flex-1 min-w-[60px] shrink-0 text-center {{ request()->routeIs('transactions.*') ? 'text-secondary font-bold' : 'text-on-surface-variant font-medium' }} h-full active:scale-90 rounded-lg px-1">
-            <span class="material-symbols-outlined text-xl {{ request()->routeIs('transactions.*') ? 'icon-filled' : '' }}">receipt_long</span>
-            <span class="text-[10px] mt-0.5 whitespace-nowrap">Transaksi</span>
+        <a href="{{ route('transactions.index') }}" class="flex flex-col items-center justify-center flex-1 min-w-[64px] shrink-0 text-center {{ request()->routeIs('transactions.*') ? 'text-secondary font-bold' : 'text-on-surface-variant font-medium' }} h-full active:scale-90 rounded-lg px-1">
+            <span class="material-symbols-outlined text-2xl {{ request()->routeIs('transactions.*') ? 'icon-filled' : '' }}">receipt_long</span>
+            <span class="text-[11px] mt-1 whitespace-nowrap">Transaksi</span>
         </a>
 
         @if(Auth::user()->role === 'admin')
         <!-- 10. Pengaturan Halaman -->
-        <a href="{{ route('pages.index') }}" class="flex flex-col items-center justify-center flex-1 min-w-[60px] shrink-0 text-center {{ request()->routeIs('pages.*') ? 'text-secondary font-bold' : 'text-on-surface-variant font-medium' }} h-full active:scale-90 rounded-lg px-1">
-            <span class="material-symbols-outlined text-xl {{ request()->routeIs('pages.*') ? 'icon-filled' : '' }}">description</span>
-            <span class="text-[10px] mt-0.5 whitespace-nowrap">Halaman</span>
+        <a href="{{ route('pages.index') }}" class="flex flex-col items-center justify-center flex-1 min-w-[64px] shrink-0 text-center {{ request()->routeIs('pages.*') ? 'text-secondary font-bold' : 'text-on-surface-variant font-medium' }} h-full active:scale-90 rounded-lg px-1">
+            <span class="material-symbols-outlined text-2xl {{ request()->routeIs('pages.*') ? 'icon-filled' : '' }}">description</span>
+            <span class="text-[11px] mt-1 whitespace-nowrap">Halaman</span>
         </a>
         @endif
     </nav>
+
+<script>
+// Global Password Toggle — injects show/hide button on all password fields
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('input[type="password"]').forEach((input, idx) => {
+        // Wrap in relative container
+        const parent = input.parentElement;
+        const wrapper = document.createElement('div');
+        wrapper.className = 'relative';
+        parent.insertBefore(wrapper, input);
+        wrapper.appendChild(input);
+
+        // Create toggle button
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.id = 'pw-toggle-' + idx;
+        btn.setAttribute('aria-label', 'Toggle visibility');
+        btn.className = 'absolute inset-y-0 right-0 flex items-center px-3 text-on-surface-variant hover:text-secondary transition-colors';
+        btn.innerHTML = '<span class="material-symbols-outlined text-[20px] select-none" style="font-variation-settings:\'FILL\' 0;">visibility</span>';
+        wrapper.appendChild(btn);
+
+        // Pad input right so text doesn't go under button
+        input.style.paddingRight = '2.5rem';
+
+        btn.addEventListener('click', () => {
+            const isHidden = input.type === 'password';
+            input.type = isHidden ? 'text' : 'password';
+            btn.querySelector('span').textContent = isHidden ? 'visibility_off' : 'visibility';
+        });
+    });
+});
+</script>
 </body>
 </html>
