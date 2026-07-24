@@ -88,16 +88,18 @@ jobs:
           username: ${{ secrets.STAGING_VPS_USERNAME }}
           key: ${{ secrets.STAGING_VPS_SSH_KEY }}
           script: |
+            export PATH=$PATH:/usr/local/bin:~/.nvm/versions/node/$(ls ~/.nvm/versions/node 2>/dev/null | tail -n 1)/bin
             cd /var/www/staging-sibengkel
             git pull origin dev
             composer update --no-dev --optimize-autoloader
             php artisan migrate --force
             php artisan storage:link --force
+            npm install
+            npm run build
+            php artisan view:clear
             php artisan config:cache
             php artisan route:cache
             php artisan view:cache
-            npm install
-            npm run build
             sudo systemctl restart php8.3-fpm
 
   production-deployment:
@@ -113,14 +115,16 @@ jobs:
           username: ${{ secrets.VPS_USERNAME }}
           key: ${{ secrets.VPS_SSH_KEY }}
           script: |
+            export PATH=$PATH:/usr/local/bin:~/.nvm/versions/node/$(ls ~/.nvm/versions/node 2>/dev/null | tail -n 1)/bin
             cd /var/www/sibengkel
             git pull origin main
             composer update --no-dev --optimize-autoloader
             php artisan migrate --force
             php artisan storage:link --force
+            npm install
+            npm run build
+            php artisan view:clear
             php artisan config:cache
             php artisan route:cache
             php artisan view:cache
-            npm install
-            npm run build
             sudo systemctl restart php8.3-fpm
