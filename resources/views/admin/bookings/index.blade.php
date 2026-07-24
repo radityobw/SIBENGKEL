@@ -81,7 +81,10 @@
                                                             <select name="mechanic_id" id="mechanic-{{ $booking->id }}" class="w-full border border-outline-variant rounded-lg p-2 text-sm bg-surface focus:ring-primary focus:border-primary" required>
                                                                 <option value="">-- Pilih Mekanik --</option>
                                                                 @foreach($mechanics as $mechanic)
-                                                                    <option value="{{ $mechanic->id }}">{{ $mechanic->name }}</option>
+                                                                    <option value="{{ $mechanic->id }}" 
+                                                                        @if(Auth::user()->role === 'mekanik' && optional(Auth::user()->mechanic)->id === $mechanic->id) selected @endif>
+                                                                        {{ $mechanic->name }}
+                                                                    </option>
                                                                 @endforeach
                                                             </select>
                                                         </div>

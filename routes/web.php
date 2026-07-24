@@ -123,8 +123,6 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::put('transactions/{transaction}', [TransactionController::class, 'update'])->name('transactions.update');
     Route::delete('transactions/{transaction}', [TransactionController::class, 'destroy'])->name('transactions.destroy');
 
-    // Admin Bookings Status Update (Admin Only)
-    Route::patch('admin-bookings/{booking}/status', [AdminBookingController::class, 'updateStatus'])->name('admin.bookings.updateStatus');
 
     // Admin Spareparts (Create, Store, Edit, Update, Destroy - Admin Only)
     Route::get('spareparts/create', [\App\Http\Controllers\AdminSparePartController::class, 'create'])->name('admin.spareparts.create');
@@ -155,6 +153,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 Route::middleware(['auth', 'role:admin,mekanik'])->group(function () {
     // Bookings (View List for Admin & Mekanik)
     Route::get('admin-bookings', [AdminBookingController::class, 'index'])->name('admin.bookings.index');
+    Route::patch('admin-bookings/{booking}/status', [AdminBookingController::class, 'updateStatus'])->name('admin.bookings.updateStatus');
 
     // Spareparts (View Stock & Catalog for Admin & Mekanik)
     Route::get('spareparts', [\App\Http\Controllers\AdminSparePartController::class, 'index'])->name('admin.spareparts.index');
