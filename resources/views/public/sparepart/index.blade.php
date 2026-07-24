@@ -8,19 +8,19 @@
 @include('public.sparepart._nav')
 
 <!-- Search and Filter -->
-<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-sm md:p-md mb-lg shadow-sm">
+<div class="bg-surface-container-lowest dark:bg-[#161615] border border-outline-variant dark:border-[#3E3E3A] rounded-xl p-sm md:p-md mb-lg shadow-sm">
     <form action="{{ route('public.sparepart.index') }}" method="GET" class="flex flex-col md:flex-row gap-sm">
         <div class="flex-grow">
             <div class="relative">
                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <span class="material-symbols-outlined text-on-surface-variant">search</span>
+                    <span class="material-symbols-outlined text-on-surface-variant dark:text-gray-400">search</span>
                 </div>
                 <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari nama sparepart..." 
-                    class="w-full pl-10 pr-3 py-2 border border-outline-variant rounded-lg bg-surface text-body-md focus:ring-1 focus:ring-primary focus:border-primary">
+                    class="w-full pl-10 pr-3 py-2 border border-outline-variant dark:border-[#3E3E3A] rounded-lg bg-surface dark:bg-[#111111] text-body-md text-on-surface dark:text-[#EDEDEC] dark:placeholder:text-gray-500 focus:ring-1 focus:ring-primary dark:focus:ring-secondary focus:border-primary dark:focus:border-secondary">
             </div>
         </div>
         <div class="w-full md:w-64">
-            <select name="category" onchange="this.form.submit()" class="w-full py-2 border border-outline-variant rounded-lg bg-surface text-body-md focus:ring-1 focus:ring-primary focus:border-primary">
+            <select name="category" onchange="this.form.submit()" class="w-full py-2 border border-outline-variant dark:border-[#3E3E3A] rounded-lg bg-surface dark:bg-[#111111] text-body-md text-on-surface dark:text-[#EDEDEC] focus:ring-1 focus:ring-primary dark:focus:ring-secondary focus:border-primary dark:focus:border-secondary">
                 <option value="">Semua Kategori</option>
                 @foreach($categories as $cat)
                     <option value="{{ $cat }}" {{ request('category') == $cat ? 'selected' : '' }}>{{ $cat }}</option>
@@ -43,30 +43,30 @@
 
 <!-- Product Grid -->
 @if($spareparts->isEmpty())
-    <div class="industrial-card rounded-lg p-xl text-center">
-        <span class="material-symbols-outlined text-4xl text-outline mb-2">inventory_2</span>
-        <p class="text-body-lg text-on-surface-variant">Tidak ada sparepart yang ditemukan.</p>
+    <div class="bg-surface-container-lowest dark:bg-[#161615] border border-outline-variant dark:border-[#3E3E3A] rounded-lg p-xl text-center">
+        <span class="material-symbols-outlined text-4xl text-outline dark:text-gray-500 mb-2">inventory_2</span>
+        <p class="text-body-lg text-on-surface-variant dark:text-gray-400">Tidak ada sparepart yang ditemukan.</p>
     </div>
 @else
     <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-sm md:gap-md">
         @foreach($spareparts as $item)
-            <div class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden hover:shadow-md transition-all flex flex-col group">
-                <div class="aspect-square bg-surface-container-low relative overflow-hidden flex items-center justify-center">
+            <div class="bg-surface-container-lowest dark:bg-[#161615] border border-outline-variant dark:border-[#3E3E3A] rounded-xl overflow-hidden hover:shadow-md transition-all flex flex-col group">
+                <div class="aspect-square bg-surface-container-low dark:bg-[#111111] relative overflow-hidden flex items-center justify-center border-b border-outline-variant dark:border-[#3E3E3A]">
                     @if($item->image_path)
                         <img src="{{ Storage::url($item->image_path) }}" alt="{{ $item->name }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
                     @else
-                        <span class="material-symbols-outlined text-6xl text-outline-variant">construction</span>
+                        <span class="material-symbols-outlined text-6xl text-outline-variant dark:text-gray-600">construction</span>
                     @endif
                     @if($item->stock <= 0)
-                        <div class="absolute inset-0 bg-surface/80 flex items-center justify-center">
+                        <div class="absolute inset-0 bg-surface/80 dark:bg-black/60 flex items-center justify-center">
                             <span class="bg-error text-on-error px-2 py-1 rounded font-bold text-xs uppercase tracking-wider">Habis</span>
                         </div>
                     @endif
                 </div>
                 <div class="p-sm flex flex-col flex-grow">
                     <span class="text-[10px] font-bold text-secondary uppercase tracking-widest mb-1">{{ $item->category }}</span>
-                    <h3 class="text-body-md font-bold text-on-surface line-clamp-2 mb-1 flex-grow">{{ $item->name }}</h3>
-                    <p class="text-body-lg font-bold text-primary mb-3">Rp {{ number_format($item->price, 0, ',', '.') }}</p>
+                    <h3 class="text-body-md font-bold text-on-surface dark:text-[#EDEDEC] line-clamp-2 mb-1 flex-grow">{{ $item->name }}</h3>
+                    <p class="text-body-lg font-bold text-primary dark:text-[#EDEDEC] mb-3">Rp {{ number_format($item->price, 0, ',', '.') }}</p>
                     
                     <form action="{{ route('public.cart.add') }}" method="POST" class="mt-auto">
                         @csrf

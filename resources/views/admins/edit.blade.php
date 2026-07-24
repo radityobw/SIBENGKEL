@@ -9,7 +9,7 @@
         <p class="text-on-surface-variant text-sm ml-8">Ubah informasi untuk administrator <strong>{{ $admin->name }}</strong>.</p>
     </div>
 
-    <div class="bg-surface-container-lowest border border-outline-variant rounded-xl shadow-sm overflow-hidden max-w-3xl">
+    <div class="bg-surface-container-lowest border border-outline-variant rounded-xl shadow-sm overflow-hidden max-w-3xl mx-auto w-full">
         <form action="{{ route('admins.update', $admin->id) }}" method="POST" class="p-6 md:p-8 flex flex-col gap-6">
             @csrf
             @method('PUT')

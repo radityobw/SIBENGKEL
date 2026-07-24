@@ -57,7 +57,7 @@
                         <td class="py-4 px-6 text-on-surface-variant">{{ $vehicle->year }}</td>
                         <td class="py-4 px-6 text-right">
                             <div class="flex justify-end gap-2">
-                                <a href="{{ route('vehicles.edit', $vehicle->id) }}" class="p-2 text-primary hover:bg-primary-container rounded-lg transition-colors" title="Edit">
+                                <a href="{{ route('vehicles.edit', $vehicle->id) }}" class="p-2 text-on-surface hover:bg-surface-variant rounded-lg transition-colors" title="Edit">
                                     <span class="material-symbols-outlined text-[20px]">edit</span>
                                 </a>
                                 <form action="{{ route('vehicles.destroy', $vehicle->id) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus kendaraan ini?');" class="inline">
@@ -106,7 +106,7 @@
             </div>
             
             <div class="flex justify-end gap-2 mt-2 pt-3 border-t border-outline-variant/50">
-                <a href="{{ route('vehicles.edit', $vehicle->id) }}" class="p-2 text-primary hover:bg-primary-container rounded-lg">
+                <a href="{{ route('vehicles.edit', $vehicle->id) }}" class="p-2 text-on-surface hover:bg-surface-variant rounded-lg">
                     <span class="material-symbols-outlined text-[20px]">edit</span>
                 </a>
                 <form action="{{ route('vehicles.destroy', $vehicle->id) }}" method="POST" onsubmit="return confirm('Hapus kendaraan ini?');">

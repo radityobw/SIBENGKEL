@@ -3,12 +3,22 @@
 
 | Atribut Dokumen | Keterangan & Spesifikasi |
 | :--- | :--- |
-| **Nama Proyek** | Sistem Informasi Bengkel Terpadu (SIBENGKEL / SIB) |
+| **Nama Proyek** | Sistem Informasi Bengkel Terpadu + Customer Portal (SIBENGKEL / SIB) |
 | **Mata Kuliah** | Pemrograman Web + Sistem Basis Data |
 | **Jenis Dokumen** | **Master Development Guidebook & Production Playbook** |
-| **Versi** | 1.0 (End-to-End Complete Execution Guide) |
+| **Versi Dokumen** | **3.0 (End-to-End Execution Guide & SSOT Playbook — Status Aktual V3.0)** |
+| **Status Implementation** | **✅ 100% Terimplementasi, Terverifikasi & Live Production Ready** |
 | **Target Deadline** | **Senin, 27 Juli 2026** |
 | **Portal Pengumpulan PDF** | **[Upload PDF Individual: bit.ly/4gKHyJY](https://bit.ly/4gKHyJY)** |
+
+---
+
+> [!IMPORTANT]
+> **Referensi Single Source of Truth (SSOT)**:
+> 1. Dokumen Arsitektur Inti: [docs/PRD_Sistem_Informasi_Bengkel.md](file:///Users/ryo/PemrogramanWeb/SIBENGKEL/SIBENGKEL/docs/PRD_Sistem_Informasi_Bengkel.md)
+> 2. Dokumen Arsitektur Suplementer (V3.0): [docs/PRD_Suplementer_Customer_Portal_SIBENGKEL.md](file:///Users/ryo/PemrogramanWeb/SIBENGKEL/SIBENGKEL/docs/PRD_Suplementer_Customer_Portal_SIBENGKEL.md)
+> 3. Panduan UI Tokens & Design System: [docs/DESIGN.md](file:///Users/ryo/PemrogramanWeb/SIBENGKEL/SIBENGKEL/docs/DESIGN.md)
+
 
 ---
 
@@ -40,6 +50,13 @@
   - [Fitur I: RESTful API Sanctum Endpoints & Postman Test](#-fitur-i-restful-api-sanctum-endpoints--postman-test)
 - [🎨 FASE 6: FRONTEND MOBILE-FIRST TAILWIND CSS](#-fase-6-frontend-mobile-first-tailwind-css)
   - [Fitur J: Mobile-First Responsive UI/UX dengan Tailwind CSS](#-fitur-j-mobile-first-responsive-uiux-dengan-tailwind-css)
+- [🚀 FASE EKSTENSI: CUSTOMER PORTAL & MODERN PLATFORM](#-fase-ekstensi-ekosistem-customer-portal--modern-platform)
+  - [Fitur P: Public Guest Lookup & Dynamic Landing Page](#-fitur-p-public-guest-lookup--dynamic-landing-page)
+  - [Fitur Q: Multi-Guard Auth Customer & Hybrid Account Management](#-fitur-q-multi-guard-auth-customer--hybrid-account-management)
+  - [Fitur R: Booking Servis Daring & Conversion Flow oleh Admin](#-fitur-r-booking-servis-daring--conversion-flow-oleh-admin)
+  - [Fitur S: E-Commerce Sparepart Catalog, Persistent Cart & Checkout Order](#-fitur-s-e-commerce-sparepart-catalog-persistent-cart--checkout-order)
+  - [Fitur T: System Theme Adaptif Industrial (Dark & Light Mode Toggle)](#-fitur-t-system-theme-adaptif-industrial-dark--light-mode-toggle)
+  - [Fitur U: Dynamic System Settings (WA Config), Content CMS & System Notifications](#-fitur-u-dynamic-system-settings-wa-config-content-cms--system-notifications)
 - [🛡️ FASE 7: OTOMASI DEVSECOPS & CI/CD PIPELINE](#-fase-7-otomasi-devsecops--cicd-pipeline)
   - [Fitur K: Complete DevSecOps Pipeline GitHub Actions](#-fitur-k-complete-devsecops-pipeline-github-actions)
 - [☁️ FASE 8: INFRASTRUKTUR VPS & CLOUDFLARE CUSTOM DOMAIN](#-fase-8-infrastruktur-vps--cloudflare-custom-domain)
@@ -55,45 +72,109 @@
 
 ## 📌 Rekomendasi Pembagian Peran Tim 3 Orang (*Non-Mandatory / Fleksibel*)
 
+> [!TIP]
+> **✨ UPDATE EKSTENSI V3.0 — ALOKASI TUGAS TERINTEGRASI**:
+> Pembagian peran tim telah diselaraskan dengan modul Customer Portal, E-Commerce, OTP Email, dan Adaptive Dark/Light Mode Theme System dari dokumen **PRD Suplementer V3.0**.
+
 Dokumen ini disusun agar 3 anggota tim dapat berkolaborasi secara efisien tanpa tumpang tindih (*overlap*) pengerjaan:
 
 ```mermaid
 graph TD
-    subgraph TIM_SIBENGKEL ["Tim Pengembang SIBENGKEL (3 Anggota)"]
-        A1["Anggota 1: Backend, API & DevSecOps Lead"]
-        A2["Anggota 2: Frontend UI/UX & Core Module Lead"]
-        A3["Anggota 3: QA, Cloud Infra & Documentation Lead"]
+    subgraph TIM_SIBENGKEL ["✨ TIM PENGEMBANG SIBENGKEL V3.0 (3 ANGGOTA) ✨"]
+        A1["👨‍💻 Anggota 1: Lead Backend, Multi-Guard Auth & DevSecOps"]
+        A2["🎨 Anggota 2: Lead Frontend UI/UX & E-Commerce Lead"]
+        A3["⚙️ Anggota 3: Lead Operational Workflow, QA & Infra"]
     end
 
-    A1 --> |"Fitur A, B, C, I, K, L"| DB["Database, Auth Breeze/Sanctum, API Endpoints, DevSecOps CI/CD & VPS NGINX"]
-    A2 --> |"Fitur D, E, F, G, H, J"| UI["Blade Templates, Tailwind CSS Mobile-First, CRUD Views & Dashboard Analytics"]
-    A3 --> |"Fitur G, M, N, O"| QA["Postman API Tests, Invoice Cetak, Cloudflare DNS/SSL, Live Test & PDF Report"]
+    subgraph CORE_MODULES ["📦 FASE INTI (V1.0)"]
+        M_CORE["Database, Auth Breeze, Core CRUD, API Sanctum, CI/CD DevSecOps & VPS"]
+    end
+
+    subgraph EXT_MODULES ["🌟 FASE EKSTENSI CUSTOMER PORTAL (V3.0 SUPLLEMENTER)"]
+        M_EXT1["✨ Fitur Q: Multi-Guard Customer Auth & OTP Email Reset<br>✨ Fitur U: Dynamic Settings CMS & Notif Engine"]
+        M_EXT2["✨ Fitur P: Landing Page & Public Guest Lookup<br>✨ Fitur S: Sparepart Catalog, DB Cart & Order Checkout<br>✨ Fitur T: Adaptive Industrial Dark/Light Theme System"]
+        M_EXT3["✨ Fitur R: Online Service Booking & Conversion Workflow<br>✨ System Testing & Production Deployment"]
+    end
+
+    A1 --> M_CORE
+    A1 ==> |"✨ Ekstensi Backend"| M_EXT1
+    A2 --> M_CORE
+    A2 ==> |"✨ Ekstensi Frontend & Theme"| M_EXT2
+    A3 --> M_CORE
+    A3 ==> |"✨ Ekstensi Workflow & QA"| M_EXT3
+
+    style EXT_MODULES fill:#2d1b00,stroke:#FF6B00,stroke-width:2px,color:#fff
+    style TIM_SIBENGKEL fill:#0a192f,stroke:#62a5f9,stroke-width:2px,color:#fff
 ```
 
-* **Anggota 1 — Lead Backend, API & DevSecOps Engineer**: Bertanggung jawab atas skema database, Eloquent Model, Autentikasi Breeze & Sanctum, REST API, GitHub Actions DevSecOps (Trivy, Gitleaks, PHPUnit), dan setup VPS NGINX.
-* **Anggota 2 — Lead Frontend UI/UX & Core Module Engineer**: Bertanggung jawab atas Blade Layouts, Tailwind CSS Mobile-First responsive design, Form CRUD (Pelanggan, Kendaraan, Mekanik), Transaksi Servis (`pending` → `proses` → `selesai`), dan Dashboard Widget.
-* **Anggota 3 — Lead QA, Cloud Infrastructure & Documentation**: Bertanggung jawab atas Postman API Collection testing, Cetak Invoice PDF, Cloudflare DNS & SSL Full Strict, Verification Live Test, Penyusunan Laporan PDF Akademis (BAB I-V), dan Upload Submission Portal.
+* **👨‍💻 Anggota 1 — Lead Backend, Multi-Guard Auth & DevSecOps Engineer**: 
+  - **Fase Inti**: Skema database, Eloquent Model, Autentikasi Breeze & Sanctum API, GitHub Actions CI/CD (Trivy, Gitleaks, PHPUnit), dan VPS NGINX.
+  - **✨ Ekstensi V3.0**: **Fitur Q** (Multi-Guard Auth Customer, Hybrid Login Email/HP, Reset Password OTP Email via `OtpMail`), **Fitur U** (Dynamic Settings API & System Notifications Engine).
+* **🎨 Anggota 2 — Lead Frontend UI/UX & E-Commerce Lead**: 
+  - **Fase Inti**: Blade Layouts, Tailwind CSS Mobile-First responsive design, Form CRUD Master Data, dan Dashboard Executive Analytics.
+  - **✨ Ekstensi V3.0**: **Fitur P** (Landing Page Dynamic Hero & Public Guest Lookup `/cek-status`), **Fitur S** (Katalog Sparepart, Keranjang DB Persisten `cart_data`, Checkout UI), **Fitur T** (Adaptive Industrial Theme System Dark/Light Mode & CSS Tokens).
+* **⚙️ Anggota 3 — Lead Operational Workflow, QA & Cloud Infrastructure**: 
+  - **Fase Inti**: Postman API Collection testing, Cetak Invoice PDF, Cloudflare DNS & SSL Full Strict, Verification Live Test, dan Penyusunan Laporan PDF Akademis (BAB I-V).
+  - **✨ Ekstensi V3.0**: **Fitur R** (Booking Servis Daring & Alur Konversi Booking ke Transaksi Servis di `/admin/bookings`), Testing E-Commerce & Production Deployment.
 
 ---
 
-## 🗺️ Peta Alur Pengerjaan Sekuensial Fitur (A → O)
+## 🗺️ Peta Alur Pengerjaan Sekuensial Fitur (A → U)
+
+> [!IMPORTANT]
+> **🌟 EFEK SPESIAL — TRANSISI DARI FASE INTI KE FASE EKSTENSI V3.0**:
+> Peta alur sekuensial berikut menonjolkan transisi sekuensial dari pengerjaan modul operasional dasar (**Fitur A → J**) menuju ekosistem Customer Portal & Modern Platform (**Fitur P → U**), sebelum melangkah ke otomasi DevSecOps dan Production Deployment (**Fitur K → O**).
 
 ```mermaid
 flowchart TD
-    FiturA[Fitur A: Setup Environment Local & Workspace] --> FiturB[Fitur B: Database Architecture & Eloquent Data Layer]
-    FiturB --> FiturC[Fitur C: Authentication Breeze, Sanctum & RBAC Access Control]
-    FiturC --> FiturD[Fitur D: Data Master Pelanggan / Customers CRUD]
-    FiturD --> FiturE[Fitur E: Data Master Kendaraan / Vehicles CRUD]
-    FiturE --> FiturF[Fitur F: Data Master Mekanik / Mechanics CRUD]
-    FiturF --> FiturG[Fitur G: Transaksi Servis & Tracking Status Pengerjaan]
-    FiturG --> FiturH[Fitur H: Dashboard Admin & Analytics Executive Widget]
-    FiturH --> FiturI[Fitur I: RESTful API Sanctum Endpoints & Postman Test]
-    FiturI --> FiturJ[Fitur J: Mobile-First Responsive UI/UX with Tailwind CSS]
-    FiturJ --> FiturK[Fitur K: Complete DevSecOps Pipeline GitHub Actions]
-    FiturK --> FiturL[Fitur L: VPS Hardening & LEMP Stack Provisioning]
-    FiturL --> FiturM[Fitur M: Cloudflare Security, Custom Domain & SSL/TLS]
-    FiturM --> FiturN[Fitur N: Staging, Production Deployment & Live Verification]
-    FiturN --> FiturO[Fitur O: Laporan PDF Akademis BAB I-V & Portal Submission]
+    subgraph FASE_INTI_1 ["📦 FASE INTI (FITUR A → J): INFRASTRUKTUR & CORE OPERATIONAL"]
+        FiturA[Fitur A: Setup Environment Local & Workspace] --> FiturB[Fitur B: Database Architecture & Eloquent Layer]
+        FiturB --> FiturC[Fitur C: Authentication Breeze, Sanctum & RBAC]
+        FiturC --> FiturD[Fitur D: Data Master Pelanggan / Customers CRUD]
+        FiturD --> FiturE[Fitur E: Data Master Kendaraan / Vehicles CRUD]
+        FiturE --> FiturF[Fitur F: Data Master Mekanik / Mechanics CRUD]
+        FiturF --> FiturG[Fitur G: Transaksi Servis & Tracking Status]
+        FiturG --> FiturH[Fitur H: Dashboard Admin & Executive Analytics]
+        FiturH --> FiturI[Fitur I: RESTful API Sanctum & Postman Test]
+        FiturI --> FiturJ[Fitur J: Mobile-First Responsive UI/UX Tailwind]
+    end
+
+    subgraph FASE_EKSTENSI ["🌟 FASE EKSTENSI SUPLLEMENTER V3.0 (MODERN ECOSYSTEM) 🌟"]
+        FiturP["✨ Fitur P: Public Guest Lookup & Dynamic Landing Page"]
+        FiturQ["✨ Fitur Q: Multi-Guard Auth Customer & OTP Email Reset"]
+        FiturR["✨ Fitur R: Booking Servis Daring & Conversion Workflow"]
+        FiturS["✨ Fitur S: E-Commerce Sparepart Catalog, DB Cart & Orders"]
+        FiturT["✨ Fitur T: Adaptive Industrial Theme Dark/Light Mode"]
+        FiturU["✨ Fitur U: Dynamic System Settings CMS & Notifications"]
+    end
+
+    subgraph FASE_INTI_2 ["🛡️ FASE DEPLOYMENT & AKADEMIS (FITUR K → O)"]
+        FiturK[Fitur K: Complete DevSecOps Pipeline GitHub Actions]
+        FiturL[Fitur L: VPS Hardening & LEMP Stack Provisioning]
+        FiturM[Fitur M: Cloudflare Security, Custom Domain & SSL]
+        FiturN[Fitur N: Staging, Production Deployment & Live Test]
+        FiturO[Fitur O: Laporan PDF Akademis BAB I-V & Submission]
+    end
+
+    FiturJ ==> |"🚀 Transisi ke Customer Portal"| FiturP
+    FiturP --> FiturQ
+    FiturQ --> FiturR
+    FiturR --> FiturS
+    FiturS --> FiturT
+    FiturT --> FiturU
+    FiturU ==> |"🛡️ Lanjut ke DevSecOps & VPS"| FiturK
+    FiturK --> FiturL
+    FiturL --> FiturM
+    FiturM --> FiturN
+    FiturN --> FiturO
+
+    style FASE_EKSTENSI fill:#1a1000,stroke:#FF6B00,stroke-width:3px,color:#fff
+    style FiturP fill:#2d1500,stroke:#FF6B00,color:#fff
+    style FiturQ fill:#2d1500,stroke:#FF6B00,color:#fff
+    style FiturR fill:#2d1500,stroke:#FF6B00,color:#fff
+    style FiturS fill:#2d1500,stroke:#FF6B00,color:#fff
+    style FiturT fill:#2d1500,stroke:#FF6B00,color:#fff
+    style FiturU fill:#2d1500,stroke:#FF6B00,color:#fff
 ```
 
 ---
@@ -1297,6 +1378,97 @@ Route::middleware('auth:sanctum')->group(function () {
     </span>
 @endif
 ```
+
+---
+
+# FASE EKSTENSI: EKOSISTEM CUSTOMER PORTAL & MODERN PLATFORM
+
+> [!NOTE]
+> **Modul Suplementer V3.0**: Fase ini melengkapi sistem operasional internal (Admin & Mekanik) dengan menghadirkan antarmuka publik untuk pelanggan, reservasi online, e-commerce sparepart, reset password OTP email, pengaturan sistem dinamis, serta tema adaptif mode gelap/terang.
+
+## 🚀 Fitur P: Public Guest Lookup & Dynamic Landing Page
+
+### P.1. Landing Page Dinamis (`LandingController.php`)
+* **Dynamic Hero & Showcase**: Mengambil transaksi servis aktif (`proses`) dan selesai (`selesai`) terbaru dari DB untuk ditampilkan di widget hero publik.
+* **Slider Testimoni Hybrid**: Slider ulasan pelanggan otomatis (*infinite loop*) yang mendukung sentuhan/drag serta berhenti otomatis saat *hover*.
+
+### P.2. Pelacakan Status Servis Tanpa Login (`PublicStatusController.php`)
+* **Lookup Serbaguna**: Input tunggal cerdas yang menerima Nomor Polisi (`B 5678 AB`) atau Nomor HP (`081234567801`).
+* **Visual 3-Stage Timeline**: Progres bar visual (`Pending` → `Sedang Dikerjakan` → `Selesai`).
+* **WhatsApp Action Button**: Tombol "Hubungi Bengkel (WhatsApp)" otomatis yang membaca konfigurasi `admin_whatsapp` & `admin_wa_text` dari tabel `settings`.
+
+```bash
+# Rute Publik Terkait
+GET /               --> LandingController@index (public.landing)
+GET /cek-status     --> PublicStatusController@index (public.status.index)
+GET /cek-status/cari --> PublicStatusController@search (public.status.search)
+```
+
+---
+
+## 🔒 Fitur Q: Multi-Guard Auth Customer & Hybrid Account Management
+
+### Q.1. Multi-Guard Authentication (`config/auth.php`)
+Pemisahan entitas akun antara karyawan bengkel (`users` via guard `web`) dan pelanggan (`customers` via guard `customer`).
+
+### Q.2. Hybrid Login & Registration (`CustomerAuthController.php`)
+* **Hybrid Login**: Pengguna dapat memasukkan Alamat Email atau Nomor HP dalam satu kolom input (dideteksi otomatis oleh controller via `filter_var($input, FILTER_VALIDATE_EMAIL)`).
+* **Reset Password OTP Email (`CustomerForgotPasswordController.php`)**: Mengirimkan kode OTP 6-digit ke email terdaftar via `OtpMail` dengan batasan waktu verifikasi sebelum password dapat diperbarui.
+
+```bash
+# Rute Autentikasi Pelanggan
+GET  /masuk         --> CustomerAuthController@showLoginForm (public.login)
+POST /masuk         --> CustomerAuthController@login (public.login.submit)
+GET  /daftar        --> CustomerAuthController@showRegisterForm (public.register)
+POST /daftar        --> CustomerAuthController@register (public.register.submit)
+POST /lupa-password/send-otp --> CustomerForgotPasswordController@sendOtp (public.forgot_password.send_otp)
+```
+
+---
+
+## 📅 Fitur R: Booking Servis Daring & Conversion Flow oleh Admin
+
+### R.1. Reservasi Servis Pelanggan (`BookingPortalController.php`)
+Pelanggan terdaftar dapat mendaftarkan jadwal perbaikan kendaraan, menentukan tanggal & jam servis, serta menginput rincian keluhan melalui form di `/booking`.
+
+### R.2. Konversi Booking Menjadi Transaksi Resmi (`AdminBookingController.php`)
+Staf Admin meninjau reservasi di `/admin/bookings` dan dapat menekan tombol **"Proses Booking"** (`POST /admin/bookings/{id}/convert`). Sistem secara otomatis:
+1. Membuat baris transaksi baru di `service_transactions`.
+2. Menugaskan mekanik dan menentukan perkiraan biaya awal.
+3. Mengaitkan `service_transaction_id` pada row `booking` dan mengubah statusnya menjadi `dikonversi`.
+
+---
+
+## 🛒 Fitur S: E-Commerce Sparepart Catalog, Persistent Cart & Checkout Order
+
+### S.1. Manajemen Inventaris & Katalog Sparepart (`SparePartController.php`)
+* Admin mengelola katalog suku cadang di `/admin/spareparts` (kategori, harga HET, stok, foto produk).
+* Pelanggan menjelajahi katalog publik di `/sparepart` dengan pencarian dan filter kategori.
+
+### S.2. Keranjang Belanja Persisten DB & Checkout (`CartController.php` & `OrderController.php`)
+* Keranjang belanja disimpan secara persisten di kolom `customers.cart_data` (JSON).
+* Proses *Checkout* membentuk transaksi baru pada tabel `orders` & `order_items`, serta mengurangi stok produk secara otomatis.
+* Admin mengelola dan memperbarui status pesanan (`menunggu_pembayaran`, `diproses`, `selesai`, `dibatalkan`) di `/admin/orders`.
+
+---
+
+## 🎨 Fitur T: System Theme Adaptif Industrial (Dark & Light Mode Toggle)
+
+### T.1. Design Tokens & Dynamic CSS Variables (`app.css` & `tailwind.config.js`)
+* **Tokens**: Industrial Navy (`#0A192F` / `primary`), Workshop Orange (`#FF6B00` / `secondary`), Surface (`#F8F9FB` light, `#111111` dark).
+* **Mode Toggle**: Beralih secara instan via tombol di topbar navbar dengan menyimpan preferensi di `localStorage`.
+* **Auto Contrast Buttons**: Tombol utama (`bg-primary`) beradaptasi otomatis menjadi warna putih terang (`#EDEDEC`) pada mode gelap dengan teks gelap (`#111111`) untuk menjaga keterbacaan penuh di area perbengkelan.
+
+---
+
+## ⚙️ Fitur U: Dynamic System Settings (WA Config), Content CMS & System Notifications
+
+### U.1. Centralized System Settings (`SettingController.php`)
+Super Admin mengelola konfigurasi kontak WhatsApp bengkel dan template pesan otomatis di `/admin/settings` (`settings` table: `admin_whatsapp`, `admin_wa_text`, `superadmin_wa_text`).
+
+### U.2. Content CMS & Notifications System
+* **Content CMS**: Pengelolaan halaman statis (`pages`), form pesan masuk (`contact_messages`), dan ulasan pelanggan (`testimonials`).
+* **Database Notifications**: Notifikasi interaktif dropdown navbar topbar untuk Admin dan Customer (`notifications` table dengan UUID PK).
 
 ---
 

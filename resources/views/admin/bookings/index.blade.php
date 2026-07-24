@@ -29,7 +29,7 @@
                     <tbody>
                         @forelse($bookings as $booking)
                             <tr class="bg-surface border-b border-outline-variant/40 hover:bg-surface-container-low">
-                                <td class="px-6 py-4 font-bold text-primary">#SB-{{ str_pad($booking->id, 4, '0', STR_PAD_LEFT) }}</td>
+                                <td class="px-6 py-4 font-bold text-on-surface">#SB-{{ str_pad($booking->id, 4, '0', STR_PAD_LEFT) }}</td>
                                 <td class="px-6 py-4 font-semibold">
                                     {{ $booking->customer->name ?? '-' }}
                                     <br><span class="text-xs font-normal text-on-surface-variant">{{ $booking->customer->phone ?? '-' }}</span>
@@ -57,7 +57,7 @@
                                 </td>
                                 <td class="px-6 py-4 text-right">
                                     @if($booking->status == 'menunggu_konfirmasi')
-                                        <button type="button" onclick="document.getElementById('modal-{{ $booking->id }}').classList.remove('hidden')" class="bg-primary hover:bg-primary/90 text-on-primary px-3 py-1.5 rounded-lg text-xs font-semibold shadow-sm transition-colors">
+                                        <button type="button" onclick="document.getElementById('modal-{{ $booking->id }}').classList.remove('hidden')" class="bg-secondary hover:bg-secondary/90 text-on-secondary px-3 py-1.5 rounded-lg text-xs font-semibold shadow-sm transition-colors">
                                             Proses Booking
                                         </button>
                                         

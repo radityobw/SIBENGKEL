@@ -1,5 +1,5 @@
 <x-app-layout>
-<div class="max-w-2xl">
+<div class="max-w-2xl mx-auto w-full">
     <div class="mb-6">
         <a href="{{ route('admin.testimonials.index') }}" class="text-on-surface-variant hover:text-primary flex items-center gap-1 font-medium transition-colors">
             <span class="material-symbols-outlined text-[20px]">arrow_back</span>

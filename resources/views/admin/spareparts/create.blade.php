@@ -17,44 +17,44 @@
             </div>
         @endif
 
-        <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-            <div class="p-6 text-gray-900">
+        <div class="bg-surface overflow-hidden shadow-sm sm:rounded-lg border border-outline-variant">
+            <div class="p-6 text-on-surface">
                 <form action="{{ route('admin.spareparts.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                         <div>
-                            <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Nama Produk <span class="text-red-500">*</span></label>
-                            <input type="text" name="name" id="name" value="{{ old('name') }}" required class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                            <label for="name" class="block text-sm font-medium text-on-surface mb-1">Nama Produk <span class="text-error">*</span></label>
+                            <input type="text" name="name" id="name" value="{{ old('name') }}" required class="w-full bg-surface-container-low rounded-md border-outline-variant shadow-sm focus:border-primary focus:ring-primary text-on-surface">
                         </div>
                         <div>
-                            <label for="category" class="block text-sm font-medium text-gray-700 mb-1">Kategori <span class="text-red-500">*</span></label>
-                            <input type="text" name="category" id="category" value="{{ old('category') }}" required placeholder="Contoh: Oli, Ban, Kampas Rem" class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                            <label for="category" class="block text-sm font-medium text-on-surface mb-1">Kategori <span class="text-error">*</span></label>
+                            <input type="text" name="category" id="category" value="{{ old('category') }}" required placeholder="Contoh: Oli, Ban, Kampas Rem" class="w-full bg-surface-container-low rounded-md border-outline-variant shadow-sm focus:border-primary focus:ring-primary text-on-surface">
                         </div>
                         <div>
-                            <label for="price" class="block text-sm font-medium text-gray-700 mb-1">Harga Jual (Rp) <span class="text-red-500">*</span></label>
-                            <input type="number" name="price" id="price" value="{{ old('price') }}" required min="0" class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                            <label for="price" class="block text-sm font-medium text-on-surface mb-1">Harga Jual (Rp) <span class="text-error">*</span></label>
+                            <input type="number" name="price" id="price" value="{{ old('price') }}" required min="0" class="w-full bg-surface-container-low rounded-md border-outline-variant shadow-sm focus:border-primary focus:ring-primary text-on-surface">
                         </div>
                         <div>
-                            <label for="stock" class="block text-sm font-medium text-gray-700 mb-1">Stok Awal <span class="text-red-500">*</span></label>
-                            <input type="number" name="stock" id="stock" value="{{ old('stock', 0) }}" required min="0" class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                            <label for="stock" class="block text-sm font-medium text-on-surface mb-1">Stok Awal <span class="text-error">*</span></label>
+                            <input type="number" name="stock" id="stock" value="{{ old('stock', 0) }}" required min="0" class="w-full bg-surface-container-low rounded-md border-outline-variant shadow-sm focus:border-primary focus:ring-primary text-on-surface">
                         </div>
                     </div>
 
                     <div class="mb-6">
-                        <label for="description" class="block text-sm font-medium text-gray-700 mb-1">Deskripsi Produk</label>
-                        <textarea name="description" id="description" rows="3" class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">{{ old('description') }}</textarea>
+                        <label for="description" class="block text-sm font-medium text-on-surface mb-1">Deskripsi Produk</label>
+                        <textarea name="description" id="description" rows="3" class="w-full bg-surface-container-low rounded-md border-outline-variant shadow-sm focus:border-primary focus:ring-primary text-on-surface">{{ old('description') }}</textarea>
                     </div>
 
                     <div class="mb-6">
-                        <label for="image" class="block text-sm font-medium text-gray-700 mb-1">Foto Produk</label>
-                        <input type="file" name="image" id="image" accept="image/*" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100">
-                        <p class="mt-1 text-sm text-gray-500">Maksimal 2MB. Format JPG, PNG.</p>
+                        <label for="image" class="block text-sm font-medium text-on-surface mb-1">Foto Produk</label>
+                        <input type="file" name="image" id="image" accept="image/*" class="w-full text-sm text-on-surface-variant file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-surface-container-high file:text-on-surface hover:file:bg-surface-container-highest cursor-pointer">
+                        <p class="mt-1 text-sm text-on-surface-variant">Maksimal 2MB. Format JPG, PNG.</p>
                     </div>
 
-                    <div class="flex justify-end gap-3">
-                        <a href="{{ route('admin.spareparts.index') }}" class="bg-gray-200 text-gray-700 py-2 px-4 rounded-md text-sm font-medium hover:bg-gray-300">Batal</a>
-                        <button type="submit" class="bg-indigo-600 text-white py-2 px-4 rounded-md text-sm font-medium hover:bg-indigo-700">Simpan Produk</button>
+                    <div class="flex justify-end gap-3 border-t border-outline-variant pt-4 mt-2">
+                        <a href="{{ route('admin.spareparts.index') }}" class="bg-surface-container-highest text-on-surface py-2 px-4 rounded-md text-sm font-medium hover:bg-surface-variant transition-colors">Batal</a>
+                        <button type="submit" class="bg-primary text-on-primary py-2 px-4 rounded-md text-sm font-medium hover:bg-primary/90 transition-colors">Simpan Produk</button>
                     </div>
                 </form>
             </div>

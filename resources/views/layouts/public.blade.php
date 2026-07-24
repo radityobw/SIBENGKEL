@@ -13,31 +13,59 @@
             background-image: linear-gradient(to right, #E2E8F0 1px, transparent 1px), linear-gradient(to bottom, #E2E8F0 1px, transparent 1px);
             background-size: 40px 40px;
         }
+        .dark .industrial-grid {
+            background-image: linear-gradient(to right, #3E3E3A 1px, transparent 1px), linear-gradient(to bottom, #3E3E3A 1px, transparent 1px);
+        }
     </style>
+    <script>
+        // Landing & Public pages default to Dark Mode
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'light') {
+            document.documentElement.classList.remove('dark');
+        } else {
+            document.documentElement.classList.add('dark');
+        }
+        
+        function toggleTheme() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+    </script>
 </head>
-<body class="bg-background text-on-background font-body-md antialiased min-h-screen flex flex-col">
+<body class="bg-background dark:bg-[#0a0a0a] text-on-background dark:text-[#EDEDEC] font-body-md antialiased min-h-screen flex flex-col transition-colors duration-300">
     <!-- TopNavBar Component -->
-    <nav class="flex justify-between items-center w-full px-margin-desktop py-4 sticky top-0 z-50 bg-primary/95 backdrop-blur-md border-b border-primary/50 text-on-primary">
-        <a href="{{ url('/') }}" class="font-headline-md text-headline-md tracking-tighter flex items-center gap-2 hover:opacity-90">
-            <img src="{{ asset('logobengkel.png') }}" alt="Logo" class="h-8"> SIBENGKEL
+    <nav class="flex justify-between items-center w-full px-4 md:px-margin-desktop py-3 md:py-4 sticky top-0 z-50 bg-white/70 dark:bg-[#0a0a0a]/75 backdrop-blur-xl border-b border-white/50 dark:border-white/10 shadow-sm text-black dark:text-[#EDEDEC] transition-all duration-300">
+        <a href="{{ url('/') }}" class="font-headline-md text-lg md:text-headline-md tracking-tighter flex items-center gap-1.5 md:gap-2 hover:opacity-90 text-black dark:text-[#EDEDEC]">
+            <img src="{{ asset('logobengkel.png') }}" alt="Logo" class="h-6 md:h-8 object-contain brightness-0 dark:invert"> SIBENGKEL
         </a>
         <div class="hidden md:flex gap-6 items-center">
-            <a class="nav-link {{ request()->is('/') ? 'font-bold text-on-primary' : 'text-on-primary/80' }} hover:text-secondary transition-colors font-body-md text-body-md pb-1 active:scale-95 duration-200" href="{{ url('/#home') }}">Home</a>
-            <a class="nav-link {{ request()->routeIs('public.status.*') ? 'font-bold text-on-primary' : 'text-on-primary/80' }} hover:text-secondary transition-colors font-body-md text-body-md pb-1 active:scale-95 duration-200" href="{{ route('public.status.index') }}">Cek Status</a>
-            <a class="nav-link text-on-primary/80 hover:text-secondary transition-colors font-body-md text-body-md pb-1 active:scale-95 duration-200" href="{{ url('/#services') }}">Services</a>
-            <a class="nav-link text-on-primary/80 hover:text-secondary transition-colors font-body-md text-body-md pb-1 active:scale-95 duration-200" href="{{ url('/#features') }}">Features</a>
-            <a class="nav-link text-on-primary/80 hover:text-secondary transition-colors font-body-md text-body-md pb-1 active:scale-95 duration-200" href="{{ url('/#katalog-sparepart') }}">Katalog Sparepart</a>
-            <a class="nav-link text-on-primary/80 hover:text-secondary transition-colors font-body-md text-body-md pb-1 active:scale-95 duration-200" href="{{ url('/#testimonials') }}">Testimonial</a>
-            <a class="nav-link text-on-primary/80 hover:text-secondary transition-colors font-body-md text-body-md pb-1 active:scale-95 duration-200" href="{{ route('contact.index') }}">Contact Us</a>
+            <a class="nav-link {{ request()->is('/') ? 'font-bold text-black dark:text-white' : 'text-gray-700 dark:text-[#EDEDEC]/80' }} hover:text-secondary transition-colors font-body-md text-body-md pb-1 active:scale-95 duration-200" href="{{ url('/#home') }}">Home</a>
+            <a class="nav-link {{ request()->routeIs('public.status.*') ? 'font-bold text-black dark:text-white' : 'text-gray-700 dark:text-[#EDEDEC]/80' }} hover:text-secondary transition-colors font-body-md text-body-md pb-1 active:scale-95 duration-200" href="{{ route('public.status.index') }}">Cek Status</a>
+            <a class="nav-link text-gray-700 dark:text-[#EDEDEC]/80 hover:text-secondary transition-colors font-body-md text-body-md pb-1 active:scale-95 duration-200" href="{{ url('/#services') }}">Services</a>
+            <a class="nav-link text-gray-700 dark:text-[#EDEDEC]/80 hover:text-secondary transition-colors font-body-md text-body-md pb-1 active:scale-95 duration-200" href="{{ url('/#features') }}">Features</a>
+            <a class="nav-link text-gray-700 dark:text-[#EDEDEC]/80 hover:text-secondary transition-colors font-body-md text-body-md pb-1 active:scale-95 duration-200" href="{{ url('/#katalog-sparepart') }}">Katalog Sparepart</a>
+            <a class="nav-link text-gray-700 dark:text-[#EDEDEC]/80 hover:text-secondary transition-colors font-body-md text-body-md pb-1 active:scale-95 duration-200" href="{{ url('/#testimonials') }}">Testimonial</a>
+            <a class="nav-link text-gray-700 dark:text-[#EDEDEC]/80 hover:text-secondary transition-colors font-body-md text-body-md pb-1 active:scale-95 duration-200" href="{{ route('contact.index') }}">Contact Us</a>
         </div>
-        <div class="flex gap-4 items-center">
+        <div class="flex gap-2 md:gap-4 items-center">
+            <!-- Theme Toggle -->
+            <button onclick="toggleTheme()" class="flex items-center justify-center p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors focus:outline-none text-black dark:text-[#EDEDEC]" aria-label="Toggle Dark Mode">
+                <span class="material-symbols-outlined text-[20px] dark:hidden">dark_mode</span>
+                <span class="material-symbols-outlined text-[20px] hidden dark:block">light_mode</span>
+            </button>
+            
             @if(Auth::guard('customer')->check())
-                <a href="{{ route('public.dashboard') }}" class="bg-white text-primary hover:bg-secondary hover:text-on-secondary transition-colors font-label-md text-label-md h-[44px] px-6 rounded shadow-sm border border-transparent flex items-center justify-center">Portal Saya</a>
+                <a href="{{ route('public.dashboard') }}" class="bg-[#1b1b18] dark:bg-[#161615] text-white dark:text-[#EDEDEC] hover:bg-secondary hover:text-on-secondary transition-colors font-label-md text-xs md:text-label-md h-[36px] md:h-[44px] px-3 md:px-6 rounded shadow-sm border border-transparent dark:border-[#3E3E3A] flex items-center justify-center">Portal Saya</a>
             @elseif(Auth::guard('web')->check())
-                <a href="{{ route('dashboard') }}" class="bg-white text-primary hover:bg-secondary hover:text-on-secondary transition-colors font-label-md text-label-md h-[44px] px-6 rounded shadow-sm border border-transparent flex items-center justify-center">Dashboard Staff</a>
+                <a href="{{ route('dashboard') }}" class="bg-[#1b1b18] dark:bg-[#161615] text-white dark:text-[#EDEDEC] hover:bg-secondary hover:text-on-secondary transition-colors font-label-md text-xs md:text-label-md h-[36px] md:h-[44px] px-3 md:px-6 rounded shadow-sm border border-transparent dark:border-[#3E3E3A] flex items-center justify-center">Dashboard Staff</a>
             @else
-                <a href="{{ route('public.login') }}" class="hover:text-secondary transition-colors font-label-md text-label-md h-[44px] px-4 rounded flex items-center justify-center">Login</a>
-                <a href="{{ route('public.register') }}" class="bg-secondary text-on-secondary hover:bg-white hover:text-primary transition-colors font-label-md text-label-md h-[44px] px-6 rounded shadow-sm border border-transparent flex items-center justify-center">Get Started</a>
+                <a href="{{ route('public.login') }}" class="text-gray-700 dark:text-[#EDEDEC] hover:text-secondary transition-colors font-label-md text-sm md:text-label-md h-[36px] md:h-[44px] px-2 md:px-4 rounded flex items-center justify-center hidden sm:flex">Login</a>
+                <a href="{{ route('public.register') }}" class="bg-secondary text-on-secondary hover:bg-[#1b1b18] dark:hover:bg-[#161615] hover:text-white dark:hover:text-[#EDEDEC] dark:hover:border-[#3E3E3A] transition-colors font-label-md text-xs md:text-label-md h-[36px] md:h-[44px] px-3 md:px-6 rounded shadow-sm border border-transparent flex items-center justify-center">Get Started</a>
             @endif
         </div>
     </nav>
@@ -45,20 +73,20 @@
     @yield('content')
 
     <!-- Footer Component -->
-    <footer id="contact-us" class="flex flex-col md:flex-row justify-between items-center w-full px-margin-desktop py-12 gap-6 bg-primary border-t border-outline-variant/20 mt-auto">
-        <div class="font-headline-md text-headline-md text-on-primary flex items-center gap-2">
-            <img src="{{ asset('logobengkel.png') }}" alt="Logo" class="h-6 opacity-80"> SIBENGKEL
+    <footer id="contact-us" class="flex flex-col md:flex-row justify-between items-center w-full px-margin-desktop py-12 gap-6 bg-[#1b1b18] dark:bg-black border-t border-gray-800 dark:border-[#3E3E3A]/20 mt-auto text-white">
+        <div class="font-headline-md text-headline-md text-white flex items-center gap-2">
+            <img src="{{ asset('logobengkel.png') }}" alt="Logo" class="h-6 opacity-80 filter invert brightness-0"> SIBENGKEL
         </div>
         <div class="flex flex-wrap gap-4 justify-center">
-            <a class="font-label-sm text-label-sm text-on-primary/80 hover:text-secondary-fixed transition-colors cursor-pointer" href="{{ route('public.page', 'privacy-policy') }}">Privacy Policy</a>
-            <a class="font-label-sm text-label-sm text-on-primary/80 hover:text-secondary-fixed transition-colors cursor-pointer" href="{{ route('public.page', 'terms-of-service') }}">Terms of Service</a>
-            <a class="font-label-sm text-label-sm text-on-primary/80 hover:text-secondary-fixed transition-colors cursor-pointer" href="{{ route('contact.index') }}">Contact Us</a>
-            <a class="font-label-sm text-label-sm text-on-primary/80 hover:text-secondary-fixed transition-colors cursor-pointer" href="{{ route('public.page', 'support') }}">Support</a>
+            <a class="font-label-sm text-label-sm text-white/80 hover:text-secondary transition-colors cursor-pointer" href="{{ route('public.page', 'privacy-policy') }}">Privacy Policy</a>
+            <a class="font-label-sm text-label-sm text-white/80 hover:text-secondary transition-colors cursor-pointer" href="{{ route('public.page', 'terms-of-service') }}">Terms of Service</a>
+            <a class="font-label-sm text-label-sm text-white/80 hover:text-secondary transition-colors cursor-pointer" href="{{ route('contact.index') }}">Contact Us</a>
+            <a class="font-label-sm text-label-sm text-white/80 hover:text-secondary transition-colors cursor-pointer" href="{{ route('public.page', 'support') }}">Support</a>
             @if(!Auth::guard('web')->check())
-                <a class="font-label-sm text-label-sm text-on-primary/80 hover:text-secondary-fixed transition-colors cursor-pointer ml-4 border-l border-on-primary/30 pl-4" href="{{ route('login') }}">Staff Login</a>
+                <a class="font-label-sm text-label-sm text-white/80 hover:text-secondary transition-colors cursor-pointer ml-4 border-l border-white/30 pl-4" href="{{ route('login') }}">Staff Login</a>
             @endif
         </div>
-        <div class="font-label-sm text-label-sm text-on-primary/80">
+        <div class="font-label-sm text-label-sm text-white/80">
             © {{ date('Y') }} SIBENGKEL Industrial Systems. All rights reserved.
         </div>
     </footer>

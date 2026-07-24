@@ -18,7 +18,7 @@
         </div>
     @endif
 
-    <div class="bg-surface border border-outline-variant rounded-xl shadow-sm overflow-hidden max-w-3xl">
+    <div class="bg-surface border border-outline-variant rounded-xl shadow-sm overflow-hidden max-w-3xl mx-auto w-full">
         <div class="px-6 py-4 border-b border-outline-variant bg-surface-container-lowest flex items-center gap-2">
             <span class="material-symbols-outlined text-primary">contact_support</span>
             <h2 class="font-semibold text-on-surface font-sora">Kontak Bantuan & WhatsApp</h2>
