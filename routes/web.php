@@ -35,7 +35,11 @@ Route::get('/', function () {
         $stats['kepuasan'] = 100; // Default if no reviews
     }
     
-    return view('landing', compact('testimonials', 'stats', 'spareparts'));
+    // Real-time Hero UI Data
+    $recentCompleted = \App\Models\ServiceTransaction::with('vehicle')->where('status', 'selesai')->latest()->first();
+    $recentActive = \App\Models\ServiceTransaction::with('vehicle')->whereIn('status', ['pending', 'sedang dikerjakan'])->latest()->first();
+
+    return view('landing', compact('testimonials', 'stats', 'spareparts', 'recentCompleted', 'recentActive'));
 });
 
 use App\Http\Controllers\DashboardController;

@@ -48,17 +48,24 @@
                             
                             const processNode = (node, parent) => {
                                 if (node.nodeType === Node.TEXT_NODE) {
-                                    const chars = node.textContent.split('');
-                                    chars.forEach(char => {
-                                        if (char === ' ' || char === '\n') {
-                                            parent.appendChild(document.createTextNode(char));
+                                    const words = node.textContent.split(/(\s+)/);
+                                    words.forEach(word => {
+                                        if (/^\s+$/.test(word)) {
+                                            parent.appendChild(document.createTextNode(word));
                                         } else {
-                                            const span = document.createElement('span');
-                                            span.textContent = char;
-                                            span.className = 'split-char';
-                                            span.style.animationDelay = `${delay}s`;
-                                            parent.appendChild(span);
-                                            delay += 0.02; // 20ms stagger per character
+                                            const wordSpan = document.createElement('span');
+                                            wordSpan.style.display = 'inline-block';
+                                            wordSpan.style.whiteSpace = 'nowrap';
+                                            const chars = word.split('');
+                                            chars.forEach(char => {
+                                                const span = document.createElement('span');
+                                                span.textContent = char;
+                                                span.className = 'split-char';
+                                                span.style.animationDelay = `${delay}s`;
+                                                wordSpan.appendChild(span);
+                                                delay += 0.02;
+                                            });
+                                            parent.appendChild(wordSpan);
                                         }
                                     });
                                 } else if (node.nodeType === Node.ELEMENT_NODE) {
@@ -144,28 +151,43 @@
                 <div class="absolute inset-0 bg-cover bg-center transition-transform duration-1000 group-hover:scale-105" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBZvM-U3Ofp6TpN3dc9SL0HVpySEVtAjhcpDWNmCYHbxssKlVYrqSLf9qLGElWxt8rNSmXw40by1BWeiH1q2sUo1QqA2I1F7EE9RTUmP1GWid0VI8_TmyedVO45y1FoXNyxMb2Qq-NKeserCEzwTOqZPiQJoKyvgsVILTVJ-94D3gFnMk_dR6XAv1ZP03AkSsLujx8hbudGQMvY5G9E3nNuVoNB4Ct00Uhp-fa4gDhXs66TNS28UGyM8w');"></div>
                 <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
                 
-                <!-- Floating Glassmorphism Element 1 -->
-                <div class="absolute top-8 right-8 bg-surface/80 backdrop-blur-md p-4 rounded-2xl border border-white/20 shadow-xl flex items-center gap-4 text-on-surface animate-bounce" style="animation-duration: 3s;">
+                <!-- Floating Glassmorphism Element 1 (Dynamic Completed) -->
+                <a href="{{ route('public.status.index') }}" class="absolute top-8 right-8 bg-surface/80 backdrop-blur-md p-4 rounded-2xl border border-white/20 shadow-xl flex items-center gap-4 text-on-surface animate-bounce hover:bg-surface hover:scale-105 transition-all cursor-pointer" style="animation-duration: 3s;">
                     <div class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center text-green-600">
                         <span class="material-symbols-outlined">task_alt</span>
                     </div>
                     <div>
-                        <p class="text-xs text-on-surface-variant font-medium">Servis Selesai</p>
-                        <p class="font-bold">B 1234 XYZ</p>
+                        <p class="text-xs text-on-surface-variant font-medium">Servis Selesai (Live)</p>
+                        @if(isset($recentCompleted) && $recentCompleted->vehicle)
+                            <p class="font-bold">{{ substr($recentCompleted->vehicle->license_plate, 0, 2) . '***' . substr($recentCompleted->vehicle->license_plate, -2) }}</p>
+                        @else
+                            <p class="font-bold">B 12** YZ</p>
+                        @endif
                     </div>
-                </div>
+                </a>
                 
-                <!-- Floating Glassmorphism Element 2 -->
-                <div class="absolute bottom-10 left-8 bg-surface/80 backdrop-blur-md p-5 rounded-2xl border border-white/20 shadow-xl max-w-[250px]">
-                    <div class="flex justify-between items-center mb-3">
-                        <span class="font-semibold text-sm">Estimasi Waktu</span>
-                        <span class="material-symbols-outlined text-secondary">timer</span>
-                    </div>
-                    <div class="w-full bg-surface-container-high rounded-full h-2 mb-2">
-                        <div class="bg-secondary h-2 rounded-full" style="width: 75%"></div>
-                    </div>
-                    <p class="text-xs text-on-surface-variant text-right">45 Menit tersisa</p>
-                </div>
+                <!-- Floating Glassmorphism Element 2 (Dynamic Active) -->
+                <a href="{{ route('public.status.index') }}" class="absolute bottom-10 left-8 bg-surface/80 backdrop-blur-md p-5 rounded-2xl border border-white/20 shadow-xl min-w-[220px] max-w-[250px] hover:bg-surface hover:scale-105 transition-all cursor-pointer">
+                    @if(isset($recentActive) && $recentActive->vehicle)
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="font-semibold text-sm">{{ ucfirst($recentActive->status) }}</span>
+                            <span class="material-symbols-outlined text-secondary">{{ $recentActive->status == 'pending' ? 'pending_actions' : 'build' }}</span>
+                        </div>
+                        <div class="w-full bg-surface-container-high rounded-full h-2 mb-2 overflow-hidden">
+                            <div class="bg-secondary h-full rounded-full animate-pulse" style="width: {{ $recentActive->status == 'pending' ? '30%' : '70%' }}"></div>
+                        </div>
+                        <p class="text-xs text-on-surface-variant text-right">Plat: {{ substr($recentActive->vehicle->license_plate, 0, 2) . '***' . substr($recentActive->vehicle->license_plate, -2) }}</p>
+                    @else
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="font-semibold text-sm">Sedang Dikerjakan</span>
+                            <span class="material-symbols-outlined text-secondary">build</span>
+                        </div>
+                        <div class="w-full bg-surface-container-high rounded-full h-2 mb-2 overflow-hidden">
+                            <div class="bg-secondary h-full rounded-full animate-pulse" style="width: 75%"></div>
+                        </div>
+                        <p class="text-xs text-on-surface-variant text-right">Lacak progres real-time</p>
+                    @endif
+                </a>
             </div>
         </div>
     </section>
@@ -442,28 +464,12 @@
             </div>
         </div>
             
-        <!-- Infinite Marquee Container -->
-        <div class="relative w-full flex overflow-hidden group">
-            <style>
-                @keyframes marquee {
-                    0% { transform: translateX(0); }
-                    100% { transform: translateX(-100%); }
-                }
-                .animate-marquee {
-                    animation: marquee 40s linear infinite;
-                    display: flex;
-                    width: max-content;
-                }
-                /* Pause on hover for better readability */
-                .group:hover .animate-marquee {
-                    animation-play-state: paused;
-                }
-            </style>
-
-            <!-- First Marquee Track -->
-            <div class="animate-marquee flex gap-6 px-3">
+        <!-- Horizontal Scrollable Container (Auto-scroll Ticker) -->
+        <div class="relative w-full group">
+            <div id="testimonial-scroll" class="flex overflow-x-auto gap-6 px-margin-mobile md:px-margin-desktop pb-8 pt-4 custom-scrollbar w-full">
+                <!-- Set 1 -->
                 @foreach($testimonials as $testimonial)
-                <div class="bg-surface p-8 rounded-3xl shadow-sm border border-outline-variant relative flex flex-col shrink-0 w-[85vw] sm:w-[400px]">
+                <div class="bg-surface p-8 rounded-3xl shadow-sm hover:shadow-md border border-outline-variant relative flex flex-col shrink-0 w-[85vw] sm:w-[400px] transition-shadow">
                     <span class="material-symbols-outlined absolute top-6 right-6 text-5xl text-outline-variant/30">format_quote</span>
                     <div class="flex gap-1 text-secondary mb-6">
                         @for($i = 0; $i < 5; $i++)
@@ -488,12 +494,10 @@
                     </div>
                 </div>
                 @endforeach
-            </div>
-            
-            <!-- Second Marquee Track (Duplicate for seamless loop) -->
-            <div class="animate-marquee flex gap-6 px-3" aria-hidden="true">
+
+                <!-- Set 2 (for seamless infinite loop) -->
                 @foreach($testimonials as $testimonial)
-                <div class="bg-surface p-8 rounded-3xl shadow-sm border border-outline-variant relative flex flex-col shrink-0 w-[85vw] sm:w-[400px]">
+                <div class="bg-surface p-8 rounded-3xl shadow-sm hover:shadow-md border border-outline-variant relative flex flex-col shrink-0 w-[85vw] sm:w-[400px] transition-shadow" aria-hidden="true">
                     <span class="material-symbols-outlined absolute top-6 right-6 text-5xl text-outline-variant/30">format_quote</span>
                     <div class="flex gap-1 text-secondary mb-6">
                         @for($i = 0; $i < 5; $i++)
@@ -520,6 +524,44 @@
                 @endforeach
             </div>
         </div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                const scrollContainer = document.getElementById('testimonial-scroll');
+                if(!scrollContainer) return;
+
+                let isHovered = false;
+                
+                scrollContainer.addEventListener('mouseenter', () => isHovered = true);
+                scrollContainer.addEventListener('mouseleave', () => isHovered = false);
+                scrollContainer.addEventListener('touchstart', () => isHovered = true);
+                scrollContainer.addEventListener('touchend', () => {
+                    setTimeout(() => isHovered = false, 2000);
+                });
+
+                // Smooth scrolling ticker
+                let scrollPos = 0;
+                let lastTime = 0;
+                
+                const step = (time) => {
+                    if (!isHovered) {
+                        scrollPos += 1; // Kecepatan scroll
+                        scrollContainer.scrollLeft = scrollPos;
+
+                        // Reset position for infinite loop effect
+                        if (scrollContainer.scrollLeft >= (scrollContainer.scrollWidth - scrollContainer.clientWidth) - 10) {
+                            scrollPos = 0;
+                            scrollContainer.scrollLeft = 0;
+                        }
+                    } else {
+                        // Jika dihover/dislide manual, sync scrollPos dengan posisi asli agar tidak loncat
+                        scrollPos = scrollContainer.scrollLeft;
+                    }
+                    requestAnimationFrame(step);
+                };
+                requestAnimationFrame(step);
+            });
+        </script>
     </section>
     @endif
 

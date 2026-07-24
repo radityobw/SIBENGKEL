@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  @media (min-width: 1024px) {
+    html {
+      font-size: 14px; /* Mengkompensasi zoom Windows 125% dengan mengecilkan base size */
+    }
+  }
+}
+
 @layer utilities {
   .custom-scrollbar::-webkit-scrollbar {
     width: 6px;
