@@ -61,7 +61,7 @@
                             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                 <span class="material-symbols-outlined @error('name') text-error @else text-on-surface-variant @enderror">badge</span>
                             </div>
-                            <input class="block w-full pl-10 pr-3 py-3 min-h-[44px] border @error('name') border-error @else border-outline-variant @enderror rounded-lg bg-surface-container-lowest text-on-surface focus:ring-1 focus:ring-primary focus:border-primary font-body-md text-body-md transition-colors placeholder-on-surface-variant/50" 
+                            <input class="block w-full pl-10 pr-3 py-2 min-h-[44px] border @error('name') border-error @else border-outline-variant @enderror rounded-lg bg-surface-container-lowest text-on-surface focus:ring-1 focus:ring-primary focus:border-primary font-body-md text-body-md transition-colors placeholder-on-surface-variant/50" 
                                 id="name" 
                                 name="name" 
                                 placeholder="Masukkan nama Anda" 
@@ -83,7 +83,7 @@
                             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                 <span class="material-symbols-outlined @error('username') text-error @else text-on-surface-variant @enderror">alternate_email</span>
                             </div>
-                            <input class="block w-full pl-10 pr-3 py-3 min-h-[44px] border @error('username') border-error @else border-outline-variant @enderror rounded-lg bg-surface-container-lowest text-on-surface focus:ring-1 focus:ring-primary focus:border-primary font-body-md text-body-md transition-colors placeholder-on-surface-variant/50" 
+                            <input class="block w-full pl-10 pr-3 py-2 min-h-[44px] border @error('username') border-error @else border-outline-variant @enderror rounded-lg bg-surface-container-lowest text-on-surface focus:ring-1 focus:ring-primary focus:border-primary font-body-md text-body-md transition-colors placeholder-on-surface-variant/50" 
                                 id="username" 
                                 name="username" 
                                 placeholder="Masukkan username Anda" 
@@ -104,7 +104,7 @@
                             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                 <span class="material-symbols-outlined @error('email') text-error @else text-on-surface-variant @enderror">mail</span>
                             </div>
-                            <input class="block w-full pl-10 pr-3 py-3 min-h-[44px] border @error('email') border-error @else border-outline-variant @enderror rounded-lg bg-surface-container-lowest text-on-surface focus:ring-1 focus:ring-primary focus:border-primary font-body-md text-body-md transition-colors placeholder-on-surface-variant/50" 
+                            <input class="block w-full pl-10 pr-3 py-2 min-h-[44px] border @error('email') border-error @else border-outline-variant @enderror rounded-lg bg-surface-container-lowest text-on-surface focus:ring-1 focus:ring-primary focus:border-primary font-body-md text-body-md transition-colors placeholder-on-surface-variant/50" 
                                 id="email" 
                                 name="email" 
                                 placeholder="Masukkan email Anda" 
@@ -125,7 +125,7 @@
                             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                 <span class="material-symbols-outlined @error('password') text-error @else text-on-surface-variant @enderror">lock</span>
                             </div>
-                            <input class="block w-full pl-10 pr-10 py-3 min-h-[44px] border @error('password') border-error @else border-outline-variant @enderror rounded-lg bg-surface-container-lowest text-on-surface focus:ring-1 focus:ring-primary focus:border-primary font-body-md text-body-md transition-colors" 
+                            <input class="block w-full pl-10 pr-10 py-2 min-h-[44px] border @error('password') border-error @else border-outline-variant @enderror rounded-lg bg-surface-container-lowest text-on-surface focus:ring-1 focus:ring-primary focus:border-primary font-body-md text-body-md transition-colors" 
                                 id="password" 
                                 name="password" 
                                 placeholder="••••••••" 
@@ -148,7 +148,7 @@
                             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                 <span class="material-symbols-outlined @error('password_confirmation') text-error @else text-on-surface-variant @enderror">lock_reset</span>
                             </div>
-                            <input class="block w-full pl-10 pr-10 py-3 min-h-[44px] border @error('password_confirmation') border-error @else border-outline-variant @enderror rounded-lg bg-surface-container-lowest text-on-surface focus:ring-1 focus:ring-primary focus:border-primary font-body-md text-body-md transition-colors" 
+                            <input class="block w-full pl-10 pr-10 py-2 min-h-[44px] border @error('password_confirmation') border-error @else border-outline-variant @enderror rounded-lg bg-surface-container-lowest text-on-surface focus:ring-1 focus:ring-primary focus:border-primary font-body-md text-body-md transition-colors" 
                                 id="password_confirmation" 
                                 name="password_confirmation" 
                                 placeholder="••••••••" 

@@ -27,7 +27,7 @@
             <img src="{{ asset('logobengkel.png') }}" alt="Logo" class="h-8 filter invert"> SIBENGKEL
         </a>
         <a href="{{ route('public.forgot_password') }}" class="text-sm font-semibold text-primary hover:underline flex items-center gap-1">
-            <span class="material-symbols-outlined text-sm">arrow_back</span> Ubah Nomor HP
+            <span class="material-symbols-outlined text-sm">arrow_back</span> Ubah Email
         </a>
     </nav>
 
@@ -46,15 +46,15 @@
                     <span class="material-symbols-outlined text-3xl">mark_email_read</span>
                 </div>
                 <h1 class="font-headline-xl text-2xl font-bold tracking-tight text-primary mb-xs font-sora">Verifikasi Kode OTP</h1>
-                <p class="font-body-md text-sm text-on-surface-variant">Langkah 2 dari 2: Masukkan kode OTP 6-digit untuk nomor <span class="font-bold text-primary">{{ $phone }}</span>.</p>
+                <p class="font-body-md text-sm text-on-surface-variant">Langkah 2 dari 2: Masukkan kode OTP 6-digit untuk email <span class="font-bold text-primary">{{ $email }}</span>.</p>
             </div>
 
-            @if(session('info'))
-                <div class="mb-4 bg-amber-50 border border-amber-300 text-amber-900 p-4 rounded-xl text-xs font-medium shadow-sm flex items-start gap-2">
-                    <span class="material-symbols-outlined text-amber-600 text-lg shrink-0 mt-0.5">verified_user</span>
+            @if(session('success'))
+                <div class="mb-4 bg-green-50 border border-green-300 text-green-900 p-4 rounded-xl text-sm font-medium shadow-sm flex items-start gap-2">
+                    <span class="material-symbols-outlined text-green-600 text-lg shrink-0 mt-0.5">check_circle</span>
                     <div>
-                        <p class="font-bold mb-1">Simulasi Pengiriman OTP:</p>
-                        <p class="font-mono text-sm bg-amber-100 px-2 py-1 rounded inline-block font-bold text-amber-900">{{ session('info') }}</p>
+                        <p class="font-bold mb-1">Berhasil!</p>
+                        <p>{{ session('success') }}</p>
                     </div>
                 </div>
             @endif
@@ -112,5 +112,28 @@
             </div>
         </div>
     </div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll('input[type="password"]').forEach((input, idx) => {
+        const parent = input.parentElement;
+        if (window.getComputedStyle(parent).position === "static") {
+            parent.style.position = "relative";
+        }
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.id = "pw-toggle-" + idx;
+        btn.setAttribute("aria-label", "Toggle visibility");
+        btn.className = "absolute inset-y-0 right-0 flex items-center px-3 text-on-surface-variant hover:text-secondary transition-colors";
+        btn.innerHTML = '<span class="material-symbols-outlined text-[20px] select-none" style="font-variation-settings:\'FILL\' 0;">visibility</span>';
+        parent.appendChild(btn);
+        input.style.paddingRight = "2.5rem";
+        btn.addEventListener("click", () => {
+            const isHidden = input.type === "password";
+            input.type = isHidden ? "text" : "password";
+            btn.querySelector("span").textContent = isHidden ? "visibility_off" : "visibility";
+        });
+    });
+});
+</script>
 </body>
 </html>

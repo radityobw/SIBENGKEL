@@ -92,6 +92,7 @@ jobs:
             git pull origin dev
             composer update --no-dev --optimize-autoloader
             php artisan migrate --force
+            php artisan storage:link --force
             php artisan config:cache
             php artisan route:cache
             php artisan view:cache
@@ -116,6 +117,7 @@ jobs:
             git pull origin main
             composer update --no-dev --optimize-autoloader
             php artisan migrate --force
+            php artisan storage:link --force
             php artisan config:cache
             php artisan route:cache
             php artisan view:cache

@@ -63,7 +63,6 @@
                         <span class="font-label-sm text-label-sm">Total Biaya</span>
                     </div>
                     <span class="font-label-md text-label-md text-on-surface">Rp {{ number_format($transaction->cost, 0, ',', '.') }}</span>
-                    <span class="font-label-sm text-label-sm text-on-surface-variant mt-auto">Detail Tagihan (Opsional)</span>
                 </div>
             </div>
         </div>
@@ -119,7 +118,16 @@
         </div>
 
         <!-- Action Button -->
-        <a href="https://wa.me/6281234567890" target="_blank" class="w-full min-h-[44px] mt-sm bg-secondary text-on-secondary rounded flex items-center justify-center gap-xs font-label-md text-label-md py-3 shadow-md hover:bg-white hover:text-secondary transition-colors active:scale-[0.98]">
+        @php
+            $waNumber = \App\Models\Setting::get('admin_whatsapp', '6281234567890');
+            // Pastikan format nomor WA benar (buang karakter selain angka, ganti 0 di depan jadi 62)
+            $waNumber = preg_replace('/[^0-9]/', '', $waNumber);
+            if (substr($waNumber, 0, 1) === '0') {
+                $waNumber = '62' . substr($waNumber, 1);
+            }
+            $waMessage = "Halo Admin SIBENGKEL, saya ingin bertanya tentang status perbaikan kendaraan saya dengan ID Transaksi: *#TRX-" . str_pad($transaction->id, 4, '0', STR_PAD_LEFT) . "*. Terima kasih.";
+        @endphp
+        <a href="https://wa.me/{{ $waNumber }}?text={{ urlencode($waMessage) }}" target="_blank" class="w-full min-h-[44px] mt-sm bg-secondary text-on-secondary rounded flex items-center justify-center gap-xs font-label-md text-label-md py-3 shadow-md hover:bg-white hover:text-secondary transition-colors active:scale-[0.98]">
             <span class="material-symbols-outlined text-[20px]">forum</span>
             Hubungi Bengkel (WhatsApp)
         </a>

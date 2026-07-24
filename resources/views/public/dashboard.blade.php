@@ -25,17 +25,26 @@
                 <div class="industrial-card rounded-lg p-sm md:p-md relative overflow-hidden shadow-sm hover:shadow-md transition-shadow">
                     <!-- Status Strip -->
                     @php
-                        $stripColor = match($booking->status) {
+                        $actualStatus = $booking->status;
+                        if ($actualStatus == 'disetujui' && $booking->transaction) {
+                            $actualStatus = 'transaksi_' . $booking->transaction->status;
+                        }
+
+                        $stripColor = match($actualStatus) {
                             'menunggu_konfirmasi' => 'bg-secondary',
-                            'disetujui' => 'bg-primary',
-                            'dikonversi' => 'bg-green-500',
+                            'disetujui', 'transaksi_pending' => 'bg-primary',
+                            'transaksi_proses' => 'bg-amber-500',
+                            'transaksi_selesai', 'dikonversi' => 'bg-green-500',
                             'ditolak' => 'bg-error',
                             default => 'bg-outline'
                         };
-                        $statusText = match($booking->status) {
+                        $statusText = match($actualStatus) {
                             'menunggu_konfirmasi' => 'Menunggu',
                             'disetujui' => 'Disetujui',
-                            'dikonversi' => 'Dikonversi ke Transaksi',
+                            'transaksi_pending' => 'Menunggu Mekanik',
+                            'transaksi_proses' => 'Sedang Dikerjakan',
+                            'transaksi_selesai' => 'Servis Selesai',
+                            'dikonversi' => 'Dikonversi',
                             'ditolak' => 'Ditolak',
                             default => 'Unknown'
                         };
@@ -51,7 +60,7 @@
                                 <span class="text-label-sm font-label-sm text-on-surface-variant">ID: #SB-{{ str_pad($booking->id, 4, '0', STR_PAD_LEFT) }}</span>
                             </div>
                             <h3 class="text-body-lg font-body-lg font-semibold text-primary">Booking Servis</h3>
-                            <p class="text-body-md font-body-md text-on-surface-variant">{{ optional($booking->vehicle)->brand ?? '-' }} {{ optional($booking->vehicle)->model ?? '-' }} ({{ optional($booking->vehicle)->nomor_polisi ?? '-' }})</p>
+                            <p class="text-body-md font-body-md text-on-surface-variant">{{ optional($booking->vehicle)->brand ?? '-' }} {{ optional($booking->vehicle)->model ?? '-' }} ({{ optional($booking->vehicle)->plate_number ?? '-' }})</p>
                             <p class="text-body-sm text-on-surface-variant italic mt-1 max-w-lg">{{ $booking->complaint }}</p>
                         </div>
                         <div class="text-left sm:text-right">
@@ -95,7 +104,7 @@
                         <h3 class="text-body-lg font-body-lg font-semibold text-primary">{{ $vehicle->brand }} {{ $vehicle->model }}</h3>
                         <p class="text-body-md font-body-md text-on-surface-variant mb-xs">Tahun {{ $vehicle->year }}</p>
                         <div class="inline-flex px-2 py-0.5 border border-outline-variant rounded bg-surface text-label-md font-label-md font-bold text-on-background tracking-widest">
-                            {{ $vehicle->nomor_polisi }}
+                            {{ $vehicle->plate_number }}
                         </div>
                     </div>
                 </div>

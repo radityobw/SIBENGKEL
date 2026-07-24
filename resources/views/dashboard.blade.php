@@ -146,7 +146,7 @@
         <div class="{{ Auth::user()->role === 'admin' ? 'xl:col-span-2' : 'xl:col-span-3' }} bg-surface rounded-lg border border-outline-variant shadow-sm flex flex-col overflow-hidden h-auto xl:h-[400px]">
             <div class="p-6 border-b border-outline-variant flex justify-between items-center bg-surface-bright">
                 <h3 class="text-lg font-sora font-semibold text-on-surface">Transaksi Servis Terkini</h3>
-                <a href="#" class="text-sm font-semibold text-primary hover:underline h-8 px-2 flex items-center">Lihat Semua</a>
+                <a href="{{ route('transactions.index') }}" class="text-sm font-semibold text-primary hover:underline h-8 px-2 flex items-center">Lihat Semua</a>
             </div>
             
             <!-- Desktop Table -->

@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\OtpMail;
 
 class CustomerAuthPortalController extends Controller
 {
@@ -27,7 +29,7 @@ class CustomerAuthPortalController extends Controller
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'phone' => ['required', 'string', 'max:20', 'unique:customers'],
-            'email' => ['nullable', 'string', 'email', 'max:255', 'unique:customers'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:customers'],
             'address' => ['required', 'string'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
@@ -188,21 +190,25 @@ class CustomerAuthPortalController extends Controller
     public function sendResetOtp(Request $request)
     {
         $request->validate([
-            'phone' => ['required', 'string', 'exists:customers,phone'],
+            'email' => ['required', 'email', 'exists:customers,email'],
         ], [
-            'phone.required' => 'Nomor HP wajib diisi.',
-            'phone.exists' => 'Nomor HP ini tidak terdaftar dalam sistem SIBENGKEL.',
+            'email.required' => 'Alamat email wajib diisi.',
+            'email.email' => 'Format email tidak valid.',
+            'email.exists' => 'Alamat email ini tidak terdaftar dalam sistem SIBENGKEL.',
         ]);
 
         $otp = (string) rand(100000, 999999);
         session([
-            'reset_phone' => $request->phone,
+            'reset_email' => $request->email,
             'reset_otp' => $otp,
             'reset_otp_expires' => now()->addMinutes(10),
         ]);
 
+        // Kirim email OTP
+        Mail::to($request->email)->send(new OtpMail($otp));
+
         return redirect()->route('public.forgot_password.verify')
-            ->with('info', "Kode OTP Verifikasi Keamanan SIBENGKEL: [ {$otp} ]. Silakan masukkan kode ini untuk mereset password.");
+            ->with('success', "Kode OTP telah berhasil dikirim ke alamat email Anda.");
     }
 
     /**
@@ -210,11 +216,11 @@ class CustomerAuthPortalController extends Controller
      */
     public function showVerifyOtpForm()
     {
-        $phone = session('reset_phone');
-        if (!$phone) {
+        $email = session('reset_email');
+        if (!$email) {
             return redirect()->route('public.forgot_password');
         }
-        return view('public.auth.verify_otp', compact('phone'));
+        return view('public.auth.verify_otp', compact('email'));
     }
 
     /**
@@ -233,19 +239,19 @@ class CustomerAuthPortalController extends Controller
             'password.confirmed' => 'Konfirmasi password baru tidak cocok.',
         ]);
 
-        $sessionPhone = session('reset_phone');
+        $sessionEmail = session('reset_email');
         $sessionOtp = session('reset_otp');
         $expiresAt = session('reset_otp_expires');
 
-        if (!$sessionPhone || !$sessionOtp || (now()->greaterThan($expiresAt))) {
-            return redirect()->route('public.forgot_password')->withErrors(['phone' => 'Sesi verifikasi telah kadaluarsa. Silakan ajukan ulang kode OTP.']);
+        if (!$sessionEmail || !$sessionOtp || (now()->greaterThan($expiresAt))) {
+            return redirect()->route('public.forgot_password')->withErrors(['email' => 'Sesi verifikasi telah kadaluarsa. Silakan ajukan ulang kode OTP.']);
         }
 
         if ($request->otp !== $sessionOtp) {
             return redirect()->back()->withErrors(['otp' => 'Kode OTP yang Anda masukkan salah. Silakan periksa kembali.']);
         }
 
-        $customer = Customer::where('phone', $sessionPhone)->first();
+        $customer = Customer::where('email', $sessionEmail)->first();
         $customer->password = Hash::make($request->password);
         $customer->save();
 

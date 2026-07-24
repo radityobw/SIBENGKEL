@@ -34,9 +34,13 @@
                     <tr class="hover:bg-surface-container-low/50 transition-colors group {{ $loop->even ? 'bg-surface-bright' : '' }}">
                         <td class="p-4">
                             <div class="flex items-center gap-3">
-                                <div class="w-10 h-10 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-bold text-sm shrink-0 border border-outline-variant">
-                                    {{ substr($admin->name, 0, 1) }}
-                                </div>
+                                @if($admin->profile_photo_url)
+                                    <img src="{{ $admin->profile_photo_url }}" alt="{{ $admin->name }}" class="w-10 h-10 rounded-full object-cover shrink-0 border border-outline-variant">
+                                @else
+                                    <div class="w-10 h-10 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-bold text-sm shrink-0 border border-outline-variant">
+                                        {{ substr($admin->name, 0, 1) }}
+                                    </div>
+                                @endif
                                 <div class="flex flex-col">
                                     <span class="font-semibold text-on-surface">{{ $admin->name }}</span>
                                     @if($admin->id === Auth::id())

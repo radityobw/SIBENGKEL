@@ -65,11 +65,11 @@
                     @csrf
                     
                     <div class="space-y-1">
-                        <label class="block font-semibold text-xs text-on-surface" for="phone">Nomor Telepon Terdaftar <span class="text-error">*</span></label>
+                        <label class="block font-semibold text-xs text-on-surface" for="email">Alamat Email Terdaftar <span class="text-error">*</span></label>
                         <div class="relative">
-                            <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-lg">phone_iphone</span>
+                            <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-lg">mail</span>
                             <input class="w-full pl-10 pr-3 py-3 rounded-lg border border-outline-variant bg-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors text-sm text-on-surface placeholder:text-outline" 
-                                id="phone" name="phone" placeholder="Contoh: 08123456789" type="text" value="{{ old('phone') }}" required/>
+                                id="email" name="email" placeholder="email@domain.com" type="email" value="{{ old('email') }}" required/>
                         </div>
                     </div>
                     

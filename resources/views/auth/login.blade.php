@@ -2,147 +2,131 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Masuk - SIBENGKEL</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@600;700;900&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@600;700&display=swap" rel="stylesheet"/>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
 </head>
-<body class="bg-background min-h-screen flex text-on-surface antialiased">
-    <!-- Split Screen Layout -->
-    <div class="flex w-full min-h-screen">
-        <!-- Left Side: Image/Branding (Hidden on mobile) -->
-        <div class="hidden lg:flex lg:w-[55%] relative bg-primary flex-col justify-between overflow-hidden">
-            <!-- Background Image -->
-            <div class="absolute inset-0 z-0">
-                <div class="bg-cover bg-center w-full h-full opacity-40 mix-blend-overlay" data-alt="A pristine, high-tech automotive workshop interior." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCp8N7Qg_QuXbYy6Syl2edvPnrnJuUm1VnM4OZs36sP_-PHJNbPXaGkkpfjuH4bdBMNggcsAm1YlC91XHlvhvm8TU6iapaN5Y-MsPaPv2tqzYaBbQZ4g-GEYq1Z6aOcgVkkAs24dF6ytKVxiWCSQviV8FLYL4PmR8bdM0kVl0F1Kq-dv1N_aYngSz8YHmDHcNhRSUTHLKYj5yJ1Z9o5n5tVXi8vIas1XQUGcN-z1ArtctdgwS_UDKueSA')"></div>
-                <div class="absolute inset-0 bg-gradient-to-t from-primary/90 to-primary/30"></div>
+<body class="bg-surface min-h-screen flex flex-col font-sans antialiased text-on-surface relative overflow-hidden">
+    <!-- Navbar (simplified for auth) -->
+    <nav class="flex justify-between items-center w-full px-margin-mobile md:px-8 py-4 absolute top-0 z-50">
+        <a href="{{ url('/') }}" class="font-headline-md text-headline-md tracking-tighter flex items-center gap-2 hover:opacity-80 transition-opacity text-primary">
+            <img src="{{ asset('logobengkel.png') }}" alt="Logo" class="h-8 filter invert"> SIBENGKEL
+        </a>
+        <a href="{{ url('/') }}" class="flex items-center gap-2 font-label-md text-primary hover:text-primary-container transition-colors bg-surface/50 backdrop-blur-sm px-4 py-2 rounded-full border border-outline-variant/50">
+            <span class="material-symbols-outlined text-[20px]">arrow_back</span>
+            <span class="hidden md:inline">Kembali</span>
+        </a>
+    </nav>
+
+    <!-- Background Decor (Light/Welcoming) -->
+    <div class="absolute inset-0 z-0 pointer-events-none opacity-20">
+        <div class="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-primary-fixed rounded-full blur-[100px]"></div>
+        <div class="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-secondary-fixed rounded-full blur-[100px]"></div>
+    </div>
+    
+    <!-- Login Container -->
+    <div class="flex-1 flex items-center justify-center w-full max-w-md px-margin-mobile md:px-0 z-10 mx-auto">
+        <div class="w-full">
+            <!-- Brand Header -->
+            <div class="text-center mb-lg">
+                <h1 class="font-headline-xl text-[40px] leading-[48px] font-bold tracking-[-0.02em] text-primary mb-xs">Login Pegawai</h1>
+                <p class="font-body-md text-[16px] leading-[24px] font-normal text-on-surface-variant">Masuk ke sistem manajemen bengkel.</p>
             </div>
-            <!-- Content overlay -->
-            <div class="relative z-10 p-xl flex flex-col h-full justify-between">
-                <div>
-                    <div class="flex items-center gap-2 text-on-primary">
-                        <img src="{{ asset('logobengkel.png') }}" alt="SIBENGKEL Logo" class="h-10 md:h-12 object-contain brightness-0 invert">
-                        <h1 class="font-headline-xl text-headline-xl text-on-primary tracking-tight">SIBENGKEL</h1>
-                    </div>
-                    <p class="font-headline-md text-headline-md text-primary-fixed mt-4 max-w-md">Digitalisasi Bengkel Masa Kini. Efisiensi Tanpa Batas.</p>
+            
+            <x-auth-session-status class="mb-4" :status="session('status')" />
+
+            @if ($errors->any())
+                <div class="mb-4 bg-error-container text-on-error-container p-4 rounded text-sm">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
                 </div>
-                <div class="text-on-primary/60 font-label-md text-label-md">
-                    © {{ date('Y') }} SIBENGKEL. All rights reserved.
-                </div>
-            </div>
-        </div>
+            @endif
 
-        <!-- Right Side: Login Form -->
-        <div class="w-full lg:w-[45%] flex flex-col bg-surface relative z-10 min-h-screen">
-            <!-- Mobile Navbar (visible only on small screens) -->
-            <header class="lg:hidden flex items-center gap-2 px-4 h-16 w-full bg-primary shrink-0 shadow-sm">
-                <img src="{{ asset('logobengkel.png') }}" alt="SIBENGKEL Logo" class="h-6 object-contain brightness-0 invert">
-                <h2 class="text-xl font-sora font-bold text-on-primary tracking-tight">SIBENGKEL</h2>
-            </header>
-
-            <div class="flex-1 flex items-center justify-center p-4 md:p-lg">
-                <div class="w-full max-w-md bg-surface-container-lowest border border-outline-variant rounded-xl shadow-sm p-6 md:p-12">
-                    <div class="mb-lg">
-                    <h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-2">Selamat Datang</h2>
-                    <p class="font-body-md text-body-md text-on-surface-variant">Silakan masuk ke akun manajemen bengkel Anda.</p>
-                </div>
-
-                <!-- Session Status -->
-                <x-auth-session-status class="mb-4" :status="session('status')" />
-
-                <form method="POST" action="{{ route('login') }}" class="space-y-md">
+            <!-- Login Card -->
+            <div class="glass-card rounded-xl p-lg md:p-xl border border-outline-variant shadow-sm">
+                <form action="{{ route('login') }}" class="space-y-md" method="POST">
                     @csrf
-                    
-                    <!-- Email Field -->
-                    <div>
-                        <label class="block font-label-md text-label-md text-on-surface mb-2" for="login">Email atau Username</label>
+                    <div class="space-y-xs">
+                        <label class="block font-label-md text-[14px] leading-[20px] font-semibold text-on-surface" for="login">Username atau Email</label>
                         <div class="relative">
-                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                <span class="material-symbols-outlined @error('login') text-error @else text-on-surface-variant @enderror">person</span>
-                            </div>
-                            <input class="block w-full pl-10 pr-3 py-3 min-h-[44px] border @error('login') border-error @else border-outline-variant @enderror rounded-lg bg-surface-container-lowest text-on-surface focus:ring-1 focus:ring-primary focus:border-primary font-body-md text-body-md transition-colors placeholder-on-surface-variant/50" 
-                                id="login" 
-                                name="login" 
-                                placeholder="Masukkan email atau username Anda" 
-                                required 
-                                type="text" 
-                                value="{{ old('login') }}" 
-                                autofocus 
-                                autocomplete="username" />
+                            <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">person</span>
+                            <input class="w-full pl-10 pr-3 py-3 rounded border border-outline-variant bg-surface-container-lowest focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors font-body-md text-on-surface placeholder:text-outline" 
+                                id="login" name="login" placeholder="Masukkan username/email" type="text" value="{{ old('login') }}" required autofocus/>
                         </div>
-                        @error('login')
-                            <p class="mt-1 font-label-sm text-label-sm text-error">{{ $message }}</p>
-                        @enderror
                     </div>
-
-                    <!-- Password Field -->
-                    <div>
-                        <label class="block font-label-md text-label-md text-on-surface mb-2" for="password">Password</label>
-                        <div class="relative">
-                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                <span class="material-symbols-outlined @error('password') text-error @else text-on-surface-variant @enderror">lock</span>
-                            </div>
-                            <input class="block w-full pl-10 pr-10 py-3 min-h-[44px] border @error('password') border-error @else border-outline-variant @enderror rounded-lg bg-surface-container-lowest text-on-surface focus:ring-1 focus:ring-primary focus:border-primary font-body-md text-body-md transition-colors" 
-                                id="password" 
-                                name="password" 
-                                placeholder="••••••••" 
-                                required 
-                                type="password" 
-                                autocomplete="current-password" />
-                            <button type="button" onclick="const p=document.getElementById('password'); p.type=p.type==='password'?'text':'password'; this.querySelector('span').innerText=p.type==='password'?'visibility_off':'visibility';" class="absolute inset-y-0 right-0 pr-3 flex items-center text-on-surface-variant hover:text-on-surface">
-                                <span class="material-symbols-outlined">visibility_off</span>
-                            </button>
-                        </div>
-                        @error('password')
-                            <p class="mt-1 font-label-sm text-label-sm text-error">{{ $message }}</p>
-                        @enderror
-                    </div>
-
-                    <!-- Remember Me & Forgot Password -->
-                    <div class="flex items-center justify-between">
-                        <div class="flex items-center">
-                            <input class="h-4 w-4 rounded border-outline-variant text-primary focus:ring-primary bg-surface-container-lowest" 
-                                id="remember_me" 
-                                name="remember" 
-                                type="checkbox" />
-                            <label class="ml-2 block font-body-md text-body-md text-on-surface-variant" for="remember_me">
-                                Ingat saya
-                            </label>
-                        </div>
-                        @if (Route::has('password.request'))
-                            <a class="font-label-sm text-label-sm text-primary hover:text-primary-container transition-colors" href="{{ route('password.request') }}">
-                                Lupa Password?
-                            </a>
-                        @endif
-                    </div>
-
-                    <!-- Submit Button -->
-                    <button class="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm font-label-md text-label-md text-on-primary bg-primary hover:bg-primary-container focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary min-h-[44px] items-center transition-colors" type="submit">
-                        Masuk Sistem
-                    </button>
                     
-                    @if (Route::has('register'))
-                    <div class="text-center mt-4">
-                        <a class="font-label-sm text-label-sm text-primary hover:text-primary-container transition-colors" href="{{ route('register') }}">
-                            Belum punya akun? Daftar sekarang
-                        </a>
+                    <div class="space-y-xs">
+                        <div class="flex justify-between items-center">
+                            <label class="block font-label-md text-[14px] leading-[20px] font-semibold text-on-surface" for="password">Kata Sandi</label>
+                            @if (Route::has('password.request'))
+                                <a href="{{ route('password.request') }}" class="font-label-sm text-xs text-primary hover:underline font-semibold">Lupa Password?</a>
+                            @endif
+                        </div>
+                        <div class="relative">
+                            <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">lock</span>
+                            <input class="w-full pl-10 pr-10 py-3 rounded border border-outline-variant bg-surface-container-lowest focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors font-body-md text-on-surface placeholder:text-outline" 
+                                id="password" name="password" placeholder="••••••••" type="password" required/>
+                        </div>
                     </div>
-                    @endif
+                    
+                    <div class="flex items-center pt-2">
+                        <input class="h-4 w-4 rounded border-outline-variant text-primary focus:ring-primary bg-surface-container-lowest" 
+                            id="remember_me" name="remember" type="checkbox" />
+                        <label class="ml-2 block font-body-md text-sm text-on-surface-variant" for="remember_me">
+                            Ingat saya
+                        </label>
+                    </div>
+
+                    <div class="pt-sm">
+                        <button class="w-full bg-primary hover:bg-primary-container hover:text-on-primary-container text-on-primary font-label-md text-[14px] leading-[20px] font-semibold py-3 px-4 rounded h-[44px] transition-colors active:scale-[0.98] flex items-center justify-center gap-2" type="submit">
+                            Masuk Sistem
+                            <span class="material-symbols-outlined">arrow_forward</span>
+                        </button>
+                    </div>
                 </form>
-
-                <div class="mt-lg pt-sm border-t border-outline-variant flex items-center justify-center gap-2">
-                    <span class="relative flex h-3 w-3">
-                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary opacity-75"></span>
-                        <span class="relative inline-flex rounded-full h-3 w-3 bg-secondary"></span>
-                    </span>
-                    <span class="font-label-sm text-label-sm text-on-surface-variant">Sistem Operasional Normal</span>
-                </div>
             </div>
         </div>
     </div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll('input[type="password"]').forEach((input, idx) => {
+        const parent = input.parentElement;
+        if (window.getComputedStyle(parent).position === "static") {
+            parent.style.position = "relative";
+        }
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.id = "pw-toggle-" + idx;
+        btn.setAttribute("aria-label", "Toggle visibility");
+        btn.className = "absolute inset-y-0 right-0 flex items-center px-3 text-on-surface-variant hover:text-secondary transition-colors";
+        btn.innerHTML = '<span class="material-symbols-outlined text-[20px] select-none" style="font-variation-settings:\'FILL\' 0;">visibility</span>';
+        parent.appendChild(btn);
+        input.style.paddingRight = "2.5rem";
+        btn.addEventListener("click", () => {
+            const isHidden = input.type === "password";
+            input.type = isHidden ? "text" : "password";
+            btn.querySelector("span").textContent = isHidden ? "visibility_off" : "visibility";
+        });
+    });
+});
+</script>
 </body>
 </html>

@@ -55,57 +55,34 @@ class PageSeeder extends Seeder
             [
                 'slug' => 'contact-us',
                 'title' => 'Contact Us',
-                'content' => '<div class="grid md:grid-cols-2 gap-xl">
-    <div class="space-y-md text-on-surface-variant font-body-md text-body-md">
-        <p>Have a question or need assistance? Our team is here to help you with your vehicle\'s needs.</p>
-        
-        <div class="space-y-4 mt-lg">
-            <div class="flex items-start gap-4">
-                <span class="material-symbols-outlined text-primary text-3xl">location_on</span>
-                <div>
-                    <h3 class="font-headline-sm text-headline-sm text-on-background font-bold mb-1">Our Workshop</h3>
-                    <p>Jl. Raya Industri No. 123<br>Kawasan Otomotif, Jakarta 10110</p>
-                </div>
-            </div>
-            
-            <div class="flex items-start gap-4">
-                <span class="material-symbols-outlined text-primary text-3xl">call</span>
-                <div>
-                    <h3 class="font-headline-sm text-headline-sm text-on-background font-bold mb-1">Phone Number</h3>
-                    <p>+62 21 1234 5678</p>
-                    <p class="text-sm mt-1">Available Mon-Sat, 08:00 - 17:00 WIB</p>
-                </div>
-            </div>
-            
-            <div class="flex items-start gap-4">
-                <span class="material-symbols-outlined text-primary text-3xl">mail</span>
-                <div>
-                    <h3 class="font-headline-sm text-headline-sm text-on-background font-bold mb-1">Email Address</h3>
-                    <p>info@sibengkel.web.id</p>
-                </div>
+                'content' => '<div class="space-y-md text-on-surface-variant font-body-md text-body-md">
+    <p>Have a question or need assistance? Our team is here to help you with your vehicle\'s needs.</p>
+    
+    <div class="space-y-4 mt-lg">
+        <div class="flex items-start gap-4">
+            <span class="material-symbols-outlined text-primary text-3xl">location_on</span>
+            <div>
+                <h3 class="font-headline-sm text-headline-sm text-on-background font-bold mb-1">Our Workshop</h3>
+                <p>Jl. Raya Industri No. 123<br>Kawasan Otomotif, Jakarta 10110</p>
             </div>
         </div>
-    </div>
-
-    <div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg">
-        <h3 class="font-headline-md text-headline-md text-on-background font-bold mb-md">Send us a message</h3>
-        <form class="space-y-4">
+        
+        <div class="flex items-start gap-4">
+            <span class="material-symbols-outlined text-primary text-3xl">call</span>
             <div>
-                <label class="block text-sm font-medium mb-1">Name</label>
-                <input type="text" class="w-full rounded border-outline-variant p-2" placeholder="Your full name">
+                <h3 class="font-headline-sm text-headline-sm text-on-background font-bold mb-1">Phone Number</h3>
+                <p>+62 21 1234 5678</p>
+                <p class="text-sm mt-1">Available Mon-Sat, 08:00 - 17:00 WIB</p>
             </div>
+        </div>
+        
+        <div class="flex items-start gap-4">
+            <span class="material-symbols-outlined text-primary text-3xl">mail</span>
             <div>
-                <label class="block text-sm font-medium mb-1">Email</label>
-                <input type="email" class="w-full rounded border-outline-variant p-2" placeholder="your@email.com">
+                <h3 class="font-headline-sm text-headline-sm text-on-background font-bold mb-1">Email Address</h3>
+                <p>info@sibengkel.web.id</p>
             </div>
-            <div>
-                <label class="block text-sm font-medium mb-1">Message</label>
-                <textarea class="w-full rounded border-outline-variant p-2 min-h-[120px]" placeholder="How can we help you?"></textarea>
-            </div>
-            <button type="button" class="bg-primary text-on-primary font-bold py-2 px-6 rounded hover:opacity-90 w-full transition-opacity">
-                Send Message
-            </button>
-        </form>
+        </div>
     </div>
 </div>'
             ],

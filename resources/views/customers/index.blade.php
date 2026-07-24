@@ -34,11 +34,22 @@
                 <tbody class="divide-y divide-outline-variant">
                     @forelse($customers as $customer)
                     <tr class="hover:bg-surface-container-lowest transition-colors group {{ $loop->even ? 'bg-surface-bright' : '' }}">
-                        <td class="py-4 px-6 font-medium text-on-surface">{{ $customer->name }}</td>
+                        <td class="py-4 px-6 font-medium text-on-surface">
+                            <div class="flex items-center gap-3">
+                                @if($customer->profile_photo_url)
+                                    <img src="{{ $customer->profile_photo_url }}" alt="{{ $customer->name }}" class="w-10 h-10 rounded-full object-cover shrink-0 border border-outline-variant">
+                                @else
+                                    <div class="w-10 h-10 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-bold text-sm shrink-0 border border-outline-variant">
+                                        {{ substr($customer->name, 0, 1) }}
+                                    </div>
+                                @endif
+                                <span>{{ $customer->name }}</span>
+                            </div>
+                        </td>
                         <td class="py-4 px-6 text-on-surface-variant">{{ $customer->phone }}</td>
                         <td class="py-4 px-6 text-on-surface-variant truncate max-w-xs">{{ $customer->address ?: '-' }}</td>
-                        <td class="py-4 px-6 text-center">
-                            <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-primary-container text-on-primary-container font-semibold text-sm">{{ $customer->vehicles_count }}</span>
+                        <td class="py-4 px-6 text-center text-on-surface font-semibold">
+                            {{ $customer->vehicles_count }}
                         </td>
                         @if(Auth::user()->role === 'admin')
                         <td class="py-4 px-6 text-right">

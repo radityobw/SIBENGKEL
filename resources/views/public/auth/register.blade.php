@@ -16,9 +16,9 @@
 <body class="bg-surface text-on-surface antialiased min-h-screen">
     <div class="flex min-h-screen w-full relative">
         <!-- Absolute Back Button to Home -->
-        <a href="{{ url('/') }}" class="absolute top-4 left-4 lg:left-8 z-50 flex items-center gap-2 text-primary bg-surface/80 p-2 rounded-full hover:bg-surface transition-colors backdrop-blur-sm shadow-sm" aria-label="Kembali ke Beranda">
-            <span class="material-symbols-outlined">arrow_back</span>
-            <span class="font-label-md hidden md:inline">Beranda</span>
+        <a href="{{ url('/') }}" class="absolute top-4 right-4 lg:right-8 z-50 flex items-center gap-2 font-label-md text-on-surface-variant hover:text-primary transition-colors px-4 py-2 rounded-full border border-outline-variant/50 hover:bg-surface-container shadow-sm bg-surface/90 backdrop-blur-sm" aria-label="Kembali ke Beranda">
+            <span class="material-symbols-outlined text-[20px]">arrow_back</span>
+            <span class="hidden md:inline">Kembali</span>
         </a>
 
         <!-- Left Side: Brand & Image (Hidden on Mobile) -->
@@ -82,9 +82,9 @@
                     
                     <!-- Email -->
                     <div class="flex flex-col gap-base">
-                        <label class="font-label-md text-label-md text-on-surface" for="email">Alamat Email (Opsional)</label>
+                        <label class="font-label-md text-label-md text-on-surface" for="email">Alamat Email <span class="text-secondary">*</span></label>
                         <input class="w-full min-h-[44px] px-sm py-2 bg-surface-container-lowest border border-outline-variant rounded focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary text-body-md font-body-md text-on-surface transition-colors" 
-                            id="email" name="email" placeholder="Contoh: email@domain.com" value="{{ old('email') }}" type="email"/>
+                            id="email" name="email" placeholder="Contoh: email@domain.com" value="{{ old('email') }}" type="email" required/>
                     </div>
                     
                     <!-- Address -->
@@ -121,9 +121,31 @@
                             Sudah punya akun? <a class="text-primary font-bold hover:underline" href="{{ route('public.login') }}">Masuk di sini</a>
                         </div>
                     </div>
-                </form>
-            </div>
-        </div>
     </div>
+</div>
+</div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll('input[type="password"]').forEach((input, idx) => {
+        const parent = input.parentElement;
+        if (window.getComputedStyle(parent).position === "static") {
+            parent.style.position = "relative";
+        }
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.id = "pw-toggle-" + idx;
+        btn.setAttribute("aria-label", "Toggle visibility");
+        btn.className = "absolute inset-y-0 right-0 flex items-center px-3 text-on-surface-variant hover:text-secondary transition-colors";
+        btn.innerHTML = '<span class="material-symbols-outlined text-[20px] select-none" style="font-variation-settings:\'FILL\' 0;">visibility</span>';
+        parent.appendChild(btn);
+        input.style.paddingRight = "2.5rem";
+        btn.addEventListener("click", () => {
+            const isHidden = input.type === "password";
+            input.type = isHidden ? "text" : "password";
+            btn.querySelector("span").textContent = isHidden ? "visibility_off" : "visibility";
+        });
+    });
+});
+</script>
 </body>
 </html>
