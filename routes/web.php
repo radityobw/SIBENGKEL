@@ -6,8 +6,14 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminPageController;
 use App\Http\Controllers\PublicPageController;
 
+use App\Http\Controllers\ContactController;
+
 // Public Pages (Static -> Dynamic)
 Route::get('/p/{slug}', [PublicPageController::class, 'show'])->name('public.page');
+
+// Contact Us
+Route::get('/contact-us', [ContactController::class, 'index'])->name('contact.index');
+Route::post('/contact-us', [ContactController::class, 'store'])->name('contact.submit');
 
 Route::get('/', function () {
     $testimonials = \App\Models\Testimonial::where('is_active', true)->latest()->take(10)->get();
@@ -58,6 +64,11 @@ Route::middleware('guest:customer')->group(function () {
 // Portal Pelanggan (Authenticated)
 Route::middleware('auth:customer')->group(function () {
     Route::post('/keluar', [CustomerAuthPortalController::class, 'logout'])->name('public.logout');
+
+    // Notifications
+    Route::post('notifications/{id}/read', [NotificationController::class, 'markAsRead'])->name('public.notifications.read');
+    Route::post('notifications/read-all', [NotificationController::class, 'markAllAsRead'])->name('public.notifications.readAll');
+
     Route::get('/portal', [BookingPortalController::class, 'dashboard'])->name('public.dashboard');
     Route::get('/profil', [CustomerAuthPortalController::class, 'editProfile'])->name('public.profile');
     Route::put('/profil', [CustomerAuthPortalController::class, 'updateProfile'])->name('public.profile.update');
@@ -132,6 +143,10 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     // Testimonials Management
     Route::resource('testimonials', \App\Http\Controllers\TestimonialController::class, ['as' => 'admin'])->except('show');
 
+    // Notifications
+    Route::post('admin/notifications/{id}/read', [NotificationController::class, 'markAsRead'])->name('admin.notifications.read');
+    Route::post('admin/notifications/read-all', [NotificationController::class, 'markAllAsRead'])->name('admin.notifications.readAll');
+
     // System Settings
     Route::get('/settings', [\App\Http\Controllers\Admin\SettingController::class, 'index'])->name('admin.settings.index');
     Route::post('/settings', [\App\Http\Controllers\Admin\SettingController::class, 'update'])->name('admin.settings.update');
@@ -158,6 +173,11 @@ Route::middleware(['auth', 'role:admin,mekanik'])->group(function () {
     Route::post('transactions', [TransactionController::class, 'store'])->name('transactions.store');
     Route::patch('transactions/{transaction}/status', [TransactionController::class, 'updateStatus'])->name('transactions.updateStatus');
     Route::get('transactions/{transaction}/invoice', [TransactionController::class, 'printInvoice'])->name('transactions.invoice');
+
+    // Contact Messages
+    Route::get('messages', [ContactController::class, 'adminIndex'])->name('admin.messages.index');
+    Route::post('messages/{message}/read', [ContactController::class, 'adminMarkAsRead'])->name('admin.messages.read');
+    Route::delete('messages/{message}', [ContactController::class, 'adminDestroy'])->name('admin.messages.destroy');
 });
 
 require __DIR__.'/auth.php';

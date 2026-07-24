@@ -56,10 +56,8 @@
                         <td class="p-4 whitespace-nowrap">{{ \Carbon\Carbon::parse($tx->transaction_date)->format('d M Y') }}</td>
                         <td class="p-4 font-medium text-primary whitespace-nowrap">{{ $tx->vehicle->plate_number }} <span class="text-xs text-on-surface-variant font-normal block">{{ $tx->vehicle->brand }} {{ $tx->vehicle->model }}</span></td>
                         <td class="p-4">
-                            <div class="flex items-center gap-2">
-                                <div class="w-8 h-8 rounded-full bg-surface-variant flex items-center justify-center text-on-surface-variant font-bold text-xs shrink-0 border border-outline-variant">{{ substr($tx->vehicle->customer->name, 0, 1) }}</div>
-                                <span class="truncate max-w-[150px]">{{ $tx->vehicle->customer->name }}</span>
-                            </div>
+                            <span class="truncate max-w-[150px] font-medium text-on-surface block">{{ $tx->vehicle->customer->name }}</span>
+                            <span class="text-xs text-on-surface-variant">{{ $tx->vehicle->customer->phone ?? '-' }}</span>
                         </td>
                         <td class="p-4">{{ $tx->mechanic ? $tx->mechanic->name : '-' }}</td>
                         <td class="p-4 text-right font-medium">Rp {{ number_format($tx->cost, 0, ',', '.') }}</td>

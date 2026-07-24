@@ -22,7 +22,7 @@
          class="fixed inset-0 z-40 bg-black/50 md:hidden" style="display: none;"></div>
 
     <!-- SideNavBar -->
-    <aside :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'" class="w-[280px] h-screen fixed left-0 top-0 bg-primary border-r border-outline-variant/20 shadow-md flex flex-col py-6 px-4 gap-2 z-50 transition-transform duration-300 ease-in-out">
+    <aside :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'" class="hidden md:flex w-[280px] h-screen fixed left-0 top-0 bg-primary border-r border-outline-variant/20 shadow-md flex-col py-6 px-4 gap-2 z-50 transition-transform duration-300 ease-in-out">
         <div class="px-4 mb-8">
             <a href="{{ url('/') }}" class="group block hover:opacity-90 transition-opacity">
                 <div class="flex items-center gap-2">
@@ -55,10 +55,6 @@
         <!-- TopNavBar (Identical to Dashboard) -->
         <header class="flex justify-between items-center px-4 md:px-8 w-full h-16 sticky top-0 z-40 bg-primary md:bg-surface border-b border-outline-variant">
             <div class="flex items-center gap-2">
-                <!-- Mobile Menu Button -->
-                <button @click="sidebarOpen = true" class="md:hidden p-2 rounded-full text-on-primary hover:bg-primary-container/20 transition-colors">
-                    <span class="material-symbols-outlined">menu</span>
-                </button>
                 <a href="{{ url('/') }}" class="md:hidden flex items-center gap-2 hover:opacity-90 transition-opacity">
                     <img src="{{ asset('logobengkel.png') }}" alt="SIBENGKEL Logo" class="h-6 object-contain brightness-0 invert">
                     <h2 class="text-xl font-sora font-bold text-on-primary tracking-tight">SIBENGKEL</h2>
@@ -67,13 +63,60 @@
             
             <div class="flex items-center gap-3">
                 @if(Auth::guard('customer')->check())
-                    @php $customerBookingCount = Auth::guard('customer')->user()->bookings()->whereIn('status', ['menunggu_konfirmasi', 'disetujui'])->count(); @endphp
-                    <a href="{{ route('public.orders.index') }}" class="w-10 h-10 rounded-full flex items-center justify-center text-on-primary md:text-on-surface-variant hover:bg-primary-container/20 md:hover:bg-surface-container-high transition-colors relative" title="Lihat Status Pesanan & Booking">
+                <!-- Notification Dropdown -->
+                <div x-data="{ notifOpen: false }" class="relative">
+                    @php 
+                        $unreadCount = Auth::guard('customer')->user()->unreadNotifications->count(); 
+                        $notifications = Auth::guard('customer')->user()->notifications()->take(5)->get();
+                    @endphp
+                    <button @click="notifOpen = !notifOpen" @click.away="notifOpen = false" class="w-10 h-10 rounded-full flex items-center justify-center text-on-primary md:text-on-surface-variant hover:bg-primary-container/20 md:hover:bg-surface-container-high transition-colors relative" title="Notifikasi">
                         <span class="material-symbols-outlined">notifications</span>
-                        @if($customerBookingCount > 0)
-                            <span class="absolute top-2 right-2 w-2.5 h-2.5 rounded-full bg-secondary animate-pulse"></span>
+                        @if($unreadCount > 0)
+                            <span class="absolute top-2 right-2 w-4 h-4 rounded-full bg-error text-white text-[9px] font-bold flex items-center justify-center border-2 border-surface">{{ $unreadCount > 9 ? '9+' : $unreadCount }}</span>
                         @endif
-                    </a>
+                    </button>
+                    
+                    <!-- Dropdown Menu -->
+                    <div x-show="notifOpen" x-transition class="fixed left-4 right-4 top-16 md:absolute md:left-auto md:right-0 md:top-auto md:mt-2 md:w-80 bg-surface rounded-xl shadow-lg border border-outline-variant/30 overflow-hidden z-50 hidden" :class="{'hidden': !notifOpen}">
+                        <div class="p-3 border-b border-outline-variant/30 flex justify-between items-center bg-surface-container-lowest">
+                            <h3 class="font-bold text-on-surface text-sm">Notifikasi</h3>
+                            @if($unreadCount > 0)
+                                <form action="{{ route('public.notifications.readAll') }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="text-xs text-primary hover:underline">Tandai semua dibaca</button>
+                                </form>
+                            @endif
+                        </div>
+                        <div class="max-h-[300px] overflow-y-auto custom-scrollbar">
+                            @forelse($notifications as $notif)
+                                <div class="p-3 border-b border-outline-variant/10 hover:bg-surface-container-lowest transition-colors {{ is_null($notif->read_at) ? 'bg-primary/5' : '' }}">
+                                    <div class="flex justify-between items-start gap-2">
+                                        <div class="flex-1">
+                                            <p class="text-sm font-bold text-on-surface leading-tight">{{ $notif->data['title'] ?? 'Pemberitahuan' }}</p>
+                                            <p class="text-xs text-on-surface-variant mt-1">{{ $notif->data['message'] ?? '' }}</p>
+                                            <p class="text-[10px] text-outline mt-1">{{ $notif->created_at->diffForHumans() }}</p>
+                                        </div>
+                                        @if(is_null($notif->read_at))
+                                            <form action="{{ route('public.notifications.read', $notif->id) }}" method="POST">
+                                                @csrf
+                                                <button type="submit" class="w-6 h-6 rounded-full hover:bg-surface-container flex items-center justify-center text-primary" title="Tandai dibaca">
+                                                    <span class="material-symbols-outlined text-[14px]">check</span>
+                                                </button>
+                                            </form>
+                                        @endif
+                                    </div>
+                                    @if(isset($notif->data['action_url']))
+                                        <a href="{{ $notif->data['action_url'] }}" class="inline-block mt-2 text-xs text-primary font-semibold hover:underline">Lihat Detail</a>
+                                    @endif
+                                </div>
+                            @empty
+                                <div class="p-4 text-center text-sm text-on-surface-variant">
+                                    Belum ada notifikasi.
+                                </div>
+                            @endforelse
+                        </div>
+                    </div>
+                </div>
                     <a href="{{ route('public.profile') }}" class="font-medium text-sm text-on-primary md:text-on-surface-variant truncate max-w-[140px] sm:max-w-[200px] hover:opacity-80 transition-opacity flex items-center gap-2" title="Edit Profil Saya">
                         @if(Auth::guard('customer')->user()->profile_photo_url)
                             <img src="{{ Auth::guard('customer')->user()->profile_photo_url }}" class="w-8 h-8 rounded-full object-cover border border-outline-variant/30">
@@ -82,7 +125,7 @@
                                 {{ substr(Auth::guard('customer')->user()->name, 0, 1) }}
                             </div>
                         @endif
-                        <span>Halo, <span class="font-bold underline decoration-secondary decoration-2 underline-offset-4">{{ Auth::guard('customer')->user()->name }}</span></span>
+                        <span class="hidden md:inline">Halo, <span class="font-bold underline decoration-secondary decoration-2 underline-offset-4">{{ Auth::guard('customer')->user()->name }}</span></span>
                     </a>
                 @endif
                 <!-- Logout -->
@@ -143,25 +186,24 @@
     </nav>
 
 <script>
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
     document.querySelectorAll('input[type="password"]').forEach((input, idx) => {
         const parent = input.parentElement;
-        const wrapper = document.createElement('div');
-        wrapper.className = 'relative';
-        parent.insertBefore(wrapper, input);
-        wrapper.appendChild(input);
-        const btn = document.createElement('button');
-        btn.type = 'button';
-        btn.id = 'pw-toggle-' + idx;
-        btn.setAttribute('aria-label', 'Toggle visibility');
-        btn.className = 'absolute inset-y-0 right-0 flex items-center px-3 text-on-surface-variant hover:text-secondary transition-colors';
+        if (window.getComputedStyle(parent).position === "static") {
+            parent.style.position = "relative";
+        }
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.id = "pw-toggle-" + idx;
+        btn.setAttribute("aria-label", "Toggle visibility");
+        btn.className = "absolute inset-y-0 right-0 flex items-center px-3 text-on-surface-variant hover:text-secondary transition-colors";
         btn.innerHTML = '<span class="material-symbols-outlined text-[20px] select-none" style="font-variation-settings:\'FILL\' 0;">visibility</span>';
-        wrapper.appendChild(btn);
-        input.style.paddingRight = '2.5rem';
-        btn.addEventListener('click', () => {
-            const isHidden = input.type === 'password';
-            input.type = isHidden ? 'text' : 'password';
-            btn.querySelector('span').textContent = isHidden ? 'visibility_off' : 'visibility';
+        parent.appendChild(btn);
+        input.style.paddingRight = "2.5rem";
+        btn.addEventListener("click", () => {
+            const isHidden = input.type === "password";
+            input.type = isHidden ? "text" : "password";
+            btn.querySelector("span").textContent = isHidden ? "visibility_off" : "visibility";
         });
     });
 });

@@ -28,7 +28,7 @@
                     <option disabled selected value="">Pilih kendaraan Anda...</option>
                     @foreach($vehicles as $vehicle)
                         <option value="{{ $vehicle->id }}" {{ old('vehicle_id') == $vehicle->id ? 'selected' : '' }}>
-                            {{ $vehicle->brand }} {{ $vehicle->model }} ({{ $vehicle->nomor_polisi }})
+                            {{ $vehicle->brand }} {{ $vehicle->model }} ({{ $vehicle->plate_number }})
                         </option>
                     @endforeach
                 </select>

@@ -36,7 +36,7 @@
                                 </td>
                                 <td class="px-6 py-4 font-semibold">
                                     {{ $booking->vehicle->brand ?? '-' }} {{ $booking->vehicle->model ?? '-' }}
-                                    <br><span class="text-xs font-normal text-on-surface-variant">{{ $booking->vehicle->plate_number ?? $booking->vehicle->nomor_polisi ?? '-' }}</span>
+                                    <br><span class="text-xs font-normal text-on-surface-variant">{{ $booking->vehicle->plate_number ?? $booking->vehicle->plate_number ?? '-' }}</span>
                                 </td>
                                 <td class="px-6 py-4">
                                     {{ \Carbon\Carbon::parse($booking->preferred_date)->translatedFormat('d M Y') }}
@@ -46,7 +46,7 @@
                                     {{ $booking->complaint ?? '-' }}
                                 </td>
                                 <td class="px-6 py-4">
-                                    <span class="px-2.5 py-1 rounded-full text-xs font-bold text-white
+                                    <span class="inline-block whitespace-nowrap px-2.5 py-1 rounded-full text-xs font-bold text-white
                                         @if($booking->status == 'menunggu_konfirmasi') bg-amber-500
                                         @elseif($booking->status == 'disetujui') bg-blue-600
                                         @elseif($booking->status == 'dikonversi') bg-emerald-600
@@ -56,25 +56,78 @@
                                     </span>
                                 </td>
                                 <td class="px-6 py-4 text-right">
-                                    @if($booking->status != 'dikonversi')
-                                        <form action="{{ route('admin.bookings.updateStatus', $booking) }}" method="POST" class="inline-block" onsubmit="return confirm('Apakah Anda yakin ingin memperbarui status booking ini?')">
-                                            @csrf
-                                            @method('PATCH')
-                                            <select name="status" class="text-xs border border-outline-variant rounded-lg p-1.5 bg-surface text-on-surface focus:ring-primary" onchange="this.form.submit()">
-                                                <option value="" disabled selected>Ubah Status</option>
-                                                @if($booking->status != 'disetujui')
-                                                    <option value="disetujui">Setujui</option>
-                                                @endif
-                                                <option value="dikonversi">Konversi ke Transaksi Servis</option>
-                                                <option value="ditolak">Tolak</option>
-                                            </select>
-                                        </form>
-                                    @else
+                                    @if($booking->status == 'menunggu_konfirmasi')
+                                        <button type="button" onclick="document.getElementById('modal-{{ $booking->id }}').classList.remove('hidden')" class="bg-primary hover:bg-primary/90 text-on-primary px-3 py-1.5 rounded-lg text-xs font-semibold shadow-sm transition-colors">
+                                            Proses Booking
+                                        </button>
+                                        
+                                        <!-- Modal -->
+                                        <div id="modal-{{ $booking->id }}" class="fixed inset-0 z-50 hidden bg-black/50 flex items-center justify-center backdrop-blur-sm">
+                                            <div class="bg-surface rounded-xl shadow-lg w-full max-w-md mx-4 overflow-hidden border border-outline-variant text-left">
+                                                <div class="p-4 border-b border-outline-variant flex justify-between items-center bg-surface-container-lowest">
+                                                    <h3 class="font-bold text-on-surface">Proses Booking #SB-{{ str_pad($booking->id, 4, '0', STR_PAD_LEFT) }}</h3>
+                                                    <button type="button" onclick="document.getElementById('modal-{{ $booking->id }}').classList.add('hidden')" class="text-on-surface-variant hover:text-on-surface">
+                                                        <span class="material-symbols-outlined">close</span>
+                                                    </button>
+                                                </div>
+                                                <form action="{{ route('admin.bookings.updateStatus', $booking) }}" method="POST">
+                                                    @csrf
+                                                    @method('PATCH')
+                                                    <div class="p-4 space-y-4">
+                                                        <p class="text-sm text-on-surface-variant">Tentukan mekanik dan estimasi biaya awal sebelum menyetujui booking ini. Atau Anda dapat menolak booking ini.</p>
+                                                        
+                                                        <div>
+                                                            <label class="block text-xs font-semibold text-on-surface mb-1">Mekanik Bertugas <span class="text-error">*</span></label>
+                                                            <select name="mechanic_id" id="mechanic-{{ $booking->id }}" class="w-full border border-outline-variant rounded-lg p-2 text-sm bg-surface focus:ring-primary focus:border-primary" required>
+                                                                <option value="">-- Pilih Mekanik --</option>
+                                                                @foreach($mechanics as $mechanic)
+                                                                    <option value="{{ $mechanic->id }}">{{ $mechanic->name }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                        
+                                                        <div>
+                                                            <label class="block text-xs font-semibold text-on-surface mb-1">Estimasi Biaya (Rp) <span class="text-error">*</span></label>
+                                                            <input type="number" name="cost" id="cost-{{ $booking->id }}" value="0" min="0" class="w-full border border-outline-variant rounded-lg p-2 text-sm bg-surface focus:ring-primary focus:border-primary" required>
+                                                        </div>
+                                                        
+                                                        <div>
+                                                            <label class="block text-xs font-semibold text-on-surface mb-1">Keputusan</label>
+                                                            <select name="status" class="w-full border border-outline-variant rounded-lg p-2 text-sm bg-surface focus:ring-primary focus:border-primary" required onchange="
+                                                                if(this.value === 'ditolak') { 
+                                                                    document.getElementById('mechanic-{{ $booking->id }}').required = false; 
+                                                                    document.getElementById('cost-{{ $booking->id }}').required = false; 
+                                                                } else { 
+                                                                    document.getElementById('mechanic-{{ $booking->id }}').required = true; 
+                                                                    document.getElementById('cost-{{ $booking->id }}').required = true; 
+                                                                }">
+                                                                <option value="disetujui">Setujui (Masuk Antrean Servis)</option>
+                                                                <option value="ditolak">Tolak Booking</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="p-4 border-t border-outline-variant bg-surface-container-lowest flex justify-end gap-2">
+                                                        <button type="button" onclick="document.getElementById('modal-{{ $booking->id }}').classList.add('hidden')" class="px-4 py-2 text-sm font-medium text-on-surface-variant hover:bg-surface-variant rounded-lg transition-colors">Batal</button>
+                                                        <button type="submit" class="px-4 py-2 text-sm font-medium bg-primary text-on-primary hover:bg-primary/90 rounded-lg transition-colors">Simpan</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    @elseif($booking->status == 'disetujui' && $booking->service_transaction_id)
+                                        <a href="{{ route('transactions.edit', $booking->service_transaction_id) }}" class="inline-flex items-center gap-1 text-primary hover:underline text-xs font-bold">
+                                            Lihat Transaksi <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+                                        </a>
+                                    @elseif($booking->status == 'dikonversi')
+                                        <!-- Fallback for incorrectly seeded data -->
                                         @if($booking->service_transaction_id)
                                             <a href="{{ route('transactions.edit', $booking->service_transaction_id) }}" class="inline-flex items-center gap-1 text-primary hover:underline text-xs font-bold">
                                                 Lihat Transaksi <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
                                             </a>
+                                        @else
+                                            <span class="text-xs font-bold text-on-surface-variant">Data Seed Lama</span>
                                         @endif
+                                    @elseif($booking->status == 'ditolak')
+                                        <span class="text-xs font-bold text-error">Ditolak</span>
                                     @endif
                                 </td>
                             </tr>

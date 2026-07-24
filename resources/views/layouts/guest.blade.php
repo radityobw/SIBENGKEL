@@ -27,28 +27,27 @@
             </div>
         </div>
     <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        document.querySelectorAll('input[type="password"]').forEach((input, idx) => {
-            const parent = input.parentElement;
-            const wrapper = document.createElement('div');
-            wrapper.className = 'relative';
-            parent.insertBefore(wrapper, input);
-            wrapper.appendChild(input);
-            const btn = document.createElement('button');
-            btn.type = 'button';
-            btn.id = 'pw-toggle-' + idx;
-            btn.setAttribute('aria-label', 'Toggle visibility');
-            btn.className = 'absolute inset-y-0 right-0 flex items-center px-3 text-gray-400 hover:text-gray-700 transition-colors';
-            btn.innerHTML = '<span class="material-symbols-outlined text-[20px] select-none">visibility</span>';
-            wrapper.appendChild(btn);
-            input.style.paddingRight = '2.5rem';
-            btn.addEventListener('click', () => {
-                const isHidden = input.type === 'password';
-                input.type = isHidden ? 'text' : 'password';
-                btn.querySelector('span').textContent = isHidden ? 'visibility_off' : 'visibility';
-            });
+document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll('input[type="password"]').forEach((input, idx) => {
+        const parent = input.parentElement;
+        if (window.getComputedStyle(parent).position === "static") {
+            parent.style.position = "relative";
+        }
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.id = "pw-toggle-" + idx;
+        btn.setAttribute("aria-label", "Toggle visibility");
+        btn.className = "absolute inset-y-0 right-0 flex items-center px-3 text-on-surface-variant hover:text-secondary transition-colors";
+        btn.innerHTML = '<span class="material-symbols-outlined text-[20px] select-none" style="font-variation-settings:\'FILL\' 0;">visibility</span>';
+        parent.appendChild(btn);
+        input.style.paddingRight = "2.5rem";
+        btn.addEventListener("click", () => {
+            const isHidden = input.type === "password";
+            input.type = isHidden ? "text" : "password";
+            btn.querySelector("span").textContent = isHidden ? "visibility_off" : "visibility";
         });
     });
-    </script>
+});
+</script>
     </body>
 </html>

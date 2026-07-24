@@ -23,7 +23,7 @@
          @click="sidebarOpen = false"
          class="fixed inset-0 z-40 bg-black/50 lg:hidden" style="display: none;"></div>
     <!-- SideNavBar -->
-    <aside :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'" class="w-[280px] h-screen fixed left-0 top-0 bg-primary dark:bg-tertiary border-r border-outline-variant/20 shadow-md flex flex-col py-6 px-4 gap-2 z-50 transition-transform duration-300 ease-in-out">
+    <aside :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'" class="hidden lg:flex w-[280px] h-screen fixed left-0 top-0 bg-primary dark:bg-tertiary border-r border-outline-variant/20 shadow-md flex-col py-6 px-4 gap-2 z-50 transition-transform duration-300 ease-in-out">
         <div class="px-4 mb-8">
             <a href="{{ url('/') }}" class="group block hover:opacity-90 transition-opacity">
                 <div class="flex items-center gap-2">
@@ -65,6 +65,10 @@
                 <span class="material-symbols-outlined {{ request()->routeIs('admin.spareparts.*') ? 'icon-filled' : '' }}">inventory_2</span>
                 <span>Sparepart</span>
             </a>
+            <a class="flex items-center gap-4 px-4 py-2 {{ request()->routeIs('transactions.*') ? 'bg-secondary text-white' : 'text-on-primary/70 hover:text-on-primary hover:bg-primary-container/50' }} rounded-lg font-semibold transition-all duration-200 ease-in-out h-11" href="{{ route('transactions.index') }}">
+                <span class="material-symbols-outlined {{ request()->routeIs('transactions.*') ? 'icon-filled' : '' }}">receipt_long</span>
+                <span>Transaksi Servis</span>
+            </a>
             <a class="flex items-center justify-between px-4 py-2 {{ request()->routeIs('admin.bookings.*') ? 'bg-secondary text-white' : 'text-on-primary/70 hover:text-on-primary hover:bg-primary-container/50' }} rounded-lg font-semibold transition-all duration-200 ease-in-out h-11" href="{{ route('admin.bookings.index') }}">
                 <div class="flex items-center gap-4">
                     <span class="material-symbols-outlined {{ request()->routeIs('admin.bookings.*') ? 'icon-filled' : '' }}">calendar_month</span>
@@ -85,14 +89,20 @@
                     <span class="bg-white text-secondary text-xs px-2 py-0.5 rounded-full font-bold">{{ $pendingOrderCount }}</span>
                 @endif
             </a>
-            <a class="flex items-center gap-4 px-4 py-2 {{ request()->routeIs('transactions.*') ? 'bg-secondary text-white' : 'text-on-primary/70 hover:text-on-primary hover:bg-primary-container/50' }} rounded-lg font-semibold transition-all duration-200 ease-in-out h-11" href="{{ route('transactions.index') }}">
-                <span class="material-symbols-outlined">receipt_long</span>
-                <span>Transaksi</span>
-            </a>
+
             @if(Auth::user()->role === 'admin')
             <a class="flex items-center gap-4 px-4 py-2 {{ request()->routeIs('pages.*') ? 'bg-secondary text-white' : 'text-on-primary/70 hover:text-on-primary hover:bg-primary-container/50' }} rounded-lg font-semibold transition-all duration-200 ease-in-out h-11" href="{{ route('pages.index') }}">
                 <span class="material-symbols-outlined">description</span>
-                <span>Pengaturan Halaman</span>
+                <span>Halaman Statis</span>
+            </a>
+            
+            <a class="flex items-center gap-4 px-4 py-2 {{ request()->routeIs('admin.messages.*') ? 'bg-secondary text-white' : 'text-on-primary/70 hover:text-on-primary hover:bg-primary-container/50' }} rounded-lg font-semibold transition-all duration-200 ease-in-out h-11 relative" href="{{ route('admin.messages.index') }}">
+                <span class="material-symbols-outlined {{ request()->routeIs('admin.messages.*') ? 'icon-filled' : '' }}">mail</span>
+                <span>Pesan Masuk</span>
+                @php $unreadMessages = \App\Models\ContactMessage::where('is_read', false)->count(); @endphp
+                @if($unreadMessages > 0)
+                    <span class="absolute right-4 top-1/2 -translate-y-1/2 bg-error text-white text-[10px] px-1.5 py-0.5 rounded-full font-bold">{{ $unreadMessages > 9 ? '9+' : $unreadMessages }}</span>
+                @endif
             </a>
             <a class="flex items-center gap-4 px-4 py-2 {{ request()->routeIs('admin.settings.*') ? 'bg-secondary text-white' : 'text-on-primary/70 hover:text-on-primary hover:bg-primary-container/50' }} rounded-lg font-semibold transition-all duration-200 ease-in-out h-11" href="{{ route('admin.settings.index') }}">
                 <span class="material-symbols-outlined">settings</span>
@@ -108,24 +118,67 @@
         <!-- TopNavBar (Visible on Mobile & Desktop) -->
         <header class="flex justify-between items-center px-4 lg:px-8 w-full h-16 sticky top-0 z-40 bg-primary lg:bg-surface border-b border-outline-variant">
             <div class="flex items-center gap-2">
-                <!-- Mobile Menu Button -->
-                <button @click="sidebarOpen = true" class="lg:hidden p-2 rounded-full text-on-primary hover:bg-primary-container/20 transition-colors">
-                    <span class="material-symbols-outlined">menu</span>
-                </button>
                 <a href="{{ url('/') }}" class="lg:hidden flex items-center gap-2 hover:opacity-90 transition-opacity">
                     <img src="{{ asset('logobengkel.png') }}" alt="SIBENGKEL Logo" class="h-6 object-contain brightness-0 invert">
                     <h2 class="text-xl font-sora font-bold text-on-primary tracking-tight">SIBENGKEL</h2>
                 </a>
             </div>
             <div class="flex items-center gap-3">
-                @php $pendingBookingCount = \App\Models\Booking::where('status', 'menunggu_konfirmasi')->count(); @endphp
-                <a href="{{ route('admin.bookings.index') }}" class="w-10 h-10 rounded-full flex items-center justify-center text-on-primary lg:text-on-surface-variant hover:bg-primary-container/20 lg:hover:bg-surface-container-high transition-colors relative" title="Cek {{ $pendingBookingCount }} Booking Masuk">
-                    <span class="material-symbols-outlined">notifications</span>
-                    @if($pendingBookingCount > 0)
-                        <span class="absolute top-2 right-2 w-2.5 h-2.5 rounded-full bg-secondary animate-pulse"></span>
-                    @endif
-                </a>
-                <a href="{{ route('profile.edit') }}" class="font-medium text-sm text-on-primary lg:text-on-surface-variant truncate max-w-[140px] sm:max-w-[200px] hover:opacity-80 transition-opacity flex items-center gap-2" title="Edit Profil Admin">
+                <!-- Notification Dropdown -->
+                <div x-data="{ notifOpen: false }" class="relative">
+                    @php 
+                        $unreadCount = Auth::user()->unreadNotifications->count(); 
+                        $notifications = Auth::user()->notifications()->take(5)->get();
+                    @endphp
+                    <button @click="notifOpen = !notifOpen" @click.away="notifOpen = false" class="w-10 h-10 rounded-full flex items-center justify-center text-on-primary lg:text-on-surface-variant hover:bg-primary-container/20 lg:hover:bg-surface-container-high transition-colors relative" title="Notifikasi">
+                        <span class="material-symbols-outlined">notifications</span>
+                        @if($unreadCount > 0)
+                            <span class="absolute top-2 right-2 w-4 h-4 rounded-full bg-error text-white text-[9px] font-bold flex items-center justify-center border-2 border-surface">{{ $unreadCount > 9 ? '9+' : $unreadCount }}</span>
+                        @endif
+                    </button>
+                    
+                    <!-- Dropdown Menu -->
+                    <div x-show="notifOpen" x-transition class="fixed left-4 right-4 top-16 sm:absolute sm:left-auto sm:right-0 sm:top-auto sm:mt-2 sm:w-80 bg-surface rounded-xl shadow-lg border border-outline-variant/30 overflow-hidden z-50 hidden" :class="{'hidden': !notifOpen}">
+                        <div class="p-3 border-b border-outline-variant/30 flex justify-between items-center bg-surface-container-lowest">
+                            <h3 class="font-bold text-on-surface text-sm">Notifikasi</h3>
+                            @if($unreadCount > 0)
+                                <form action="{{ route('admin.notifications.readAll') }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="text-xs text-primary hover:underline">Tandai semua dibaca</button>
+                                </form>
+                            @endif
+                        </div>
+                        <div class="max-h-[300px] overflow-y-auto custom-scrollbar">
+                            @forelse($notifications as $notif)
+                                <div class="p-3 border-b border-outline-variant/10 hover:bg-surface-container-lowest transition-colors {{ is_null($notif->read_at) ? 'bg-primary/5' : '' }}">
+                                    <div class="flex justify-between items-start gap-2">
+                                        <div class="flex-1">
+                                            <p class="text-sm font-bold text-on-surface leading-tight">{{ $notif->data['title'] ?? 'Pemberitahuan' }}</p>
+                                            <p class="text-xs text-on-surface-variant mt-1">{{ $notif->data['message'] ?? '' }}</p>
+                                            <p class="text-[10px] text-outline mt-1">{{ $notif->created_at->diffForHumans() }}</p>
+                                        </div>
+                                        @if(is_null($notif->read_at))
+                                            <form action="{{ route('admin.notifications.read', $notif->id) }}" method="POST">
+                                                @csrf
+                                                <button type="submit" class="w-6 h-6 rounded-full hover:bg-surface-container flex items-center justify-center text-primary" title="Tandai dibaca">
+                                                    <span class="material-symbols-outlined text-[14px]">check</span>
+                                                </button>
+                                            </form>
+                                        @endif
+                                    </div>
+                                    @if(isset($notif->data['action_url']))
+                                        <a href="{{ $notif->data['action_url'] }}" class="inline-block mt-2 text-xs text-primary font-semibold hover:underline">Lihat Detail</a>
+                                    @endif
+                                </div>
+                            @empty
+                                <div class="p-4 text-center text-sm text-on-surface-variant">
+                                    Belum ada notifikasi.
+                                </div>
+                            @endforelse
+                        </div>
+                    </div>
+                </div>
+                <a href="{{ route('profile.edit') }}" class="font-medium text-sm text-on-primary lg:text-on-surface-variant whitespace-nowrap hover:opacity-80 transition-opacity flex items-center gap-2" title="Edit Profil Admin">
                     @if(Auth::user()->profile_photo_url)
                         <img src="{{ Auth::user()->profile_photo_url }}" class="w-8 h-8 rounded-full object-cover border border-outline-variant/30">
                     @else
@@ -133,7 +186,7 @@
                             {{ substr(Auth::user()->name ?? 'A', 0, 1) }}
                         </div>
                     @endif
-                    <span>Halo, <span class="font-bold underline decoration-secondary decoration-2 underline-offset-4">{{ Auth::user()->name ?? 'Admin' }}</span></span>
+                    <span class="hidden md:inline">Halo, <span class="font-bold underline decoration-secondary decoration-2 underline-offset-4">{{ Auth::user()->name ?? 'Admin' }}</span></span>
                 </a>
                 <!-- Logout -->
                 <form method="POST" action="{{ route('logout') }}" class="flex items-center ml-2 border-l border-outline-variant/30 pl-4">
@@ -184,17 +237,26 @@
             <span class="material-symbols-outlined text-2xl">web</span>
             <span class="text-[11px] mt-1 whitespace-nowrap">Halaman</span>
         </a>
-        <a href="{{ route('admin.settings.index') }}" class="flex flex-col items-center justify-center flex-1 min-w-[64px] shrink-0 text-center {{ request()->routeIs('admin.settings.*') ? 'text-secondary font-bold' : 'text-on-surface-variant font-medium' }} h-full active:scale-90 rounded-lg px-1">
-            <span class="material-symbols-outlined text-2xl">settings</span>
-            <span class="text-[11px] mt-1 whitespace-nowrap">Pengaturan</span>
+        <a href="{{ route('pages.index') }}" class="flex flex-col items-center justify-center flex-1 min-w-[64px] shrink-0 text-center {{ request()->routeIs('pages.*') ? 'text-secondary font-bold' : 'text-on-surface-variant font-medium' }} h-full active:scale-90 rounded-lg px-1">
+            <span class="material-symbols-outlined text-2xl">description</span>
+            <span class="text-[11px] mt-1 whitespace-nowrap">Pages</span>
         </a>
+        
+        <a href="{{ route('admin.messages.index') }}" class="flex flex-col items-center justify-center flex-1 min-w-[64px] shrink-0 text-center {{ request()->routeIs('admin.messages.*') ? 'text-secondary font-bold' : 'text-on-surface-variant font-medium' }} h-full active:scale-90 rounded-lg px-1 relative">
+            <span class="material-symbols-outlined text-2xl {{ request()->routeIs('admin.messages.*') ? 'icon-filled' : '' }}">mail</span>
+            <span class="text-[11px] mt-1 whitespace-nowrap">Pesan</span>
+            @php $unreadMessages = \App\Models\ContactMessage::where('is_read', false)->count(); @endphp
+            @if($unreadMessages > 0)
+                <span class="absolute top-1 right-2 w-2 h-2 rounded-full bg-error"></span>
+            @endif
+        </a>
+        @endif
 
         <!-- 6. Mekanik -->
         <a href="{{ route('mechanics.index') }}" class="flex flex-col items-center justify-center flex-1 min-w-[64px] shrink-0 text-center {{ request()->routeIs('mechanics.*') ? 'text-secondary font-bold' : 'text-on-surface-variant font-medium' }} h-full active:scale-90 rounded-lg px-1">
             <span class="material-symbols-outlined text-2xl {{ request()->routeIs('mechanics.*') ? 'icon-filled' : '' }}">build</span>
             <span class="text-[11px] mt-1 whitespace-nowrap">Mekanik</span>
         </a>
-        @endif
 
         <!-- 7. Sparepart -->
         <a href="{{ route('admin.spareparts.index') }}" class="flex flex-col items-center justify-center flex-1 min-w-[64px] shrink-0 text-center {{ request()->routeIs('admin.spareparts.*') ? 'text-secondary font-bold' : 'text-on-surface-variant font-medium' }} h-full active:scale-90 rounded-lg px-1">
@@ -225,7 +287,7 @@
         <!-- 9. Transaksi -->
         <a href="{{ route('transactions.index') }}" class="flex flex-col items-center justify-center flex-1 min-w-[64px] shrink-0 text-center {{ request()->routeIs('transactions.*') ? 'text-secondary font-bold' : 'text-on-surface-variant font-medium' }} h-full active:scale-90 rounded-lg px-1">
             <span class="material-symbols-outlined text-2xl {{ request()->routeIs('transactions.*') ? 'icon-filled' : '' }}">receipt_long</span>
-            <span class="text-[11px] mt-1 whitespace-nowrap">Transaksi</span>
+            <span class="text-[11px] mt-1 whitespace-nowrap">Transaksi Servis</span>
         </a>
 
         @if(Auth::user()->role === 'admin')
@@ -238,32 +300,24 @@
     </nav>
 
 <script>
-// Global Password Toggle — injects show/hide button on all password fields
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
     document.querySelectorAll('input[type="password"]').forEach((input, idx) => {
-        // Wrap in relative container
         const parent = input.parentElement;
-        const wrapper = document.createElement('div');
-        wrapper.className = 'relative';
-        parent.insertBefore(wrapper, input);
-        wrapper.appendChild(input);
-
-        // Create toggle button
-        const btn = document.createElement('button');
-        btn.type = 'button';
-        btn.id = 'pw-toggle-' + idx;
-        btn.setAttribute('aria-label', 'Toggle visibility');
-        btn.className = 'absolute inset-y-0 right-0 flex items-center px-3 text-on-surface-variant hover:text-secondary transition-colors';
+        if (window.getComputedStyle(parent).position === "static") {
+            parent.style.position = "relative";
+        }
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.id = "pw-toggle-" + idx;
+        btn.setAttribute("aria-label", "Toggle visibility");
+        btn.className = "absolute inset-y-0 right-0 flex items-center px-3 text-on-surface-variant hover:text-secondary transition-colors";
         btn.innerHTML = '<span class="material-symbols-outlined text-[20px] select-none" style="font-variation-settings:\'FILL\' 0;">visibility</span>';
-        wrapper.appendChild(btn);
-
-        // Pad input right so text doesn't go under button
-        input.style.paddingRight = '2.5rem';
-
-        btn.addEventListener('click', () => {
-            const isHidden = input.type === 'password';
-            input.type = isHidden ? 'text' : 'password';
-            btn.querySelector('span').textContent = isHidden ? 'visibility_off' : 'visibility';
+        parent.appendChild(btn);
+        input.style.paddingRight = "2.5rem";
+        btn.addEventListener("click", () => {
+            const isHidden = input.type === "password";
+            input.type = isHidden ? "text" : "password";
+            btn.querySelector("span").textContent = isHidden ? "visibility_off" : "visibility";
         });
     });
 });

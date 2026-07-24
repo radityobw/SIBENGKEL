@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Booking;
 use App\Models\Vehicle;
+use App\Models\User;
+use App\Notifications\SystemNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -56,6 +58,15 @@ class BookingPortalController extends Controller
             'complaint' => $request->complaint,
             'status' => 'menunggu_konfirmasi',
         ]);
+
+        $admins = User::where('role', 'admin')->get();
+        foreach ($admins as $admin) {
+            $admin->notify(new SystemNotification(
+                'Booking Baru Masuk',
+                Auth::guard('customer')->user()->name . ' telah mengajukan booking servis baru.',
+                route('admin.bookings.index')
+            ));
+        }
 
         return redirect()->route('public.dashboard')->with('success', 'Booking berhasil diajukan dan sedang menunggu konfirmasi bengkel.');
     }

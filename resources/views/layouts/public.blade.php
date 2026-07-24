@@ -28,7 +28,7 @@
             <a class="nav-link text-on-primary/80 hover:text-secondary transition-colors font-body-md text-body-md pb-1 active:scale-95 duration-200" href="{{ url('/#features') }}">Features</a>
             <a class="nav-link text-on-primary/80 hover:text-secondary transition-colors font-body-md text-body-md pb-1 active:scale-95 duration-200" href="{{ url('/#katalog-sparepart') }}">Katalog Sparepart</a>
             <a class="nav-link text-on-primary/80 hover:text-secondary transition-colors font-body-md text-body-md pb-1 active:scale-95 duration-200" href="{{ url('/#testimonials') }}">Testimonial</a>
-            <a class="nav-link text-on-primary/80 hover:text-secondary transition-colors font-body-md text-body-md pb-1 active:scale-95 duration-200" href="{{ url('/#contact-us') }}">Contact Us</a>
+            <a class="nav-link text-on-primary/80 hover:text-secondary transition-colors font-body-md text-body-md pb-1 active:scale-95 duration-200" href="{{ route('contact.index') }}">Contact Us</a>
         </div>
         <div class="flex gap-4 items-center">
             @if(Auth::guard('customer')->check())
@@ -52,7 +52,7 @@
         <div class="flex flex-wrap gap-4 justify-center">
             <a class="font-label-sm text-label-sm text-on-primary/80 hover:text-secondary-fixed transition-colors cursor-pointer" href="{{ route('public.page', 'privacy-policy') }}">Privacy Policy</a>
             <a class="font-label-sm text-label-sm text-on-primary/80 hover:text-secondary-fixed transition-colors cursor-pointer" href="{{ route('public.page', 'terms-of-service') }}">Terms of Service</a>
-            <a class="font-label-sm text-label-sm text-on-primary/80 hover:text-secondary-fixed transition-colors cursor-pointer" href="{{ route('public.page', 'contact-us') }}">Contact Us</a>
+            <a class="font-label-sm text-label-sm text-on-primary/80 hover:text-secondary-fixed transition-colors cursor-pointer" href="{{ route('contact.index') }}">Contact Us</a>
             <a class="font-label-sm text-label-sm text-on-primary/80 hover:text-secondary-fixed transition-colors cursor-pointer" href="{{ route('public.page', 'support') }}">Support</a>
             @if(!Auth::guard('web')->check())
                 <a class="font-label-sm text-label-sm text-on-primary/80 hover:text-secondary-fixed transition-colors cursor-pointer ml-4 border-l border-on-primary/30 pl-4" href="{{ route('login') }}">Staff Login</a>
@@ -63,52 +63,24 @@
         </div>
     </footer>
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const sections = document.querySelectorAll('section[id], footer[id]');
-            const navLinks = document.querySelectorAll('.nav-link');
-
-            if (sections.length > 0 && window.location.pathname === '/') {
-                const observer = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            const currentId = entry.target.getAttribute('id');
-                            navLinks.forEach(link => {
-                                link.classList.remove('font-bold', 'text-on-primary');
-                                link.classList.add('text-on-primary/80');
-                                if (link.getAttribute('href').endsWith('#' + currentId)) {
-                                    link.classList.add('font-bold', 'text-on-primary');
-                                    link.classList.remove('text-on-primary/80');
-                                }
-                            });
-                        }
-                    });
-                }, { threshold: 0.2, rootMargin: "-10% 0px -60% 0px" });
-
-                sections.forEach(section => observer.observe(section));
-            }
-        });
-    </script>
-    <x-toast />
-<script>
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
     document.querySelectorAll('input[type="password"]').forEach((input, idx) => {
         const parent = input.parentElement;
-        const wrapper = document.createElement('div');
-        wrapper.className = 'relative';
-        parent.insertBefore(wrapper, input);
-        wrapper.appendChild(input);
-        const btn = document.createElement('button');
-        btn.type = 'button';
-        btn.id = 'pw-toggle-' + idx;
-        btn.setAttribute('aria-label', 'Toggle visibility');
-        btn.className = 'absolute inset-y-0 right-0 flex items-center px-3 text-on-surface-variant hover:text-secondary transition-colors';
+        if (window.getComputedStyle(parent).position === "static") {
+            parent.style.position = "relative";
+        }
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.id = "pw-toggle-" + idx;
+        btn.setAttribute("aria-label", "Toggle visibility");
+        btn.className = "absolute inset-y-0 right-0 flex items-center px-3 text-on-surface-variant hover:text-secondary transition-colors";
         btn.innerHTML = '<span class="material-symbols-outlined text-[20px] select-none" style="font-variation-settings:\'FILL\' 0;">visibility</span>';
-        wrapper.appendChild(btn);
-        input.style.paddingRight = '2.5rem';
-        btn.addEventListener('click', () => {
-            const isHidden = input.type === 'password';
-            input.type = isHidden ? 'text' : 'password';
-            btn.querySelector('span').textContent = isHidden ? 'visibility_off' : 'visibility';
+        parent.appendChild(btn);
+        input.style.paddingRight = "2.5rem";
+        btn.addEventListener("click", () => {
+            const isHidden = input.type === "password";
+            input.type = isHidden ? "text" : "password";
+            btn.querySelector("span").textContent = isHidden ? "visibility_off" : "visibility";
         });
     });
 });

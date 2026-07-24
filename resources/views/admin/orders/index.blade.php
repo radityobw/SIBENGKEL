@@ -56,7 +56,7 @@
                                 ];
                                 $s = $statusMap[$order->status] ?? ['label' => $order->status, 'class' => 'bg-gray-100 text-gray-800 border-gray-200'];
                             @endphp
-                            <span class="px-2 py-1 rounded-full text-xs font-bold border {{ $s['class'] }}">{{ $s['label'] }}</span>
+                            <span class="inline-block whitespace-nowrap px-2 py-1 rounded-full text-xs font-bold border {{ $s['class'] }}">{{ $s['label'] }}</span>
                         </td>
                         <td class="px-4 py-3 text-right">
                             <form action="{{ route('admin.orders.updateStatus', $order->id) }}" method="POST">

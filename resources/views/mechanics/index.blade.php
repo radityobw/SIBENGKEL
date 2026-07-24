@@ -21,10 +21,14 @@
         @forelse($mechanics as $mechanic)
         <div class="bg-surface rounded-xl border border-outline-variant overflow-hidden shadow-sm hover:border-primary/50 transition-colors group flex flex-col">
             <div class="p-6 flex-1 flex flex-col items-center text-center">
-                <!-- Avatar Placeholder -->
-                <div class="w-20 h-20 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-sora text-2xl font-bold mb-4 shadow-inner">
-                    {{ substr($mechanic->name, 0, 1) }}
-                </div>
+                <!-- Avatar -->
+                @if($mechanic->user && $mechanic->user->profile_photo_url)
+                    <img src="{{ $mechanic->user->profile_photo_url }}" alt="{{ $mechanic->name }}" class="w-20 h-20 rounded-full object-cover mb-4 shadow-inner border-2 border-outline-variant/30">
+                @else
+                    <div class="w-20 h-20 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-sora text-2xl font-bold mb-4 shadow-inner">
+                        {{ substr($mechanic->name, 0, 1) }}
+                    </div>
+                @endif
                 
                 <h3 class="text-lg font-sora font-semibold text-on-surface">{{ $mechanic->name }}</h3>
                 <p class="text-sm text-on-surface-variant flex items-center gap-1 mt-1">
