@@ -282,7 +282,7 @@
                 content: "";
                 position: absolute;
                 inset: 0;
-                background: radial-gradient(400px circle at var(--x, 0) var(--y, 0), rgba(13, 71, 161, 0.08), transparent 40%);
+                background: radial-gradient(400px circle at var(--x, 0) var(--y, 0), rgba(255, 107, 0, 0.08), transparent 40%);
                 pointer-events: none;
                 opacity: 0;
                 transition: opacity 0.3s;
