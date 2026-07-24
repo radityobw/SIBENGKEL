@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\OtpMail;
 
 class CustomerAuthPortalController extends Controller
 {
@@ -202,8 +204,11 @@ class CustomerAuthPortalController extends Controller
             'reset_otp_expires' => now()->addMinutes(10),
         ]);
 
+        // Kirim email OTP
+        Mail::to($request->email)->send(new OtpMail($otp));
+
         return redirect()->route('public.forgot_password.verify')
-            ->with('info', "Kode OTP Verifikasi Keamanan SIBENGKEL: [ {$otp} ]. Silakan masukkan kode ini untuk mereset password.");
+            ->with('success', "Kode OTP telah berhasil dikirim ke alamat email Anda.");
     }
 
     /**

@@ -49,12 +49,12 @@
                 <p class="font-body-md text-sm text-on-surface-variant">Langkah 2 dari 2: Masukkan kode OTP 6-digit untuk email <span class="font-bold text-primary">{{ $email }}</span>.</p>
             </div>
 
-            @if(session('info'))
-                <div class="mb-4 bg-amber-50 border border-amber-300 text-amber-900 p-4 rounded-xl text-xs font-medium shadow-sm flex items-start gap-2">
-                    <span class="material-symbols-outlined text-amber-600 text-lg shrink-0 mt-0.5">verified_user</span>
+            @if(session('success'))
+                <div class="mb-4 bg-green-50 border border-green-300 text-green-900 p-4 rounded-xl text-sm font-medium shadow-sm flex items-start gap-2">
+                    <span class="material-symbols-outlined text-green-600 text-lg shrink-0 mt-0.5">check_circle</span>
                     <div>
-                        <p class="font-bold mb-1">Simulasi Pengiriman OTP:</p>
-                        <p class="font-mono text-sm bg-amber-100 px-2 py-1 rounded inline-block font-bold text-amber-900">{{ session('info') }}</p>
+                        <p class="font-bold mb-1">Berhasil!</p>
+                        <p>{{ session('success') }}</p>
                     </div>
                 </div>
             @endif
