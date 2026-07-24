@@ -60,7 +60,7 @@
         
         <div class="max-w-3xl w-full mx-auto relative z-10 flex flex-col items-center text-center gap-8 md:gap-12">
             <div class="space-y-6 md:space-y-8 relative z-20 flex flex-col items-center">
-                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-surface-container-high dark:bg-[#161615] border border-outline-variant/50 dark:border-[#3E3E3A]/50 shadow-sm text-sm font-semibold text-primary dark:text-[#EDEDEC]">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/70 dark:bg-[#161615]/70 backdrop-blur-md border border-white/50 dark:border-white/10 shadow-sm text-sm font-semibold text-black dark:text-[#EDEDEC]">
                     <span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
                     Sistem Manajemen Bengkel Era Digital
                 </div>
@@ -178,7 +178,7 @@
                             <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform" style="font-variation-settings: 'FILL' 1;">arrow_forward</span>
                         </span>
                     </a>
-                    <a href="{{ url('/cek-status') }}" class="bg-surface-container dark:bg-[#161615] text-on-surface dark:text-[#EDEDEC] hover:bg-surface-container-high dark:hover:bg-[#3E3E3A] border border-outline-variant dark:border-[#3E3E3A] transition-all duration-300 font-label-md text-label-md h-14 px-8 rounded-full flex items-center justify-center gap-2">
+                    <a href="{{ url('/cek-status') }}" class="bg-white/70 dark:bg-[#161615]/70 backdrop-blur-md text-on-surface dark:text-[#EDEDEC] hover:bg-white/90 dark:hover:bg-[#3E3E3A] border border-white/50 dark:border-white/10 transition-all duration-300 font-label-md text-label-md h-14 px-8 rounded-full flex items-center justify-center gap-2 shadow-sm">
                         <span class="material-symbols-outlined">search</span>
                         Cek Status Servis
                     </a>
@@ -207,19 +207,19 @@
             <div class="grid grid-cols-2 md:grid-cols-4 gap-8 divide-x divide-white/10 text-center" id="stats-container">
                 <div class="px-4">
                     <h3 class="text-4xl md:text-5xl font-bold text-white font-sora mb-2"><span class="count-up" data-target="{{ $stats['servis_selesai'] }}">0</span>+</h3>
-                    <p class="text-on-primary/80 text-sm md:text-base">Servis Selesai</p>
+                    <p class="text-white/80 text-sm md:text-base">Servis Selesai</p>
                 </div>
                 <div class="px-4">
                     <h3 class="text-4xl md:text-5xl font-bold text-white font-sora mb-2"><span class="count-up" data-target="{{ $stats['pelanggan'] }}">0</span>+</h3>
-                    <p class="text-on-primary/80 text-sm md:text-base">Pelanggan Setia</p>
+                    <p class="text-white/80 text-sm md:text-base">Pelanggan Setia</p>
                 </div>
                 <div class="px-4">
                     <h3 class="text-4xl md:text-5xl font-bold text-white font-sora mb-2"><span class="count-up" data-target="{{ $stats['mekanik'] }}">0</span></h3>
-                    <p class="text-on-primary/80 text-sm md:text-base">Mekanik Ahli</p>
+                    <p class="text-white/80 text-sm md:text-base">Mekanik Ahli</p>
                 </div>
                 <div class="px-4">
                     <h3 class="text-4xl md:text-5xl font-bold text-white font-sora mb-2"><span class="count-up" data-target="{{ $stats['kepuasan'] }}">0</span>%</h3>
-                    <p class="text-on-primary/80 text-sm md:text-base">Kepuasan Pelanggan</p>
+                    <p class="text-white/80 text-sm md:text-base">Kepuasan Pelanggan</p>
                 </div>
             </div>
         </div>
@@ -306,7 +306,7 @@
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 <!-- Card 1 -->
-                <div class="spotlight-card bg-surface dark:bg-[#161615] rounded-3xl p-8 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 border border-outline-variant dark:border-[#3E3E3A] group">
+                <div class="spotlight-card bg-white/70 dark:bg-[#161615]/70 backdrop-blur-md rounded-3xl p-8 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 border border-white/50 dark:border-white/10 group">
                     <div class="w-16 h-16 bg-primary/10 dark:bg-[#EDEDEC]/10 text-primary dark:text-[#EDEDEC] rounded-2xl flex items-center justify-center mb-6 group-hover:bg-primary dark:group-hover:bg-[#EDEDEC] group-hover:text-white dark:group-hover:text-black transition-colors duration-300">
                         <span class="material-symbols-outlined text-3xl">build</span>
                     </div>
@@ -314,7 +314,7 @@
                     <p class="text-on-surface-variant dark:text-gray-400 leading-relaxed">Perawatan rutin dengan standar pabrikan untuk menjaga performa optimal kendaraan Anda.</p>
                 </div>
                 <!-- Card 2 -->
-                <div class="spotlight-card bg-surface dark:bg-[#161615] rounded-3xl p-8 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 border border-outline-variant dark:border-[#3E3E3A] group">
+                <div class="spotlight-card bg-white/70 dark:bg-[#161615]/70 backdrop-blur-md rounded-3xl p-8 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 border border-white/50 dark:border-white/10 group">
                     <div class="w-16 h-16 bg-secondary/10 text-secondary rounded-2xl flex items-center justify-center mb-6 group-hover:bg-secondary group-hover:text-white transition-colors duration-300">
                         <span class="material-symbols-outlined text-3xl">settings</span>
                     </div>
@@ -322,7 +322,7 @@
                     <p class="text-on-surface-variant dark:text-gray-400 leading-relaxed">Penyediaan suku cadang orisinal bergaransi resmi untuk keamanan jangka panjang.</p>
                 </div>
                 <!-- Card 3 -->
-                <div class="spotlight-card bg-surface dark:bg-[#161615] rounded-3xl p-8 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 border border-outline-variant dark:border-[#3E3E3A] group">
+                <div class="spotlight-card bg-white/70 dark:bg-[#161615]/70 backdrop-blur-md rounded-3xl p-8 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 border border-white/50 dark:border-white/10 group">
                     <div class="w-16 h-16 bg-primary/10 dark:bg-[#EDEDEC]/10 text-primary dark:text-[#EDEDEC] rounded-2xl flex items-center justify-center mb-6 group-hover:bg-primary dark:group-hover:bg-[#EDEDEC] group-hover:text-white dark:group-hover:text-black transition-colors duration-300">
                         <span class="material-symbols-outlined text-3xl">calendar_month</span>
                     </div>
@@ -330,7 +330,7 @@
                     <p class="text-on-surface-variant dark:text-gray-400 leading-relaxed">Sistem penjadwalan pintar untuk menghindari antrean panjang di bengkel.</p>
                 </div>
                 <!-- Card 4 -->
-                <div class="spotlight-card bg-surface dark:bg-[#161615] rounded-3xl p-8 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 border border-outline-variant dark:border-[#3E3E3A] group">
+                <div class="spotlight-card bg-white/70 dark:bg-[#161615]/70 backdrop-blur-md rounded-3xl p-8 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 border border-white/50 dark:border-white/10 group">
                     <div class="w-16 h-16 bg-secondary/10 text-secondary rounded-2xl flex items-center justify-center mb-6 group-hover:bg-secondary group-hover:text-white transition-colors duration-300">
                         <span class="material-symbols-outlined text-3xl">query_stats</span>
                     </div>
@@ -421,7 +421,7 @@
 
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
                 @foreach($spareparts as $item)
-                    <div class="bg-surface dark:bg-[#161615] rounded-2xl p-4 shadow-sm border border-outline-variant dark:border-[#3E3E3A] hover:shadow-lg transition-all group flex flex-col h-full relative overflow-hidden">
+                    <div class="bg-white/70 dark:bg-[#161615]/70 backdrop-blur-md rounded-2xl p-4 shadow-sm border border-white/50 dark:border-white/10 hover:shadow-lg transition-all group flex flex-col h-full relative overflow-hidden">
                         <a href="{{ Auth::guard('customer')->check() ? route('public.sparepart.index') : route('public.login') }}" class="aspect-square bg-surface-container-lowest dark:bg-[#0a0a0a] rounded-xl mb-4 relative overflow-hidden flex items-center justify-center block">
                             @if($item->image_path)
                                 <img src="{{ Storage::url($item->image_path) }}" alt="{{ $item->name }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
@@ -474,10 +474,10 @@
             
         <!-- Horizontal Scrollable Container (Auto-scroll Ticker) -->
         <div class="relative w-full group">
-            <div id="testimonial-scroll" class="flex overflow-x-auto gap-6 px-margin-mobile md:px-margin-desktop pb-8 pt-4 custom-scrollbar w-full">
+            <div id="testimonial-scroll" class="flex overflow-x-auto gap-6 px-margin-mobile md:px-margin-desktop pb-8 pt-4 no-scrollbar w-full">
                 <!-- Set 1 -->
                 @foreach($testimonials as $testimonial)
-                <div class="bg-surface dark:bg-[#161615] p-8 rounded-3xl shadow-sm hover:shadow-md border border-outline-variant dark:border-[#3E3E3A] relative flex flex-col shrink-0 w-[85vw] sm:w-[400px] transition-shadow">
+                <div class="bg-white/70 dark:bg-[#161615]/70 backdrop-blur-md p-8 rounded-3xl shadow-sm hover:shadow-md border border-white/50 dark:border-white/10 relative flex flex-col shrink-0 w-[85vw] sm:w-[400px] transition-shadow">
                     <span class="material-symbols-outlined absolute top-6 right-6 text-5xl text-outline-variant/30 dark:text-outline-variant/10">format_quote</span>
                     <div class="flex gap-1 text-secondary mb-6">
                         @for($i = 0; $i < 5; $i++)
@@ -579,7 +579,7 @@
         <div class="absolute inset-0 bg-gradient-to-t from-primary dark:from-black to-transparent"></div>
         <div class="max-w-4xl mx-auto px-margin-mobile md:px-margin-desktop relative z-10 text-center">
             <h2 class="split-target text-4xl md:text-5xl font-bold text-white mb-6 font-sora">Siap Merawat <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#FF6B00] to-[#FF8F42]">Kendaraan</span> Anda?</h2>
-            <p class="text-xl text-on-primary/90 mb-10 leading-relaxed">Bergabunglah dengan ribuan pelanggan lainnya dan rasakan pengalaman servis kendaraan yang modern, transparan, dan tanpa ribet.</p>
+            <p class="text-xl text-white/90 mb-10 leading-relaxed">Bergabunglah dengan ribuan pelanggan lainnya dan rasakan pengalaman servis kendaraan yang modern, transparan, dan tanpa ribet.</p>
             <div class="flex flex-col sm:flex-row justify-center gap-4">
                 <a href="{{ route('public.register') }}" class="bg-[#FF7A1F] text-white hover:bg-[#FF8F42] hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 font-bold text-lg h-16 px-10 rounded-full shadow-xl shadow-[#FF6B00]/30 flex items-center justify-center gap-2">
                     Daftar Sekarang

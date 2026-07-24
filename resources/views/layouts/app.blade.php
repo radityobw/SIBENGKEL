@@ -16,8 +16,9 @@
         h1, h2, h3, h4, h5, h6, .font-sora { font-family: 'Sora', sans-serif; }
     </style>
     <script>
-        // Dark mode setup
-        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        // Staff Dashboard defaults to Light Mode
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
             document.documentElement.classList.add('dark');
         } else {
             document.documentElement.classList.remove('dark');
