@@ -1,2 +1,6 @@
 *
 !.gitignore
+!spareparts/
+!spareparts/*
+!avatars/
+!avatars/*
