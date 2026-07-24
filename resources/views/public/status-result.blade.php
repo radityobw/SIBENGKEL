@@ -119,7 +119,7 @@
 
         <!-- Action Button -->
         @php
-            $waNumber = \App\Models\Setting::get('whatsapp_number', '6281234567890');
+            $waNumber = \App\Models\Setting::get('admin_whatsapp', '6281234567890');
             // Pastikan format nomor WA benar (buang karakter selain angka, ganti 0 di depan jadi 62)
             $waNumber = preg_replace('/[^0-9]/', '', $waNumber);
             if (substr($waNumber, 0, 1) === '0') {
