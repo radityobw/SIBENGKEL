@@ -65,11 +65,16 @@
             </div>
 
             <div class="flex-1 flex items-center justify-center p-4 md:p-lg">
-                <div class="w-full max-w-md bg-surface-container-lowest dark:bg-[#161615] border border-outline-variant dark:border-[#3E3E3A] rounded-xl shadow-sm p-6 md:p-12">
-                    <div class="mb-lg text-center md:text-left">
-                        <h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface dark:text-[#EDEDEC] mb-2">Portal Pelanggan</h2>
-                        <p class="font-body-md text-body-md text-on-surface-variant dark:text-gray-400">Silakan masuk untuk mengelola servis kendaraan Anda.</p>
-                    </div>
+                <div class="w-full max-w-md bg-surface-container-lowest dark:bg-[#161615] border border-outline-variant dark:border-[#3E3E3A] rounded-xl shadow-sm p-6 md:p-12 relative group overflow-hidden magic-card">
+                    <!-- Magic Card Spotlight -->
+                    <div class="pointer-events-none absolute -inset-px opacity-0 transition duration-300 group-hover:opacity-100 z-0" 
+                         style="background: radial-gradient(600px circle at var(--x, 0) var(--y, 0), rgba(242, 107, 33, 0.15), transparent 40%);"></div>
+                    
+                    <div class="relative z-10">
+                        <div class="mb-lg text-center md:text-left">
+                            <h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface dark:text-[#EDEDEC] mb-2">Portal Pelanggan</h2>
+                            <p class="font-body-md text-body-md text-on-surface-variant dark:text-gray-400">Silakan masuk untuk mengelola servis kendaraan Anda.</p>
+                        </div>
 
                     @if ($errors->any())
                         <div class="mb-4 bg-error-container text-on-error-container p-4 rounded text-sm">
@@ -137,6 +142,7 @@
                     </form>
                 </div>
             </div>
+            </div>
         </div>
     </div>
 <script>
@@ -158,6 +164,15 @@ document.addEventListener("DOMContentLoaded", () => {
             const isHidden = input.type === "password";
             input.type = isHidden ? "text" : "password";
             btn.querySelector("span").textContent = isHidden ? "visibility_off" : "visibility";
+        });
+    });
+
+    // Magic Card Effect
+    document.querySelectorAll('.magic-card').forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            card.style.setProperty('--x', `${e.clientX - rect.left}px`);
+            card.style.setProperty('--y', `${e.clientY - rect.top}px`);
         });
     });
 });

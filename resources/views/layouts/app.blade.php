@@ -14,6 +14,13 @@
     <style>
         body { font-family: 'Inter', sans-serif; background-color: theme('colors.background'); color: theme('colors.on-surface'); }
         h1, h2, h3, h4, h5, h6, .font-sora { font-family: 'Sora', sans-serif; }
+        ::view-transition-old(root),
+        ::view-transition-new(root) {
+            animation: none;
+            mix-blend-mode: normal;
+        }
+        ::view-transition-old(root) { z-index: 1; }
+        ::view-transition-new(root) { z-index: 2; }
     </style>
     <script>
         // Staff Dashboard defaults to Light Mode
@@ -24,14 +31,42 @@
             document.documentElement.classList.remove('dark');
         }
         
-        function toggleTheme() {
-            if (document.documentElement.classList.contains('dark')) {
-                document.documentElement.classList.remove('dark');
-                localStorage.setItem('theme', 'light');
-            } else {
-                document.documentElement.classList.add('dark');
-                localStorage.setItem('theme', 'dark');
+        function toggleTheme(event) {
+            const doToggle = () => {
+                if (document.documentElement.classList.contains('dark')) {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('theme', 'light');
+                } else {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('theme', 'dark');
+                }
+            };
+
+            if (!document.startViewTransition || !event) {
+                doToggle();
+                return;
             }
+
+            const x = event.clientX ?? innerWidth / 2;
+            const y = event.clientY ?? innerHeight / 2;
+            const endRadius = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
+
+            const transition = document.startViewTransition(doToggle);
+            transition.ready.then(() => {
+                document.documentElement.animate(
+                    {
+                        clipPath: [
+                            `circle(0px at ${x}px ${y}px)`,
+                            `circle(${endRadius}px at ${x}px ${y}px)`
+                        ],
+                    },
+                    {
+                        duration: 500,
+                        easing: 'ease-in-out',
+                        pseudoElement: '::view-transition-new(root)',
+                    }
+                );
+            });
         }
     </script>
 </head>
@@ -144,7 +179,7 @@
             </div>
             <div class="flex items-center gap-3">
                 <!-- Theme Toggle -->
-                <button onclick="toggleTheme()" class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant dark:text-white hover:bg-surface-container-high dark:hover:bg-white/10 transition-colors" title="Toggle Dark Mode">
+                <button onclick="toggleTheme(event)" class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant dark:text-white hover:bg-surface-container-high dark:hover:bg-white/10 transition-colors" title="Toggle Dark Mode">
                     <span class="material-symbols-outlined dark:hidden">dark_mode</span>
                     <span class="material-symbols-outlined hidden dark:block text-amber-400">light_mode</span>
                 </button>
@@ -202,23 +237,53 @@
                         </div>
                     </div>
                 </div>
-                <a href="{{ route('profile.edit') }}" class="font-medium text-sm text-on-surface dark:text-[#EDEDEC] whitespace-nowrap hover:opacity-80 transition-opacity flex items-center gap-2" title="Edit Profil Admin">
-                    @if(Auth::user()->profile_photo_url)
-                        <img src="{{ Auth::user()->profile_photo_url }}" class="w-8 h-8 rounded-full object-cover border border-outline-variant/30">
-                    @else
-                        <div class="w-8 h-8 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-bold text-xs border border-outline-variant/30">
-                            {{ substr(Auth::user()->name ?? 'A', 0, 1) }}
-                        </div>
-                    @endif
-                    <span class="hidden md:inline">Halo, <span class="font-bold underline decoration-secondary decoration-2 underline-offset-4">{{ Auth::user()->name ?? 'Admin' }}</span></span>
-                </a>
-                <!-- Logout -->
-                <form method="POST" action="{{ route('logout') }}" class="flex items-center ml-2 border-l border-outline-variant/30 pl-4">
-                    @csrf
-                    <button type="submit" class="p-2 rounded-full text-error lg:text-error hover:bg-error/10 transition-colors" title="Logout">
-                        <span class="material-symbols-outlined">logout</span>
+                <div x-data="{ open: false }" class="relative ml-2 border-l border-outline-variant/30 pl-4">
+                    <button @click="open = !open" @click.away="open = false" class="flex items-center gap-2 p-1 rounded-full hover:bg-surface-container dark:hover:bg-[#161615] transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
+                        @if(Auth::user()->profile_photo_url)
+                            <img src="{{ Auth::user()->profile_photo_url }}" class="w-8 h-8 rounded-full object-cover border border-outline-variant/30">
+                        @else
+                            <div class="w-8 h-8 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-bold text-xs border border-outline-variant/30">
+                                {{ substr(Auth::user()->name ?? 'A', 0, 1) }}
+                            </div>
+                        @endif
+                        <span class="hidden md:inline font-medium text-sm text-on-surface dark:text-[#EDEDEC] truncate max-w-[120px]">{{ Auth::user()->name ?? 'Admin' }}</span>
+                        <span class="material-symbols-outlined text-[18px] text-on-surface-variant dark:text-gray-400" :class="{'rotate-180': open}">expand_more</span>
                     </button>
-                </form>
+
+                    <!-- Dropdown Menu -->
+                    <div x-show="open" 
+                         x-transition:enter="transition ease-out duration-200"
+                         x-transition:enter-start="opacity-0 scale-95 translate-y-[-10px]"
+                         x-transition:enter-end="opacity-100 scale-100 translate-y-0"
+                         x-transition:leave="transition ease-in duration-150"
+                         x-transition:leave-start="opacity-100 scale-100 translate-y-0"
+                         x-transition:leave-end="opacity-0 scale-95 translate-y-[-10px]"
+                         class="absolute right-0 mt-2 w-56 rounded-xl bg-surface-container-lowest dark:bg-[#161615] border border-outline-variant dark:border-[#3E3E3A] shadow-lg py-2 z-50 origin-top-right"
+                         style="display: none;">
+                        
+                        <div class="px-4 py-3 border-b border-outline-variant dark:border-[#3E3E3A]">
+                            <p class="text-sm font-bold text-on-surface dark:text-[#EDEDEC] truncate">{{ Auth::user()->name ?? 'Admin' }}</p>
+                            <p class="text-xs text-on-surface-variant dark:text-gray-400 truncate">{{ Auth::user()->email ?? 'admin@sibengkel.web.id' }}</p>
+                        </div>
+                        
+                        <div class="py-1">
+                            <a href="{{ route('profile.edit') }}" class="flex items-center gap-3 px-4 py-2 text-sm text-on-surface dark:text-[#EDEDEC] hover:bg-surface-container dark:hover:bg-[#111111] transition-colors">
+                                <span class="material-symbols-outlined text-[18px]">person</span>
+                                Pengaturan Profil
+                            </a>
+                        </div>
+                        
+                        <div class="py-1 border-t border-outline-variant dark:border-[#3E3E3A]">
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <button type="submit" class="flex items-center gap-3 px-4 py-2 text-sm text-error w-full text-left hover:bg-error/10 transition-colors">
+                                    <span class="material-symbols-outlined text-[18px]">logout</span>
+                                    Keluar Sistem
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
         </header>
 
@@ -346,5 +411,19 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 </script>
+    @if(session('success'))
+        <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                var end = Date.now() + (2 * 1000);
+                var colors = ['#f26b21', '#f97316', '#ffffff'];
+                (function frame() {
+                    confetti({ particleCount: 3, angle: 60, spread: 55, origin: { x: 0 }, colors: colors, zIndex: 100000 });
+                    confetti({ particleCount: 3, angle: 120, spread: 55, origin: { x: 1 }, colors: colors, zIndex: 100000 });
+                    if (Date.now() < end) requestAnimationFrame(frame);
+                }());
+            });
+        </script>
+    @endif
 </body>
 </html>
