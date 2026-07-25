@@ -78,20 +78,26 @@
                 const labels = {!! json_encode($revenueTrend['labels'] ?? []) !!};
                 const dataPoints = {!! json_encode($revenueTrend['data'] ?? []) !!};
                 
-                new Chart(ctx, {
+                const isDark = document.documentElement.classList.contains('dark') || window.matchMedia('(prefers-color-scheme: dark)').matches;
+                const primaryColor = isDark ? '#FF8F42' : '#0A192F';
+                const bgColor = isDark ? 'rgba(255, 143, 66, 0.1)' : 'rgba(10, 25, 47, 0.1)';
+                const gridColor = isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.05)';
+                const textColor = isDark ? '#A1A09A' : '#706f6c';
+
+                let chart = new Chart(ctx, {
                     type: 'line',
                     data: {
                         labels: labels,
                         datasets: [{
                             label: 'Pendapatan (Rp)',
                             data: dataPoints,
-                            borderColor: '#0A192F',
-                            backgroundColor: 'rgba(10, 25, 47, 0.1)',
+                            borderColor: primaryColor,
+                            backgroundColor: bgColor,
                             borderWidth: 2,
                             fill: true,
                             tension: 0.4,
-                            pointBackgroundColor: '#0A192F',
-                            pointBorderColor: '#fff',
+                            pointBackgroundColor: primaryColor,
+                            pointBorderColor: isDark ? '#111111' : '#fff',
                             pointBorderWidth: 2,
                             pointRadius: 4,
                             pointHoverRadius: 6
@@ -121,16 +127,20 @@
                             y: {
                                 beginAtZero: true,
                                 ticks: {
+                                    color: textColor,
                                     callback: function(value) {
                                         if (value === 0) return '0';
                                         return 'Rp ' + (value/1000) + 'k';
                                     }
                                 },
                                 grid: {
-                                    color: 'rgba(0,0,0,0.05)'
+                                    color: gridColor
                                 }
                             },
                             x: {
+                                ticks: {
+                                    color: textColor,
+                                },
                                 grid: {
                                     display: false
                                 }
@@ -138,6 +148,24 @@
                         }
                     }
                 });
+
+                // Optional: Watch for dark mode changes if there's a theme toggle
+                const observer = new MutationObserver((mutations) => {
+                    mutations.forEach((mutation) => {
+                        if (mutation.attributeName === 'class') {
+                            const isDarkNow = document.documentElement.classList.contains('dark');
+                            chart.data.datasets[0].borderColor = isDarkNow ? '#FF8F42' : '#0A192F';
+                            chart.data.datasets[0].backgroundColor = isDarkNow ? 'rgba(255, 143, 66, 0.1)' : 'rgba(10, 25, 47, 0.1)';
+                            chart.data.datasets[0].pointBackgroundColor = isDarkNow ? '#FF8F42' : '#0A192F';
+                            chart.data.datasets[0].pointBorderColor = isDarkNow ? '#111111' : '#fff';
+                            chart.options.scales.x.ticks.color = isDarkNow ? '#A1A09A' : '#706f6c';
+                            chart.options.scales.y.ticks.color = isDarkNow ? '#A1A09A' : '#706f6c';
+                            chart.options.scales.y.grid.color = isDarkNow ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.05)';
+                            chart.update();
+                        }
+                    });
+                });
+                observer.observe(document.documentElement, { attributes: true });
             });
         </script>
         @endif

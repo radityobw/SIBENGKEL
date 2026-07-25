@@ -18,7 +18,7 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
         .header {
-            background-color: #0b213f; /* SIBENGKEL Industrial Navy */
+            background-color: #000000;
             padding: 20px;
             text-align: center;
         }
@@ -66,6 +66,7 @@
 <body>
     <div class="email-container">
         <div class="header">
+            <img src="{{ asset('logobengkel.png') }}" alt="SIBENGKEL Logo" style="height: 50px; margin-bottom: 15px; object-fit: contain;">
             <h1>SIBENGKEL</h1>
         </div>
         <div class="content">
