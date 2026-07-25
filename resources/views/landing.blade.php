@@ -201,25 +201,25 @@
     </section>
 
     <!-- Stats Section -->
-    <section class="py-16 bg-primary dark:bg-black relative overflow-hidden">
-        <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 24px 24px;"></div>
+    <section class="py-16 bg-white dark:bg-[#111111] relative overflow-hidden border-y border-outline-variant/30 dark:border-[#3E3E3A]/30">
+        <div class="absolute inset-0 opacity-5 dark:opacity-10 text-on-surface" style="background-image: radial-gradient(circle at 2px 2px, currentColor 1px, transparent 0); background-size: 24px 24px;"></div>
         <div class="max-w-screen-xl mx-auto px-margin-mobile md:px-margin-desktop relative z-10">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 divide-x divide-white/10 text-center" id="stats-container">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 divide-x divide-outline-variant/30 dark:divide-white/10 text-center" id="stats-container">
                 <div class="px-4">
-                    <h3 class="text-4xl md:text-5xl font-bold text-white font-sora mb-2"><span class="count-up" data-target="{{ $stats['servis_selesai'] }}">0</span>+</h3>
-                    <p class="text-white/80 text-sm md:text-base">Servis Selesai</p>
+                    <h3 class="text-4xl md:text-5xl font-bold text-on-surface dark:text-white font-sora mb-2"><span class="count-up" data-target="{{ $stats['servis_selesai'] }}">0</span>+</h3>
+                    <p class="text-on-surface-variant dark:text-white/80 text-sm md:text-base">Servis Selesai</p>
                 </div>
                 <div class="px-4">
-                    <h3 class="text-4xl md:text-5xl font-bold text-white font-sora mb-2"><span class="count-up" data-target="{{ $stats['pelanggan'] }}">0</span>+</h3>
-                    <p class="text-white/80 text-sm md:text-base">Pelanggan Setia</p>
+                    <h3 class="text-4xl md:text-5xl font-bold text-on-surface dark:text-white font-sora mb-2"><span class="count-up" data-target="{{ $stats['pelanggan'] }}">0</span>+</h3>
+                    <p class="text-on-surface-variant dark:text-white/80 text-sm md:text-base">Pelanggan Setia</p>
                 </div>
                 <div class="px-4">
-                    <h3 class="text-4xl md:text-5xl font-bold text-white font-sora mb-2"><span class="count-up" data-target="{{ $stats['mekanik'] }}">0</span></h3>
-                    <p class="text-white/80 text-sm md:text-base">Mekanik Ahli</p>
+                    <h3 class="text-4xl md:text-5xl font-bold text-on-surface dark:text-white font-sora mb-2"><span class="count-up" data-target="{{ $stats['mekanik'] }}">0</span></h3>
+                    <p class="text-on-surface-variant dark:text-white/80 text-sm md:text-base">Mekanik Ahli</p>
                 </div>
                 <div class="px-4">
-                    <h3 class="text-4xl md:text-5xl font-bold text-white font-sora mb-2"><span class="count-up" data-target="{{ $stats['kepuasan'] }}">0</span>%</h3>
-                    <p class="text-white/80 text-sm md:text-base">Kepuasan Pelanggan</p>
+                    <h3 class="text-4xl md:text-5xl font-bold text-on-surface dark:text-white font-sora mb-2"><span class="count-up" data-target="{{ $stats['kepuasan'] }}">0</span>%</h3>
+                    <p class="text-on-surface-variant dark:text-white/80 text-sm md:text-base">Kepuasan Pelanggan</p>
                 </div>
             </div>
         </div>
@@ -574,17 +574,17 @@
     @endif
 
     <!-- Final CTA Section -->
-    <section class="py-24 bg-primary dark:bg-black relative overflow-hidden">
-        <div class="absolute inset-0 bg-[url('https://lh3.googleusercontent.com/aida-public/AB6AXuBqcFyfSaGZkAhCtijRJkrnP6PUW7V-24XDxsWZXgXekVLt5P1DbMak7qb1FnRHTch5HqA9JrtpbrFB-I8HWTrdgs_IW8uBHKcjpmYl6_DAqtx_bPRobMMLplGCY4MMepnV1ApYOjjIu8cKQCw-kAEWMOUGGJk80w7qvpjYDw-79hG9Stpou345AExteGRoggQax9SZ8K1PyJiIitezCajqNplnm537UTTL1Wgbd7iDLRY1SuNRR-K4Ow')] bg-cover bg-center mix-blend-overlay opacity-20"></div>
-        <div class="absolute inset-0 bg-gradient-to-t from-primary dark:from-black to-transparent"></div>
+    <section class="py-24 bg-surface-container-lowest dark:bg-[#0a0a0a] relative overflow-hidden border-t border-outline-variant/30 dark:border-[#3E3E3A]/30">
+        <div class="absolute inset-0 bg-[url('https://lh3.googleusercontent.com/aida-public/AB6AXuBqcFyfSaGZkAhCtijRJkrnP6PUW7V-24XDxsWZXgXekVLt5P1DbMak7qb1FnRHTch5HqA9JrtpbrFB-I8HWTrdgs_IW8uBHKcjpmYl6_DAqtx_bPRobMMLplGCY4MMepnV1ApYOjjIu8cKQCw-kAEWMOUGGJk80w7qvpjYDw-79hG9Stpou345AExteGRoggQax9SZ8K1PyJiIitezCajqNplnm537UTTL1Wgbd7iDLRY1SuNRR-K4Ow')] bg-cover bg-center mix-blend-overlay opacity-5 dark:opacity-20"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest dark:from-black to-transparent"></div>
         <div class="max-w-4xl mx-auto px-margin-mobile md:px-margin-desktop relative z-10 text-center">
-            <h2 class="split-target text-4xl md:text-5xl font-bold text-white mb-6 font-sora">Siap Merawat <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#FF6B00] to-[#FF8F42]">Kendaraan</span> Anda?</h2>
-            <p class="text-xl text-white/90 mb-10 leading-relaxed">Bergabunglah dengan ribuan pelanggan lainnya dan rasakan pengalaman servis kendaraan yang modern, transparan, dan tanpa ribet.</p>
+            <h2 class="split-target text-4xl md:text-5xl font-bold text-on-surface dark:text-white mb-6 font-sora">Siap Merawat <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#FF6B00] to-[#FF8F42]">Kendaraan</span> Anda?</h2>
+            <p class="text-xl text-on-surface-variant dark:text-white/90 mb-10 leading-relaxed">Bergabunglah dengan ribuan pelanggan lainnya dan rasakan pengalaman servis kendaraan yang modern, transparan, dan tanpa ribet.</p>
             <div class="flex flex-col sm:flex-row justify-center gap-4">
                 <a href="{{ route('public.register') }}" class="bg-[#FF7A1F] text-white hover:bg-[#FF8F42] hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 font-bold text-lg h-16 px-10 rounded-full shadow-xl shadow-[#FF6B00]/30 flex items-center justify-center gap-2">
                     Daftar Sekarang
                 </a>
-                <a href="{{ route('public.login') }}" class="bg-transparent border-2 border-white text-white hover:bg-white/10 transition-all font-bold text-lg h-16 px-10 rounded-full flex items-center justify-center">
+                <a href="{{ route('public.login') }}" class="bg-transparent border-2 border-outline-variant dark:border-white text-on-surface dark:text-white hover:bg-surface-container-highest dark:hover:bg-white/10 transition-all font-bold text-lg h-16 px-10 rounded-full flex items-center justify-center">
                     Masuk Portal
                 </a>
             </div>

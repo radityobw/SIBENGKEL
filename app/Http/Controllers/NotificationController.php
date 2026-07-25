@@ -32,7 +32,7 @@ class NotificationController extends Controller
         $user = Auth::guard('customer')->check() ? Auth::guard('customer')->user() : Auth::user();
         
         if ($user) {
-            $user->unreadNotifications->markAsRead();
+            $user->unreadNotifications()->update(['read_at' => now()]);
         }
         
         return back();

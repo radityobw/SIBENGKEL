@@ -41,26 +41,26 @@
          class="fixed inset-0 z-40 bg-black/50 md:hidden" style="display: none;"></div>
 
     <!-- SideNavBar -->
-    <aside :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'" class="hidden md:flex w-[280px] h-screen fixed left-0 top-0 bg-primary dark:bg-[#111111] border-r border-outline-variant/20 dark:border-[#3E3E3A]/50 shadow-md flex-col py-6 px-4 gap-2 z-50 transition-transform duration-300 ease-in-out">
+    <aside :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'" class="hidden md:flex w-[280px] h-screen fixed left-0 top-0 bg-surface dark:bg-[#111111] border-r border-outline-variant/20 dark:border-[#3E3E3A]/50 shadow-md flex-col py-6 px-4 gap-2 z-50 transition-transform duration-300 ease-in-out">
         <div class="px-4 mb-8">
             <a href="{{ url('/') }}" class="group block hover:opacity-90 transition-opacity">
                 <div class="flex items-center gap-2">
-                    <img src="{{ asset('logobengkel.png') }}" alt="SIBENGKEL Logo" class="h-8 object-contain brightness-0 invert">
-                    <h1 class="text-2xl font-sora font-bold text-on-primary">SIBENGKEL</h1>
+                    <img src="{{ asset('logobengkel.png') }}" alt="SIBENGKEL Logo" class="h-8 object-contain brightness-0 dark:invert">
+                    <h1 class="text-2xl font-sora font-bold text-primary dark:text-[#EDEDEC]">SIBENGKEL</h1>
                 </div>
-                <p class="text-sm text-on-primary/70 mt-1">Customer Portal</p>
+                <p class="text-sm text-on-surface-variant dark:text-gray-400 mt-1">Customer Portal</p>
             </a>
         </div>
         <nav class="flex-1 flex flex-col gap-2 overflow-y-auto pr-2 custom-scrollbar">
-            <a class="flex items-center gap-4 px-4 py-2 {{ request()->routeIs('public.dashboard') ? 'bg-secondary text-white font-semibold' : 'text-on-primary/70 hover:text-on-primary hover:bg-primary-container/50 font-medium' }} rounded-lg transition-all duration-200 ease-in-out h-11" href="{{ route('public.dashboard') }}">
+            <a class="flex items-center gap-4 px-4 py-2 {{ request()->routeIs('public.dashboard') ? 'bg-secondary text-white font-semibold' : 'text-on-surface-variant dark:text-gray-400 hover:text-on-surface dark:hover:text-white hover:bg-surface-container dark:hover:bg-white/10 font-medium' }} rounded-lg transition-all duration-200 ease-in-out h-11" href="{{ route('public.dashboard') }}">
                 <span class="material-symbols-outlined {{ request()->routeIs('public.dashboard') ? 'icon-filled' : '' }}">dashboard</span>
                 <span>Dashboard</span>
             </a>
-            <a class="flex items-center gap-4 px-4 py-2 {{ request()->routeIs('public.booking.*') ? 'bg-secondary text-white font-semibold' : 'text-on-primary/70 hover:text-on-primary hover:bg-primary-container/50 font-medium' }} rounded-lg transition-all duration-200 ease-in-out h-11" href="{{ route('public.booking.form') }}">
+            <a class="flex items-center gap-4 px-4 py-2 {{ request()->routeIs('public.booking.*') ? 'bg-secondary text-white font-semibold' : 'text-on-surface-variant dark:text-gray-400 hover:text-on-surface dark:hover:text-white hover:bg-surface-container dark:hover:bg-white/10 font-medium' }} rounded-lg transition-all duration-200 ease-in-out h-11" href="{{ route('public.booking.form') }}">
                 <span class="material-symbols-outlined {{ request()->routeIs('public.booking.*') ? 'icon-filled' : '' }}">calendar_month</span>
                 <span>Booking</span>
             </a>
-            <a class="flex items-center gap-4 px-4 py-2 {{ request()->routeIs('public.sparepart.*') || request()->routeIs('public.cart') || request()->routeIs('public.checkout') || request()->routeIs('public.orders.*') ? 'bg-secondary text-white font-semibold' : 'text-on-primary/70 hover:text-on-primary hover:bg-primary-container/50 font-medium' }} rounded-lg transition-all duration-200 ease-in-out h-11" href="{{ route('public.sparepart.index') }}">
+            <a class="flex items-center gap-4 px-4 py-2 {{ request()->routeIs('public.sparepart.*') || request()->routeIs('public.cart') || request()->routeIs('public.checkout') || request()->routeIs('public.orders.*') ? 'bg-secondary text-white font-semibold' : 'text-on-surface-variant dark:text-gray-400 hover:text-on-surface dark:hover:text-white hover:bg-surface-container dark:hover:bg-white/10 font-medium' }} rounded-lg transition-all duration-200 ease-in-out h-11" href="{{ route('public.sparepart.index') }}">
                 <span class="material-symbols-outlined {{ request()->routeIs('public.sparepart.*') || request()->routeIs('public.cart') || request()->routeIs('public.checkout') || request()->routeIs('public.orders.*') ? 'icon-filled' : '' }}">settings_input_component</span>
                 <span>Katalog Sparepart</span>
             </a>
@@ -72,28 +72,28 @@
     <!-- Main Content Area -->
     <main class="flex-1 flex flex-col min-w-0 md:ml-[280px]">
         <!-- TopNavBar (Identical to Dashboard) -->
-        <header class="flex justify-between items-center px-4 md:px-8 w-full h-16 sticky top-0 z-40 bg-primary md:bg-surface dark:bg-[#161615] border-b border-outline-variant dark:border-[#3E3E3A]">
+        <header class="flex justify-between items-center px-4 md:px-8 w-full h-16 sticky top-0 z-40 bg-surface dark:bg-[#161615] border-b border-outline-variant dark:border-[#3E3E3A]">
             <div class="flex items-center gap-2">
                 <a href="{{ url('/') }}" class="md:hidden flex items-center gap-2 hover:opacity-90 transition-opacity">
-                    <img src="{{ asset('logobengkel.png') }}" alt="SIBENGKEL Logo" class="h-6 object-contain brightness-0 invert">
-                    <h2 class="text-xl font-sora font-bold text-on-primary tracking-tight">SIBENGKEL</h2>
+                    <img src="{{ asset('logobengkel.png') }}" alt="SIBENGKEL Logo" class="h-6 object-contain brightness-0 dark:invert">
+                    <h2 class="text-xl font-sora font-bold text-primary dark:text-[#EDEDEC] tracking-tight">SIBENGKEL</h2>
                 </a>
             </div>
             
             <div class="flex items-center gap-3">
                 <!-- Theme Toggle -->
-                <button onclick="toggleTheme()" class="w-10 h-10 rounded-full flex items-center justify-center text-on-primary md:text-on-surface-variant hover:bg-primary-container/20 md:hover:bg-surface-container-high transition-colors" title="Toggle Dark Mode">
+                <button onclick="toggleTheme()" class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant dark:text-white hover:bg-surface-container-high dark:hover:bg-white/10 transition-colors" title="Toggle Dark Mode">
                     <span class="material-symbols-outlined dark:hidden">dark_mode</span>
                     <span class="material-symbols-outlined hidden dark:block text-amber-400">light_mode</span>
                 </button>
                 @if(Auth::guard('customer')->check())
                 <!-- Notification Dropdown -->
-                <div x-data="{ notifOpen: false }" class="relative">
+                <div x-data="{ notifOpen: false, profileOpen: false }" class="relative">
                     @php 
                         $unreadCount = Auth::guard('customer')->user()->unreadNotifications->count(); 
                         $notifications = Auth::guard('customer')->user()->notifications()->take(5)->get();
                     @endphp
-                    <button @click="notifOpen = !notifOpen" @click.away="notifOpen = false" class="w-10 h-10 rounded-full flex items-center justify-center text-on-primary md:text-on-surface-variant hover:bg-primary-container/20 md:hover:bg-surface-container-high transition-colors relative" title="Notifikasi">
+                    <button @click="notifOpen = !notifOpen" @click.away="notifOpen = false" class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant dark:text-white hover:bg-surface-container-high dark:hover:bg-white/10 transition-colors relative" title="Notifikasi">
                         <span class="material-symbols-outlined">notifications</span>
                         @if($unreadCount > 0)
                             <span class="absolute top-2 right-2 w-4 h-4 rounded-full bg-error text-white text-[9px] font-bold flex items-center justify-center border-2 border-surface">{{ $unreadCount > 9 ? '9+' : $unreadCount }}</span>
@@ -141,7 +141,7 @@
                         </div>
                     </div>
                 </div>
-                    <a href="{{ route('public.profile') }}" class="font-medium text-sm text-on-primary md:text-on-surface-variant dark:text-[#EDEDEC] truncate max-w-[140px] sm:max-w-[200px] hover:opacity-80 transition-opacity flex items-center gap-2" title="Edit Profil Saya">
+                    <a href="{{ route('public.profile') }}" class="font-medium text-sm text-on-surface-variant dark:text-[#EDEDEC] truncate max-w-[140px] sm:max-w-[200px] hover:opacity-80 transition-opacity flex items-center gap-2" title="Edit Profil Saya">
                         @if(Auth::guard('customer')->user()->profile_photo_url)
                             <img src="{{ Auth::guard('customer')->user()->profile_photo_url }}" class="w-8 h-8 rounded-full object-cover border border-outline-variant/30">
                         @else
