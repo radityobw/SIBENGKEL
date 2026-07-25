@@ -7,6 +7,7 @@ use App\Http\Controllers\AdminPageController;
 use App\Http\Controllers\PublicPageController;
 
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\NotificationController;
 
 // Public Pages (Static -> Dynamic)
 Route::get('/p/{slug}', [PublicPageController::class, 'show'])->name('public.page');

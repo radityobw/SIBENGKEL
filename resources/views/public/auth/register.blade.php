@@ -76,28 +76,28 @@
                     <!-- Full Name -->
                     <div class="flex flex-col gap-base">
                         <label class="font-label-md text-label-md text-on-surface dark:text-[#EDEDEC]" for="name">Nama Lengkap</label>
-                        <input class="w-full min-h-[44px] px-sm py-2 bg-surface-container-lowest dark:bg-[#111111] border border-outline-variant dark:border-[#3E3E3A] rounded focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary text-body-md font-body-md text-on-surface dark:text-[#EDEDEC] transition-colors" 
+                        <input class="w-full min-h-[44px] px-sm py-2 bg-surface-container-lowest dark:bg-[#111111] border border-outline-variant dark:border-[#3E3E3A] rounded focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary text-body-md font-body-md text-on-surface dark:text-white placeholder:text-outline dark:placeholder:text-gray-600 transition-colors" 
                             id="name" name="name" placeholder="Masukkan nama lengkap" value="{{ old('name') }}" required type="text"/>
                     </div>
                     
                     <!-- Phone Number -->
                     <div class="flex flex-col gap-base">
                         <label class="font-label-md text-label-md text-on-surface dark:text-[#EDEDEC]" for="phone">Nomor Telepon</label>
-                        <input class="w-full min-h-[44px] px-sm py-2 bg-surface-container-lowest dark:bg-[#111111] border border-outline-variant dark:border-[#3E3E3A] rounded focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary text-body-md font-body-md text-on-surface dark:text-[#EDEDEC] transition-colors" 
+                        <input class="w-full min-h-[44px] px-sm py-2 bg-surface-container-lowest dark:bg-[#111111] border border-outline-variant dark:border-[#3E3E3A] rounded focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary text-body-md font-body-md text-on-surface dark:text-white placeholder:text-outline dark:placeholder:text-gray-600 transition-colors" 
                             id="phone" name="phone" placeholder="Contoh: 081234567890" value="{{ old('phone') }}" required type="tel"/>
                     </div>
                     
                     <!-- Email -->
                     <div class="flex flex-col gap-base">
                         <label class="font-label-md text-label-md text-on-surface dark:text-[#EDEDEC]" for="email">Alamat Email <span class="text-secondary">*</span></label>
-                        <input class="w-full min-h-[44px] px-sm py-2 bg-surface-container-lowest dark:bg-[#111111] border border-outline-variant dark:border-[#3E3E3A] rounded focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary text-body-md font-body-md text-on-surface dark:text-[#EDEDEC] transition-colors" 
+                        <input class="w-full min-h-[44px] px-sm py-2 bg-surface-container-lowest dark:bg-[#111111] border border-outline-variant dark:border-[#3E3E3A] rounded focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary text-body-md font-body-md text-on-surface dark:text-white placeholder:text-outline dark:placeholder:text-gray-600 transition-colors" 
                             id="email" name="email" placeholder="Contoh: email@domain.com" value="{{ old('email') }}" type="email" required/>
                     </div>
                     
                     <!-- Address -->
                     <div class="flex flex-col gap-base">
                         <label class="font-label-md text-label-md text-on-surface dark:text-[#EDEDEC]" for="address">Alamat Domisili</label>
-                        <textarea class="w-full px-sm py-2 bg-surface-container-lowest dark:bg-[#111111] border border-outline-variant dark:border-[#3E3E3A] rounded focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary text-body-md font-body-md text-on-surface dark:text-[#EDEDEC] transition-colors" 
+                        <textarea class="w-full px-sm py-2 bg-surface-container-lowest dark:bg-[#111111] border border-outline-variant dark:border-[#3E3E3A] rounded focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary text-body-md font-body-md text-on-surface dark:text-white placeholder:text-outline dark:placeholder:text-gray-600 transition-colors" 
                             id="address" name="address" placeholder="Masukkan alamat domisili" required rows="2">{{ old('address') }}</textarea>
                     </div>
                     
@@ -105,7 +105,7 @@
                     <div class="flex flex-col gap-base">
                         <label class="font-label-md text-label-md text-on-surface dark:text-[#EDEDEC]" for="password">Kata Sandi</label>
                         <div class="relative">
-                            <input class="w-full min-h-[44px] px-sm py-2 bg-surface-container-lowest dark:bg-[#111111] border border-outline-variant dark:border-[#3E3E3A] rounded focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary text-body-md font-body-md text-on-surface dark:text-[#EDEDEC] transition-colors pr-12" 
+                            <input class="w-full min-h-[44px] px-sm py-2 bg-surface-container-lowest dark:bg-[#111111] border border-outline-variant dark:border-[#3E3E3A] rounded focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary text-body-md font-body-md text-on-surface dark:text-white placeholder:text-outline dark:placeholder:text-gray-600 transition-colors pr-12" 
                                 id="password" name="password" placeholder="Minimal 8 karakter" required type="password"/>
                         </div>
                     </div>
@@ -114,7 +114,7 @@
                     <div class="flex flex-col gap-base">
                         <label class="font-label-md text-label-md text-on-surface dark:text-[#EDEDEC]" for="password_confirmation">Konfirmasi Kata Sandi</label>
                         <div class="relative">
-                            <input class="w-full min-h-[44px] px-sm py-2 bg-surface-container-lowest dark:bg-[#111111] border border-outline-variant dark:border-[#3E3E3A] rounded focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary text-body-md font-body-md text-on-surface dark:text-[#EDEDEC] transition-colors pr-12" 
+                            <input class="w-full min-h-[44px] px-sm py-2 bg-surface-container-lowest dark:bg-[#111111] border border-outline-variant dark:border-[#3E3E3A] rounded focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary text-body-md font-body-md text-on-surface dark:text-white placeholder:text-outline dark:placeholder:text-gray-600 transition-colors pr-12" 
                                 id="password_confirmation" name="password_confirmation" placeholder="Ulangi password" required type="password"/>
                         </div>
                     </div>

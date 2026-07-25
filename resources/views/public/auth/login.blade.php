@@ -91,7 +91,7 @@
                                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                     <span class="material-symbols-outlined @error('login') text-error @else text-on-surface-variant dark:text-gray-400 @enderror">person</span>
                                 </div>
-                                <input class="block w-full pl-10 pr-3 py-3 border @error('login') border-error @else border-outline-variant dark:border-[#3E3E3A] @enderror rounded-lg bg-surface-container-lowest dark:bg-[#111111] text-on-surface dark:text-[#EDEDEC] focus:ring-1 focus:ring-primary focus:border-primary font-body-md text-body-md transition-colors placeholder-on-surface-variant/50" 
+                                <input class="block w-full pl-10 pr-3 py-3 border @error('login') border-error @else border-outline-variant dark:border-[#3E3E3A] @enderror rounded-lg bg-surface-container-lowest dark:bg-[#111111] text-on-surface dark:text-white focus:ring-1 focus:ring-primary focus:border-primary font-body-md text-body-md transition-colors placeholder:text-outline dark:placeholder:text-gray-600" 
                                     id="login" 
                                     name="login" 
                                     placeholder="Masukkan No. HP atau Email" 
@@ -112,7 +112,7 @@
                                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                     <span class="material-symbols-outlined @error('password') text-error @else text-on-surface-variant dark:text-gray-400 @enderror">lock</span>
                                 </div>
-                                <input class="block w-full pl-10 pr-10 py-3 border @error('password') border-error @else border-outline-variant dark:border-[#3E3E3A] @enderror rounded-lg bg-surface-container-lowest dark:bg-[#111111] text-on-surface dark:text-[#EDEDEC] focus:ring-1 focus:ring-primary focus:border-primary font-body-md text-body-md transition-colors" 
+                                <input class="block w-full pl-10 pr-10 py-3 border @error('password') border-error @else border-outline-variant dark:border-[#3E3E3A] @enderror rounded-lg bg-surface-container-lowest dark:bg-[#111111] text-on-surface dark:text-white focus:ring-1 focus:ring-primary focus:border-primary font-body-md text-body-md transition-colors placeholder:text-outline dark:placeholder:text-gray-600" 
                                     id="password" 
                                     name="password" 
                                     placeholder="••••••••" 
