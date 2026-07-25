@@ -20,11 +20,11 @@
         }
     </style>
 </head>
-<body class="bg-surface min-h-screen flex flex-col font-sans antialiased text-on-surface relative overflow-hidden">
+<body class="bg-surface dark:bg-[#0a0a0a] min-h-screen flex flex-col font-sans antialiased text-on-surface dark:text-[#EDEDEC] relative overflow-hidden transition-colors duration-300">
     <!-- Navbar -->
     <nav class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-4 absolute top-0 z-50">
         <a href="{{ url('/') }}" class="font-headline-md text-headline-md tracking-tighter flex items-center gap-2 hover:opacity-80 transition-opacity text-primary font-sora font-bold">
-            <img src="{{ asset('logobengkel.png') }}" alt="Logo" class="h-8 filter invert"> SIBENGKEL
+            <img src="{{ asset('logobengkel.png') }}" alt="Logo" class="h-8 dark:brightness-0 dark:invert"> SIBENGKEL
         </a>
         <a href="{{ route('public.forgot_password') }}" class="text-sm font-semibold text-primary hover:underline flex items-center gap-1">
             <span class="material-symbols-outlined text-sm">arrow_back</span> Ubah Email
@@ -78,7 +78,7 @@
                         <label class="block font-semibold text-xs text-on-surface" for="otp">Kode OTP (6 Digit) <span class="text-error">*</span></label>
                         <div class="relative">
                             <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-lg">pin</span>
-                            <input class="w-full pl-10 pr-3 py-3 rounded-lg border border-outline-variant bg-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors text-lg font-mono font-bold tracking-widest text-on-surface placeholder:text-outline" 
+                            <input class="w-full pl-10 pr-3 py-3 rounded-lg border border-outline-variant dark:border-[#3E3E3A] bg-surface dark:bg-[#111111] focus:border-primary dark:focus:border-white focus:ring-1 focus:ring-primary outline-none transition-colors text-lg font-mono font-bold tracking-widest text-on-surface dark:text-white placeholder:text-outline dark:placeholder:text-gray-600" 
                                 id="otp" name="otp" placeholder="123456" maxlength="6" type="text" required autofocus/>
                         </div>
                     </div>
@@ -87,7 +87,7 @@
                         <label class="block font-semibold text-xs text-on-surface" for="password">Password Baru <span class="text-error">*</span></label>
                         <div class="relative">
                             <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-lg">lock</span>
-                            <input class="w-full pl-10 pr-3 py-2.5 rounded-lg border border-outline-variant bg-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors text-sm text-on-surface placeholder:text-outline" 
+                            <input class="w-full pl-10 pr-3 py-2.5 rounded-lg border border-outline-variant dark:border-[#3E3E3A] bg-surface dark:bg-[#111111] focus:border-primary dark:focus:border-white focus:ring-1 focus:ring-primary outline-none transition-colors text-sm text-on-surface dark:text-white placeholder:text-outline dark:placeholder:text-gray-600" 
                                 id="password" name="password" placeholder="Minimal 8 karakter" type="password" required/>
                         </div>
                     </div>
@@ -96,7 +96,7 @@
                         <label class="block font-semibold text-xs text-on-surface" for="password_confirmation">Konfirmasi Password Baru <span class="text-error">*</span></label>
                         <div class="relative">
                             <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-lg">lock</span>
-                            <input class="w-full pl-10 pr-3 py-2.5 rounded-lg border border-outline-variant bg-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors text-sm text-on-surface placeholder:text-outline" 
+                            <input class="w-full pl-10 pr-3 py-2.5 rounded-lg border border-outline-variant dark:border-[#3E3E3A] bg-surface dark:bg-[#111111] focus:border-primary dark:focus:border-white focus:ring-1 focus:ring-primary outline-none transition-colors text-sm text-on-surface dark:text-white placeholder:text-outline dark:placeholder:text-gray-600" 
                                 id="password_confirmation" name="password_confirmation" placeholder="Ulangi password baru" type="password" required/>
                         </div>
                     </div>

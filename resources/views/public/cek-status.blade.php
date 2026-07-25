@@ -37,7 +37,7 @@
                         <label class="font-label-sm text-label-sm text-on-surface-variant dark:text-gray-400 uppercase tracking-wider" for="search-input" id="search-label">Nomor Polisi</label>
                         <div class="relative flex items-center h-[44px]">
                             <span class="material-symbols-outlined absolute left-sm text-outline dark:text-gray-500" id="search-icon">directions_car</span>
-                            <input class="w-full h-full bg-surface-container-lowest dark:bg-[#111111] border border-outline-variant dark:border-[#3E3E3A] rounded-lg pl-[44px] pr-sm font-body-md text-body-md text-on-surface dark:text-[#EDEDEC] placeholder:text-outline dark:placeholder:text-gray-600 focus:border-primary dark:focus:border-secondary focus:ring-1 focus:ring-primary dark:focus:ring-secondary outline-none transition-colors uppercase" 
+                            <input class="w-full h-full bg-surface-container-lowest dark:bg-[#111111] border border-outline-variant dark:border-[#3E3E3A] rounded-lg pl-[44px] pr-sm font-body-md text-body-md text-on-surface dark:text-white placeholder:text-outline dark:placeholder:text-gray-600 focus:border-primary dark:focus:border-secondary focus:ring-1 focus:ring-primary dark:focus:ring-secondary outline-none transition-colors uppercase" 
                                 id="search-input" 
                                 name="search_query"
                                 placeholder="Contoh: B 1234 ABC" 

@@ -80,7 +80,7 @@
                         <label class="block font-label-md text-[14px] leading-[20px] font-semibold text-on-surface dark:text-[#EDEDEC]" for="login">Username atau Email</label>
                         <div class="relative">
                             <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline dark:text-gray-400">person</span>
-                            <input class="w-full pl-10 pr-3 py-3 rounded border border-outline-variant dark:border-[#3E3E3A] bg-surface-container-lowest dark:bg-[#111111] focus:border-primary dark:focus:border-white focus:ring-1 focus:ring-primary outline-none transition-colors font-body-md text-on-surface dark:text-[#EDEDEC] placeholder:text-outline" 
+                            <input class="w-full pl-10 pr-3 py-3 rounded border border-outline-variant dark:border-[#3E3E3A] bg-surface-container-lowest dark:bg-[#111111] focus:border-primary dark:focus:border-white focus:ring-1 focus:ring-primary outline-none transition-colors font-body-md text-on-surface dark:text-white placeholder:text-outline dark:placeholder:text-gray-600" 
                                 id="login" name="login" placeholder="Masukkan username/email" type="text" value="{{ old('login') }}" required autofocus/>
                         </div>
                     </div>
@@ -94,7 +94,7 @@
                         </div>
                         <div class="relative">
                             <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline dark:text-gray-400">lock</span>
-                            <input class="w-full pl-10 pr-10 py-3 rounded border border-outline-variant dark:border-[#3E3E3A] bg-surface-container-lowest dark:bg-[#111111] focus:border-primary dark:focus:border-white focus:ring-1 focus:ring-primary outline-none transition-colors font-body-md text-on-surface dark:text-[#EDEDEC] placeholder:text-outline" 
+                            <input class="w-full pl-10 pr-10 py-3 rounded border border-outline-variant dark:border-[#3E3E3A] bg-surface-container-lowest dark:bg-[#111111] focus:border-primary dark:focus:border-white focus:ring-1 focus:ring-primary outline-none transition-colors font-body-md text-on-surface dark:text-white placeholder:text-outline dark:placeholder:text-gray-600" 
                                 id="password" name="password" placeholder="••••••••" type="password" required/>
                         </div>
                     </div>

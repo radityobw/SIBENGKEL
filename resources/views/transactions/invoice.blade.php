@@ -49,7 +49,7 @@
         <header class="flex justify-between items-start border-b border-black pb-4">
             <div class="flex items-center gap-4">
                 <div class="flex items-center gap-3">
-                    <img src="{{ asset('logobengkel.png') }}" alt="SIBENGKEL Logo" class="h-10 object-contain">
+                    <img src="/logobengkel.png" alt="SIBENGKEL Logo" class="h-12 object-contain invert">
                 </div>
                 <div>
                     <h1 class="text-3xl font-sora font-bold text-primary tracking-tight uppercase">SIBENGKEL</h1>

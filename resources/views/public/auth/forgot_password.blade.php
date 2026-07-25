@@ -80,7 +80,7 @@
                         <label class="block font-semibold text-xs text-on-surface dark:text-[#EDEDEC]" for="email">Alamat Email Terdaftar <span class="text-error">*</span></label>
                         <div class="relative">
                             <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline dark:text-gray-400 text-lg">mail</span>
-                            <input class="w-full pl-10 pr-3 py-3 rounded-lg border border-outline-variant dark:border-[#3E3E3A] bg-surface dark:bg-[#111111] focus:border-primary dark:focus:border-white focus:ring-1 focus:ring-primary outline-none transition-colors text-sm text-on-surface dark:text-[#EDEDEC] placeholder:text-outline" 
+                            <input class="w-full pl-10 pr-3 py-3 rounded-lg border border-outline-variant dark:border-[#3E3E3A] bg-surface dark:bg-[#111111] focus:border-primary dark:focus:border-white focus:ring-1 focus:ring-primary outline-none transition-colors text-sm text-on-surface dark:text-white placeholder:text-outline dark:placeholder:text-gray-600" 
                                 id="email" name="email" placeholder="email@domain.com" type="email" value="{{ old('email') }}" required/>
                         </div>
                     </div>
