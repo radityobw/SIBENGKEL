@@ -16,7 +16,7 @@
                 <h3 class="font-headline-md text-headline-md text-on-background font-bold mb-md">Send us a message</h3>
                 
                 @if(session('success'))
-                    <div class="bg-primary-container text-on-primary-container p-4 rounded-lg mb-6 flex items-start gap-3">
+                    <div class="bg-green-100 dark:bg-green-900/50 text-green-800 dark:text-green-300 border border-green-200 dark:border-green-800 p-4 rounded-lg mb-6 flex items-start gap-3">
                         <span class="material-symbols-outlined">check_circle</span>
                         <p>{{ session('success') }}</p>
                     </div>

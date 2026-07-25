@@ -156,33 +156,85 @@
                 </script>
                 <div class="flex flex-col sm:flex-row gap-4 pt-4 justify-center">
                     <style>
-                        .border-glow {
+                        .btn-interactive {
                             position: relative;
-                            z-index: 1;
+                            display: inline-flex;
+                            height: 3.5rem;
+                            width: 15rem;
+                            align-items: center;
+                            justify-content: center;
                             overflow: hidden;
+                            border-radius: 9999px;
+                            border: 1px solid #f26b21;
+                            background-color: white;
+                            font-weight: 600;
+                            color: #f26b21;
+                            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+                            transition: all 0.3s ease;
                         }
-                        .border-glow::before {
-                            content: '';
+                        .dark .btn-interactive {
+                            background-color: #161615;
+                            color: #EDEDEC;
+                            border-color: rgba(242, 107, 33, 0.5);
+                        }
+                        .btn-interactive:hover {
+                            border-color: transparent;
+                        }
+                        .btn-interactive-text {
+                            position: relative;
+                            z-index: 10;
+                            display: inline-block;
+                            transform: translateX(4px);
+                            transition: all 0.3s ease;
+                        }
+                        .btn-interactive:hover .btn-interactive-text {
+                            transform: translateX(48px);
+                            opacity: 0;
+                        }
+                        .btn-interactive-hover-content {
                             position: absolute;
-                            top: 50%; left: 50%;
-                            width: 300%; height: 300%;
-                            background: conic-gradient(transparent, #f26b21, transparent 30%);
-                            animation: rotate-glow 3s linear infinite;
-                            z-index: -1;
+                            inset: 0;
+                            z-index: 20;
+                            display: flex;
+                            height: 100%;
+                            width: 100%;
+                            transform: translateX(48px);
+                            align-items: center;
+                            justify-content: center;
+                            gap: 8px;
+                            color: white;
+                            opacity: 0;
+                            transition: all 0.3s ease;
                         }
-                        @keyframes rotate-glow {
-                            0% { transform: translate(-50%, -50%) rotate(0deg); }
-                            100% { transform: translate(-50%, -50%) rotate(360deg); }
+                        .btn-interactive:hover .btn-interactive-hover-content {
+                            transform: translateX(0);
+                            opacity: 1;
+                        }
+                        .btn-interactive-bg {
+                            position: absolute;
+                            left: 16px;
+                            top: calc(50% - 6px);
+                            z-index: 0;
+                            height: 12px;
+                            width: 12px;
+                            border-radius: 50%;
+                            background-color: #f26b21;
+                            transform: scale(1);
+                            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+                        }
+                        .btn-interactive:hover .btn-interactive-bg {
+                            transform: scale(50);
                         }
                     </style>
-                    <a href="{{ route('public.login') }}" class="border-glow bg-primary text-on-primary hover:text-white transition-all duration-300 font-label-md text-label-md h-14 px-8 rounded-full flex items-center justify-center gap-2 group shadow-lg hover:shadow-primary/25">
-                        <span class="absolute inset-[2px] rounded-full bg-primary z-10 transition-colors group-hover:bg-primary/90"></span>
-                        <span class="relative z-20 flex items-center gap-2">
-                            Portal Pelanggan
-                            <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform" style="font-variation-settings: 'FILL' 1;">arrow_forward</span>
-                        </span>
+                    <a href="{{ route('public.login') }}" class="btn-interactive">
+                        <span class="btn-interactive-text">Portal Pelanggan</span>
+                        <div class="btn-interactive-hover-content">
+                            <span>Portal Pelanggan</span>
+                            <span class="material-symbols-outlined" style="font-size: 20px; font-variation-settings: 'FILL' 0;">arrow_forward</span>
+                        </div>
+                        <div class="btn-interactive-bg"></div>
                     </a>
-                    <a href="{{ url('/cek-status') }}" class="bg-white/70 dark:bg-[#161615]/70 backdrop-blur-md text-on-surface dark:text-[#EDEDEC] hover:bg-white/90 dark:hover:bg-[#3E3E3A] border border-white/50 dark:border-white/10 transition-all duration-300 font-label-md text-label-md h-14 px-8 rounded-full flex items-center justify-center gap-2 shadow-sm">
+                    <a href="{{ url('/cek-status') }}" class="bg-white/70 dark:bg-[#161615]/70 backdrop-blur-md text-on-surface dark:text-[#EDEDEC] hover:bg-white/90 dark:hover:bg-[#3E3E3A] border border-black/10 dark:border-white/10 transition-all duration-300 font-label-md text-label-md h-14 px-8 rounded-full flex items-center justify-center gap-2 shadow-sm">
                         <span class="material-symbols-outlined">search</span>
                         Cek Status Servis
                     </a>
@@ -278,15 +330,31 @@
     <!-- Services Section -->
     <section class="py-24 bg-surface-container-lowest dark:bg-[#0a0a0a] px-margin-mobile md:px-margin-desktop relative" id="services">
         <style>
-            .spotlight-card {
+            .cards-container {
+                perspective: 1000px;
+            }
+            .cards-container:hover .spotlight-card {
+                opacity: 0.3;
+                filter: grayscale(40%) blur(1px);
+            }
+            .cards-container .spotlight-card {
                 position: relative;
                 overflow: hidden;
+                transition: transform 0.2s ease-out, opacity 0.3s ease, filter 0.3s ease, box-shadow 0.3s ease;
+                transform-style: preserve-3d;
+                will-change: transform;
+            }
+            .cards-container .spotlight-card:hover {
+                opacity: 1;
+                filter: none;
+                z-index: 10;
+                box-shadow: 0 20px 40px -10px rgba(255, 107, 0, 0.15);
             }
             .spotlight-card::before {
                 content: "";
                 position: absolute;
                 inset: 0;
-                background: radial-gradient(400px circle at var(--x, 0) var(--y, 0), rgba(255, 107, 0, 0.08), transparent 40%);
+                background: radial-gradient(500px circle at var(--x, 0) var(--y, 0), rgba(255, 107, 0, 0.15), transparent 40%);
                 pointer-events: none;
                 opacity: 0;
                 transition: opacity 0.3s;
@@ -298,6 +366,7 @@
             .spotlight-card > * {
                 position: relative;
                 z-index: 1;
+                transform: translateZ(20px); /* 3D pop effect for content */
             }
         </style>
         
@@ -308,9 +377,9 @@
                 <p class="text-on-surface-variant dark:text-gray-400 text-lg">Kami menyediakan berbagai layanan perbaikan dan perawatan kendaraan dengan standar industri terdepan.</p>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div class="cards-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 <!-- Card 1 -->
-                <div class="spotlight-card bg-white/70 dark:bg-[#161615]/70 backdrop-blur-md rounded-3xl p-8 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 border border-white/50 dark:border-white/10 group">
+                <div class="spotlight-card bg-white/80 dark:bg-[#161615]/80 backdrop-blur-xl rounded-3xl p-8 border border-outline-variant/30 dark:border-white/5 group">
                     <div class="w-16 h-16 bg-primary/10 dark:bg-[#EDEDEC]/10 text-primary dark:text-[#EDEDEC] rounded-2xl flex items-center justify-center mb-6 group-hover:bg-primary dark:group-hover:bg-[#EDEDEC] group-hover:text-white dark:group-hover:text-black transition-colors duration-300">
                         <span class="material-symbols-outlined text-3xl">build</span>
                     </div>
@@ -318,7 +387,7 @@
                     <p class="text-on-surface-variant dark:text-gray-400 leading-relaxed">Perawatan rutin dengan standar pabrikan untuk menjaga performa optimal kendaraan Anda.</p>
                 </div>
                 <!-- Card 2 -->
-                <div class="spotlight-card bg-white/70 dark:bg-[#161615]/70 backdrop-blur-md rounded-3xl p-8 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 border border-white/50 dark:border-white/10 group">
+                <div class="spotlight-card bg-white/80 dark:bg-[#161615]/80 backdrop-blur-xl rounded-3xl p-8 border border-outline-variant/30 dark:border-white/5 group">
                     <div class="w-16 h-16 bg-secondary/10 text-secondary rounded-2xl flex items-center justify-center mb-6 group-hover:bg-secondary group-hover:text-white transition-colors duration-300">
                         <span class="material-symbols-outlined text-3xl">settings</span>
                     </div>
@@ -326,7 +395,7 @@
                     <p class="text-on-surface-variant dark:text-gray-400 leading-relaxed">Penyediaan suku cadang orisinal bergaransi resmi untuk keamanan jangka panjang.</p>
                 </div>
                 <!-- Card 3 -->
-                <div class="spotlight-card bg-white/70 dark:bg-[#161615]/70 backdrop-blur-md rounded-3xl p-8 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 border border-white/50 dark:border-white/10 group">
+                <div class="spotlight-card bg-white/80 dark:bg-[#161615]/80 backdrop-blur-xl rounded-3xl p-8 border border-outline-variant/30 dark:border-white/5 group">
                     <div class="w-16 h-16 bg-primary/10 dark:bg-[#EDEDEC]/10 text-primary dark:text-[#EDEDEC] rounded-2xl flex items-center justify-center mb-6 group-hover:bg-primary dark:group-hover:bg-[#EDEDEC] group-hover:text-white dark:group-hover:text-black transition-colors duration-300">
                         <span class="material-symbols-outlined text-3xl">calendar_month</span>
                     </div>
@@ -334,7 +403,7 @@
                     <p class="text-on-surface-variant dark:text-gray-400 leading-relaxed">Sistem penjadwalan pintar untuk menghindari antrean panjang di bengkel.</p>
                 </div>
                 <!-- Card 4 -->
-                <div class="spotlight-card bg-white/70 dark:bg-[#161615]/70 backdrop-blur-md rounded-3xl p-8 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 border border-white/50 dark:border-white/10 group">
+                <div class="spotlight-card bg-white/80 dark:bg-[#161615]/80 backdrop-blur-xl rounded-3xl p-8 border border-outline-variant/30 dark:border-white/5 group">
                     <div class="w-16 h-16 bg-secondary/10 text-secondary rounded-2xl flex items-center justify-center mb-6 group-hover:bg-secondary group-hover:text-white transition-colors duration-300">
                         <span class="material-symbols-outlined text-3xl">query_stats</span>
                     </div>
@@ -347,13 +416,29 @@
         <script>
             document.addEventListener('DOMContentLoaded', () => {
                 const cards = document.querySelectorAll('.spotlight-card');
+                
                 cards.forEach(card => {
                     card.addEventListener('mousemove', e => {
                         const rect = card.getBoundingClientRect();
                         const x = e.clientX - rect.left;
                         const y = e.clientY - rect.top;
+                        
+                        // Set Spotlight position
                         card.style.setProperty('--x', `${x}px`);
                         card.style.setProperty('--y', `${y}px`);
+                        
+                        // Calculate 3D tilt
+                        const centerX = rect.width / 2;
+                        const centerY = rect.height / 2;
+                        // Limit rotation to -10 to 10 degrees for a subtle effect
+                        const rotateX = ((y - centerY) / centerY) * -10; 
+                        const rotateY = ((x - centerX) / centerX) * 10;
+                        
+                        card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+                    });
+                    
+                    card.addEventListener('mouseleave', () => {
+                        card.style.transform = `rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
                     });
                 });
             });
@@ -364,6 +449,64 @@
     <section class="py-24 bg-surface dark:bg-[#111111] px-margin-mobile md:px-margin-desktop border-t border-outline-variant/30 dark:border-[#3E3E3A]/30 relative" id="features">
         <div id="alur-servis" class="absolute -top-24"></div>
         <div class="max-w-screen-xl mx-auto">
+            <style>
+                @keyframes shiny-text {
+                    0% { background-position: 100% center; }
+                    100% { background-position: 0% center; }
+                }
+                .shiny-text {
+                    background-image: linear-gradient(
+                        120deg,
+                        #1f2937 45%,
+                        #FF6B00 50%,
+                        #1f2937 55%
+                    );
+                    background-size: 300% auto;
+                    background-clip: text;
+                    -webkit-background-clip: text;
+                    color: transparent !important;
+                    display: inline-block;
+                    background-position: 100% center;
+                    cursor: default;
+                }
+                .shiny-text.is-animating {
+                    animation: shiny-text 2s linear infinite;
+                }
+                .dark .shiny-text {
+                    background-image: linear-gradient(
+                        120deg,
+                        #EDEDEC 45%,
+                        #FF8F42 50%,
+                        #EDEDEC 55%
+                    );
+                }
+            </style>
+            
+            <script>
+                document.addEventListener('DOMContentLoaded', () => {
+                    document.querySelectorAll('.flex.group').forEach(group => {
+                        const text = group.querySelector('.shiny-text');
+                        if (!text) return;
+
+                        // Start animation on hover
+                        group.addEventListener('mouseenter', () => {
+                            text.classList.add('is-animating');
+                        });
+
+                        // Stop animation ONLY at the end of a cycle, if no longer hovering
+                        text.addEventListener('animationiteration', () => {
+                            if (!group.matches(':hover')) {
+                                text.classList.remove('is-animating');
+                            }
+                        });
+                        
+                        // Fallback in case animation gets interrupted or mouse leaves before first iteration starts (rare)
+                        group.addEventListener('mouseleave', () => {
+                            // We intentionally don't remove the class here so it finishes the cycle
+                        });
+                    });
+                });
+            </script>
             <div class="flex flex-col lg:flex-row items-center gap-16">
                 <div class="lg:w-1/2 space-y-8">
                     <div>
@@ -373,24 +516,24 @@
                     </div>
                     
                     <div class="space-y-6">
-                        <div class="flex gap-6">
+                        <div class="flex gap-6 group">
                             <div class="w-12 h-12 rounded-full bg-surface-container-highest dark:bg-[#3E3E3A] text-on-surface dark:text-[#EDEDEC] flex items-center justify-center font-bold text-xl shrink-0 shadow-sm">1</div>
                             <div>
-                                <h4 class="text-xl font-bold mb-2 dark:text-[#EDEDEC]">Booking Jadwal Servis</h4>
+                                <h4 class="shiny-text text-xl font-bold mb-2">Booking Jadwal Servis</h4>
                                 <p class="text-on-surface-variant dark:text-gray-400">Pilih waktu yang sesuai dengan kesibukan Anda melalui portal pelanggan kami tanpa perlu menelepon.</p>
                             </div>
                         </div>
-                        <div class="flex gap-6">
+                        <div class="flex gap-6 group">
                             <div class="w-12 h-12 rounded-full bg-secondary text-white flex items-center justify-center font-bold text-xl shrink-0 shadow-lg shadow-secondary/30">2</div>
                             <div>
-                                <h4 class="text-xl font-bold mb-2 dark:text-[#EDEDEC]">Pantau Pengerjaan</h4>
+                                <h4 class="shiny-text text-xl font-bold mb-2">Pantau Pengerjaan</h4>
                                 <p class="text-on-surface-variant dark:text-gray-400">Kendaraan dikerjakan oleh mekanik ahli. Anda dapat memantau status pengerjaannya secara real-time dari HP Anda.</p>
                             </div>
                         </div>
-                        <div class="flex gap-6">
+                        <div class="flex gap-6 group">
                             <div class="w-12 h-12 rounded-full bg-surface-container-high dark:bg-[#161615] border-2 border-outline-variant dark:border-[#EDEDEC] text-on-surface dark:text-[#EDEDEC] flex items-center justify-center font-bold text-xl shrink-0">3</div>
                             <div>
-                                <h4 class="text-xl font-bold mb-2 dark:text-[#EDEDEC]">Selesai & Ambil Kendaraan</h4>
+                                <h4 class="shiny-text text-xl font-bold mb-2">Selesai & Ambil Kendaraan</h4>
                                 <p class="text-on-surface-variant dark:text-gray-400">Dapatkan notifikasi instan saat kendaraan siap. Riwayat dan invoice digital otomatis tersimpan.</p>
                             </div>
                         </div>
@@ -423,9 +566,33 @@
                 </a>
             </div>
 
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+            <style>
+                .highlighter-item {
+                    position: relative;
+                }
+                .highlighter-item::after {
+                    content: "";
+                    position: absolute;
+                    inset: -1px; /* Overlap existing border */
+                    border-radius: inherit; /* Inherit parent radius */
+                    padding: 1.5px; /* Highlight border thickness */
+                    background: radial-gradient(400px circle at var(--x, -1000px) var(--y, -1000px), rgba(255, 107, 0, 0.8), transparent 40%);
+                    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+                    -webkit-mask-composite: xor;
+                    mask-composite: exclude;
+                    opacity: 0;
+                    transition: opacity 0.3s ease;
+                    pointer-events: none;
+                    z-index: 20;
+                }
+                .highlighter-group:hover .highlighter-item::after {
+                    opacity: 1;
+                }
+            </style>
+            
+            <div class="highlighter-group grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
                 @foreach($spareparts as $item)
-                    <div class="bg-white/70 dark:bg-[#161615]/70 backdrop-blur-md rounded-2xl p-4 shadow-sm border border-white/50 dark:border-white/10 hover:shadow-lg transition-all group flex flex-col h-full relative overflow-hidden">
+                    <div class="highlighter-item bg-white/70 dark:bg-[#161615]/70 backdrop-blur-md rounded-2xl p-4 shadow-sm border border-outline-variant/30 dark:border-white/5 hover:shadow-lg transition-all group flex flex-col h-full relative" style="border-radius: 1rem;">
                         <a href="{{ Auth::guard('customer')->check() ? route('public.sparepart.index') : route('public.login') }}" class="aspect-square bg-surface-container-lowest dark:bg-[#0a0a0a] rounded-xl mb-4 relative overflow-hidden flex items-center justify-center block">
                             @if($item->image_path)
                                 <img src="{{ Storage::url($item->image_path) }}" alt="{{ $item->name }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
@@ -434,7 +601,7 @@
                             @endif
                             <div class="absolute inset-0 bg-primary/0 group-hover:bg-primary/5 transition-colors duration-300"></div>
                         </a>
-                        <div class="flex flex-col flex-grow">
+                        <div class="flex flex-col flex-grow relative z-10">
                             <span class="text-[10px] md:text-xs font-bold text-secondary uppercase tracking-widest mb-1">{{ $item->category }}</span>
                             <a href="{{ Auth::guard('customer')->check() ? route('public.sparepart.index') : route('public.login') }}" class="font-bold text-on-surface dark:text-[#EDEDEC] line-clamp-2 mb-2 flex-grow hover:text-primary transition-colors">
                                 {{ $item->name }}
@@ -455,6 +622,24 @@
                     </div>
                 @endforeach
             </div>
+            
+            <script>
+                document.addEventListener('DOMContentLoaded', () => {
+                    const highlighterGroups = document.querySelectorAll('.highlighter-group');
+                    highlighterGroups.forEach(group => {
+                        group.addEventListener('mousemove', e => {
+                            const items = group.querySelectorAll('.highlighter-item');
+                            items.forEach(item => {
+                                const rect = item.getBoundingClientRect();
+                                const x = e.clientX - rect.left;
+                                const y = e.clientY - rect.top;
+                                item.style.setProperty('--x', `${x}px`);
+                                item.style.setProperty('--y', `${y}px`);
+                            });
+                        });
+                    });
+                });
+            </script>
             
             <div class="mt-12 text-center md:hidden">
                 <a href="{{ route('public.sparepart.index') }}" class="inline-flex items-center justify-center gap-2 w-full h-14 bg-surface-container-high dark:bg-[#161615] border border-outline-variant dark:border-[#3E3E3A] rounded-full text-on-surface dark:text-[#EDEDEC] font-bold hover:bg-surface-container-highest transition-colors">
@@ -477,11 +662,11 @@
         </div>
             
         <!-- Horizontal Scrollable Container (Auto-scroll Ticker) -->
-        <div class="relative w-full group">
+        <div class="relative w-full group highlighter-group">
             <div id="testimonial-scroll" class="flex overflow-x-auto gap-6 px-margin-mobile md:px-margin-desktop pb-8 pt-4 no-scrollbar w-full">
                 <!-- Set 1 -->
                 @foreach($testimonials as $testimonial)
-                <div class="bg-white/70 dark:bg-[#161615]/70 backdrop-blur-md p-8 rounded-3xl shadow-sm hover:shadow-md border border-white/50 dark:border-white/10 relative flex flex-col shrink-0 w-[85vw] sm:w-[400px] transition-shadow">
+                <div class="highlighter-item bg-white/70 dark:bg-[#161615]/70 backdrop-blur-md p-8 rounded-3xl shadow-sm hover:shadow-md border border-outline-variant/30 dark:border-white/5 relative flex flex-col shrink-0 w-[85vw] sm:w-[400px] transition-shadow" style="border-radius: 1.5rem;">
                     <span class="material-symbols-outlined absolute top-6 right-6 text-5xl text-outline-variant/30 dark:text-outline-variant/10">format_quote</span>
                     <div class="flex gap-1 text-secondary mb-6">
                         @for($i = 0; $i < 5; $i++)
@@ -509,7 +694,7 @@
 
                 <!-- Set 2 (for seamless infinite loop) -->
                 @foreach($testimonials as $testimonial)
-                <div class="bg-surface dark:bg-[#161615] p-8 rounded-3xl shadow-sm hover:shadow-md border border-outline-variant dark:border-[#3E3E3A] relative flex flex-col shrink-0 w-[85vw] sm:w-[400px] transition-shadow" aria-hidden="true">
+                <div class="highlighter-item bg-surface dark:bg-[#161615] p-8 rounded-3xl shadow-sm hover:shadow-md border border-outline-variant dark:border-[#3E3E3A] relative flex flex-col shrink-0 w-[85vw] sm:w-[400px] transition-shadow" aria-hidden="true" style="border-radius: 1.5rem;">
                     <span class="material-symbols-outlined absolute top-6 right-6 text-5xl text-outline-variant/30 dark:text-outline-variant/10">format_quote</span>
                     <div class="flex gap-1 text-secondary mb-6">
                         @for($i = 0; $i < 5; $i++)

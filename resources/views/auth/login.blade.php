@@ -73,10 +73,15 @@
             @endif
 
             <!-- Login Card -->
-            <div class="glass-card rounded-xl p-lg md:p-xl border border-outline-variant dark:border-[#3E3E3A] shadow-sm">
-                <form action="{{ route('login') }}" class="space-y-md" method="POST">
-                    @csrf
-                    <div class="space-y-xs">
+            <div class="glass-card rounded-xl p-lg md:p-xl border border-outline-variant dark:border-[#3E3E3A] shadow-sm relative group overflow-hidden magic-card">
+                <!-- Magic Card Spotlight -->
+                <div class="pointer-events-none absolute -inset-px opacity-0 transition duration-300 group-hover:opacity-100 z-0" 
+                     style="background: radial-gradient(600px circle at var(--x, 0) var(--y, 0), rgba(242, 107, 33, 0.15), transparent 40%);"></div>
+                
+                <div class="relative z-10">
+                    <form action="{{ route('login') }}" class="space-y-md" method="POST">
+                        @csrf
+                        <div class="space-y-xs">
                         <label class="block font-label-md text-[14px] leading-[20px] font-semibold text-on-surface dark:text-[#EDEDEC]" for="login">Username atau Email</label>
                         <div class="relative">
                             <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline dark:text-gray-400">person</span>
@@ -114,6 +119,7 @@
                         </button>
                     </div>
                 </form>
+                </div>
             </div>
         </div>
     </div>
@@ -136,6 +142,15 @@ document.addEventListener("DOMContentLoaded", () => {
             const isHidden = input.type === "password";
             input.type = isHidden ? "text" : "password";
             btn.querySelector("span").textContent = isHidden ? "visibility_off" : "visibility";
+        });
+    });
+
+    // Magic Card Effect
+    document.querySelectorAll('.magic-card').forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            card.style.setProperty('--x', `${e.clientX - rect.left}px`);
+            card.style.setProperty('--y', `${e.clientY - rect.top}px`);
         });
     });
 });

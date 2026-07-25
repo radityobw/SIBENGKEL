@@ -38,6 +38,13 @@
         .dark .industrial-grid {
             background-image: linear-gradient(to right, #3E3E3A 1px, transparent 1px), linear-gradient(to bottom, #3E3E3A 1px, transparent 1px);
         }
+        ::view-transition-old(root),
+        ::view-transition-new(root) {
+            animation: none;
+            mix-blend-mode: normal;
+        }
+        ::view-transition-old(root) { z-index: 1; }
+        ::view-transition-new(root) { z-index: 2; }
     </style>
     <script>
         // Landing & Public pages default to Dark Mode
@@ -48,14 +55,42 @@
             document.documentElement.classList.add('dark');
         }
         
-        function toggleTheme() {
-            if (document.documentElement.classList.contains('dark')) {
-                document.documentElement.classList.remove('dark');
-                localStorage.setItem('theme', 'light');
-            } else {
-                document.documentElement.classList.add('dark');
-                localStorage.setItem('theme', 'dark');
+        function toggleTheme(event) {
+            const doToggle = () => {
+                if (document.documentElement.classList.contains('dark')) {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('theme', 'light');
+                } else {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('theme', 'dark');
+                }
+            };
+
+            if (!document.startViewTransition || !event) {
+                doToggle();
+                return;
             }
+
+            const x = event.clientX ?? innerWidth / 2;
+            const y = event.clientY ?? innerHeight / 2;
+            const endRadius = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
+
+            const transition = document.startViewTransition(doToggle);
+            transition.ready.then(() => {
+                document.documentElement.animate(
+                    {
+                        clipPath: [
+                            `circle(0px at ${x}px ${y}px)`,
+                            `circle(${endRadius}px at ${x}px ${y}px)`
+                        ],
+                    },
+                    {
+                        duration: 500,
+                        easing: 'ease-in-out',
+                        pseudoElement: '::view-transition-new(root)',
+                    }
+                );
+            });
         }
     </script>
 </head>
@@ -76,7 +111,7 @@
         </div>
         <div class="flex gap-2 md:gap-4 items-center">
             <!-- Theme Toggle -->
-            <button onclick="toggleTheme()" class="flex items-center justify-center p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors focus:outline-none text-black dark:text-[#EDEDEC]" aria-label="Toggle Dark Mode">
+            <button onclick="toggleTheme(event)" class="flex items-center justify-center p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors focus:outline-none text-black dark:text-[#EDEDEC]" aria-label="Toggle Dark Mode">
                 <span class="material-symbols-outlined text-[20px] dark:hidden">dark_mode</span>
                 <span class="material-symbols-outlined text-[20px] hidden dark:block">light_mode</span>
             </button>
@@ -135,5 +170,19 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 </script>
+    @if(session('success'))
+        <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                var end = Date.now() + (2 * 1000);
+                var colors = ['#f26b21', '#f97316', '#ffffff'];
+                (function frame() {
+                    confetti({ particleCount: 3, angle: 60, spread: 55, origin: { x: 0 }, colors: colors, zIndex: 100000 });
+                    confetti({ particleCount: 3, angle: 120, spread: 55, origin: { x: 1 }, colors: colors, zIndex: 100000 });
+                    if (Date.now() < end) requestAnimationFrame(frame);
+                }());
+            });
+        </script>
+    @endif
 </body>
 </html>

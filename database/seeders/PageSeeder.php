@@ -120,11 +120,11 @@ class PageSeeder extends Seeder
         </div>
     </div>
     
-    <div class="bg-primary-container text-on-primary-container p-lg rounded-xl text-center">
-        <span class="material-symbols-outlined text-4xl mb-2">help_center</span>
-        <h3 class="font-headline-sm text-headline-sm font-bold mb-2">Still need help?</h3>
-        <p class="mb-4">Can\'t find the answer you\'re looking for? Our dedicated support team is ready to assist you.</p>
-        <a href="/p/contact-us" class="inline-block bg-primary text-on-primary font-bold px-6 py-2 rounded-lg hover:opacity-90">
+    <div class="bg-surface-container-lowest dark:bg-[#161615] border border-outline-variant dark:border-[#3E3E3A] text-on-surface dark:text-[#EDEDEC] p-lg rounded-xl text-center">
+        <span class="material-symbols-outlined text-4xl mb-2 text-primary dark:text-[#EDEDEC]">help_center</span>
+        <h3 class="font-headline-sm text-headline-sm font-bold mb-2 text-on-surface dark:text-[#EDEDEC]">Still need help?</h3>
+        <p class="mb-4 text-on-surface-variant dark:text-gray-400">Can\'t find the answer you\'re looking for? Our dedicated support team is ready to assist you.</p>
+        <a href="/p/contact-us" class="inline-block bg-primary dark:bg-white text-on-primary dark:text-black font-bold px-6 py-2 rounded-lg hover:opacity-90">
             Contact Support
         </a>
     </div>

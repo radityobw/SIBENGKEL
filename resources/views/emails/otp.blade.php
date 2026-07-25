@@ -21,6 +21,7 @@
             background-color: #000000;
             padding: 20px;
             text-align: center;
+            border-bottom: 2px solid #e65100;
         }
         .header h1 {
             color: #ffffff;
@@ -66,7 +67,7 @@
 <body>
     <div class="email-container">
         <div class="header">
-            <img src="{{ asset('logobengkel.png') }}" alt="SIBENGKEL Logo" style="height: 50px; margin-bottom: 15px; object-fit: contain;">
+            <img src="{{ asset('logobengkel.png') }}" alt="SIBENGKEL Logo" style="height: 50px; margin-bottom: 15px; object-fit: contain; filter: invert(1); -webkit-filter: invert(1);">
             <h1>SIBENGKEL</h1>
         </div>
         <div class="content">
