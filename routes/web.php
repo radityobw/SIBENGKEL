@@ -10,6 +10,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\NotificationController;
 
 // Public Pages (Static -> Dynamic)
+Route::get('/sitemap.xml', [\App\Http\Controllers\SitemapController::class, 'index'])->name('sitemap');
 Route::get('/p/{slug}', [PublicPageController::class, 'show'])->name('public.page');
 
 // Contact Us

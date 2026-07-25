@@ -1,5 +1,9 @@
 @extends('layouts.public')
 
+@section('title', 'SIBENGKEL - Sistem Manajemen Bengkel Era Digital')
+@section('meta_description', 'SIBENGKEL adalah sistem informasi bengkel dan manajemen bengkel yang memudahkan Anda untuk cek status servis, booking online, dan membeli sparepart.')
+@section('meta_keywords', 'sibengkel, sistem informasi bengkel, sistem manajemen bengkel')
+
 @section('content')
     <!-- Hero Section -->
     <section class="relative bg-surface dark:bg-[#0a0a0a] text-on-surface dark:text-[#EDEDEC] py-20 lg:py-32 px-margin-mobile md:px-margin-desktop overflow-hidden flex-grow flex items-center md:min-h-[calc(100vh-64px)]" id="home">
