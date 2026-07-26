@@ -5,10 +5,10 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     
     <!-- Primary Meta Tags -->
-    <title>@yield('title', 'SIBENGKEL - Sistem Manajemen Bengkel Era Digital')</title>
-    <meta name="title" content="@yield('title', 'SIBENGKEL - Sistem Manajemen Bengkel Era Digital')">
+    <title>@yield('title', 'SIBENGKEL - Sistem Informasi Bengkel Era Digital')</title>
+    <meta name="title" content="@yield('title', 'SIBENGKEL - Sistem Informasi Bengkel Era Digital')">
     <meta name="description" content="@yield('meta_description', 'Kelola jadwal servis, pantau status pengerjaan secara real-time, dan akses riwayat perawatan kendaraan Anda dalam satu aplikasi canggih.')">
-    <meta name="keywords" content="@yield('meta_keywords', 'sibengkel, sistem informasi bengkel, sistem manajemen bengkel, servis mobil, bengkel terpercaya')">
+    <meta name="keywords" content="@yield('meta_keywords', 'sibengkel, sistem informasi bengkel, servis mobil, bengkel terpercaya')">
     <meta name="author" content="SIBENGKEL">
     <link rel="canonical" href="@yield('canonical_url', url()->current())">
     <meta name="robots" content="index, follow">
@@ -16,14 +16,14 @@
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="{{ url()->current() }}">
-    <meta property="og:title" content="@yield('title', 'SIBENGKEL - Sistem Manajemen Bengkel Era Digital')">
+    <meta property="og:title" content="@yield('title', 'SIBENGKEL - Sistem Informasi Bengkel Era Digital')">
     <meta property="og:description" content="@yield('meta_description', 'Kelola jadwal servis, pantau status pengerjaan secara real-time, dan akses riwayat perawatan kendaraan Anda dalam satu aplikasi canggih.')">
     <meta property="og:image" content="{{ asset('logobengkel.png') }}">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="{{ url()->current() }}">
-    <meta property="twitter:title" content="@yield('title', 'SIBENGKEL - Sistem Manajemen Bengkel Era Digital')">
+    <meta property="twitter:title" content="@yield('title', 'SIBENGKEL - Sistem Informasi Bengkel Era Digital')">
     <meta property="twitter:description" content="@yield('meta_description', 'Kelola jadwal servis, pantau status pengerjaan secara real-time, dan akses riwayat perawatan kendaraan Anda dalam satu aplikasi canggih.')">
     <meta property="twitter:image" content="{{ asset('logobengkel.png') }}">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>

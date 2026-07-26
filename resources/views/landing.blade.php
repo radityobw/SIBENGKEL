@@ -1,8 +1,8 @@
 @extends('layouts.public')
 
-@section('title', 'SIBENGKEL - Sistem Manajemen Bengkel Era Digital')
-@section('meta_description', 'SIBENGKEL adalah sistem informasi bengkel dan manajemen bengkel yang memudahkan Anda untuk cek status servis, booking online, dan membeli sparepart.')
-@section('meta_keywords', 'sibengkel, sistem informasi bengkel, sistem manajemen bengkel')
+@section('title', 'SIBENGKEL - Sistem Informasi Bengkel Era Digital')
+@section('meta_description', 'SIBENGKEL adalah sistem informasi bengkel terpadu yang memudahkan Anda untuk cek status servis, booking online, dan membeli sparepart.')
+@section('meta_keywords', 'sibengkel, sistem informasi bengkel, servis mobil, bengkel terpercaya')
 
 @section('content')
     <!-- Hero Section -->
@@ -66,7 +66,7 @@
             <div class="space-y-6 md:space-y-8 relative z-20 flex flex-col items-center">
                 <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/70 dark:bg-[#161615]/70 backdrop-blur-md border border-white/50 dark:border-white/10 shadow-sm text-sm font-semibold text-black dark:text-[#EDEDEC]">
                     <span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
-                    Sistem Manajemen Bengkel Era Digital
+                    Sistem Informasi Bengkel Era Digital
                 </div>
                 <style>
                     .split-char {

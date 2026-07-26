@@ -28,7 +28,7 @@
                         <img src="{{ asset('logobengkel.png') }}" alt="SIBENGKEL Logo" class="h-10 md:h-12 object-contain brightness-0 invert">
                         <h1 class="font-headline-xl text-headline-xl text-on-primary tracking-tight">SIBENGKEL</h1>
                     </div>
-                    <p class="font-headline-md text-headline-md text-primary-fixed mt-4 max-w-md">Pemulihan Keamanan Akun Manajemen Bengkel.</p>
+                    <p class="font-headline-md text-headline-md text-primary-fixed mt-4 max-w-md">Pemulihan Keamanan Akun Sistem Informasi Bengkel.</p>
                 </div>
                 <div class="text-on-primary/60 font-label-md text-label-md">
                     © {{ date('Y') }} SIBENGKEL. All rights reserved.
