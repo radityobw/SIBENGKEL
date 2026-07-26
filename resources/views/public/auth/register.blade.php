@@ -139,18 +139,22 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         input.dataset.pwToggled = "true";
         
-        const wrapper = document.createElement("div");
-        wrapper.className = "relative w-full flex items-center";
-        
-        Array.from(input.classList).forEach(cls => {
-            if (cls.startsWith("mt-") || cls.startsWith("mb-") || cls.startsWith("my-")) {
-                wrapper.classList.add(cls);
-                input.classList.remove(cls);
-            }
-        });
+        let wrapper = input.parentNode;
+        if (!wrapper || !wrapper.classList.contains("relative")) {
+            wrapper = document.createElement("div");
+            wrapper.className = "relative w-full flex items-center";
+            Array.from(input.classList).forEach(cls => {
+                if (cls.startsWith("mt-") || cls.startsWith("mb-") || cls.startsWith("my-")) {
+                    wrapper.classList.add(cls);
+                    input.classList.remove(cls);
+                }
+            });
+            input.parentNode.insertBefore(wrapper, input);
+            wrapper.appendChild(input);
+        }
 
-        input.parentNode.insertBefore(wrapper, input);
-        wrapper.appendChild(input);
+        const leftIcon = wrapper.querySelector("span.material-symbols-outlined, i");
+        if (leftIcon) leftIcon.style.zIndex = "10";
 
         const btn = document.createElement("button");
         btn.type = "button";
