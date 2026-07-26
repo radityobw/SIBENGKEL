@@ -4,7 +4,7 @@
             <h2 class="text-2xl md:text-3xl font-sora font-bold text-on-surface">Daftar Transaksi</h2>
             <p class="text-on-surface-variant mt-1 text-sm">Kelola dan pantau semua transaksi servis kendaraan.</p>
         </div>
-        <a href="{{ route('transactions.create') }}" class="bg-secondary hover:bg-secondary/90 text-on-secondary py-2 px-4 rounded-lg flex items-center justify-center gap-2 shadow-sm border border-secondary transition-all active:scale-95 duration-200 min-h-[44px] shrink-0 font-medium text-sm">
+        <a href="{{ route('transactions.create') }}" class="hidden md:flex bg-secondary hover:bg-secondary/90 text-on-secondary py-2 px-4 rounded-lg items-center justify-center gap-2 shadow-sm border border-secondary transition-all active:scale-95 duration-200 min-h-[44px] shrink-0 font-medium text-sm">
             <span class="material-symbols-outlined">add</span>
             Buat Transaksi Baru
         </a>
@@ -116,4 +116,6 @@
         </div>
         @endif
     </div>
+    <x-fab route="{{ route('transactions.create') }}" icon="receipt_long" />
+
 </x-app-layout>

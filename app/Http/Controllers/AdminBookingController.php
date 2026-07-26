@@ -36,10 +36,17 @@ class AdminBookingController extends Controller
         $customer = $booking->customer;
         if ($customer) {
             $statusText = $request->status === 'disetujui' ? 'disetujui dan masuk antrean servis' : 'ditolak';
+            $plateNumber = $booking->vehicle->plate_number ?? null;
+
+            // Arahkan ke halaman cek status dengan nomor polisi sudah terisi
+            $statusUrl = $plateNumber
+                ? route('public.status.search', ['search_type' => 'nopol', 'search_query' => $plateNumber])
+                : route('public.status.index');
+
             $customer->notify(new SystemNotification(
                 'Status Booking Diperbarui', 
-                "Booking servis Anda untuk {$booking->preferred_date} telah {$statusText}.",
-                route('public.orders.index')
+                "Booking servis Anda untuk {$booking->preferred_date} telah {$statusText}. Pantau progres servis kendaraan Anda sekarang.",
+                $statusUrl
             ));
         }
 

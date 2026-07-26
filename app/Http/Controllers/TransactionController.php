@@ -74,8 +74,11 @@ class TransactionController extends Controller {
     }
 
     public function destroy(ServiceTransaction $transaction) {
+        // Hapus booking servis yang terhubung (cascade manual)
+        \App\Models\Booking::where('service_transaction_id', $transaction->id)->delete();
+
         $transaction->delete();
-        return redirect()->route('transactions.index')->with('success', 'Transaksi Servis berhasil dihapus!');
+        return redirect()->route('transactions.index')->with('success', 'Transaksi Servis dan booking terkait berhasil dihapus!');
     }
 
     public function printInvoice(ServiceTransaction $transaction) {
