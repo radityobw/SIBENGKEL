@@ -21,10 +21,10 @@
             </div>
         @endif
 
-        <div class="bg-surface overflow-hidden shadow-sm sm:rounded-lg border border-outline-variant">
-            <div class="p-6 text-on-surface overflow-x-auto">
+        <div class="bg-surface dark:bg-[#161615] overflow-hidden shadow-sm sm:rounded-lg border border-outline-variant dark:border-[#3E3E3A]">
+            <div class="p-6 text-on-surface dark:text-[#EDEDEC] overflow-x-auto">
                 <table class="w-full text-sm text-left">
-                    <thead class="text-xs text-on-surface-variant uppercase bg-surface-container-low border-b border-outline-variant">
+                    <thead class="text-xs text-on-surface-variant dark:text-gray-400 uppercase bg-surface-container-low dark:bg-[#111111] border-b border-outline-variant dark:border-[#3E3E3A]">
                         <tr>
                             <th scope="col" class="px-6 py-3 w-16">Foto</th>
                             <th scope="col" class="px-6 py-3">Nama Produk</th>
@@ -38,29 +38,29 @@
                     </thead>
                     <tbody>
                         @forelse($spareparts as $item)
-                            <tr class="bg-surface border-b border-outline-variant hover:bg-surface-container-lowest">
+                            <tr class="bg-surface dark:bg-[#161615] border-b border-outline-variant dark:border-[#3E3E3A] hover:bg-surface-container-lowest dark:hover:bg-white/5 transition-colors">
                                 <td class="px-6 py-4">
                                     @if($item->image_path)
-                                        <img src="{{ Storage::url($item->image_path) }}" alt="{{ $item->name }}" class="w-10 h-10 object-cover rounded">
+                                        <img src="{{ Storage::url($item->image_path) }}" alt="{{ $item->name }}" class="w-10 h-10 object-cover rounded border border-outline-variant dark:border-[#3E3E3A]">
                                     @else
-                                        <div class="w-10 h-10 bg-surface-container-high rounded flex items-center justify-center text-on-surface-variant text-xs">No Img</div>
+                                        <div class="w-10 h-10 bg-surface-container-high dark:bg-[#2A2A27] rounded flex items-center justify-center text-on-surface-variant dark:text-gray-400 text-xs">No Img</div>
                                     @endif
                                 </td>
-                                <td class="px-6 py-4 font-bold text-on-surface">{{ $item->name }}</td>
-                                <td class="px-6 py-4"><span class="px-2 py-0.5 bg-surface-container-high rounded text-xs font-semibold">{{ $item->category }}</span></td>
-                                <td class="px-6 py-4 font-bold text-on-surface">Rp {{ number_format($item->price, 0, ',', '.') }}</td>
+                                <td class="px-6 py-4 font-bold text-on-surface dark:text-[#EDEDEC]">{{ $item->name }}</td>
+                                <td class="px-6 py-4"><span class="px-2.5 py-1 bg-surface-container-high dark:bg-[#2A2A27] rounded-lg text-xs font-semibold text-on-surface dark:text-[#EDEDEC]">{{ $item->category }}</span></td>
+                                <td class="px-6 py-4 font-bold text-on-surface dark:text-[#EDEDEC]">Rp {{ number_format($item->price, 0, ',', '.') }}</td>
                                 <td class="px-6 py-4 text-center">
-                                    <span class="px-2 py-1 rounded text-xs font-bold {{ $item->stock <= 5 ? 'bg-error-container text-on-error-container' : 'bg-[#10b981]/20 text-[#10b981]' }}">
+                                    <span class="px-2.5 py-1 rounded-lg text-xs font-bold {{ $item->stock <= 5 ? 'bg-error-container/40 dark:bg-red-900/40 text-error dark:text-red-400' : 'bg-[#10b981]/20 text-[#10b981] dark:text-emerald-400' }}">
                                         {{ $item->stock }} Pcs
                                     </span>
                                 </td>
                                 @if(Auth::user()->role === 'admin')
                                 <td class="px-6 py-4 text-right">
-                                    <a href="{{ route('admin.spareparts.edit', $item->id) }}" class="text-blue-600 hover:text-blue-900 mr-3 font-semibold">Edit</a>
+                                    <a href="{{ route('admin.spareparts.edit', $item->id) }}" class="text-primary dark:text-amber-400 hover:underline mr-3 font-semibold transition-colors">Edit</a>
                                     <form action="{{ route('admin.spareparts.destroy', $item->id) }}" method="POST" class="inline-block" onsubmit="return confirm('Apakah Anda yakin ingin menghapus produk ini?')">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="text-red-600 hover:text-red-900 font-semibold">Hapus</button>
+                                        <button type="submit" class="text-error dark:text-red-400 hover:underline font-semibold transition-colors">Hapus</button>
                                     </form>
                                 </td>
                                 @endif

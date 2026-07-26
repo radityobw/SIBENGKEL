@@ -230,18 +230,102 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
-        // 6. Bookings
-        foreach ($customerModels as $index => $customer) {
-            $vehicle = $vehicleModels[$index];
-            Booking::create([
-                'customer_id' => $customer->id,
-                'vehicle_id' => $vehicle->id,
-                'preferred_date' => Carbon::now()->addDays($index + 1)->format('Y-m-d'),
-                'preferred_time' => '10:00:00',
-                'complaint' => 'Tolong diperiksa suara bising di roda bagian kanan.',
-                'status' => ($index == 0) ? 'menunggu_konfirmasi' : (($index == 1) ? 'disetujui' : 'dikonversi'),
-            ]);
-        }
+        // 6. Bookings (Versi Terbaru - dummy data lengkap untuk semua status dan pelanggan)
+        // Booking 1: Menunggu Konfirmasi - Andi Budiman (Honda Vario 150)
+        Booking::create([
+            'customer_id' => $customerModels[0]->id,
+            'vehicle_id' => $vehicleModels[0]->id,
+            'preferred_date' => Carbon::now()->addDays(1)->format('Y-m-d'),
+            'preferred_time' => '08:30:00',
+            'complaint' => 'Tarikan motor terasa berat dan ada suara bunyi decit di bagian transmisi CVT saat awal angkatan.',
+            'status' => 'menunggu_konfirmasi',
+        ]);
+
+        // Booking 2: Menunggu Konfirmasi - Siti Maimunah (Toyota Avanza Veloz)
+        Booking::create([
+            'customer_id' => $customerModels[1]->id,
+            'vehicle_id' => $vehicleModels[1]->id,
+            'preferred_date' => Carbon::now()->addDays(1)->format('Y-m-d'),
+            'preferred_time' => '10:00:00',
+            'complaint' => 'Lampu indikator Check Engine tiba-tiba menyala di dashboard dan mesin terasa sedikit bergetar saat idle.',
+            'status' => 'menunggu_konfirmasi',
+        ]);
+
+        // Booking 3: Disetujui (Menunggu Mekanik) - Dimas Riyanto (Yamaha NMAX 155) -> Otomatis buat Service Transaction
+        $txBooking1 = ServiceTransaction::create([
+            'vehicle_id' => $vehicleModels[2]->id,
+            'user_id' => $adminUser->id,
+            'mechanic_id' => $mechanicModels[0]->id,
+            'type' => 'servis',
+            'complaint' => 'Servis berkala bulanan, ganti oli mesin sintetis Yamalube dan periksa tekanan rem hidrolik depan belakang.',
+            'cost' => 185000,
+            'status' => 'pending',
+            'transaction_date' => Carbon::now()->addDays(2)->format('Y-m-d'),
+        ]);
+
+        Booking::create([
+            'customer_id' => $customerModels[2]->id,
+            'vehicle_id' => $vehicleModels[2]->id,
+            'preferred_date' => Carbon::now()->addDays(2)->format('Y-m-d'),
+            'preferred_time' => '09:00:00',
+            'complaint' => 'Servis berkala bulanan, ganti oli mesin sintetis Yamalube dan periksa tekanan rem hidrolik depan belakang.',
+            'status' => 'disetujui',
+            'service_transaction_id' => $txBooking1->id,
+        ]);
+
+        // Booking 4: Disetujui (Sedang Dikerjakan) - Rina Wijaya (Honda Jazz RS) -> Otomatis buat Service Transaction
+        $txBooking2 = ServiceTransaction::create([
+            'vehicle_id' => $vehicleModels[3]->id,
+            'user_id' => $adminUser->id,
+            'mechanic_id' => $mechanicModels[2]->id,
+            'type' => 'servis',
+            'complaint' => 'Tolong diperiksa suara bising di roda depan kiri saat pengereman mendadak dan ganti kampas rem orisinil.',
+            'cost' => 450000,
+            'status' => 'proses',
+            'transaction_date' => Carbon::now()->addDays(2)->format('Y-m-d'),
+        ]);
+
+        Booking::create([
+            'customer_id' => $customerModels[3]->id,
+            'vehicle_id' => $vehicleModels[3]->id,
+            'preferred_date' => Carbon::now()->addDays(2)->format('Y-m-d'),
+            'preferred_time' => '13:00:00',
+            'complaint' => 'Tolong diperiksa suara bising di roda depan kiri saat pengereman mendadak dan ganti kampas rem orisinil.',
+            'status' => 'disetujui',
+            'service_transaction_id' => $txBooking2->id,
+        ]);
+
+        // Booking 5: Dikonversi (Servis Selesai) - Hendra Kurniawan (Mitsubishi Pajero Sport) -> Otomatis buat Service Transaction
+        $txBooking3 = ServiceTransaction::create([
+            'vehicle_id' => $vehicleModels[4]->id,
+            'user_id' => $adminUser->id,
+            'mechanic_id' => $mechanicModels[0]->id,
+            'type' => 'servis',
+            'complaint' => 'AC mobil kurang dingin dan ada bau apek saat dinyalakan pagi hari, perlu cuci evaporator dan ganti filter kabin.',
+            'cost' => 650000,
+            'status' => 'selesai',
+            'transaction_date' => Carbon::now()->format('Y-m-d'),
+        ]);
+
+        Booking::create([
+            'customer_id' => $customerModels[4]->id,
+            'vehicle_id' => $vehicleModels[4]->id,
+            'preferred_date' => Carbon::now()->format('Y-m-d'),
+            'preferred_time' => '10:30:00',
+            'complaint' => 'AC mobil kurang dingin dan ada bau apek saat dinyalakan pagi hari, perlu cuci evaporator dan ganti filter kabin.',
+            'status' => 'disetujui',
+            'service_transaction_id' => $txBooking3->id,
+        ]);
+
+        // Booking 6: Ditolak - Dewi Lestari (Yamaha Aerox 155)
+        Booking::create([
+            'customer_id' => $customerModels[5]->id,
+            'vehicle_id' => $vehicleModels[5]->id,
+            'preferred_date' => Carbon::now()->addDays(3)->format('Y-m-d'),
+            'preferred_time' => '14:00:00',
+            'complaint' => 'Ingin modifikasi bore-up mesin harian menjadi 183cc dan ganti ECU racing programmable.',
+            'status' => 'ditolak',
+        ]);
 
         // 7. Seed SpareParts & Testimonials
         $this->call(SparePartSeeder::class);

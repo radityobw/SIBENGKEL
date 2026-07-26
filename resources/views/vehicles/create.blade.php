@@ -17,7 +17,7 @@
                 <div class="space-y-2">
                     <label for="customer_id" class="block text-sm font-semibold text-on-surface">Pemilik (Pelanggan) <span class="text-error">*</span></label>
                     <select id="customer_id" name="customer_id" required
-                        class="w-full h-11 px-4 bg-surface border border-outline-variant rounded-lg focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-shadow">
+                        class="w-full h-11 px-4 bg-surface dark:bg-[#111111] border border-outline-variant dark:border-[#3E3E3A] rounded-lg text-on-surface dark:text-[#EDEDEC] focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-shadow">
                         <option value="">-- Pilih Pelanggan --</option>
                         @foreach($customers as $customer)
                             <option value="{{ $customer->id }}" {{ (old('customer_id', $vehicle->customer_id ?? '') == $customer->id) ? 'selected' : '' }}>

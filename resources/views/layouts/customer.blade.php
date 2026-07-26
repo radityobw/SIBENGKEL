@@ -45,18 +45,27 @@
                 return;
             }
 
-            let x = innerWidth / 2;
-            let y = innerHeight / 2;
-            if (event && (event.currentTarget || event.target)) {
-                const target = event.currentTarget || event.target;
-                const rect = target.getBoundingClientRect();
-                x = rect.left + rect.width / 2;
-                y = rect.top + rect.height / 2;
-            } else if (event && event.clientX) {
-                x = event.clientX;
-                y = event.clientY;
+            let x = window.innerWidth / 2;
+            let y = window.innerHeight / 2;
+            if (event) {
+                if (event.clientX !== undefined && event.clientY !== undefined && (event.clientX !== 0 || event.clientY !== 0)) {
+                    x = event.clientX;
+                    y = event.clientY;
+                } else if (event.touches && event.touches.length > 0) {
+                    x = event.touches[0].clientX;
+                    y = event.touches[0].clientY;
+                } else {
+                    const btn = event.currentTarget || (event.target && event.target.closest ? event.target.closest('button') : event.target);
+                    if (btn) {
+                        const rect = btn.getBoundingClientRect();
+                        x = rect.left + rect.width / 2;
+                        y = rect.top + rect.height / 2;
+                    }
+                }
             }
-            const endRadius = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
+            const w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+            const h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+            const endRadius = Math.hypot(Math.max(x, w - x), Math.max(y, h - y));
 
             const transition = document.startViewTransition(doToggle);
             transition.ready.then(() => {
@@ -79,7 +88,7 @@
 </head>
 <body class="bg-background dark:bg-[#0a0a0a] min-h-screen flex text-on-surface dark:text-[#EDEDEC] antialiased transition-colors duration-300" x-data="{ sidebarOpen: window.innerWidth >= 768 }">
     <!-- SideNavBar (Desktop Only) -->
-    <aside :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full'" class="hidden md:flex w-[280px] h-screen fixed left-0 top-0 bg-surface dark:bg-[#111111] border-r border-outline-variant/20 dark:border-[#3E3E3A]/50 shadow-md flex-col py-6 px-4 gap-2 z-50 transition-all duration-300 ease-in-out">
+    <aside :class="sidebarOpen ? 'translate-x-0' : '!-translate-x-full'" class="hidden md:flex w-[280px] h-screen fixed left-0 top-0 bg-surface dark:bg-[#111111] border-r border-outline-variant/20 dark:border-[#3E3E3A]/50 shadow-md flex-col py-6 px-4 gap-2 z-50 transition-all duration-300 ease-in-out">
         <div class="px-4 mb-6 flex items-center justify-between">
             <a href="{{ url('/') }}" class="group block hover:opacity-90 transition-opacity">
                 <div class="flex items-center gap-2">
@@ -116,7 +125,7 @@
     </aside>
 
     <!-- Main Content Area -->
-    <main :class="sidebarOpen ? 'md:ml-[280px]' : 'ml-0'" class="flex-1 flex flex-col min-w-0 transition-all duration-300 ease-in-out">
+    <main :class="sidebarOpen ? 'md:ml-[280px]' : 'md:!ml-0'" class="flex-1 flex flex-col min-w-0 md:ml-[280px] transition-all duration-300 ease-in-out">
         <!-- TopNavBar (Identical to Dashboard) -->
         <header class="flex justify-between items-center px-4 md:px-8 w-full h-16 sticky top-0 z-40 bg-surface dark:bg-[#161615] border-b border-outline-variant dark:border-[#3E3E3A]">
             <div class="flex items-center gap-2">
@@ -150,41 +159,59 @@
                     </button>
                     
                     <!-- Dropdown Menu -->
-                    <div x-show="notifOpen" x-transition class="fixed left-4 right-4 top-16 md:absolute md:left-auto md:right-0 md:top-auto md:mt-2 md:w-80 bg-surface rounded-xl shadow-lg border border-outline-variant/30 overflow-hidden z-50 hidden" :class="{'hidden': !notifOpen}">
-                        <div class="p-3 border-b border-outline-variant/30 flex justify-between items-center bg-surface-container-lowest">
-                            <h3 class="font-bold text-on-surface text-sm">Notifikasi</h3>
+                    <div x-show="notifOpen" 
+                         x-transition:enter="transition ease-out duration-200"
+                         x-transition:enter-start="opacity-0 scale-95 translate-y-[-10px]"
+                         x-transition:enter-end="opacity-100 scale-100 translate-y-0"
+                         x-transition:leave="transition ease-in duration-150"
+                         x-transition:leave-start="opacity-100 scale-100 translate-y-0"
+                         x-transition:leave-end="opacity-0 scale-95 translate-y-[-10px]"
+                         class="absolute right-0 mt-2 w-80 sm:w-96 rounded-2xl bg-surface-container-lowest dark:bg-[#161615] border border-outline-variant dark:border-[#3E3E3A] shadow-2xl overflow-hidden z-50 origin-top-right"
+                         style="display: none;">
+                        <div class="px-4 py-3 border-b border-outline-variant dark:border-[#3E3E3A] flex justify-between items-center bg-surface-container/30 dark:bg-[#1f1f1d]">
+                            <h3 class="font-bold text-on-surface dark:text-[#EDEDEC] text-sm flex items-center gap-2">
+                                <span class="material-symbols-outlined text-primary dark:text-amber-400 text-[18px]">notifications</span>
+                                Notifikasi
+                            </h3>
                             @if($unreadCount > 0)
                                 <form action="{{ route('public.notifications.readAll') }}" method="POST">
                                     @csrf
-                                    <button type="submit" class="text-xs text-on-surface hover:underline">Tandai semua dibaca</button>
+                                    <button type="submit" class="text-xs text-primary dark:text-amber-400 font-semibold hover:underline">Tandai semua dibaca</button>
                                 </form>
                             @endif
                         </div>
-                        <div class="max-h-[300px] overflow-y-auto custom-scrollbar">
+                        <div class="max-h-[340px] overflow-y-auto custom-scrollbar divide-y divide-outline-variant/30 dark:divide-[#3E3E3A]">
                             @forelse($notifications as $notif)
-                                <div class="p-3 border-b border-outline-variant/10 hover:bg-surface-container-lowest transition-colors {{ is_null($notif->read_at) ? 'bg-primary/5' : '' }}">
-                                    <div class="flex justify-between items-start gap-2">
-                                        <div class="flex-1">
-                                            <p class="text-sm font-bold text-on-surface leading-tight">{{ $notif->data['title'] ?? 'Pemberitahuan' }}</p>
-                                            <p class="text-xs text-on-surface-variant mt-1">{{ $notif->data['message'] ?? '' }}</p>
-                                            <p class="text-[10px] text-outline mt-1">{{ $notif->created_at->diffForHumans() }}</p>
+                                <div class="p-3.5 hover:bg-surface-container dark:hover:bg-white/5 transition-colors {{ is_null($notif->read_at) ? 'bg-primary/5 dark:bg-primary/10' : '' }}">
+                                    <div class="flex justify-between items-start gap-3">
+                                        <div class="flex-1 min-w-0">
+                                            <p class="text-sm font-bold text-on-surface dark:text-[#EDEDEC] leading-tight">{{ $notif->data['title'] ?? 'Pemberitahuan' }}</p>
+                                            <p class="text-xs text-on-surface-variant dark:text-gray-400 mt-1 line-clamp-2">{{ $notif->data['message'] ?? '' }}</p>
+                                            <p class="text-[10px] text-outline dark:text-gray-500 mt-1.5 flex items-center gap-1">
+                                                <span class="material-symbols-outlined text-[12px]">schedule</span>
+                                                {{ $notif->created_at->diffForHumans() }}
+                                            </p>
                                         </div>
                                         @if(is_null($notif->read_at))
-                                            <form action="{{ route('public.notifications.read', $notif->id) }}" method="POST">
+                                            <form action="{{ route('public.notifications.read', $notif->id) }}" method="POST" class="shrink-0">
                                                 @csrf
-                                                <button type="submit" class="w-6 h-6 rounded-full hover:bg-surface-container flex items-center justify-center text-on-surface" title="Tandai dibaca">
-                                                    <span class="material-symbols-outlined text-[14px]">check</span>
+                                                <button type="submit" class="w-7 h-7 rounded-full hover:bg-primary/20 dark:hover:bg-white/10 flex items-center justify-center text-primary dark:text-amber-400 transition-colors" title="Tandai dibaca">
+                                                    <span class="material-symbols-outlined text-[16px]">check_circle</span>
                                                 </button>
                                             </form>
                                         @endif
                                     </div>
                                     @if(isset($notif->data['action_url']))
-                                        <a href="{{ $notif->data['action_url'] }}" class="inline-block mt-2 text-xs text-on-surface font-semibold hover:underline">Lihat Detail</a>
+                                        <a href="{{ $notif->data['action_url'] }}" class="inline-flex items-center gap-1 mt-2.5 text-xs text-primary dark:text-amber-400 font-semibold hover:underline">
+                                            <span>Lihat Detail</span>
+                                            <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+                                        </a>
                                     @endif
                                 </div>
                             @empty
-                                <div class="p-4 text-center text-sm text-on-surface-variant">
-                                    Belum ada notifikasi.
+                                <div class="p-8 text-center text-sm text-on-surface-variant dark:text-gray-400 flex flex-col items-center justify-center gap-2">
+                                    <span class="material-symbols-outlined text-4xl text-outline/50 dark:text-gray-600">notifications_off</span>
+                                    <span>Belum ada notifikasi baru.</span>
                                 </div>
                             @endforelse
                         </div>
@@ -211,7 +238,7 @@
                          x-transition:leave="transition ease-in duration-150"
                          x-transition:leave-start="opacity-100 scale-100 translate-y-0"
                          x-transition:leave-end="opacity-0 scale-95 translate-y-[-10px]"
-                         class="absolute right-0 mt-2 w-56 rounded-xl bg-surface-container-lowest dark:bg-[#161615] border border-outline-variant dark:border-[#3E3E3A] shadow-lg py-2 z-50 origin-top-right"
+                         class="absolute right-0 mt-2 w-60 rounded-2xl bg-surface-container-lowest dark:bg-[#161615] border border-outline-variant dark:border-[#3E3E3A] shadow-2xl py-2 z-50 origin-top-right"
                          style="display: none;">
                         
                         <div class="px-4 py-3 border-b border-outline-variant dark:border-[#3E3E3A]">
@@ -219,17 +246,17 @@
                             <p class="text-xs text-on-surface-variant dark:text-gray-400 truncate">{{ Auth::guard('customer')->user()->email ?? Auth::guard('customer')->user()->phone }}</p>
                         </div>
                         
-                        <div class="py-1">
-                            <a href="{{ route('public.profile') }}" class="flex items-center gap-3 px-4 py-2 text-sm text-on-surface dark:text-[#EDEDEC] hover:bg-surface-container dark:hover:bg-[#111111] transition-colors">
+                        <div class="py-1.5 px-1.5">
+                            <a href="{{ route('public.profile') }}" class="flex items-center gap-3 px-3 py-2 text-sm rounded-xl text-on-surface dark:text-[#EDEDEC] hover:bg-surface-container dark:hover:bg-white/10 hover:text-primary dark:hover:text-amber-400 transition-all">
                                 <span class="material-symbols-outlined text-[18px]">person</span>
                                 Pengaturan Profil
                             </a>
                         </div>
                         
-                        <div class="py-1 border-t border-outline-variant dark:border-[#3E3E3A]">
+                        <div class="py-1.5 px-1.5 border-t border-outline-variant dark:border-[#3E3E3A]">
                             <form method="POST" action="{{ route('public.logout') }}">
                                 @csrf
-                                <button type="submit" class="flex items-center gap-3 px-4 py-2 text-sm text-error w-full text-left hover:bg-error/10 transition-colors">
+                                <button type="submit" class="flex items-center gap-3 px-3 py-2 text-sm rounded-xl text-error w-full text-left hover:bg-error/10 transition-all">
                                     <span class="material-symbols-outlined text-[18px]">logout</span>
                                     Keluar Sistem
                                 </button>
@@ -260,7 +287,7 @@
 
     <!-- Prominent FAB (Visible only on Customer Dashboard) -->
     @if(request()->routeIs('public.dashboard'))
-    <div class="fixed bottom-24 md:bottom-8 right-4 md:right-8 z-40">
+    <div class="fixed bottom-20 md:bottom-8 right-4 md:right-8 z-40">
         <a href="{{ route('public.booking.form') }}" class="bg-secondary text-on-secondary rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all flex items-center gap-xs px-sm md:px-md min-h-[56px] min-w-[56px] group active:scale-95">
             <span class="material-symbols-outlined text-[24px]">add</span>
             <span class="text-label-md font-label-md font-semibold whitespace-nowrap hidden sm:inline">Booking Servis Baru</span>
@@ -268,54 +295,57 @@
     </div>
     @endif
 
-    <!-- BottomNavBar (Visible only on Mobile - Categorized Dock) -->
-    <nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex items-center justify-around bg-surface dark:bg-[#161615] px-2 pb-safe h-20 rounded-t-2xl border-t border-outline-variant dark:border-[#3E3E3A] shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] gap-1">
-        <!-- KATEGORI: PORTAL -->
-        <div class="flex flex-col items-center justify-center flex-1 h-full py-1 border-r border-outline-variant/30 pr-1">
-            <span class="text-[8px] font-bold text-secondary uppercase tracking-widest mb-0.5">Portal</span>
-            <div class="flex items-center justify-around w-full">
-                <a class="flex flex-col items-center justify-center flex-1 text-center {{ request()->routeIs('public.dashboard') ? 'text-secondary font-bold' : 'text-on-surface-variant font-medium' }} py-1 active:scale-90 rounded-lg" href="{{ route('public.dashboard') }}">
-                    <span class="material-symbols-outlined text-xl mb-0.5" {{ request()->routeIs('public.dashboard') ? "data-weight=fill style=font-variation-settings:'FILL' 1;" : '' }}>dashboard</span>
-                    <span class="text-[10px]">Dashboard</span>
-                </a>
-                <a class="flex flex-col items-center justify-center flex-1 text-center {{ request()->routeIs('public.booking.*') ? 'text-secondary font-bold' : 'text-on-surface-variant font-medium' }} py-1 active:scale-90 rounded-lg" href="{{ route('public.booking.form') }}">
-                    <span class="material-symbols-outlined text-xl mb-0.5" {{ request()->routeIs('public.booking.*') ? "data-weight=fill style=font-variation-settings:'FILL' 1;" : '' }}>calendar_month</span>
-                    <span class="text-[10px]">Booking</span>
-                </a>
-            </div>
-        </div>
-
-        <!-- KATEGORI: BELANJA & AKUN -->
-        <div class="flex flex-col items-center justify-center flex-1 h-full py-1 pl-1">
-            <span class="text-[8px] font-bold text-secondary uppercase tracking-widest mb-0.5">Belanja & Akun</span>
-            <div class="flex items-center justify-around w-full">
-                <a class="flex flex-col items-center justify-center flex-1 text-center {{ request()->routeIs('public.sparepart.*') || request()->routeIs('public.cart') || request()->routeIs('public.checkout') || request()->routeIs('public.orders.*') ? 'text-secondary font-bold' : 'text-on-surface-variant font-medium' }} py-1 active:scale-90 rounded-lg" href="{{ route('public.sparepart.index') }}">
-                    <span class="material-symbols-outlined text-xl mb-0.5" {{ request()->routeIs('public.sparepart.*') ? "data-weight=fill style=font-variation-settings:'FILL' 1;" : '' }}>settings_input_component</span>
-                    <span class="text-[10px]">Sparepart</span>
-                </a>
-                <a class="flex flex-col items-center justify-center flex-1 text-center {{ request()->routeIs('public.profile') ? 'text-secondary font-bold' : 'text-on-surface-variant font-medium' }} py-1 active:scale-90 rounded-lg" href="{{ route('public.profile') }}">
-                    <span class="material-symbols-outlined text-xl mb-0.5" {{ request()->routeIs('public.profile') ? "data-weight=fill style=font-variation-settings:'FILL' 1;" : '' }}>account_circle</span>
-                    <span class="text-[10px]">Profil</span>
-                </a>
-            </div>
-        </div>
+    <!-- BottomNavBar (Visible only on Mobile - Sleek Flat Dock) -->
+    <nav class="md:hidden fixed bottom-0 left-0 w-full z-50 grid grid-cols-4 items-center bg-surface/95 dark:bg-[#161615]/95 backdrop-blur-md px-2 pb-safe h-16 border-t border-outline-variant dark:border-[#3E3E3A] shadow-[0_-4px_12px_rgba(0,0,0,0.1)]">
+        <a class="flex flex-col items-center justify-center py-1 transition-all {{ request()->routeIs('public.dashboard') ? 'text-secondary font-bold scale-105' : 'text-on-surface-variant hover:text-on-surface' }}" href="{{ route('public.dashboard') }}">
+            <span class="material-symbols-outlined text-2xl mb-0.5" {{ request()->routeIs('public.dashboard') ? "data-weight=fill style=font-variation-settings:'FILL' 1;" : '' }}>dashboard</span>
+            <span class="text-[10px] tracking-tight font-medium">Dashboard</span>
+        </a>
+        <a class="flex flex-col items-center justify-center py-1 transition-all {{ request()->routeIs('public.booking.*') ? 'text-secondary font-bold scale-105' : 'text-on-surface-variant hover:text-on-surface' }}" href="{{ route('public.booking.form') }}">
+            <span class="material-symbols-outlined text-2xl mb-0.5" {{ request()->routeIs('public.booking.*') ? "data-weight=fill style=font-variation-settings:'FILL' 1;" : '' }}>calendar_month</span>
+            <span class="text-[10px] tracking-tight font-medium">Booking</span>
+        </a>
+        <a class="flex flex-col items-center justify-center py-1 transition-all {{ request()->routeIs('public.sparepart.*') || request()->routeIs('public.cart') || request()->routeIs('public.checkout') || request()->routeIs('public.orders.*') ? 'text-secondary font-bold scale-105' : 'text-on-surface-variant hover:text-on-surface' }}" href="{{ route('public.sparepart.index') }}">
+            <span class="material-symbols-outlined text-2xl mb-0.5" {{ request()->routeIs('public.sparepart.*') ? "data-weight=fill style=font-variation-settings:'FILL' 1;" : '' }}>settings_input_component</span>
+            <span class="text-[10px] tracking-tight font-medium">Sparepart</span>
+        </a>
+        <a class="flex flex-col items-center justify-center py-1 transition-all {{ request()->routeIs('public.profile') ? 'text-secondary font-bold scale-105' : 'text-on-surface-variant hover:text-on-surface' }}" href="{{ route('public.profile') }}">
+            <span class="material-symbols-outlined text-2xl mb-0.5" {{ request()->routeIs('public.profile') ? "data-weight=fill style=font-variation-settings:'FILL' 1;" : '' }}>account_circle</span>
+            <span class="text-[10px] tracking-tight font-medium">Profil</span>
+        </a>
     </nav>
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
     document.querySelectorAll('input[type="password"]').forEach((input, idx) => {
-        const parent = input.parentElement;
-        if (window.getComputedStyle(parent).position === "static") {
-            parent.style.position = "relative";
+        if (input.dataset.pwToggled || (input.parentElement && input.parentElement.querySelector('button[aria-label="Toggle visibility"], button[onclick*="visibility"], span.material-symbols-outlined[style*="FILL"]'))) {
+            return;
         }
+        input.dataset.pwToggled = "true";
+        
+        const wrapper = document.createElement("div");
+        wrapper.className = "relative w-full flex items-center";
+        
+        Array.from(input.classList).forEach(cls => {
+            if (cls.startsWith("mt-") || cls.startsWith("mb-") || cls.startsWith("my-")) {
+                wrapper.classList.add(cls);
+                input.classList.remove(cls);
+            }
+        });
+
+        input.parentNode.insertBefore(wrapper, input);
+        wrapper.appendChild(input);
+
         const btn = document.createElement("button");
         btn.type = "button";
         btn.id = "pw-toggle-" + idx;
         btn.setAttribute("aria-label", "Toggle visibility");
-        btn.className = "absolute inset-y-0 right-0 flex items-center px-3 text-on-surface-variant hover:text-secondary transition-colors";
+        btn.className = "absolute right-2.5 top-1/2 -translate-y-1/2 flex items-center justify-center w-8 h-8 rounded-full text-on-surface-variant dark:text-gray-400 hover:text-primary dark:hover:text-white hover:bg-on-surface/5 dark:hover:bg-white/10 transition-all z-10";
         btn.innerHTML = '<span class="material-symbols-outlined text-[20px] select-none" style="font-variation-settings:\'FILL\' 0;">visibility</span>';
-        parent.appendChild(btn);
-        input.style.paddingRight = "2.5rem";
+        wrapper.appendChild(btn);
+        
+        input.style.paddingRight = "2.75rem";
+        
         btn.addEventListener("click", () => {
             const isHidden = input.type === "password";
             input.type = isHidden ? "text" : "password";

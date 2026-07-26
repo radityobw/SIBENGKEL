@@ -73,7 +73,7 @@
             <a href="{{ route('public.dashboard') }}" class="h-11 px-sm border border-primary dark:border-[#EDEDEC] text-primary dark:text-[#EDEDEC] rounded-DEFAULT text-label-md font-label-md hover:bg-surface-container-low dark:hover:bg-[#3E3E3A] transition-colors flex items-center justify-center">
                 Batal
             </a>
-            <button class="h-11 px-md bg-secondary text-on-secondary rounded-DEFAULT text-label-md font-label-md hover:opacity-90 transition-opacity flex items-center justify-center gap-2 shadow-sm {{ $vehicles->isEmpty() ? 'opacity-50 cursor-not-allowed' : '' }}" type="submit" {{ $vehicles->isEmpty() ? 'disabled' : '' }}>
+            <button class="h-11 px-md bg-primary dark:bg-secondary text-white dark:text-white rounded-DEFAULT text-label-md font-label-md hover:opacity-90 transition-opacity flex items-center justify-center gap-2 shadow-sm font-bold {{ $vehicles->isEmpty() ? 'opacity-50 cursor-not-allowed' : '' }}" type="submit" {{ $vehicles->isEmpty() ? 'disabled' : '' }}>
                 <span class="material-symbols-outlined">send</span>
                 Kirim Permintaan Booking
             </button>

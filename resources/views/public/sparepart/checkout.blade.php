@@ -56,7 +56,7 @@
             <form action="{{ route('public.checkout.process') }}" method="POST" class="flex justify-end gap-sm">
                 @csrf
                 <a href="{{ route('public.cart') }}" class="h-11 px-6 border border-outline dark:border-[#3E3E3A] text-on-surface-variant dark:text-gray-300 rounded-DEFAULT font-label-md hover:bg-surface-container-low dark:hover:bg-[#3E3E3A] flex items-center justify-center">Kembali</a>
-                <button type="submit" class="h-11 px-8 bg-secondary text-on-secondary rounded-DEFAULT font-label-md hover:opacity-90 flex items-center justify-center gap-2 shadow-sm" onclick="this.disabled=true;this.innerHTML='Memproses...';this.form.submit();">
+                <button type="submit" class="h-11 px-8 bg-primary dark:bg-secondary text-white dark:text-white rounded-DEFAULT font-label-md hover:opacity-90 flex items-center justify-center gap-2 shadow-sm font-bold" onclick="this.disabled=true;this.innerHTML='Memproses...';this.form.submit();">
                     Buat Pesanan
                 </button>
             </form>
