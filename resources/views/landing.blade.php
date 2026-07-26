@@ -662,7 +662,8 @@
         </div>
             
         <!-- Horizontal Scrollable Container (Auto-scroll Ticker) -->
-        <div class="relative w-full group highlighter-group">
+        <div class="relative w-full group highlighter-group"
+             style="-webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%); mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);">
             <div id="testimonial-scroll" class="flex overflow-x-auto gap-6 px-margin-mobile md:px-margin-desktop pb-8 pt-4 no-scrollbar w-full">
                 <!-- Set 1 -->
                 @foreach($testimonials as $testimonial)
@@ -766,27 +767,31 @@
                     scrollPos = scrollContainer.scrollLeft;
                 });
 
-                // Smooth scrolling ticker
+                // Smooth scrolling ticker — seamless infinite loop
                 let scrollPos = 0;
-                let lastTime = 0;
-                
-                const step = (time) => {
-                    if (!isHovered) {
-                        scrollPos += 1; // Kecepatan scroll
-                        scrollContainer.scrollLeft = scrollPos;
+                let animFrameId;
 
-                        // Reset position for infinite loop effect
-                        if (scrollContainer.scrollLeft >= (scrollContainer.scrollWidth - scrollContainer.clientWidth) - 10) {
+                // Tunggu sampai DOM siap lalu ambil lebar setengah konten (Set 1 = Set 2)
+                const getHalfWidth = () => scrollContainer.scrollWidth / 2;
+
+                const step = () => {
+                    if (!isHovered) {
+                        scrollPos += 0.6; // Kecepatan scroll (lebih lambat = lebih smooth)
+                        
+                        // Seamless reset: begitu mencapai titik tengah (akhir Set 1), 
+                        // langsung kembali ke awal — transisinya tidak terlihat karena Set 2 identik dengan Set 1
+                        if (scrollPos >= getHalfWidth()) {
                             scrollPos = 0;
-                            scrollContainer.scrollLeft = 0;
                         }
+                        
+                        scrollContainer.scrollLeft = scrollPos;
                     } else {
-                        // Jika dihover/dislide manual, sync scrollPos dengan posisi asli agar tidak loncat
-                        scrollPos = scrollContainer.scrollLeft;
+                        // Sync scrollPos dengan posisi manual agar tidak loncat saat hover dilepas
+                        scrollPos = scrollContainer.scrollLeft % getHalfWidth();
                     }
-                    requestAnimationFrame(step);
+                    animFrameId = requestAnimationFrame(step);
                 };
-                requestAnimationFrame(step);
+                animFrameId = requestAnimationFrame(step);
             });
         </script>
     </section>

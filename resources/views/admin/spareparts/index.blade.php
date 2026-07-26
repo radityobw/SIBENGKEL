@@ -7,7 +7,8 @@
             <p class="text-xs text-on-surface-variant mt-1">Cek ketersediaan stok produk dan harga eceran tertinggi (HET).</p>
         </div>
         @if(Auth::user()->role === 'admin')
-        <a href="{{ route('admin.spareparts.create') }}" class="bg-primary hover:bg-primary/90 text-on-primary font-bold py-2 px-4 rounded-lg text-sm">
+        <a href="{{ route('admin.spareparts.create') }}" class="hidden md:flex bg-primary hover:bg-primary/90 text-on-primary font-bold py-2 px-4 rounded-lg text-sm items-center gap-2">
+            <span class="material-symbols-outlined text-[20px]">add</span>
             Tambah Sparepart
         </a>
         @endif
@@ -79,4 +80,8 @@
             </div>
         </div>
     </div>
+    @if(Auth::user()->role === 'admin')
+    <x-fab route="{{ route('admin.spareparts.create') }}" icon="inventory_2" />
+    @endif
+
 </x-app-layout>

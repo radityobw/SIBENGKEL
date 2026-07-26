@@ -2,7 +2,7 @@
 <div class="space-y-6">
     <div class="flex justify-between items-center">
         <h2 class="text-xl font-sora font-semibold text-on-surface">Daftar Ulasan</h2>
-        <a href="{{ route('admin.testimonials.create') }}" class="bg-primary text-on-primary hover:bg-primary/90 px-4 py-2 rounded-lg font-medium transition-colors flex items-center gap-2">
+        <a href="{{ route('admin.testimonials.create') }}" class="hidden md:flex bg-primary text-on-primary hover:bg-primary/90 px-4 py-2 rounded-lg font-medium transition-colors items-center gap-2">
             <span class="material-symbols-outlined">add</span>
             Tambah Ulasan
         </a>
@@ -80,4 +80,6 @@
         @endif
     </div>
 </div>
+    <x-fab route="{{ route('admin.testimonials.create') }}" icon="reviews" />
+
 </x-app-layout>

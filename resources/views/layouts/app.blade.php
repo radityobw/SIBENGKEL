@@ -544,5 +544,8 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 </script>
 
+
+@stack('fab')
+
 </body>
 </html>

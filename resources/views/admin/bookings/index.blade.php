@@ -42,8 +42,18 @@
                                     {{ \Carbon\Carbon::parse($booking->preferred_date)->translatedFormat('d M Y') }}
                                     <br><span class="text-xs text-on-surface-variant">{{ \Carbon\Carbon::parse($booking->preferred_time)->format('H:i') }} WIB</span>
                                 </td>
-                                <td class="px-6 py-4 text-xs max-w-xs truncate" title="{{ $booking->complaint }}">
-                                    {{ $booking->complaint ?? '-' }}
+                                <td class="px-6 py-4 text-xs max-w-[180px]">
+                                    <span class="block line-clamp-2 text-on-surface-variant" title="{{ $booking->complaint }}">{{ $booking->complaint ?? '-' }}</span>
+                                    @if(strlen($booking->complaint ?? '') > 80)
+                                    <button type="button" class="text-primary text-[11px] font-semibold mt-0.5 hover:underline" onclick="document.getElementById('complaint-modal-{{ $booking->id }}').classList.remove('hidden')">Lihat Selengkapnya</button>
+                                    <div id="complaint-modal-{{ $booking->id }}" class="fixed inset-0 z-[60] hidden bg-black/60 flex items-center justify-center p-4" onclick="this.classList.add('hidden')">
+                                        <div class="bg-surface rounded-xl shadow-lg w-full max-w-sm p-5 border border-outline-variant" onclick="event.stopPropagation()">
+                                            <h4 class="font-semibold text-on-surface mb-2">Keluhan Lengkap</h4>
+                                            <p class="text-sm text-on-surface-variant leading-relaxed">{{ $booking->complaint }}</p>
+                                            <button class="mt-4 text-xs font-bold text-primary hover:underline" onclick="document.getElementById('complaint-modal-{{ $booking->id }}').classList.add('hidden')">Tutup</button>
+                                        </div>
+                                    </div>
+                                    @endif
                                 </td>
                                 <td class="px-6 py-4">
                                     <span class="inline-block whitespace-nowrap px-2.5 py-1 rounded-full text-xs font-bold text-white
@@ -61,8 +71,8 @@
                                         </button>
                                         
                                         <!-- Modal -->
-                                        <div id="modal-{{ $booking->id }}" class="fixed inset-0 z-50 hidden bg-black/50 flex items-center justify-center backdrop-blur-sm">
-                                            <div class="bg-surface rounded-xl shadow-lg w-full max-w-md mx-4 overflow-hidden border border-outline-variant text-left">
+                                        <div id="modal-{{ $booking->id }}" class="fixed inset-0 z-50 hidden bg-black/50 flex items-center justify-center p-4 backdrop-blur-sm">
+                                            <div class="bg-surface rounded-xl shadow-lg w-full max-w-md overflow-hidden border border-outline-variant text-left">
                                                 <div class="p-4 border-b border-outline-variant flex justify-between items-center bg-surface-container-lowest">
                                                     <h3 class="font-bold text-on-surface">Proses Booking #SB-{{ str_pad($booking->id, 4, '0', STR_PAD_LEFT) }}</h3>
                                                     <button type="button" onclick="document.getElementById('modal-{{ $booking->id }}').classList.add('hidden')" class="text-on-surface-variant hover:text-on-surface">
