@@ -14,16 +14,16 @@ description: UI/UX design rules, mobile-first Blade templating guidelines, desig
 > 5. [README.md](file:///Users/ryo/PemrogramanWeb/SIBENGKEL/SIBENGKEL/README.md) (Fitur J: Mobile-First Responsive UI/UX)
 
 ## 1. Design System & Tokens (from DESIGN.md)
-- **Primary (Industrial Navy)**: `#022448` / `#1e3a5f` (Headers, sidebar, primary actions)
-- **Secondary (Workshop Orange)**: `#904d00` / `#ffa454` (FABs, primary CTAs, high priority buttons)
-- **Background**: Light `#f8f9fb`, Dark `#12151C`
+- **Primary (Monochrome Industrial)**: `#000000` (Light) / `#EDEDEC` (Dark) (Headers, sidebar, primary actions)
+- **Secondary (Workshop Orange)**: `#FF6B00` / `#FF8F42` (FABs, primary CTAs, high priority buttons)
+- **Background & Surfaces**: Light background `#f8f9fb` (surface `#ffffff`), Dark background `#0A0A0A` (surface `#161615` / `#111111`, border `#3E3E3A`). Strictly NO navy/bluish tints.
 - **Typography**: 
   - Headings: `Sora` (sans-serif, bold/technical)
   - Body & Data: `Inter` (sans-serif, high legibility)
 - **Status Badges (CRITICAL CONSISTENCY)**:
-  - `pending`: Amber/Yellow badge (`bg-amber-100 text-amber-800 border-amber-300`)
-  - `proses`: Blue badge (`bg-blue-100 text-blue-800 border-blue-300`)
-  - `selesai`: Green badge (`bg-emerald-100 text-emerald-800 border-emerald-300`)
+  - `pending`: Amber/Yellow badge (`bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-400 border-amber-300 dark:border-amber-700/50`)
+  - `proses`: Blue badge (`bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400 border-blue-300 dark:border-blue-700/50`)
+  - `selesai`: Green badge (`bg-emerald-100 text-emerald-800 dark:bg-emerald-900/30 dark:text-emerald-400 border-emerald-300 dark:border-emerald-700/50`)
 
 ## 2. Mobile-First & Responsive Layout Guidelines
 - **Breakpoints**: 375px (Mobile), 768px (Tablet), 1024px+ (Desktop)

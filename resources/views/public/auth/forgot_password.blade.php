@@ -85,7 +85,7 @@
                         </div>
                     </div>
                     
-                    <button class="w-full py-3 px-4 rounded-lg bg-primary dark:bg-white text-on-primary dark:text-black font-bold text-sm shadow-sm transition-all flex items-center justify-center gap-2 hover:opacity-90" type="submit">
+                    <button class="w-full py-3 px-4 rounded-lg bg-primary dark:bg-secondary text-white dark:text-white font-bold text-sm shadow-sm transition-all flex items-center justify-center gap-2 hover:bg-primary/90 dark:hover:bg-secondary/90" type="submit">
                         <span class="material-symbols-outlined text-lg">send</span> Minta Kode OTP Verifikasi
                     </button>
                 </form>

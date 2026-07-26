@@ -29,7 +29,7 @@
 
         <div>
             <label for="rating" class="block font-label-md text-on-surface mb-2">Bintang (1-5) <span class="text-error">*</span></label>
-            <select name="rating" id="rating" required class="w-full h-11 px-4 bg-surface-container-low border border-outline-variant rounded-lg text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all">
+            <select name="rating" id="rating" required class="w-full h-11 px-4 bg-surface-container-low dark:bg-[#111111] border border-outline-variant dark:border-[#3E3E3A] rounded-lg text-on-surface dark:text-[#EDEDEC] focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all">
                 <option value="5" {{ old('rating') == '5' ? 'selected' : '' }}>5 Bintang (Sangat Puas)</option>
                 <option value="4" {{ old('rating') == '4' ? 'selected' : '' }}>4 Bintang (Puas)</option>
                 <option value="3" {{ old('rating') == '3' ? 'selected' : '' }}>3 Bintang (Cukup)</option>

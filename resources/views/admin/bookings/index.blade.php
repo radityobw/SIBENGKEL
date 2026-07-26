@@ -49,7 +49,6 @@
                                     <span class="inline-block whitespace-nowrap px-2.5 py-1 rounded-full text-xs font-bold text-white
                                         @if($booking->status == 'menunggu_konfirmasi') bg-amber-500
                                         @elseif($booking->status == 'disetujui') bg-blue-600
-                                        @elseif($booking->status == 'dikonversi') bg-emerald-600
                                         @else bg-rose-600 @endif
                                     ">
                                         {{ str_replace('_', ' ', strtoupper($booking->status)) }}
@@ -78,7 +77,7 @@
                                                         
                                                         <div>
                                                             <label class="block text-xs font-semibold text-on-surface mb-1">Mekanik Bertugas <span class="text-error">*</span></label>
-                                                            <select name="mechanic_id" id="mechanic-{{ $booking->id }}" class="w-full border border-outline-variant rounded-lg p-2 text-sm bg-surface focus:ring-primary focus:border-primary" required>
+                                                            <select name="mechanic_id" id="mechanic-{{ $booking->id }}" class="w-full border border-outline-variant dark:border-[#3E3E3A] rounded-lg p-2.5 text-sm bg-surface dark:bg-[#111111] text-on-surface dark:text-[#EDEDEC] focus:ring-1 focus:ring-primary focus:border-primary outline-none" required>
                                                                 <option value="">-- Pilih Mekanik --</option>
                                                                 @foreach($mechanics as $mechanic)
                                                                     <option value="{{ $mechanic->id }}" 
@@ -91,12 +90,12 @@
                                                         
                                                         <div>
                                                             <label class="block text-xs font-semibold text-on-surface mb-1">Estimasi Biaya (Rp) <span class="text-error">*</span></label>
-                                                            <input type="number" name="cost" id="cost-{{ $booking->id }}" value="0" min="0" class="w-full border border-outline-variant rounded-lg p-2 text-sm bg-surface focus:ring-primary focus:border-primary" required>
+                                                            <input type="number" name="cost" id="cost-{{ $booking->id }}" value="0" min="0" class="w-full border border-outline-variant dark:border-[#3E3E3A] rounded-lg p-2.5 text-sm bg-surface dark:bg-[#111111] text-on-surface dark:text-[#EDEDEC] focus:ring-1 focus:ring-primary focus:border-primary outline-none" required>
                                                         </div>
                                                         
                                                         <div>
                                                             <label class="block text-xs font-semibold text-on-surface mb-1">Keputusan</label>
-                                                            <select name="status" class="w-full border border-outline-variant rounded-lg p-2 text-sm bg-surface focus:ring-primary focus:border-primary" required onchange="
+                                                            <select name="status" class="w-full border border-outline-variant dark:border-[#3E3E3A] rounded-lg p-2.5 text-sm bg-surface dark:bg-[#111111] text-on-surface dark:text-[#EDEDEC] focus:ring-1 focus:ring-primary focus:border-primary outline-none" required onchange="
                                                                 if(this.value === 'ditolak') { 
                                                                     document.getElementById('mechanic-{{ $booking->id }}').required = false; 
                                                                     document.getElementById('cost-{{ $booking->id }}').required = false; 
@@ -120,15 +119,6 @@
                                         <a href="{{ route('transactions.edit', $booking->service_transaction_id) }}" class="inline-flex items-center gap-1 text-primary hover:underline text-xs font-bold">
                                             Lihat Transaksi <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
                                         </a>
-                                    @elseif($booking->status == 'dikonversi')
-                                        <!-- Fallback for incorrectly seeded data -->
-                                        @if($booking->service_transaction_id)
-                                            <a href="{{ route('transactions.edit', $booking->service_transaction_id) }}" class="inline-flex items-center gap-1 text-primary hover:underline text-xs font-bold">
-                                                Lihat Transaksi <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
-                                            </a>
-                                        @else
-                                            <span class="text-xs font-bold text-on-surface-variant">Data Seed Lama</span>
-                                        @endif
                                     @elseif($booking->status == 'ditolak')
                                         <span class="text-xs font-bold text-error">Ditolak</span>
                                     @endif

@@ -11,11 +11,11 @@
     </div>
 
     <!-- Filter Bar -->
-    <form action="{{ route('transactions.index') }}" method="GET" class="bg-surface-container-lowest p-4 rounded-xl border border-outline-variant shadow-sm mb-8 flex flex-col md:flex-row gap-4 items-end">
+    <form action="{{ route('transactions.index') }}" method="GET" class="bg-surface-container-lowest dark:bg-[#161615] p-4 rounded-xl border border-outline-variant dark:border-[#3E3E3A] shadow-sm mb-8 flex flex-col md:flex-row gap-4 items-end">
         <div class="w-full md:w-1/3 flex flex-col gap-1">
-            <label class="font-medium text-xs text-on-surface-variant uppercase tracking-wider">Status</label>
+            <label class="font-medium text-xs text-on-surface-variant dark:text-gray-400 uppercase tracking-wider">Status</label>
             <div class="relative">
-                <select name="status" class="w-full pl-4 pr-10 py-2 bg-surface-container-lowest border border-outline-variant rounded-lg focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary text-on-surface appearance-none min-h-[44px]">
+                <select name="status" class="w-full pl-4 pr-10 py-2 bg-surface-container-lowest dark:bg-[#111111] border border-outline-variant dark:border-[#3E3E3A] rounded-lg focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary text-on-surface dark:text-[#EDEDEC] appearance-none min-h-[44px]">
                     <option value="">Semua Status</option>
                     <option value="pending" {{ request('status') == 'pending' ? 'selected' : '' }}>Pending</option>
                     <option value="proses" {{ request('status') == 'proses' ? 'selected' : '' }}>Proses</option>

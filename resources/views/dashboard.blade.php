@@ -79,8 +79,8 @@
                 const dataPoints = {!! json_encode($revenueTrend['data'] ?? []) !!};
                 
                 const isDark = document.documentElement.classList.contains('dark') || window.matchMedia('(prefers-color-scheme: dark)').matches;
-                const primaryColor = isDark ? '#FF8F42' : '#0A192F';
-                const bgColor = isDark ? 'rgba(255, 143, 66, 0.1)' : 'rgba(10, 25, 47, 0.1)';
+                const primaryColor = isDark ? '#FF8F42' : '#FF6B00';
+                const bgColor = isDark ? 'rgba(255, 143, 66, 0.1)' : 'rgba(255, 107, 0, 0.1)';
                 const gridColor = isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.05)';
                 const textColor = isDark ? '#A1A09A' : '#706f6c';
 
@@ -154,9 +154,9 @@
                     mutations.forEach((mutation) => {
                         if (mutation.attributeName === 'class') {
                             const isDarkNow = document.documentElement.classList.contains('dark');
-                            chart.data.datasets[0].borderColor = isDarkNow ? '#FF8F42' : '#0A192F';
-                            chart.data.datasets[0].backgroundColor = isDarkNow ? 'rgba(255, 143, 66, 0.1)' : 'rgba(10, 25, 47, 0.1)';
-                            chart.data.datasets[0].pointBackgroundColor = isDarkNow ? '#FF8F42' : '#0A192F';
+                            chart.data.datasets[0].borderColor = isDarkNow ? '#FF8F42' : '#FF6B00';
+                            chart.data.datasets[0].backgroundColor = isDarkNow ? 'rgba(255, 143, 66, 0.1)' : 'rgba(255, 107, 0, 0.1)';
+                            chart.data.datasets[0].pointBackgroundColor = isDarkNow ? '#FF8F42' : '#FF6B00';
                             chart.data.datasets[0].pointBorderColor = isDarkNow ? '#111111' : '#fff';
                             chart.options.scales.x.ticks.color = isDarkNow ? '#A1A09A' : '#706f6c';
                             chart.options.scales.y.ticks.color = isDarkNow ? '#A1A09A' : '#706f6c';

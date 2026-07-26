@@ -70,7 +70,7 @@
                     <span>Total Belanja</span>
                     <span>Rp {{ number_format($total, 0, ',', '.') }}</span>
                 </div>
-                <a href="{{ route('public.checkout') }}" class="w-full h-11 bg-secondary text-on-secondary rounded-DEFAULT font-label-md hover:opacity-90 flex items-center justify-center gap-2 shadow-sm">
+                <a href="{{ route('public.checkout') }}" class="w-full h-11 bg-primary dark:bg-secondary text-white dark:text-white rounded-DEFAULT font-label-md hover:opacity-90 flex items-center justify-center gap-2 shadow-sm font-bold">
                     Lanjut Checkout
                     <span class="material-symbols-outlined">arrow_forward</span>
                 </a>

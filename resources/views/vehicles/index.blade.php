@@ -7,9 +7,9 @@
             <form action="{{ route('vehicles.index') }}" method="GET" class="relative flex-1 md:w-80 flex gap-2">
                 <div class="relative flex-1">
                     <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
-                    <input name="search" value="{{ $search }}" class="w-full h-11 pl-10 pr-4 bg-surface border border-outline-variant rounded-lg text-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-shadow" placeholder="Cari Nopol..." type="text"/>
+                    <input name="search" value="{{ $search }}" class="w-full h-11 pl-10 pr-4 bg-surface dark:bg-[#111111] border border-outline-variant dark:border-[#3E3E3A] rounded-lg text-sm text-on-surface dark:text-[#EDEDEC] focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-shadow" placeholder="Cari Nopol..." type="text"/>
                 </div>
-                <select name="brand" onchange="this.form.submit()" class="h-11 px-4 bg-surface border border-outline-variant rounded-lg text-sm focus:border-primary outline-none">
+                <select name="brand" onchange="this.form.submit()" class="h-11 px-4 bg-surface dark:bg-[#111111] border border-outline-variant dark:border-[#3E3E3A] rounded-lg text-sm text-on-surface dark:text-[#EDEDEC] focus:border-primary outline-none">
                     <option value="">Semua Merek</option>
                     <option value="Honda" {{ $brand == 'Honda' ? 'selected' : '' }}>Honda</option>
                     <option value="Yamaha" {{ $brand == 'Yamaha' ? 'selected' : '' }}>Yamaha</option>

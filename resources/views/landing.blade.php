@@ -226,7 +226,7 @@
                             transform: scale(50);
                         }
                     </style>
-                    <a href="{{ route('public.login') }}" class="btn-interactive">
+                    <a href="{{ Auth::guard('customer')->check() ? route('public.dashboard') : route('public.login') }}" class="btn-interactive">
                         <span class="btn-interactive-text">Portal Pelanggan</span>
                         <div class="btn-interactive-hover-content">
                             <span>Portal Pelanggan</span>
@@ -642,7 +642,7 @@
             </script>
             
             <div class="mt-12 text-center md:hidden">
-                <a href="{{ Auth::guard('customer')->check() ? route('public.sparepart.index') : route('public.login') }}" class="inline-flex items-center justify-center gap-2 w-full h-14 bg-surface-container-high dark:bg-[#161615] border border-outline-variant dark:border-[#3E3E3A] rounded-full text-on-surface dark:text-[#EDEDEC] font-bold hover:bg-surface-container-highest transition-colors">
+                <a href="{{ Auth::guard('customer')->check() ? route('public.sparepart.index') : route('public.login') }}" class="inline-flex items-center justify-center gap-2 w-full h-14 bg-primary dark:bg-secondary text-white dark:text-white rounded-full font-bold hover:bg-primary/90 dark:hover:bg-secondary/90 transition-colors shadow-md">
                     Lihat Semua Sparepart
                     <span class="material-symbols-outlined">arrow_forward</span>
                 </a>

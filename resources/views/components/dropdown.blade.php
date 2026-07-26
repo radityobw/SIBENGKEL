@@ -20,15 +20,15 @@ $width = match ($width) {
 
     <div x-show="open"
             x-transition:enter="transition ease-out duration-200"
-            x-transition:enter-start="opacity-0 scale-95"
-            x-transition:enter-end="opacity-100 scale-100"
-            x-transition:leave="transition ease-in duration-75"
-            x-transition:leave-start="opacity-100 scale-100"
-            x-transition:leave-end="opacity-0 scale-95"
-            class="absolute z-50 mt-2 {{ $width }} rounded-md shadow-lg {{ $alignmentClasses }}"
+            x-transition:enter-start="opacity-0 scale-95 translate-y-[-10px]"
+            x-transition:enter-end="opacity-100 scale-100 translate-y-0"
+            x-transition:leave="transition ease-in duration-150"
+            x-transition:leave-start="opacity-100 scale-100 translate-y-0"
+            x-transition:leave-end="opacity-0 scale-95 translate-y-[-10px]"
+            class="absolute z-50 mt-2 {{ $width }} rounded-2xl shadow-2xl {{ $alignmentClasses }}"
             style="display: none;"
             @click="open = false">
-        <div class="rounded-md border border-outline-variant {{ $contentClasses }}">
+        <div class="rounded-2xl border border-outline-variant dark:border-[#3E3E3A] bg-surface-container-lowest dark:bg-[#161615] {{ $contentClasses }}">
             {{ $content }}
         </div>
     </div>

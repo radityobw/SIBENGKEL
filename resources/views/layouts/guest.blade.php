@@ -29,18 +29,34 @@
     <script>
 document.addEventListener("DOMContentLoaded", () => {
     document.querySelectorAll('input[type="password"]').forEach((input, idx) => {
-        const parent = input.parentElement;
-        if (window.getComputedStyle(parent).position === "static") {
-            parent.style.position = "relative";
+        if (input.dataset.pwToggled || (input.parentElement && input.parentElement.querySelector('button[aria-label="Toggle visibility"], button[onclick*="visibility"], span.material-symbols-outlined[style*="FILL"]'))) {
+            return;
         }
+        input.dataset.pwToggled = "true";
+        
+        const wrapper = document.createElement("div");
+        wrapper.className = "relative w-full flex items-center";
+        
+        Array.from(input.classList).forEach(cls => {
+            if (cls.startsWith("mt-") || cls.startsWith("mb-") || cls.startsWith("my-")) {
+                wrapper.classList.add(cls);
+                input.classList.remove(cls);
+            }
+        });
+
+        input.parentNode.insertBefore(wrapper, input);
+        wrapper.appendChild(input);
+
         const btn = document.createElement("button");
         btn.type = "button";
         btn.id = "pw-toggle-" + idx;
         btn.setAttribute("aria-label", "Toggle visibility");
-        btn.className = "absolute inset-y-0 right-0 flex items-center px-3 text-on-surface-variant hover:text-secondary transition-colors";
+        btn.className = "absolute right-2.5 top-1/2 -translate-y-1/2 flex items-center justify-center w-8 h-8 rounded-full text-on-surface-variant dark:text-gray-400 hover:text-primary dark:hover:text-white hover:bg-on-surface/5 dark:hover:bg-white/10 transition-all z-10";
         btn.innerHTML = '<span class="material-symbols-outlined text-[20px] select-none" style="font-variation-settings:\'FILL\' 0;">visibility</span>';
-        parent.appendChild(btn);
-        input.style.paddingRight = "2.5rem";
+        wrapper.appendChild(btn);
+        
+        input.style.paddingRight = "2.75rem";
+        
         btn.addEventListener("click", () => {
             const isHidden = input.type === "password";
             input.type = isHidden ? "text" : "password";

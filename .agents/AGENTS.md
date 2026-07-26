@@ -6,7 +6,7 @@ Before executing any implementation, code modification, database migration, UI b
 1. **`docs/PRD_Sistem_Informasi_Bengkel.md`**: Single Source of Truth (SSOT) for product requirements, ERD, RBAC matrix, and API contracts.
 2. **`docs/PRD_Suplementer_Customer_Portal_SIBENGKEL.md`**: SSOT for Customer Portal, Landing Page, Public Status Lookup, Online Booking, and Sparepart Catalog.
 3. **`README.md`**: Master Development Guidebook & Execution Playbook for step-by-step workflow (Fitur A through O).
-4. **`docs/DESIGN.md`**: Design tokens, color palette (Industrial Navy & Workshop Orange), typography (Sora & Inter), and UI component guidelines.
+4. **`docs/DESIGN.md`**: Design tokens, color palette (Monochrome Industrial & Workshop Orange), typography (Sora & Inter), and UI component guidelines.
 5. **`docs/Master_Prompt_Google_Stitch_SIBENGKEL.md`**: Web navigation routes mapping to Google Stitch UI screens.
 6. **`docs/stitch/`** & **`docs/stitch2/`**: Reference directories containing raw HTML/CSS exports for converting Stitch mockups to Laravel Blade templates.
 

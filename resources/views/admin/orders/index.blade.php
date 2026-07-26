@@ -63,7 +63,7 @@
                                 @csrf
                                 @method('PATCH')
                                 <select name="status" onchange="this.form.submit()"
-                                    class="text-xs border border-outline-variant rounded-lg px-2 py-1.5 bg-surface text-on-surface focus:ring-1 focus:ring-primary focus:border-primary cursor-pointer">
+                                    class="text-xs border border-outline-variant dark:border-[#3E3E3A] rounded-lg px-2.5 py-1.5 bg-surface dark:bg-[#111111] text-on-surface dark:text-[#EDEDEC] focus:ring-1 focus:ring-primary focus:border-primary cursor-pointer outline-none">
                                     <option value="menunggu_pembayaran" {{ $order->status == 'menunggu_pembayaran' ? 'selected' : '' }}>Menunggu Bayar</option>
                                     <option value="diproses"           {{ $order->status == 'diproses'           ? 'selected' : '' }}>Diproses</option>
                                     <option value="selesai"            {{ $order->status == 'selesai'            ? 'selected' : '' }}>Selesai</option>

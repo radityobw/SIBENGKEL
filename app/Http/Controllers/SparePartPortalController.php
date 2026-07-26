@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\SparePart;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\User;
+use App\Notifications\SystemNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -236,6 +238,16 @@ class SparePartPortalController extends Controller
         if ($customer) {
             $customer->cart_data = null;
             $customer->save();
+        }
+
+        // Notify admins
+        $admins = User::where('role', 'admin')->get();
+        foreach ($admins as $admin) {
+            $admin->notify(new SystemNotification(
+                'Pesanan Online Baru',
+                ($customer->name ?? 'Pelanggan') . ' membuat pesanan sparepart #' . str_pad($order->id, 5, '0', STR_PAD_LEFT) . ' senilai Rp ' . number_format($total, 0, ',', '.'),
+                route('admin.orders.index')
+            ));
         }
 
         return redirect()->route('public.orders.show', $order->id)->with('success', 'Pesanan #' . str_pad($order->id, 5, '0', STR_PAD_LEFT) . ' berhasil dibuat! Silakan ambil barang di lokasi bengkel.')->with('confetti', true);

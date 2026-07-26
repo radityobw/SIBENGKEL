@@ -34,7 +34,7 @@
                             'menunggu_konfirmasi' => 'bg-secondary',
                             'disetujui', 'transaksi_pending' => 'bg-primary',
                             'transaksi_proses' => 'bg-amber-500',
-                            'transaksi_selesai', 'dikonversi' => 'bg-green-500',
+                            'transaksi_selesai' => 'bg-green-500',
                             'ditolak' => 'bg-error',
                             default => 'bg-outline'
                         };
@@ -44,7 +44,6 @@
                             'transaksi_pending' => 'Menunggu Mekanik',
                             'transaksi_proses' => 'Sedang Dikerjakan',
                             'transaksi_selesai' => 'Servis Selesai',
-                            'dikonversi' => 'Dikonversi',
                             'ditolak' => 'Ditolak',
                             default => 'Unknown'
                         };

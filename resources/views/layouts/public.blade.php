@@ -71,18 +71,27 @@
                 return;
             }
 
-            let x = innerWidth / 2;
-            let y = innerHeight / 2;
-            if (event && (event.currentTarget || event.target)) {
-                const target = event.currentTarget || event.target;
-                const rect = target.getBoundingClientRect();
-                x = rect.left + rect.width / 2;
-                y = rect.top + rect.height / 2;
-            } else if (event && event.clientX) {
-                x = event.clientX;
-                y = event.clientY;
+            let x = window.innerWidth / 2;
+            let y = window.innerHeight / 2;
+            if (event) {
+                if (event.clientX !== undefined && event.clientY !== undefined && (event.clientX !== 0 || event.clientY !== 0)) {
+                    x = event.clientX;
+                    y = event.clientY;
+                } else if (event.touches && event.touches.length > 0) {
+                    x = event.touches[0].clientX;
+                    y = event.touches[0].clientY;
+                } else {
+                    const btn = event.currentTarget || (event.target && event.target.closest ? event.target.closest('button') : event.target);
+                    if (btn) {
+                        const rect = btn.getBoundingClientRect();
+                        x = rect.left + rect.width / 2;
+                        y = rect.top + rect.height / 2;
+                    }
+                }
             }
-            const endRadius = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
+            const w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+            const h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+            const endRadius = Math.hypot(Math.max(x, w - x), Math.max(y, h - y));
 
             const transition = document.startViewTransition(doToggle);
             transition.ready.then(() => {
@@ -126,12 +135,12 @@
             </button>
             
             @if(Auth::guard('customer')->check())
-                <a href="{{ route('public.dashboard') }}" class="bg-primary dark:bg-[#161615] text-white dark:text-[#EDEDEC] hover:bg-primary/90 hover:text-white transition-colors font-label-md text-xs md:text-label-md h-[36px] md:h-[44px] px-3 md:px-6 rounded shadow-sm border border-transparent dark:border-[#3E3E3A] flex items-center justify-center">Portal Saya</a>
+                <a href="{{ route('public.dashboard') }}" class="bg-primary dark:bg-secondary text-white dark:text-white hover:bg-primary/90 dark:hover:bg-secondary/90 transition-colors font-label-md text-xs md:text-label-md h-[36px] md:h-[44px] px-3 md:px-6 rounded shadow-sm border border-transparent flex items-center justify-center font-bold">Portal Saya</a>
             @elseif(Auth::guard('web')->check())
-                <a href="{{ route('dashboard') }}" class="bg-primary dark:bg-[#161615] text-white dark:text-[#EDEDEC] hover:bg-primary/90 hover:text-white transition-colors font-label-md text-xs md:text-label-md h-[36px] md:h-[44px] px-3 md:px-6 rounded shadow-sm border border-transparent dark:border-[#3E3E3A] flex items-center justify-center">Dashboard Staff</a>
+                <a href="{{ route('dashboard') }}" class="bg-primary dark:bg-secondary text-white dark:text-white hover:bg-primary/90 dark:hover:bg-secondary/90 transition-colors font-label-md text-xs md:text-label-md h-[36px] md:h-[44px] px-3 md:px-6 rounded shadow-sm border border-transparent flex items-center justify-center font-bold">Dashboard Staff</a>
             @else
-                <a href="{{ route('public.login') }}" class="text-gray-700 dark:text-[#EDEDEC] hover:text-secondary transition-colors font-label-md text-sm md:text-label-md h-[36px] md:h-[44px] px-2 md:px-4 rounded flex items-center justify-center hidden sm:flex">Login</a>
-                <a href="{{ route('public.register') }}" class="bg-secondary text-on-secondary hover:bg-[#1b1b18] dark:hover:bg-[#161615] hover:text-white dark:hover:text-[#EDEDEC] dark:hover:border-[#3E3E3A] transition-colors font-label-md text-xs md:text-label-md h-[36px] md:h-[44px] px-3 md:px-6 rounded shadow-sm border border-transparent flex items-center justify-center">Get Started</a>
+                <a href="{{ route('public.login') }}" class="text-on-surface dark:text-[#EDEDEC] hover:text-secondary dark:hover:text-secondary transition-colors font-label-md text-sm md:text-label-md h-[36px] md:h-[44px] px-2 md:px-4 rounded flex items-center justify-center hidden sm:flex font-bold">Login</a>
+                <a href="{{ route('public.register') }}" class="bg-secondary text-white dark:bg-secondary dark:text-white hover:bg-[#e05d14] dark:hover:bg-[#e05d14] transition-colors font-label-md text-xs md:text-label-md h-[36px] md:h-[44px] px-3 md:px-6 rounded shadow-sm border border-transparent flex items-center justify-center font-bold">Get Started</a>
             @endif
         </div>
     </nav>
@@ -159,18 +168,34 @@
     <script>
 document.addEventListener("DOMContentLoaded", () => {
     document.querySelectorAll('input[type="password"]').forEach((input, idx) => {
-        const parent = input.parentElement;
-        if (window.getComputedStyle(parent).position === "static") {
-            parent.style.position = "relative";
+        if (input.dataset.pwToggled || (input.parentElement && input.parentElement.querySelector('button[aria-label="Toggle visibility"], button[onclick*="visibility"], span.material-symbols-outlined[style*="FILL"]'))) {
+            return;
         }
+        input.dataset.pwToggled = "true";
+        
+        const wrapper = document.createElement("div");
+        wrapper.className = "relative w-full flex items-center";
+        
+        Array.from(input.classList).forEach(cls => {
+            if (cls.startsWith("mt-") || cls.startsWith("mb-") || cls.startsWith("my-")) {
+                wrapper.classList.add(cls);
+                input.classList.remove(cls);
+            }
+        });
+
+        input.parentNode.insertBefore(wrapper, input);
+        wrapper.appendChild(input);
+
         const btn = document.createElement("button");
         btn.type = "button";
         btn.id = "pw-toggle-" + idx;
         btn.setAttribute("aria-label", "Toggle visibility");
-        btn.className = "absolute inset-y-0 right-0 flex items-center px-3 text-on-surface-variant hover:text-secondary transition-colors";
+        btn.className = "absolute right-2.5 top-1/2 -translate-y-1/2 flex items-center justify-center w-8 h-8 rounded-full text-on-surface-variant dark:text-gray-400 hover:text-primary dark:hover:text-white hover:bg-on-surface/5 dark:hover:bg-white/10 transition-all z-10";
         btn.innerHTML = '<span class="material-symbols-outlined text-[20px] select-none" style="font-variation-settings:\'FILL\' 0;">visibility</span>';
-        parent.appendChild(btn);
-        input.style.paddingRight = "2.5rem";
+        wrapper.appendChild(btn);
+        
+        input.style.paddingRight = "2.75rem";
+        
         btn.addEventListener("click", () => {
             const isHidden = input.type === "password";
             input.type = isHidden ? "text" : "password";
