@@ -36,15 +36,15 @@
                     @csrf
                     <div>
                         <label for="name" class="block text-sm font-medium mb-1">Name</label>
-                        <input type="text" name="name" id="name" value="{{ old('name') }}" class="w-full rounded border border-outline-variant p-2 focus:border-primary focus:ring-1 focus:ring-primary outline-none" placeholder="Your full name" required>
+                        <input type="text" name="name" id="name" value="{{ old('name') }}" class="w-full rounded border border-outline-variant p-2 focus:border-primary focus:ring-1 focus:ring-primary outline-none bg-transparent dark:text-white dark:placeholder-gray-400" placeholder="Your full name" required>
                     </div>
                     <div>
                         <label for="email" class="block text-sm font-medium mb-1">Email</label>
-                        <input type="email" name="email" id="email" value="{{ old('email') }}" class="w-full rounded border border-outline-variant p-2 focus:border-primary focus:ring-1 focus:ring-primary outline-none" placeholder="your@email.com" required>
+                        <input type="email" name="email" id="email" value="{{ old('email') }}" class="w-full rounded border border-outline-variant p-2 focus:border-primary focus:ring-1 focus:ring-primary outline-none bg-transparent dark:text-white dark:placeholder-gray-400" placeholder="your@email.com" required>
                     </div>
                     <div>
                         <label for="message" class="block text-sm font-medium mb-1">Message</label>
-                        <textarea name="message" id="message" class="w-full rounded border border-outline-variant p-2 min-h-[120px] focus:border-primary focus:ring-1 focus:ring-primary outline-none" placeholder="How can we help you?" required>{{ old('message') }}</textarea>
+                        <textarea name="message" id="message" class="w-full rounded border border-outline-variant p-2 min-h-[120px] focus:border-primary focus:ring-1 focus:ring-primary outline-none bg-transparent dark:text-white dark:placeholder-gray-400" placeholder="How can we help you?" required>{{ old('message') }}</textarea>
                     </div>
                     <button type="submit" class="bg-primary text-on-primary font-bold py-2 px-6 rounded hover:opacity-90 w-full transition-opacity">
                         Send Message

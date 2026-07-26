@@ -68,6 +68,6 @@ class BookingPortalController extends Controller
             ));
         }
 
-        return redirect()->route('public.dashboard')->with('success', 'Booking berhasil diajukan dan sedang menunggu konfirmasi bengkel.');
+        return redirect()->route('public.dashboard')->with('success', 'Booking berhasil diajukan dan sedang menunggu konfirmasi bengkel.')->with('confetti', true);
     }
 }

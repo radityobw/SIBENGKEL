@@ -48,7 +48,7 @@
 
                     <div class="mb-6">
                         <label for="image" class="block text-sm font-medium text-on-surface mb-1">Foto Produk</label>
-                        <input type="file" name="image" id="image" accept="image/*" class="w-full text-sm text-on-surface-variant file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-surface-container-high file:text-on-surface hover:file:bg-surface-container-highest cursor-pointer">
+                        <input type="file" name="image" id="image" accept="image/*" class="w-full text-sm text-on-surface-variant file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-primary file:text-white hover:file:bg-primary/90 dark:file:bg-secondary dark:hover:file:bg-secondary/90 cursor-pointer">
                         <p class="mt-1 text-sm text-on-surface-variant">Maksimal 2MB. Format JPG, PNG.</p>
                     </div>
 

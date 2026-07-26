@@ -5,10 +5,10 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     
     <!-- Primary Meta Tags -->
-    <title>@yield('title', 'SIBENGKEL - Sistem Manajemen Bengkel Era Digital')</title>
-    <meta name="title" content="@yield('title', 'SIBENGKEL - Sistem Manajemen Bengkel Era Digital')">
+    <title>@yield('title', 'SIBENGKEL - Sistem Informasi Bengkel Era Digital')</title>
+    <meta name="title" content="@yield('title', 'SIBENGKEL - Sistem Informasi Bengkel Era Digital')">
     <meta name="description" content="@yield('meta_description', 'Kelola jadwal servis, pantau status pengerjaan secara real-time, dan akses riwayat perawatan kendaraan Anda dalam satu aplikasi canggih.')">
-    <meta name="keywords" content="@yield('meta_keywords', 'sibengkel, sistem informasi bengkel, sistem manajemen bengkel, servis mobil, bengkel terpercaya')">
+    <meta name="keywords" content="@yield('meta_keywords', 'sibengkel, sistem informasi bengkel, servis mobil, bengkel terpercaya')">
     <meta name="author" content="SIBENGKEL">
     <link rel="canonical" href="@yield('canonical_url', url()->current())">
     <meta name="robots" content="index, follow">
@@ -16,14 +16,14 @@
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="{{ url()->current() }}">
-    <meta property="og:title" content="@yield('title', 'SIBENGKEL - Sistem Manajemen Bengkel Era Digital')">
+    <meta property="og:title" content="@yield('title', 'SIBENGKEL - Sistem Informasi Bengkel Era Digital')">
     <meta property="og:description" content="@yield('meta_description', 'Kelola jadwal servis, pantau status pengerjaan secara real-time, dan akses riwayat perawatan kendaraan Anda dalam satu aplikasi canggih.')">
     <meta property="og:image" content="{{ asset('logobengkel.png') }}">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="{{ url()->current() }}">
-    <meta property="twitter:title" content="@yield('title', 'SIBENGKEL - Sistem Manajemen Bengkel Era Digital')">
+    <meta property="twitter:title" content="@yield('title', 'SIBENGKEL - Sistem Informasi Bengkel Era Digital')">
     <meta property="twitter:description" content="@yield('meta_description', 'Kelola jadwal servis, pantau status pengerjaan secara real-time, dan akses riwayat perawatan kendaraan Anda dalam satu aplikasi canggih.')">
     <meta property="twitter:image" content="{{ asset('logobengkel.png') }}">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
@@ -71,8 +71,17 @@
                 return;
             }
 
-            const x = event.clientX ?? innerWidth / 2;
-            const y = event.clientY ?? innerHeight / 2;
+            let x = innerWidth / 2;
+            let y = innerHeight / 2;
+            if (event && (event.currentTarget || event.target)) {
+                const target = event.currentTarget || event.target;
+                const rect = target.getBoundingClientRect();
+                x = rect.left + rect.width / 2;
+                y = rect.top + rect.height / 2;
+            } else if (event && event.clientX) {
+                x = event.clientX;
+                y = event.clientY;
+            }
             const endRadius = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
 
             const transition = document.startViewTransition(doToggle);
@@ -101,7 +110,7 @@
             <img src="{{ asset('logobengkel.png') }}" alt="Logo" class="h-6 md:h-8 object-contain brightness-0 dark:invert"> SIBENGKEL
         </a>
         <div class="hidden md:flex gap-6 items-center">
-            <a class="nav-link {{ request()->is('/') ? 'font-bold text-black dark:text-white' : 'text-gray-700 dark:text-[#EDEDEC]/80' }} hover:text-secondary transition-colors font-body-md text-body-md pb-1 active:scale-95 duration-200" href="{{ url('/#home') }}">Home</a>
+            <a class="nav-link font-bold text-black dark:text-white hover:text-secondary transition-colors font-body-md text-body-md pb-1 active:scale-95 duration-200" href="{{ url('/#home') }}">Home</a>
             <a class="nav-link {{ request()->routeIs('public.status.*') ? 'font-bold text-black dark:text-white' : 'text-gray-700 dark:text-[#EDEDEC]/80' }} hover:text-secondary transition-colors font-body-md text-body-md pb-1 active:scale-95 duration-200" href="{{ route('public.status.index') }}">Cek Status</a>
             <a class="nav-link text-gray-700 dark:text-[#EDEDEC]/80 hover:text-secondary transition-colors font-body-md text-body-md pb-1 active:scale-95 duration-200" href="{{ url('/#services') }}">Services</a>
             <a class="nav-link text-gray-700 dark:text-[#EDEDEC]/80 hover:text-secondary transition-colors font-body-md text-body-md pb-1 active:scale-95 duration-200" href="{{ url('/#features') }}">Features</a>
@@ -117,9 +126,9 @@
             </button>
             
             @if(Auth::guard('customer')->check())
-                <a href="{{ route('public.dashboard') }}" class="bg-[#1b1b18] dark:bg-[#161615] text-white dark:text-[#EDEDEC] hover:bg-secondary hover:text-on-secondary transition-colors font-label-md text-xs md:text-label-md h-[36px] md:h-[44px] px-3 md:px-6 rounded shadow-sm border border-transparent dark:border-[#3E3E3A] flex items-center justify-center">Portal Saya</a>
+                <a href="{{ route('public.dashboard') }}" class="bg-primary dark:bg-[#161615] text-white dark:text-[#EDEDEC] hover:bg-primary/90 hover:text-white transition-colors font-label-md text-xs md:text-label-md h-[36px] md:h-[44px] px-3 md:px-6 rounded shadow-sm border border-transparent dark:border-[#3E3E3A] flex items-center justify-center">Portal Saya</a>
             @elseif(Auth::guard('web')->check())
-                <a href="{{ route('dashboard') }}" class="bg-[#1b1b18] dark:bg-[#161615] text-white dark:text-[#EDEDEC] hover:bg-secondary hover:text-on-secondary transition-colors font-label-md text-xs md:text-label-md h-[36px] md:h-[44px] px-3 md:px-6 rounded shadow-sm border border-transparent dark:border-[#3E3E3A] flex items-center justify-center">Dashboard Staff</a>
+                <a href="{{ route('dashboard') }}" class="bg-primary dark:bg-[#161615] text-white dark:text-[#EDEDEC] hover:bg-primary/90 hover:text-white transition-colors font-label-md text-xs md:text-label-md h-[36px] md:h-[44px] px-3 md:px-6 rounded shadow-sm border border-transparent dark:border-[#3E3E3A] flex items-center justify-center">Dashboard Staff</a>
             @else
                 <a href="{{ route('public.login') }}" class="text-gray-700 dark:text-[#EDEDEC] hover:text-secondary transition-colors font-label-md text-sm md:text-label-md h-[36px] md:h-[44px] px-2 md:px-4 rounded flex items-center justify-center hidden sm:flex">Login</a>
                 <a href="{{ route('public.register') }}" class="bg-secondary text-on-secondary hover:bg-[#1b1b18] dark:hover:bg-[#161615] hover:text-white dark:hover:text-[#EDEDEC] dark:hover:border-[#3E3E3A] transition-colors font-label-md text-xs md:text-label-md h-[36px] md:h-[44px] px-3 md:px-6 rounded shadow-sm border border-transparent flex items-center justify-center">Get Started</a>
@@ -168,9 +177,41 @@ document.addEventListener("DOMContentLoaded", () => {
             btn.querySelector("span").textContent = isHidden ? "visibility_off" : "visibility";
         });
     });
+
+    // Scrollspy for navbar
+    if (window.location.pathname === '/') {
+        const sections = document.querySelectorAll("section[id]");
+        const navLinks = document.querySelectorAll(".nav-link");
+        
+        window.addEventListener("scroll", () => {
+            let current = "home";
+            sections.forEach((section) => {
+                const sectionTop = section.offsetTop;
+                if (scrollY >= sectionTop - 200) {
+                    current = section.getAttribute("id");
+                }
+            });
+
+            if (scrollY < 100) {
+                current = "home";
+            }
+
+            navLinks.forEach((link) => {
+                const href = link.getAttribute("href");
+                if (href && href.includes("#")) {
+                    link.classList.remove("font-bold", "text-black", "dark:text-white");
+                    link.classList.add("text-gray-700", "dark:text-[#EDEDEC]/80");
+                    if (href.includes("#" + current)) {
+                        link.classList.add("font-bold", "text-black", "dark:text-white");
+                        link.classList.remove("text-gray-700", "dark:text-[#EDEDEC]/80");
+                    }
+                }
+            });
+        });
+    }
 });
 </script>
-    @if(session('success'))
+    @if(session('confetti'))
         <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
         <script>
             document.addEventListener('DOMContentLoaded', function () {

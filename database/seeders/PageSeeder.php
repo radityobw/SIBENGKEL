@@ -18,22 +18,11 @@ class PageSeeder extends Seeder
 <h2 class="font-headline-md text-headline-md text-on-background mt-lg">1. Introduction</h2>
 <p>Welcome to SIBENGKEL. We respect your privacy and are committed to protecting your personal data. This privacy policy will inform you about how we look after your personal data when you visit our website and tell you about your privacy rights and how the law protects you.</p>
 
-<h2 class="font-headline-md text-headline-md text-on-background mt-lg">2. The Data We Collect About You</h2>
-<p>We may collect, use, store and transfer different kinds of personal data about you which we have grouped together as follows:</p>
-<ul class="list-disc pl-6 space-y-2 mt-sm">
-    <li><strong>Identity Data:</strong> includes first name, last name, username or similar identifier.</li>
-    <li><strong>Contact Data:</strong> includes billing address, delivery address, email address and telephone numbers.</li>
-    <li><strong>Vehicle Data:</strong> includes license plate, make, model, and year of the vehicle you register for services.</li>
-    <li><strong>Transaction Data:</strong> includes details about payments to and from you and other details of products and services you have purchased from us.</li>
-</ul>
+<h2 class="font-headline-md text-headline-md text-on-background mt-8 mb-3 font-bold">2. The Data We Collect About You</h2>
+<p class="leading-relaxed mb-4">We may collect, use, store and transfer different kinds of personal data about you which we have grouped together into several categories. Specifically, we collect <strong>Identity Data</strong> (which includes your first name, last name, username or similar identifier), <strong>Contact Data</strong> (such as your billing address, delivery address, email address and telephone numbers), <strong>Vehicle Data</strong> (including the license plate, make, model, and year of the vehicle you register for services), and <strong>Transaction Data</strong> (which comprises details about payments to and from you as well as other details of products and services you have purchased from us).</p>
 
-<h2 class="font-headline-md text-headline-md text-on-background mt-lg">3. How We Use Your Personal Data</h2>
-<p>We will only use your personal data when the law allows us to. Most commonly, we will use your personal data in the following circumstances:</p>
-<ul class="list-disc pl-6 space-y-2 mt-sm">
-    <li>Where we need to perform the contract we are about to enter into or have entered into with you (e.g. providing vehicle maintenance).</li>
-    <li>Where it is necessary for our legitimate interests (or those of a third party) and your interests and fundamental rights do not override those interests.</li>
-    <li>Where we need to comply with a legal obligation.</li>
-</ul>'
+<h2 class="font-headline-md text-headline-md text-on-background mt-8 mb-3 font-bold">3. How We Use Your Personal Data</h2>
+<p class="leading-relaxed mb-4">We will only use your personal data when the law allows us to do so. Most commonly, we will use your personal data in three main circumstances: first, where we need to perform the contract we are about to enter into or have entered into with you, such as providing vehicle maintenance and repair services; second, where it is necessary for our legitimate business interests (or those of a third party) and your interests and fundamental rights do not override those interests; and third, where we need to comply with a regulatory or legal obligation.</p>'
             ],
             [
                 'slug' => 'terms-of-service',
@@ -89,28 +78,43 @@ class PageSeeder extends Seeder
             [
                 'slug' => 'support',
                 'title' => 'Help & Support',
-                'content' => '<div class="space-y-xl">
-    <div class="relative max-w-2xl mx-auto mb-xl">
-        <span class="material-symbols-outlined absolute left-4 top-3 text-on-surface-variant">search</span>
-        <input type="text" id="faq-search" class="w-full pl-12 pr-4 py-3 rounded-full border border-outline-variant focus:border-primary shadow-sm" placeholder="Search for help (e.g., How to book a service?)">
+                'content' => '<div class="space-y-8">
+    <div class="relative max-w-2xl mx-auto my-8 mb-12">
+        <span class="material-symbols-outlined absolute left-4 top-3.5 text-on-surface-variant">search</span>
+        <input type="text" id="faq-search" class="w-full pl-12 pr-4 py-3.5 rounded-full border border-outline-variant focus:border-primary shadow-sm bg-transparent text-on-background" placeholder="Search for help (e.g., How to book a service?)">
     </div>
 
-    <div>
-        <h2 class="font-headline-md text-headline-md text-on-background font-bold mb-md">Frequently Asked Questions</h2>
+    <div class="mb-12">
+        <h2 class="font-headline-md text-2xl text-on-background font-bold mb-6">Frequently Asked Questions</h2>
         <div class="space-y-4" id="faq-list">
-            <div class="faq-item border border-outline-variant rounded-lg p-4 bg-surface-container-lowest transition-all">
-                <h3 class="font-bold text-lg mb-2">How do I book a service appointment?</h3>
-                <p class="text-on-surface-variant">You can easily book a service by logging into your Customer Portal, selecting "Booking", choosing an available date, and specifying your vehicle issues.</p>
+            <div class="faq-item border border-outline-variant rounded-xl overflow-hidden bg-surface-container-lowest transition-all" x-data="{ open: false }">
+                <button @click="open = !open" class="w-full text-left p-5 font-bold text-lg flex justify-between items-center hover:bg-surface-container-low/50 transition-colors text-on-background">
+                    <span>How do I book a service appointment?</span>
+                    <span class="material-symbols-outlined transition-transform duration-300" :class="open ? \'rotate-180\' : \'\'">expand_more</span>
+                </button>
+                <div x-show="open" x-transition class="p-5 pt-0 text-on-surface-variant border-t border-outline-variant/10 leading-relaxed">
+                    You can easily book a service by logging into your Customer Portal, selecting "Booking", choosing an available date, and specifying your vehicle issues.
+                </div>
             </div>
             
-            <div class="faq-item border border-outline-variant rounded-lg p-4 bg-surface-container-lowest transition-all">
-                <h3 class="font-bold text-lg mb-2">How can I track the progress of my vehicle?</h3>
-                <p class="text-on-surface-variant">Once you drop off your vehicle, you can use the "Cek Status" feature on our homepage by entering your license plate and phone number, or track it directly from your Portal Dashboard.</p>
+            <div class="faq-item border border-outline-variant rounded-xl overflow-hidden bg-surface-container-lowest transition-all" x-data="{ open: false }">
+                <button @click="open = !open" class="w-full text-left p-5 font-bold text-lg flex justify-between items-center hover:bg-surface-container-low/50 transition-colors text-on-background">
+                    <span>How can I track the progress of my vehicle?</span>
+                    <span class="material-symbols-outlined transition-transform duration-300" :class="open ? \'rotate-180\' : \'\'">expand_more</span>
+                </button>
+                <div x-show="open" x-transition class="p-5 pt-0 text-on-surface-variant border-t border-outline-variant/10 leading-relaxed">
+                    Once you drop off your vehicle, you can use the "Cek Status" feature on our homepage by entering your license plate and phone number, or track it directly from your Portal Dashboard.
+                </div>
             </div>
             
-            <div class="faq-item border border-outline-variant rounded-lg p-4 bg-surface-container-lowest transition-all">
-                <h3 class="font-bold text-lg mb-2">Are the spare parts original?</h3>
-                <p class="text-on-surface-variant">Yes! We guarantee that all spare parts sold and installed at SIBENGKEL are 100% original and come with the official manufacturer warranty.</p>
+            <div class="faq-item border border-outline-variant rounded-xl overflow-hidden bg-surface-container-lowest transition-all" x-data="{ open: false }">
+                <button @click="open = !open" class="w-full text-left p-5 font-bold text-lg flex justify-between items-center hover:bg-surface-container-low/50 transition-colors text-on-background">
+                    <span>Are the spare parts original?</span>
+                    <span class="material-symbols-outlined transition-transform duration-300" :class="open ? \'rotate-180\' : \'\'">expand_more</span>
+                </button>
+                <div x-show="open" x-transition class="p-5 pt-0 text-on-surface-variant border-t border-outline-variant/10 leading-relaxed">
+                    Yes! We guarantee that all spare parts sold and installed at SIBENGKEL are 100% original and come with the official manufacturer warranty.
+                </div>
             </div>
             
             <div id="no-results" class="hidden text-center py-8 text-on-surface-variant">

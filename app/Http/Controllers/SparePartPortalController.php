@@ -238,7 +238,7 @@ class SparePartPortalController extends Controller
             $customer->save();
         }
 
-        return redirect()->route('public.orders.show', $order->id)->with('success', 'Pesanan #' . str_pad($order->id, 5, '0', STR_PAD_LEFT) . ' berhasil dibuat! Silakan ambil barang di lokasi bengkel.');
+        return redirect()->route('public.orders.show', $order->id)->with('success', 'Pesanan #' . str_pad($order->id, 5, '0', STR_PAD_LEFT) . ' berhasil dibuat! Silakan ambil barang di lokasi bengkel.')->with('confetti', true);
     }
 
     /**

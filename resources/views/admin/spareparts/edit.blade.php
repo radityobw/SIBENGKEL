@@ -54,7 +54,7 @@
                                 <img src="{{ Storage::url($sparepart->image_path) }}" alt="Current Image" class="h-24 w-24 object-cover rounded border">
                             </div>
                         @endif
-                        <input type="file" name="image" id="image" accept="image/*" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100">
+                        <input type="file" name="image" id="image" accept="image/*" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-primary file:text-white hover:file:bg-primary/90 dark:file:bg-secondary dark:hover:file:bg-secondary/90">
                         <p class="mt-1 text-sm text-gray-500">Abaikan jika tidak ingin mengubah foto.</p>
                     </div>
 

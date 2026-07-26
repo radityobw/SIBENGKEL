@@ -47,7 +47,7 @@
             <div class="space-y-base">
                 <label class="text-label-md font-label-md text-on-surface dark:text-[#EDEDEC] block" for="preferred_date">Pilih Tanggal <span class="text-error">*</span></label>
                 <div class="relative">
-                    <input class="w-full h-11 bg-surface-container-lowest dark:bg-[#111111] border border-outline-variant dark:border-[#3E3E3A] rounded-DEFAULT px-sm text-body-md font-body-md text-on-surface dark:text-[#EDEDEC] focus:border-primary dark:focus:border-secondary focus:ring-1 focus:ring-primary dark:focus:ring-secondary [color-scheme:light_dark]" 
+                    <input class="w-full h-11 bg-surface-container-lowest dark:bg-[#111111] border border-outline-variant dark:border-[#3E3E3A] rounded-DEFAULT px-sm text-body-md font-body-md text-on-surface dark:text-[#EDEDEC] focus:border-primary dark:focus:border-secondary focus:ring-1 focus:ring-primary dark:focus:ring-secondary [color-scheme:light] dark:[color-scheme:dark]" 
                         id="preferred_date" name="preferred_date" required type="date" min="{{ date('Y-m-d') }}" value="{{ old('preferred_date') }}"/>
                 </div>
             </div>
@@ -55,7 +55,7 @@
             <div class="space-y-base">
                 <label class="text-label-md font-label-md text-on-surface dark:text-[#EDEDEC] block" for="preferred_time">Pilih Jam <span class="text-error">*</span></label>
                 <div class="relative">
-                    <input class="w-full h-11 bg-surface-container-lowest dark:bg-[#111111] border border-outline-variant dark:border-[#3E3E3A] rounded-DEFAULT px-sm text-body-md font-body-md text-on-surface dark:text-[#EDEDEC] focus:border-primary dark:focus:border-secondary focus:ring-1 focus:ring-primary dark:focus:ring-secondary [color-scheme:light_dark]" 
+                    <input class="w-full h-11 bg-surface-container-lowest dark:bg-[#111111] border border-outline-variant dark:border-[#3E3E3A] rounded-DEFAULT px-sm text-body-md font-body-md text-on-surface dark:text-[#EDEDEC] focus:border-primary dark:focus:border-secondary focus:ring-1 focus:ring-primary dark:focus:ring-secondary [color-scheme:light] dark:[color-scheme:dark]" 
                         id="preferred_time" name="preferred_time" required type="time" value="{{ old('preferred_time') }}"/>
                 </div>
             </div>

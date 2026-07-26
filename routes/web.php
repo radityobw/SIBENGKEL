@@ -154,6 +154,11 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     // System Settings
     Route::get('/settings', [\App\Http\Controllers\Admin\SettingController::class, 'index'])->name('admin.settings.index');
     Route::post('/settings', [\App\Http\Controllers\Admin\SettingController::class, 'update'])->name('admin.settings.update');
+
+    // Contact Messages
+    Route::get('messages', [ContactController::class, 'adminIndex'])->name('admin.messages.index');
+    Route::post('messages/{message}/read', [ContactController::class, 'adminMarkAsRead'])->name('admin.messages.read');
+    Route::delete('messages/{message}', [ContactController::class, 'adminDestroy'])->name('admin.messages.destroy');
 });
 
 Route::middleware(['auth', 'role:admin,mekanik'])->group(function () {
@@ -178,11 +183,6 @@ Route::middleware(['auth', 'role:admin,mekanik'])->group(function () {
     Route::post('transactions', [TransactionController::class, 'store'])->name('transactions.store');
     Route::patch('transactions/{transaction}/status', [TransactionController::class, 'updateStatus'])->name('transactions.updateStatus');
     Route::get('transactions/{transaction}/invoice', [TransactionController::class, 'printInvoice'])->name('transactions.invoice');
-
-    // Contact Messages
-    Route::get('messages', [ContactController::class, 'adminIndex'])->name('admin.messages.index');
-    Route::post('messages/{message}/read', [ContactController::class, 'adminMarkAsRead'])->name('admin.messages.read');
-    Route::delete('messages/{message}', [ContactController::class, 'adminDestroy'])->name('admin.messages.destroy');
 });
 
 require __DIR__.'/auth.php';

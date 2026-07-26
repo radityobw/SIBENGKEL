@@ -31,7 +31,7 @@
             <div>
                 <label for="profile_photo" class="block text-label-md font-bold text-on-surface mb-1">Foto Profil (Opsional)</label>
                 <input type="file" name="profile_photo" id="profile_photo" accept="image/*" onchange="previewCustomerPhoto(event)"
-                    class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-primary-container file:text-on-primary-container hover:file:bg-primary/20">
+                    class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-primary file:text-white hover:file:bg-primary/90 dark:file:bg-secondary dark:hover:file:bg-secondary/90">
             </div>
 
             <div>

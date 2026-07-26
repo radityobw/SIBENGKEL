@@ -57,7 +57,7 @@
             <!-- Brand Header -->
             <div class="text-center mb-lg">
                 <h1 class="font-headline-xl text-[40px] leading-[48px] font-bold tracking-[-0.02em] text-primary dark:text-[#EDEDEC] mb-xs">Login Pegawai</h1>
-                <p class="font-body-md text-[16px] leading-[24px] font-normal text-on-surface-variant dark:text-gray-400">Masuk ke sistem manajemen bengkel.</p>
+                <p class="font-body-md text-[16px] leading-[24px] font-normal text-on-surface-variant dark:text-gray-400">Masuk ke sistem informasi bengkel.</p>
             </div>
             
             <x-auth-session-status class="mb-4" :status="session('status')" />
