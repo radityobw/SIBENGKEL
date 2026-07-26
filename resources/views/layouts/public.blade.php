@@ -101,7 +101,7 @@
             <img src="{{ asset('logobengkel.png') }}" alt="Logo" class="h-6 md:h-8 object-contain brightness-0 dark:invert"> SIBENGKEL
         </a>
         <div class="hidden md:flex gap-6 items-center">
-            <a class="nav-link {{ request()->is('/') ? 'font-bold text-black dark:text-white' : 'text-gray-700 dark:text-[#EDEDEC]/80' }} hover:text-secondary transition-colors font-body-md text-body-md pb-1 active:scale-95 duration-200" href="{{ url('/#home') }}">Home</a>
+            <a class="nav-link font-bold text-black dark:text-white hover:text-secondary transition-colors font-body-md text-body-md pb-1 active:scale-95 duration-200" href="{{ url('/#home') }}">Home</a>
             <a class="nav-link {{ request()->routeIs('public.status.*') ? 'font-bold text-black dark:text-white' : 'text-gray-700 dark:text-[#EDEDEC]/80' }} hover:text-secondary transition-colors font-body-md text-body-md pb-1 active:scale-95 duration-200" href="{{ route('public.status.index') }}">Cek Status</a>
             <a class="nav-link text-gray-700 dark:text-[#EDEDEC]/80 hover:text-secondary transition-colors font-body-md text-body-md pb-1 active:scale-95 duration-200" href="{{ url('/#services') }}">Services</a>
             <a class="nav-link text-gray-700 dark:text-[#EDEDEC]/80 hover:text-secondary transition-colors font-body-md text-body-md pb-1 active:scale-95 duration-200" href="{{ url('/#features') }}">Features</a>
@@ -117,9 +117,9 @@
             </button>
             
             @if(Auth::guard('customer')->check())
-                <a href="{{ route('public.dashboard') }}" class="bg-[#1b1b18] dark:bg-[#161615] text-white dark:text-[#EDEDEC] hover:bg-secondary hover:text-on-secondary transition-colors font-label-md text-xs md:text-label-md h-[36px] md:h-[44px] px-3 md:px-6 rounded shadow-sm border border-transparent dark:border-[#3E3E3A] flex items-center justify-center">Portal Saya</a>
+                <a href="{{ route('public.dashboard') }}" class="bg-primary dark:bg-[#161615] text-white dark:text-[#EDEDEC] hover:bg-primary/90 hover:text-white transition-colors font-label-md text-xs md:text-label-md h-[36px] md:h-[44px] px-3 md:px-6 rounded shadow-sm border border-transparent dark:border-[#3E3E3A] flex items-center justify-center">Portal Saya</a>
             @elseif(Auth::guard('web')->check())
-                <a href="{{ route('dashboard') }}" class="bg-[#1b1b18] dark:bg-[#161615] text-white dark:text-[#EDEDEC] hover:bg-secondary hover:text-on-secondary transition-colors font-label-md text-xs md:text-label-md h-[36px] md:h-[44px] px-3 md:px-6 rounded shadow-sm border border-transparent dark:border-[#3E3E3A] flex items-center justify-center">Dashboard Staff</a>
+                <a href="{{ route('dashboard') }}" class="bg-primary dark:bg-[#161615] text-white dark:text-[#EDEDEC] hover:bg-primary/90 hover:text-white transition-colors font-label-md text-xs md:text-label-md h-[36px] md:h-[44px] px-3 md:px-6 rounded shadow-sm border border-transparent dark:border-[#3E3E3A] flex items-center justify-center">Dashboard Staff</a>
             @else
                 <a href="{{ route('public.login') }}" class="text-gray-700 dark:text-[#EDEDEC] hover:text-secondary transition-colors font-label-md text-sm md:text-label-md h-[36px] md:h-[44px] px-2 md:px-4 rounded flex items-center justify-center hidden sm:flex">Login</a>
                 <a href="{{ route('public.register') }}" class="bg-secondary text-on-secondary hover:bg-[#1b1b18] dark:hover:bg-[#161615] hover:text-white dark:hover:text-[#EDEDEC] dark:hover:border-[#3E3E3A] transition-colors font-label-md text-xs md:text-label-md h-[36px] md:h-[44px] px-3 md:px-6 rounded shadow-sm border border-transparent flex items-center justify-center">Get Started</a>
@@ -168,9 +168,41 @@ document.addEventListener("DOMContentLoaded", () => {
             btn.querySelector("span").textContent = isHidden ? "visibility_off" : "visibility";
         });
     });
+
+    // Scrollspy for navbar
+    if (window.location.pathname === '/') {
+        const sections = document.querySelectorAll("section[id]");
+        const navLinks = document.querySelectorAll(".nav-link");
+        
+        window.addEventListener("scroll", () => {
+            let current = "home";
+            sections.forEach((section) => {
+                const sectionTop = section.offsetTop;
+                if (scrollY >= sectionTop - 200) {
+                    current = section.getAttribute("id");
+                }
+            });
+
+            if (scrollY < 100) {
+                current = "home";
+            }
+
+            navLinks.forEach((link) => {
+                const href = link.getAttribute("href");
+                if (href && href.includes("#")) {
+                    link.classList.remove("font-bold", "text-black", "dark:text-white");
+                    link.classList.add("text-gray-700", "dark:text-[#EDEDEC]/80");
+                    if (href.includes("#" + current)) {
+                        link.classList.add("font-bold", "text-black", "dark:text-white");
+                        link.classList.remove("text-gray-700", "dark:text-[#EDEDEC]/80");
+                    }
+                }
+            });
+        });
+    }
 });
 </script>
-    @if(session('success'))
+    @if(session('confetti'))
         <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
         <script>
             document.addEventListener('DOMContentLoaded', function () {

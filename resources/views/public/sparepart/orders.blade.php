@@ -33,7 +33,7 @@
                     <div class="pl-2">
                         <div class="flex items-center gap-2 mb-1">
                             <span class="text-label-md font-bold text-on-surface dark:text-[#EDEDEC]">Order #{{ str_pad($order->id, 5, '0', STR_PAD_LEFT) }}</span>
-                            <span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider text-white {{ $stripColor }}">
+                            <span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider {{ str_contains($stripColor, 'bg-primary') ? 'text-white dark:text-black' : 'text-white' }} {{ $stripColor }}">
                                 {{ str_replace('_', ' ', $order->status) }}
                             </span>
                         </div>

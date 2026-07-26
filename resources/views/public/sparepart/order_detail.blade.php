@@ -24,7 +24,7 @@
                 <p class="text-body-md text-on-surface-variant dark:text-gray-400">{{ $order->created_at->translatedFormat('d F Y, H:i') }}</p>
             </div>
             <div>
-                <span class="px-3 py-1 rounded text-xs font-bold uppercase tracking-wider text-white {{ $stripColor }}">
+                <span class="px-3 py-1 rounded text-xs font-bold uppercase tracking-wider {{ str_contains($stripColor, 'bg-primary') ? 'text-white dark:text-black' : 'text-white' }} {{ $stripColor }}">
                     {{ str_replace('_', ' ', $order->status) }}
                 </span>
             </div>

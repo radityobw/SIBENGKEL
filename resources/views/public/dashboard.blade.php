@@ -54,7 +54,7 @@
                     <div class="flex flex-col sm:flex-row sm:justify-between items-start gap-4">
                         <div>
                             <div class="flex items-center gap-xs mb-base">
-                                <span class="px-2 py-1 {{ $stripColor }} {{ $booking->status == 'dikonversi' ? 'text-white' : 'text-white' }} rounded text-[10px] font-bold uppercase tracking-wider">
+                                <span class="px-2 py-1 {{ $stripColor }} {{ str_contains($stripColor, 'bg-primary') ? 'text-white dark:text-black' : 'text-white' }} rounded text-[10px] font-bold uppercase tracking-wider">
                                     {{ $statusText }}
                                 </span>
                                 <span class="text-label-sm font-label-sm text-on-surface-variant dark:text-gray-400">ID: #SB-{{ str_pad($booking->id, 4, '0', STR_PAD_LEFT) }}</span>

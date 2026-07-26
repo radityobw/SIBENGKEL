@@ -71,11 +71,13 @@
                     <form action="{{ route('public.cart.add') }}" method="POST" class="mt-auto">
                         @csrf
                         <input type="hidden" name="spare_part_id" value="{{ $item->id }}">
-                        <input type="hidden" name="qty" value="1">
-                        <button type="submit" class="w-full h-10 bg-secondary text-white rounded-lg font-label-sm hover:opacity-90 flex items-center justify-center gap-1 {{ $item->stock <= 0 ? 'opacity-50 cursor-not-allowed' : '' }}" {{ $item->stock <= 0 ? 'disabled' : '' }}>
-                            <span class="material-symbols-outlined text-[18px]">add_shopping_cart</span>
-                            Tambah
-                        </button>
+                        <div class="flex items-center gap-2">
+                            <input type="number" name="qty" value="1" min="1" max="{{ $item->stock }}" class="w-16 h-10 px-2 text-center rounded-lg border border-outline-variant dark:border-[#3E3E3A] bg-surface dark:bg-[#111111] text-body-md font-bold text-on-surface dark:text-[#EDEDEC] focus:ring-1 focus:ring-primary dark:focus:ring-secondary outline-none {{ $item->stock <= 0 ? 'opacity-50 cursor-not-allowed' : '' }}" {{ $item->stock <= 0 ? 'disabled' : '' }}>
+                            <button type="submit" class="flex-grow h-10 bg-secondary text-white rounded-lg font-label-sm hover:opacity-90 flex items-center justify-center gap-1 {{ $item->stock <= 0 ? 'opacity-50 cursor-not-allowed' : '' }}" {{ $item->stock <= 0 ? 'disabled' : '' }}>
+                                <span class="material-symbols-outlined text-[18px]">add_shopping_cart</span>
+                                Tambah
+                            </button>
+                        </div>
                     </form>
                 </div>
             </div>

@@ -297,7 +297,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 </script>
-    @if(session('success'))
+    @if(session('confetti'))
         <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
         <script>
             document.addEventListener('DOMContentLoaded', function () {

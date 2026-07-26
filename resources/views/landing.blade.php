@@ -560,7 +560,7 @@
                     <h3 class="split-target font-headline-lg text-4xl lg:text-5xl font-bold text-on-surface dark:text-[#EDEDEC] mb-4">Katalog <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#FF6B00] to-[#FF8F42]">Sparepart</span></h3>
                     <p class="text-on-surface-variant dark:text-gray-400 text-lg">Temukan suku cadang berkualitas tinggi untuk kendaraan Anda. Bisa dibeli langsung atau melalui pemesanan online.</p>
                 </div>
-                <a href="{{ route('public.sparepart.index') }}" class="group flex items-center gap-2 text-primary dark:text-[#EDEDEC] font-bold hover:text-primary/80 dark:hover:text-[#EDEDEC]/80 transition-colors shrink-0">
+                <a href="{{ Auth::guard('customer')->check() ? route('public.sparepart.index') : route('public.login') }}" class="group flex items-center gap-2 text-primary dark:text-[#EDEDEC] font-bold hover:text-primary/80 dark:hover:text-[#EDEDEC]/80 transition-colors shrink-0">
                     Lihat Semua
                     <span class="material-symbols-outlined transition-transform group-hover:translate-x-1">arrow_forward</span>
                 </a>
@@ -609,7 +609,7 @@
                             <div class="flex items-center justify-between mt-auto pt-2">
                                 <p class="font-bold text-primary dark:text-[#FF8F42] text-sm md:text-base">Rp {{ number_format($item->price, 0, ',', '.') }}</p>
                                 @if(Auth::guard('customer')->check())
-                                    <a href="{{ route('public.sparepart.index') }}" class="w-8 h-8 rounded-full bg-surface-container-highest dark:bg-[#3E3E3A] text-primary dark:text-[#EDEDEC] flex items-center justify-center hover:bg-primary dark:hover:bg-secondary hover:text-white transition-colors" title="Lihat di Katalog">
+                                    <a href="{{ Auth::guard('customer')->check() ? route('public.sparepart.index') : route('public.login') }}" class="w-8 h-8 rounded-full bg-surface-container-highest dark:bg-[#3E3E3A] text-primary dark:text-[#EDEDEC] flex items-center justify-center hover:bg-primary dark:hover:bg-secondary hover:text-white transition-colors" title="Lihat di Katalog">
                                         <span class="material-symbols-outlined text-[18px] font-bold">add_shopping_cart</span>
                                     </a>
                                 @else
@@ -642,7 +642,7 @@
             </script>
             
             <div class="mt-12 text-center md:hidden">
-                <a href="{{ route('public.sparepart.index') }}" class="inline-flex items-center justify-center gap-2 w-full h-14 bg-surface-container-high dark:bg-[#161615] border border-outline-variant dark:border-[#3E3E3A] rounded-full text-on-surface dark:text-[#EDEDEC] font-bold hover:bg-surface-container-highest transition-colors">
+                <a href="{{ Auth::guard('customer')->check() ? route('public.sparepart.index') : route('public.login') }}" class="inline-flex items-center justify-center gap-2 w-full h-14 bg-surface-container-high dark:bg-[#161615] border border-outline-variant dark:border-[#3E3E3A] rounded-full text-on-surface dark:text-[#EDEDEC] font-bold hover:bg-surface-container-highest transition-colors">
                     Lihat Semua Sparepart
                     <span class="material-symbols-outlined">arrow_forward</span>
                 </a>
@@ -728,12 +728,42 @@
                 if(!scrollContainer) return;
 
                 let isHovered = false;
+                let isDown = false;
+                let startX;
+                let scrollLeft;
                 
                 scrollContainer.addEventListener('mouseenter', () => isHovered = true);
-                scrollContainer.addEventListener('mouseleave', () => isHovered = false);
+                scrollContainer.addEventListener('mouseleave', () => {
+                    isHovered = false;
+                    isDown = false;
+                    scrollContainer.classList.remove('cursor-grabbing');
+                });
                 scrollContainer.addEventListener('touchstart', () => isHovered = true);
                 scrollContainer.addEventListener('touchend', () => {
                     setTimeout(() => isHovered = false, 2000);
+                });
+                
+                scrollContainer.addEventListener('mousedown', (e) => {
+                    isDown = true;
+                    isHovered = true;
+                    scrollContainer.classList.add('cursor-grabbing');
+                    startX = e.pageX - scrollContainer.offsetLeft;
+                    scrollLeft = scrollContainer.scrollLeft;
+                });
+                
+                scrollContainer.addEventListener('mouseup', () => {
+                    isDown = false;
+                    isHovered = false;
+                    scrollContainer.classList.remove('cursor-grabbing');
+                });
+                
+                scrollContainer.addEventListener('mousemove', (e) => {
+                    if (!isDown) return;
+                    e.preventDefault();
+                    const x = e.pageX - scrollContainer.offsetLeft;
+                    const walk = (x - startX) * 1.5;
+                    scrollContainer.scrollLeft = scrollLeft - walk;
+                    scrollPos = scrollContainer.scrollLeft;
                 });
 
                 // Smooth scrolling ticker

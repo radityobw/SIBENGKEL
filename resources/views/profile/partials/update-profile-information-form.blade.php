@@ -30,7 +30,7 @@
                         <img id="photo-preview" src="" class="w-full h-full object-cover hidden">
                     @endif
                 </div>
-                <input id="profile_photo" name="profile_photo" type="file" accept="image/*" class="block w-full text-sm text-on-surface-variant file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-primary-container file:text-on-primary-container hover:file:bg-primary/20 focus:outline-none" onchange="previewPhoto(event)" />
+                <input id="profile_photo" name="profile_photo" type="file" accept="image/*" class="block w-full text-sm text-on-surface-variant file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-primary file:text-white hover:file:bg-primary/90 dark:file:bg-secondary dark:hover:file:bg-secondary/90 focus:outline-none" onchange="previewPhoto(event)" />
             </div>
             <x-input-error class="mt-2" :messages="$errors->get('profile_photo')" />
         </div>
