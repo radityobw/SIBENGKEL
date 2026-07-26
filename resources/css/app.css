@@ -66,6 +66,37 @@
   navigation: auto;
 }
 
+/* Custom View Transition for Page Navigation (Smooth & Premium) */
+@keyframes pageNavFadeOut {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.985);
+  }
+}
+
+@keyframes pageNavFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.985) translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+html:not(.theme-transitioning)::view-transition-old(root) {
+  animation: pageNavFadeOut 0.22s cubic-bezier(0.4, 0, 1, 1) forwards;
+}
+
+html:not(.theme-transitioning)::view-transition-new(root) {
+  animation: pageNavFadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
 @keyframes fadeInPage {
   from {
     opacity: 0;

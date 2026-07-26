@@ -38,13 +38,13 @@
         .dark .industrial-grid {
             background-image: linear-gradient(to right, #3E3E3A 1px, transparent 1px), linear-gradient(to bottom, #3E3E3A 1px, transparent 1px);
         }
-        ::view-transition-old(root),
-        ::view-transition-new(root) {
+        html.theme-transitioning::view-transition-old(root),
+        html.theme-transitioning::view-transition-new(root) {
             animation: none;
             mix-blend-mode: normal;
         }
-        ::view-transition-old(root) { z-index: 1; }
-        ::view-transition-new(root) { z-index: 2; }
+        html.theme-transitioning::view-transition-old(root) { z-index: 1; }
+        html.theme-transitioning::view-transition-new(root) { z-index: 2; }
     </style>
     <script>
         // Landing & Public pages default to Dark Mode
@@ -93,6 +93,7 @@
             const h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
             const endRadius = Math.hypot(Math.max(x, w - x), Math.max(y, h - y));
 
+            document.documentElement.classList.add('theme-transitioning');
             const transition = document.startViewTransition(doToggle);
             transition.ready.then(() => {
                 document.documentElement.animate(
@@ -108,6 +109,9 @@
                         pseudoElement: '::view-transition-new(root)',
                     }
                 );
+            });
+            transition.finished.finally(() => {
+                document.documentElement.classList.remove('theme-transitioning');
             });
         }
     </script>
@@ -145,7 +149,9 @@
         </div>
     </nav>
 
-    @yield('content')
+    <main class="flex-1 flex flex-col w-full min-w-0">
+        @yield('content')
+    </main>
 
     <!-- Footer Component -->
     <footer id="contact-us" class="flex flex-col md:flex-row justify-between items-center w-full px-margin-desktop py-12 gap-6 bg-[#1b1b18] dark:bg-black border-t border-gray-800 dark:border-[#3E3E3A]/20 mt-auto text-white">
