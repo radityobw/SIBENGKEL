@@ -12,13 +12,13 @@
         h1, h2, h3, h4, h5, h6, .font-sora { font-family: 'Sora', sans-serif; }
         .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
         .icon-filled { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
-        ::view-transition-old(root),
-        ::view-transition-new(root) {
+        html.theme-transitioning::view-transition-old(root),
+        html.theme-transitioning::view-transition-new(root) {
             animation: none;
             mix-blend-mode: normal;
         }
-        ::view-transition-old(root) { z-index: 1; }
-        ::view-transition-new(root) { z-index: 2; }
+        html.theme-transitioning::view-transition-old(root) { z-index: 1; }
+        html.theme-transitioning::view-transition-new(root) { z-index: 2; }
     </style>
     <script>
         // Customer Portal defaults to Light Mode
@@ -67,6 +67,7 @@
             const h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
             const endRadius = Math.hypot(Math.max(x, w - x), Math.max(y, h - y));
 
+            document.documentElement.classList.add('theme-transitioning');
             const transition = document.startViewTransition(doToggle);
             transition.ready.then(() => {
                 document.documentElement.animate(
@@ -82,6 +83,9 @@
                         pseudoElement: '::view-transition-new(root)',
                     }
                 );
+            });
+            transition.finished.finally(() => {
+                document.documentElement.classList.remove('theme-transitioning');
             });
         }
     </script>
