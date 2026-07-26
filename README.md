@@ -182,7 +182,7 @@ Dokumen teknis, arsitektur, dan panduan presentasi tersedia di folder `docs/`:
 | 3 | **Design System** | [`docs/DESIGN.md`](docs/DESIGN.md) | Tokens warna, tipografi Sora/Inter & komponen UI |
 | 4 | **Panduan Presentasi** | [`docs/penjelasan.md`](docs/penjelasan.md) | Penjelasan teknis komprehensif untuk sidang/presentasi |
 | 5 | **Blackbox Test Suite**| [`docs/blackbox.md`](docs/blackbox.md) | 137 test cases terverifikasi di 18 modul |
-| 6 | **Execution Playbook**| [`docs/DEVELOPMENT_GUIDE.md`](docs/DEVELOPMENT_GUIDE.md) | Guidebook pelaksanaan & pengerjaan 1.700+ baris |
+| 6 | **Execution Playbook**| [`docs/guidebook.md`](docs/guidebook.md) | Guidebook pelaksanaan & pengerjaan 1.700+ baris |
 
 ---
 
