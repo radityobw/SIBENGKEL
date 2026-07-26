@@ -45,8 +45,17 @@
                 return;
             }
 
-            const x = event.clientX ?? innerWidth / 2;
-            const y = event.clientY ?? innerHeight / 2;
+            let x = innerWidth / 2;
+            let y = innerHeight / 2;
+            if (event && (event.currentTarget || event.target)) {
+                const target = event.currentTarget || event.target;
+                const rect = target.getBoundingClientRect();
+                x = rect.left + rect.width / 2;
+                y = rect.top + rect.height / 2;
+            } else if (event && event.clientX) {
+                x = event.clientX;
+                y = event.clientY;
+            }
             const endRadius = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
 
             const transition = document.startViewTransition(doToggle);
@@ -68,16 +77,10 @@
         }
     </script>
 </head>
-<body class="bg-background dark:bg-[#0a0a0a] min-h-screen flex text-on-surface dark:text-[#EDEDEC] antialiased transition-colors duration-300" x-data="{ sidebarOpen: false }">
-    <!-- Mobile Sidebar Overlay -->
-    <div x-show="sidebarOpen" 
-         x-transition.opacity 
-         @click="sidebarOpen = false"
-         class="fixed inset-0 z-40 bg-black/50 md:hidden" style="display: none;"></div>
-
-    <!-- SideNavBar -->
-    <aside :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'" class="hidden md:flex w-[280px] h-screen fixed left-0 top-0 bg-surface dark:bg-[#111111] border-r border-outline-variant/20 dark:border-[#3E3E3A]/50 shadow-md flex-col py-6 px-4 gap-2 z-50 transition-transform duration-300 ease-in-out">
-        <div class="px-4 mb-8">
+<body class="bg-background dark:bg-[#0a0a0a] min-h-screen flex text-on-surface dark:text-[#EDEDEC] antialiased transition-colors duration-300" x-data="{ sidebarOpen: window.innerWidth >= 768 }">
+    <!-- SideNavBar (Desktop Only) -->
+    <aside :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full'" class="hidden md:flex w-[280px] h-screen fixed left-0 top-0 bg-surface dark:bg-[#111111] border-r border-outline-variant/20 dark:border-[#3E3E3A]/50 shadow-md flex-col py-6 px-4 gap-2 z-50 transition-all duration-300 ease-in-out">
+        <div class="px-4 mb-6 flex items-center justify-between">
             <a href="{{ url('/') }}" class="group block hover:opacity-90 transition-opacity">
                 <div class="flex items-center gap-2">
                     <img src="{{ asset('logobengkel.png') }}" alt="SIBENGKEL Logo" class="h-8 object-contain brightness-0 dark:invert">
@@ -85,16 +88,24 @@
                 </div>
                 <p class="text-sm text-on-surface-variant dark:text-gray-400 mt-1">Customer Portal</p>
             </a>
+            <button @click="sidebarOpen = false" class="md:hidden w-8 h-8 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container">
+                <span class="material-symbols-outlined">close</span>
+            </button>
         </div>
-        <nav class="flex-1 flex flex-col gap-2 overflow-y-auto pr-2 custom-scrollbar">
+        <nav class="flex-1 flex flex-col gap-1.5 overflow-y-auto pr-2 custom-scrollbar">
+            <!-- PORTAL PELANGGAN -->
+            <div class="text-[10px] font-bold tracking-wider text-secondary uppercase px-4 mt-2 mb-1">Portal Pelanggan</div>
             <a class="flex items-center gap-4 px-4 py-2 {{ request()->routeIs('public.dashboard') ? 'bg-secondary text-white font-semibold' : 'text-on-surface-variant dark:text-gray-400 hover:text-on-surface dark:hover:text-white hover:bg-surface-container dark:hover:bg-white/10 font-medium' }} rounded-lg transition-all duration-200 ease-in-out h-11" href="{{ route('public.dashboard') }}">
                 <span class="material-symbols-outlined {{ request()->routeIs('public.dashboard') ? 'icon-filled' : '' }}">dashboard</span>
                 <span>Dashboard</span>
             </a>
             <a class="flex items-center gap-4 px-4 py-2 {{ request()->routeIs('public.booking.*') ? 'bg-secondary text-white font-semibold' : 'text-on-surface-variant dark:text-gray-400 hover:text-on-surface dark:hover:text-white hover:bg-surface-container dark:hover:bg-white/10 font-medium' }} rounded-lg transition-all duration-200 ease-in-out h-11" href="{{ route('public.booking.form') }}">
                 <span class="material-symbols-outlined {{ request()->routeIs('public.booking.*') ? 'icon-filled' : '' }}">calendar_month</span>
-                <span>Booking</span>
+                <span>Booking Servis</span>
             </a>
+
+            <!-- KATALOG & BELANJA -->
+            <div class="text-[10px] font-bold tracking-wider text-secondary uppercase px-4 mt-4 mb-1">Katalog & Belanja</div>
             <a class="flex items-center gap-4 px-4 py-2 {{ request()->routeIs('public.sparepart.*') || request()->routeIs('public.cart') || request()->routeIs('public.checkout') || request()->routeIs('public.orders.*') ? 'bg-secondary text-white font-semibold' : 'text-on-surface-variant dark:text-gray-400 hover:text-on-surface dark:hover:text-white hover:bg-surface-container dark:hover:bg-white/10 font-medium' }} rounded-lg transition-all duration-200 ease-in-out h-11" href="{{ route('public.sparepart.index') }}">
                 <span class="material-symbols-outlined {{ request()->routeIs('public.sparepart.*') || request()->routeIs('public.cart') || request()->routeIs('public.checkout') || request()->routeIs('public.orders.*') ? 'icon-filled' : '' }}">settings_input_component</span>
                 <span>Katalog Sparepart</span>
@@ -105,10 +116,13 @@
     </aside>
 
     <!-- Main Content Area -->
-    <main class="flex-1 flex flex-col min-w-0 md:ml-[280px]">
+    <main :class="sidebarOpen ? 'md:ml-[280px]' : 'ml-0'" class="flex-1 flex flex-col min-w-0 transition-all duration-300 ease-in-out">
         <!-- TopNavBar (Identical to Dashboard) -->
         <header class="flex justify-between items-center px-4 md:px-8 w-full h-16 sticky top-0 z-40 bg-surface dark:bg-[#161615] border-b border-outline-variant dark:border-[#3E3E3A]">
             <div class="flex items-center gap-2">
+                <button @click="sidebarOpen = !sidebarOpen" class="hidden md:flex w-10 h-10 rounded-full items-center justify-center text-on-surface-variant dark:text-white hover:bg-surface-container-high dark:hover:bg-white/10 transition-colors mr-1" title="Toggle Sidebar">
+                    <span class="material-symbols-outlined">menu</span>
+                </button>
                 <a href="{{ url('/') }}" class="md:hidden flex items-center gap-2 hover:opacity-90 transition-opacity">
                     <img src="{{ asset('logobengkel.png') }}" alt="SIBENGKEL Logo" class="h-6 object-contain brightness-0 dark:invert">
                     <h2 class="text-xl font-sora font-bold text-primary dark:text-[#EDEDEC] tracking-tight">SIBENGKEL</h2>
@@ -254,24 +268,37 @@
     </div>
     @endif
 
-    <!-- BottomNavBar (Visible only on Mobile - Flex-1 Auto-Stretch to Fill Space) -->
-    <nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-between items-center bg-surface dark:bg-[#161615] px-2 pb-safe h-20 rounded-t-2xl border-t border-outline-variant dark:border-[#3E3E3A] shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)]">
-        <a class="flex flex-col items-center justify-center flex-1 min-w-[72px] text-center {{ request()->routeIs('public.dashboard') ? 'text-secondary font-bold' : 'text-on-surface-variant font-medium' }} h-full active:scale-90 rounded-lg px-1" href="{{ route('public.dashboard') }}">
-            <span class="material-symbols-outlined text-2xl mb-1" {{ request()->routeIs('public.dashboard') ? "data-weight=fill style=font-variation-settings:'FILL' 1;" : '' }}>dashboard</span>
-            <span class="text-xs">Dashboard</span>
-        </a>
-        <a class="flex flex-col items-center justify-center flex-1 min-w-[72px] text-center {{ request()->routeIs('public.booking.*') ? 'text-secondary font-bold' : 'text-on-surface-variant font-medium' }} h-full active:scale-90 rounded-lg px-1" href="{{ route('public.booking.form') }}">
-            <span class="material-symbols-outlined text-2xl mb-1" {{ request()->routeIs('public.booking.*') ? "data-weight=fill style=font-variation-settings:'FILL' 1;" : '' }}>calendar_month</span>
-            <span class="text-xs">Booking</span>
-        </a>
-        <a class="flex flex-col items-center justify-center flex-1 min-w-[72px] text-center {{ request()->routeIs('public.sparepart.*') || request()->routeIs('public.cart') || request()->routeIs('public.checkout') || request()->routeIs('public.orders.*') ? 'text-secondary font-bold' : 'text-on-surface-variant font-medium' }} h-full active:scale-90 rounded-lg px-1" href="{{ route('public.sparepart.index') }}">
-            <span class="material-symbols-outlined text-2xl mb-1" {{ request()->routeIs('public.sparepart.*') ? "data-weight=fill style=font-variation-settings:'FILL' 1;" : '' }}>settings_input_component</span>
-            <span class="text-xs">Sparepart</span>
-        </a>
-        <a class="flex flex-col items-center justify-center flex-1 min-w-[72px] text-center {{ request()->routeIs('public.profile') ? 'text-secondary font-bold' : 'text-on-surface-variant font-medium' }} h-full active:scale-90 rounded-lg px-1" href="{{ route('public.profile') }}">
-            <span class="material-symbols-outlined text-2xl mb-1" {{ request()->routeIs('public.profile') ? "data-weight=fill style=font-variation-settings:'FILL' 1;" : '' }}>account_circle</span>
-            <span class="text-xs">Profil</span>
-        </a>
+    <!-- BottomNavBar (Visible only on Mobile - Categorized Dock) -->
+    <nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex items-center justify-around bg-surface dark:bg-[#161615] px-2 pb-safe h-20 rounded-t-2xl border-t border-outline-variant dark:border-[#3E3E3A] shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] gap-1">
+        <!-- KATEGORI: PORTAL -->
+        <div class="flex flex-col items-center justify-center flex-1 h-full py-1 border-r border-outline-variant/30 pr-1">
+            <span class="text-[8px] font-bold text-secondary uppercase tracking-widest mb-0.5">Portal</span>
+            <div class="flex items-center justify-around w-full">
+                <a class="flex flex-col items-center justify-center flex-1 text-center {{ request()->routeIs('public.dashboard') ? 'text-secondary font-bold' : 'text-on-surface-variant font-medium' }} py-1 active:scale-90 rounded-lg" href="{{ route('public.dashboard') }}">
+                    <span class="material-symbols-outlined text-xl mb-0.5" {{ request()->routeIs('public.dashboard') ? "data-weight=fill style=font-variation-settings:'FILL' 1;" : '' }}>dashboard</span>
+                    <span class="text-[10px]">Dashboard</span>
+                </a>
+                <a class="flex flex-col items-center justify-center flex-1 text-center {{ request()->routeIs('public.booking.*') ? 'text-secondary font-bold' : 'text-on-surface-variant font-medium' }} py-1 active:scale-90 rounded-lg" href="{{ route('public.booking.form') }}">
+                    <span class="material-symbols-outlined text-xl mb-0.5" {{ request()->routeIs('public.booking.*') ? "data-weight=fill style=font-variation-settings:'FILL' 1;" : '' }}>calendar_month</span>
+                    <span class="text-[10px]">Booking</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- KATEGORI: BELANJA & AKUN -->
+        <div class="flex flex-col items-center justify-center flex-1 h-full py-1 pl-1">
+            <span class="text-[8px] font-bold text-secondary uppercase tracking-widest mb-0.5">Belanja & Akun</span>
+            <div class="flex items-center justify-around w-full">
+                <a class="flex flex-col items-center justify-center flex-1 text-center {{ request()->routeIs('public.sparepart.*') || request()->routeIs('public.cart') || request()->routeIs('public.checkout') || request()->routeIs('public.orders.*') ? 'text-secondary font-bold' : 'text-on-surface-variant font-medium' }} py-1 active:scale-90 rounded-lg" href="{{ route('public.sparepart.index') }}">
+                    <span class="material-symbols-outlined text-xl mb-0.5" {{ request()->routeIs('public.sparepart.*') ? "data-weight=fill style=font-variation-settings:'FILL' 1;" : '' }}>settings_input_component</span>
+                    <span class="text-[10px]">Sparepart</span>
+                </a>
+                <a class="flex flex-col items-center justify-center flex-1 text-center {{ request()->routeIs('public.profile') ? 'text-secondary font-bold' : 'text-on-surface-variant font-medium' }} py-1 active:scale-90 rounded-lg" href="{{ route('public.profile') }}">
+                    <span class="material-symbols-outlined text-xl mb-0.5" {{ request()->routeIs('public.profile') ? "data-weight=fill style=font-variation-settings:'FILL' 1;" : '' }}>account_circle</span>
+                    <span class="text-[10px]">Profil</span>
+                </a>
+            </div>
+        </div>
     </nav>
 
 <script>

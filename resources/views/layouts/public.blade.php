@@ -71,8 +71,17 @@
                 return;
             }
 
-            const x = event.clientX ?? innerWidth / 2;
-            const y = event.clientY ?? innerHeight / 2;
+            let x = innerWidth / 2;
+            let y = innerHeight / 2;
+            if (event && (event.currentTarget || event.target)) {
+                const target = event.currentTarget || event.target;
+                const rect = target.getBoundingClientRect();
+                x = rect.left + rect.width / 2;
+                y = rect.top + rect.height / 2;
+            } else if (event && event.clientX) {
+                x = event.clientX;
+                y = event.clientY;
+            }
             const endRadius = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
 
             const transition = document.startViewTransition(doToggle);

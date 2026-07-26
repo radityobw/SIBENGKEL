@@ -666,7 +666,7 @@
             <div id="testimonial-scroll" class="flex overflow-x-auto gap-6 px-margin-mobile md:px-margin-desktop pb-8 pt-4 no-scrollbar w-full">
                 <!-- Set 1 -->
                 @foreach($testimonials as $testimonial)
-                <div class="highlighter-item bg-white/70 dark:bg-[#161615]/70 backdrop-blur-md p-8 rounded-3xl shadow-sm hover:shadow-md border border-outline-variant/30 dark:border-white/5 relative flex flex-col shrink-0 w-[85vw] sm:w-[400px] transition-shadow" style="border-radius: 1.5rem;">
+                <div class="highlighter-item bg-white/70 dark:bg-[#161615]/70 backdrop-blur-md p-8 rounded-3xl shadow-sm hover:shadow-xl hover:scale-105 hover:z-10 border border-outline-variant/30 dark:border-white/5 relative flex flex-col shrink-0 w-[85vw] sm:w-[400px] transition-all duration-300" style="border-radius: 1.5rem;">
                     <span class="material-symbols-outlined absolute top-6 right-6 text-5xl text-outline-variant/30 dark:text-outline-variant/10">format_quote</span>
                     <div class="flex gap-1 text-secondary mb-6">
                         @for($i = 0; $i < 5; $i++)
@@ -694,7 +694,7 @@
 
                 <!-- Set 2 (for seamless infinite loop) -->
                 @foreach($testimonials as $testimonial)
-                <div class="highlighter-item bg-surface dark:bg-[#161615] p-8 rounded-3xl shadow-sm hover:shadow-md border border-outline-variant dark:border-[#3E3E3A] relative flex flex-col shrink-0 w-[85vw] sm:w-[400px] transition-shadow" aria-hidden="true" style="border-radius: 1.5rem;">
+                <div class="highlighter-item bg-surface dark:bg-[#161615] p-8 rounded-3xl shadow-sm hover:shadow-xl hover:scale-105 hover:z-10 border border-outline-variant dark:border-[#3E3E3A] relative flex flex-col shrink-0 w-[85vw] sm:w-[400px] transition-all duration-300" aria-hidden="true" style="border-radius: 1.5rem;">
                     <span class="material-symbols-outlined absolute top-6 right-6 text-5xl text-outline-variant/30 dark:text-outline-variant/10">format_quote</span>
                     <div class="flex gap-1 text-secondary mb-6">
                         @for($i = 0; $i < 5; $i++)
