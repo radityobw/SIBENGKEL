@@ -183,6 +183,7 @@ Dokumen teknis, arsitektur, dan panduan presentasi tersedia di folder `docs/`:
 | 4 | **Panduan Presentasi** | [`docs/penjelasan.md`](docs/penjelasan.md) | Penjelasan teknis komprehensif untuk sidang/presentasi |
 | 5 | **Blackbox Test Suite**| [`docs/blackbox.md`](docs/blackbox.md) | 137 test cases terverifikasi di 18 modul |
 | 6 | **Execution Playbook**| [`docs/guidebook.md`](docs/guidebook.md) | Guidebook pelaksanaan & pengerjaan 1.700+ baris |
+| 7 | **Direct Database Queries** | [`docs/query.md`](docs/query.md) | Panduan query SQL, DDL, DML, DQL Join 5 Tabel & Tinker |
 
 ---
 
