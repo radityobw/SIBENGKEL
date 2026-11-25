@@ -41,13 +41,13 @@ Selain itu, pastikan:
 
 ---
 
-## 4. Prosedur Rilis (`release.yml`)
+## 4. Prosedur Rilis & *Container Package* (`release.yml`)
 
 1. Pastikan PR dari `dev` ke `main` sudah di-*merge* dan CI pada `main` hijau.
-2. Buat *tag* beranotasi `vX.Y.Z` pada `main` dan publikasikan *GitHub Release*:
+2. Buat *tag* beranotasi `vX.Y.Z` pada `main` lalu *push*:
    ```bash
    git checkout main && git pull origin main
    git tag -a vX.Y.Z -m "Release vX.Y.Z: <ringkasan>"
    git push origin vX.Y.Z
    ```
-3. Publikasi *GitHub Release* memicu `.github/workflows/release.yml`, yang menjalankan `php artisan test`, membangun `sibengkel-X.Y.Z.tar.gz` beserta `SHA256SUMS.txt`, dan mengunggah aset rilis otomatis.
+3. *Push tag* `v*` (atau publikasi *GitHub Release*) otomatis memicu `.github/workflows/release.yml`, yang menjalankan `php artisan test`, membuat *GitHub Release* (apabila belum ada), mengunggah `sibengkel-X.Y.Z.tar.gz` + `SHA256SUMS.txt`, serta membangun dan mendorong *container image* ke `ghcr.io/radityobw/sibengkel:latest` dan `:X.Y.Z`.

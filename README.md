@@ -114,6 +114,14 @@ php artisan serve
 
 Akses aplikasi melalui peramban di `http://127.0.0.1:8000`.
 
+### Menjalankan via *Container* (`ghcr.io`)
+
+```bash
+docker run --rm -p 8080:80 ghcr.io/radityobw/sibengkel:latest
+```
+
+Akses aplikasi melalui peramban di `http://127.0.0.1:8080` (menggunakan SQLite otomatis secara bawaan, atau kirim variabel lingkungan `DB_*` untuk MySQL/MariaDB).
+
 ---
 
 ## 🔑 Kredensial Akun Pengujian (*Seeder Default*)
@@ -254,6 +262,9 @@ php artisan storage:link
 npm run build
 php artisan test
 php artisan serve
+
+# Or run directly via GitHub Container Registry (ghcr.io)
+docker run --rm -p 8080:80 ghcr.io/radityobw/sibengkel:latest
 ```
 
 ## 📄 License
