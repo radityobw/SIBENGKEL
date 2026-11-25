@@ -134,14 +134,22 @@ def build_site(out_dir: Path) -> None:
     (out_dir / "index.html").write_text(html_out, encoding="utf-8")
     (out_dir / "sitemap.xml").write_text(sitemap_out, encoding="utf-8")
 
-    for fname in (".nojekyll", "robots.txt", "sitemap.txt"):
+    for fname in (
+        ".nojekyll",
+        "robots.txt",
+        "sitemap.txt",
+        "og-banner.png",
+        "favicon.ico",
+        "favicon-48x48.png",
+        "favicon-192x192.png",
+        "apple-touch-icon.png",
+    ):
         src = PAGES_DIR / fname
         if src.is_file():
             shutil.copy2(src, out_dir / fname)
 
     for rel_src, dst_name in (
         ("public/logobengkel.png", "logobengkel.png"),
-        ("public/favicon.ico", "favicon.ico"),
     ):
         src = REPO_ROOT / rel_src
         if src.is_file():
