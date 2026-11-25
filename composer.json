@@ -1,10 +1,29 @@
 {
     "$schema": "https://getcomposer.org/schema.json",
-    "name": "laravel/laravel",
+    "name": "radityobw/sibengkel",
     "type": "project",
-    "description": "The skeleton application for the Laravel framework.",
-    "keywords": ["laravel", "framework"],
+    "description": "SIBENGKEL (Sistem Informasi Bengkel): integrated Laravel 13 workshop operations, online booking, sparepart e-commerce, customer portal, and Sanctum REST API.",
+    "keywords": ["laravel", "sibengkel", "workshop", "automotive", "booking", "ecommerce", "sanctum", "rest-api"],
+    "homepage": "https://radityobw.github.io/SIBENGKEL/",
     "license": "MIT",
+    "support": {
+        "issues": "https://github.com/radityobw/SIBENGKEL/issues",
+        "source": "https://github.com/radityobw/SIBENGKEL"
+    },
+    "authors": [
+        {
+            "name": "Radityo Budi Waskito",
+            "role": "Lead Developer & Software Architect"
+        },
+        {
+            "name": "Zayyan Fadhlur Rahman",
+            "role": "Frontend & UI/UX Engineer"
+        },
+        {
+            "name": "Raditya Ahmad Pratama",
+            "role": "Backend & Database Engineer"
+        }
+    ],
     "require": {
         "php": "^8.3",
         "laravel/breeze": "^2.4",
