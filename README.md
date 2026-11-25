@@ -36,7 +36,7 @@
 - ***E-Commerce Sparepart***: Toko *online* terintegrasi dengan keranjang belanja persisten (`cart_data`), manajemen stok produk, dan *checkout* pesanan daring.
 - **Cek Status Servis Publik (`/cek-status`)**: Pelanggan dapat memantau progres perbaikan kendaraan secara *real-time* menggunakan nomor polisi atau nomor telepon tanpa perlu *login*.
 - ***Dual-Guard Authentication* & RBAC**: Autentikasi terpisah (`web` untuk staf internal di `/login`, `customer` untuk pelanggan di `/masuk`) serta kontrol akses berbasis peran (RBAC).
-- ***Pipeline* DevSecOps Otomatis**: *Workflow* GitHub Actions mencakup Gitleaks, Trivy, **SIDIK** SAST/SCA, validasi dan audit `Composer`, pengujian PHPUnit lintas PHP 8.3 & 8.4, serta *deployment* SSH ke peladen LEMP.
+- ***Pipeline* DevSecOps Otomatis**: *Workflow* GitHub Actions mencakup Gitleaks, Trivy, **SIDIK** SAST/SCA, validasi dan audit `Composer`, pengujian PHPUnit lintas PHP 8.3 & 8.4, serta pengemasan rilis & *container* `ghcr.io`.
 
 ---
 
@@ -52,7 +52,7 @@
 | **Interaktivitas** | **Alpine.js** & **Vanilla JS** | Komponen dinamis, notifikasi, mode gelap via *View Transition API* |
 | **Autentikasi** | **Laravel Breeze** & **Sanctum** | Autentikasi sesi *web* dan *Bearer Token* API |
 | **API** | **RESTful API** | Respons standar JSON untuk integrasi sistem eksternal |
-| **DevSecOps** | **GitHub Actions + SIDIK** | Gitleaks, Trivy, SIDIK SAST/SCA, `composer audit`, PHPUnit, SSH *deploy* |
+| **DevSecOps** | **GitHub Actions + SIDIK** | Gitleaks, Trivy, SIDIK SAST/SCA, `composer audit`, PHPUnit, & `ghcr.io` |
 
 ---
 
