@@ -197,7 +197,7 @@ class CustomerAuthPortalController extends Controller
             'email.exists' => 'Alamat email ini tidak terdaftar dalam sistem SIBENGKEL.',
         ]);
 
-        $otp = (string) rand(100000, 999999);
+        $otp = (string) random_int(100000, 999999);
         session([
             'reset_email' => $request->email,
             'reset_otp' => $otp,
@@ -247,16 +247,20 @@ class CustomerAuthPortalController extends Controller
             return redirect()->route('public.forgot_password')->withErrors(['email' => 'Sesi verifikasi telah kadaluarsa. Silakan ajukan ulang kode OTP.']);
         }
 
-        if ($request->otp !== $sessionOtp) {
+        if (!hash_equals((string) $sessionOtp, (string) $request->otp)) {
             return redirect()->back()->withErrors(['otp' => 'Kode OTP yang Anda masukkan salah. Silakan periksa kembali.']);
         }
 
         $customer = Customer::where('email', $sessionEmail)->first();
+        if (!$customer) {
+            return redirect()->route('public.forgot_password')->withErrors(['email' => 'Akun pelanggan tidak ditemukan.']);
+        }
+
         $customer->password = Hash::make($request->password);
         $customer->save();
 
         // Clear session reset
-        session()->forget(['reset_phone', 'reset_otp', 'reset_otp_expires']);
+        session()->forget(['reset_email', 'reset_otp', 'reset_otp_expires']);
 
         return redirect()->route('public.login')->with('success', 'Verifikasi berhasil! Password akun Anda telah diperbarui. Silakan masuk dengan password baru.');
     }

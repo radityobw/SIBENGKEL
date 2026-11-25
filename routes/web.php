@@ -62,9 +62,13 @@ Route::middleware('guest:customer')->group(function () {
     Route::get('/daftar', [CustomerAuthPortalController::class, 'showRegisterForm'])->name('public.register');
     Route::post('/daftar', [CustomerAuthPortalController::class, 'register'])->name('public.register.submit');
     Route::get('/lupa-password', [CustomerAuthPortalController::class, 'showForgotPasswordForm'])->name('public.forgot_password');
-    Route::post('/lupa-password/send-otp', [CustomerAuthPortalController::class, 'sendResetOtp'])->name('public.forgot_password.send_otp');
+    Route::post('/lupa-password/send-otp', [CustomerAuthPortalController::class, 'sendResetOtp'])
+        ->middleware('throttle:5,1')
+        ->name('public.forgot_password.send_otp');
     Route::get('/lupa-password/verifikasi', [CustomerAuthPortalController::class, 'showVerifyOtpForm'])->name('public.forgot_password.verify');
-    Route::post('/lupa-password/reset', [CustomerAuthPortalController::class, 'resetPasswordWithOtp'])->name('public.forgot_password.reset');
+    Route::post('/lupa-password/reset', [CustomerAuthPortalController::class, 'resetPasswordWithOtp'])
+        ->middleware('throttle:5,1')
+        ->name('public.forgot_password.reset');
 });
 
 // Portal Pelanggan (Authenticated)

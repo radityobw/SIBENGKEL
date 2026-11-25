@@ -8,7 +8,7 @@ use App\Http\Controllers\Api\ServiceApiController;
 use App\Http\Controllers\Api\VehicleApiController;
 
 // Public Endpoint
-Route::post('/login', [AuthApiController::class, 'login']);
+Route::post('/login', [AuthApiController::class, 'login'])->middleware('throttle:10,1');
 
 // API Endpoint untuk AJAX Polling Status Servis (Real-time tanpa reload)
 Route::get('transactions/{id}/status', function ($id) {

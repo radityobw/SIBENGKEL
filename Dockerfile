@@ -12,6 +12,9 @@ RUN npm run build
 # Stage 2: Production PHP 8.3 Apache runtime
 FROM php:8.3-apache
 
+ENV APP_ENV=production \
+    APP_DEBUG=false
+
 LABEL org.opencontainers.image.source="https://github.com/radityobw/SIBENGKEL" \
       org.opencontainers.image.title="SIBENGKEL" \
       org.opencontainers.image.description="Sistem Informasi Bengkel Terpadu (Laravel 13, PHP 8.3, Sanctum REST API)" \
