@@ -1,0 +1,25 @@
+cff-version: 1.2.0
+message: "If you use SIBENGKEL in academic projects or software engineering references, please cite it using the metadata below."
+title: "SIBENGKEL: Sistem Informasi Bengkel Terpadu (Laravel 13 Workshop Operations, Booking, Sparepart E-Commerce & Sanctum API)"
+type: software
+version: "1.1.0"
+date-released: "2026-11-25"
+license: MIT
+repository-code: "https://github.com/radityobw/SIBENGKEL"
+url: "https://radityobw.github.io/SIBENGKEL/"
+authors:
+  - family-names: "Waskito"
+    given-names: "Radityo Budi"
+  - family-names: "Rahman"
+    given-names: "Zayyan Fadhlur"
+  - family-names: "Pratama"
+    given-names: "Raditya Ahmad"
+keywords:
+  - laravel
+  - php
+  - workshop-management
+  - automotive-service
+  - booking-system
+  - ecommerce
+  - sanctum-api
+  - devsecops

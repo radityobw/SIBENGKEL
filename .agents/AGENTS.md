@@ -15,3 +15,7 @@ Before executing any implementation, code modification, database migration, UI b
 
 ## UI / BRANDING RULES
 1. **Logo Standardization**: ALL AI agents MUST use the official image logo referenced at `public/logobengkel.png` (using `asset('logobengkel.png')` in Blade) for any UI components that require a brand logo. DO NOT use material icons (e.g., `build`) as a replacement for the logo. However, since the image `logobengkel.png` contains ONLY the visual logo mark and no text, you MUST KEEP the "SIBENGKEL" typography text next to the image logo in headers, auth screens, or invoices.
+
+## GOVERNANCE & RELEASE RULES
+* Follow [`.agents/rules/AGENTS.md`](rules/AGENTS.md) for punctuation (no em-dash `\u2014`), Indonesian prose italics rules, and mandatory pre-flight verification gates.
+* Follow [`.agents/rules/RELEASE_PLAYBOOK.md`](rules/RELEASE_PLAYBOOK.md) for `dev` -> `main` branching, SSOT version bumps (`VERSION`, `CHANGELOG.md`, `CITATION.cff`), and release automation.
