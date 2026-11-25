@@ -1,0 +1,8 @@
+# Ignore dependencies, generated assets, and third-party design mockups
+vendor/
+node_modules/
+public/build/
+storage/
+docs/stitch/
+_site/
+build-release/
