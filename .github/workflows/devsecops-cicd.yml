@@ -124,7 +124,7 @@ jobs:
   staging-deployment:
     name: Staging CD Deployment to VPS
     needs: automated-testing
-    if: github.event_name == 'push' && github.ref == 'refs/heads/dev'
+    if: github.event_name == 'push' && github.ref == 'refs/heads/dev' && vars.ENABLE_STAGING_DEPLOY == 'true'
     environment: staging
     runs-on: ubuntu-latest
 
@@ -154,7 +154,7 @@ jobs:
   production-deployment:
     name: Production CD Deployment to VPS
     needs: automated-testing
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main' && vars.ENABLE_PROD_DEPLOY == 'true'
     environment: production
     runs-on: ubuntu-latest
 

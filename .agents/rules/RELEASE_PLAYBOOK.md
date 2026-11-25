@@ -8,8 +8,8 @@ Dokumen ini menjadi pedoman wajib bagi pengembang dan *AI agent* setiap kali mem
 
 * Pengembangan dan integrasi perubahan dilakukan pada *branch* **`dev`**.
 * Penggabungan ke *branch* **`main`** dilakukan melalui *Pull Request* setelah seluruh gerbang CI pada `dev` lolos.
-* *Push* ke `dev` otomatis memicu *workflow* `.github/workflows/devsecops-cicd.yml` (audit keamanan, PHPUnit PHP `8.3` & `8.4`, serta *staging deployment* apabila tersedia).
-* *Push* ke `main` memicu *production deployment* serta *workflow* `.github/workflows/pages.yml` apabila terdapat pembaruan pada `docs/pages/`, `CHANGELOG.md`, atau `VERSION`.
+* *Push* ke `dev` otomatis memicu *workflow* `.github/workflows/devsecops-cicd.yml` (audit keamanan, PHPUnit PHP `8.3` & `8.4`, serta *staging deployment* opsional apabila variabel repositori `ENABLE_STAGING_DEPLOY` bernilai `true`).
+* *Push* ke `main` memicu *production deployment* (opsional apabila `ENABLE_PROD_DEPLOY` bernilai `true`, karena VPS lama sudah tidak aktif) serta *workflow* `.github/workflows/pages.yml` apabila terdapat pembaruan pada `docs/pages/`, `CHANGELOG.md`, atau `VERSION`.
 
 ---
 

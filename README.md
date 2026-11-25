@@ -112,7 +112,7 @@ npm run build
 php artisan serve
 ```
 
-Akses aplikasi melalui peramban di `http://127.0.0.1:8000` (atau kunjungi situs produksi di [sibengkel.web.id](https://sibengkel.web.id)).
+Akses aplikasi melalui peramban di `http://127.0.0.1:8000`.
 
 ---
 
