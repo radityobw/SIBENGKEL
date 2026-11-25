@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SIBENGKEL - Sistem Informasi Bengkel Terpadu</title>
+  <meta name="description" content="SIBENGKEL (Sistem Informasi Bengkel) adalah platform Laravel 13 terpadu untuk manajemen servis otomotif, booking daring, e-commerce sparepart, portal pelanggan, dan REST API Sanctum." />
+  <meta name="keywords" content="SIBENGKEL, Sistem Informasi Bengkel, Laravel 13, PHP 8.3, Sanctum API, Booking Servis, E-Commerce Sparepart, DevSecOps" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://radityobw.github.io/SIBENGKEL/" />
+  <link rel="icon" href="favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700&display=swap" rel="stylesheet" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="SIBENGKEL" />
+  <meta property="og:title" content="SIBENGKEL - Sistem Informasi Bengkel Terpadu" />
+  <meta property="og:description" content="Platform web Laravel 13 untuk operasional bengkel otomotif, cek status servis real-time, booking daring, toko sparepart, dan RESTful API Sanctum." />
+  <meta property="og:url" content="https://radityobw.github.io/SIBENGKEL/" />
+  <meta property="og:image" content="https://radityobw.github.io/SIBENGKEL/logobengkel.png" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "name": "SIBENGKEL",
+        "alternateName": "Sistem Informasi Bengkel",
+        "url": "https://radityobw.github.io/SIBENGKEL/"
+      },
+      {
+        "@type": ["SoftwareApplication", "SoftwareSourceCode"],
+        "name": "SIBENGKEL - Sistem Informasi Bengkel",
+        "description": "Platform web terpadu berbasis Laravel 13 untuk manajemen operasional bengkel, booking servis daring, e-commerce sparepart, portal pelanggan, dan REST API Sanctum.",
+        "softwareVersion": "1.1.0",
+        "operatingSystem": "Linux, Windows, macOS",
+        "applicationCategory": "BusinessApplication",
+        "programmingLanguage": ["PHP", "JavaScript", "Blade", "SQL"],
+        "license": "https://opensource.org/licenses/MIT",
+        "url": "https://radityobw.github.io/SIBENGKEL/",
+        "codeRepository": "https://github.com/radityobw/SIBENGKEL",
+        "image": "https://radityobw.github.io/SIBENGKEL/logobengkel.png",
+        "sameAs": [
+          "https://github.com/radityobw/SIBENGKEL",
+          "https://sibengkel.web.id"
+        ],
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "IDR"
+        }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --bg-card: #161615;
+      --bg-soft: #1f1f1d;
+      --border: #2e2e2b;
+      --text: #ededec;
+      --muted: #a8a8a3;
+      --accent: #ff6b00;
+      --accent-soft: #ff8f42;
+      --green: #22c55e;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: radial-gradient(circle at top right, rgba(255, 107, 0, 0.14) 0%, var(--bg) 46%);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    h1, h2, h3, .brand-font {
+      font-family: "Sora", "Inter", sans-serif;
+    }
+    a { color: var(--accent-soft); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .wrap { max-width: 1080px; margin: 0 auto; padding: 36px 20px 64px; }
+    .hero {
+      background: linear-gradient(145deg, #111110 0%, #191816 100%);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 36px 32px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 28px;
+      align-items: center;
+      box-shadow: 0 22px 48px rgba(0, 0, 0, 0.6);
+    }
+    @media (max-width: 780px) {
+      .hero { grid-template-columns: 1fr; text-align: center; }
+      .cta-row, .pill-row, .badge-row { justify-content: center; }
+    }
+    .eyebrow {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent-soft);
+      background: rgba(255, 107, 0, 0.14);
+      border: 1px solid rgba(255, 107, 0, 0.4);
+      border-radius: 999px;
+      padding: 4px 12px;
+      margin-bottom: 12px;
+    }
+    h1 { margin: 0 0 10px; font-size: clamp(28px, 4vw, 40px); line-height: 1.15; color: #ffffff; }
+    .lead { margin: 0 0 18px; color: #d4d4d0; font-size: 16.5px; max-width: 720px; }
+    .pill-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+    .pill {
+      font-size: 13px;
+      font-weight: 600;
+      background: var(--bg-soft);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 5px 12px;
+      border-radius: 999px;
+    }
+    .badge-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+    .cta-row { display: flex; flex-wrap: wrap; gap: 10px; }
+    .btn {
+      display: inline-block;
+      padding: 10px 18px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 14px;
+      border: 1px solid #3e3e3a;
+      color: var(--text);
+      background: #1f1f1d;
+    }
+    .btn.primary {
+      background: linear-gradient(135deg, var(--accent) 0%, #e05a00 100%);
+      border-color: var(--accent-soft);
+      color: #ffffff;
+    }
+    .btn:hover { text-decoration: none; filter: brightness(1.08); }
+    .logo-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      background: #111110;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+    }
+    .logo-box img { width: 128px; max-width: 100%; height: auto; }
+    .logo-caption { font-family: "Sora", sans-serif; font-weight: 700; letter-spacing: 0.08em; font-size: 14px; color: #ffffff; }
+    section { margin-top: 38px; }
+    h2 {
+      font-size: 22px;
+      color: #ffffff;
+      margin: 0 0 14px;
+      border-left: 4px solid var(--accent);
+      padding-left: 12px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 14px;
+    }
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 18px;
+    }
+    .card h3 { margin: 0 0 6px; font-size: 16px; color: var(--accent-soft); }
+    .card p { margin: 0; font-size: 14px; color: var(--muted); }
+    pre {
+      background: #050505;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 18px;
+      overflow-x: auto;
+      font-size: 13.5px;
+      color: #ededec;
+      margin: 0;
+    }
+    code { font-family: "Cascadia Code", Consolas, "Courier New", monospace; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      font-size: 14px;
+    }
+    th, td { padding: 11px 14px; text-align: left; border-bottom: 1px solid var(--border); }
+    th { background: #1f1f1d; color: #ffdcc3; font-weight: 700; }
+    tr:last-child td { border-bottom: none; }
+    .tag-pill {
+      display: inline-block;
+      font-weight: 700;
+      font-size: 12px;
+      padding: 2px 8px;
+      border-radius: 6px;
+      background: rgba(255, 107, 0, 0.14);
+      color: var(--accent-soft);
+      border: 1px solid rgba(255, 107, 0, 0.35);
+    }
+    .release-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 14px;
+    }
+    .release-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 18px 20px;
+    }
+    .release-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .release-tag {
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--accent-soft);
+      background: rgba(255, 107, 0, 0.14);
+      border: 1px solid rgba(255, 107, 0, 0.35);
+      padding: 2px 10px;
+      border-radius: 999px;
+    }
+    .release-date { font-size: 12.5px; color: var(--muted); }
+    .release-card ul { margin: 0; padding-left: 18px; color: var(--muted); font-size: 13.5px; }
+    .release-card li { margin-bottom: 6px; }
+    footer {
+      margin-top: 48px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 13px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="hero">
+      <div>
+        <span class="eyebrow">v1.1.0 | Monochrome Industrial Edition | MIT License</span>
+        <h1>SIBENGKEL: Sistem Informasi Bengkel Terpadu</h1>
+        <p class="lead">
+          Platform web berbasis <strong>Laravel 13</strong> dan <strong>PHP 8.3+</strong> untuk mendigitalisasi operasional bengkel otomotif: manajemen transaksi servis, <em>booking</em> daring, <em>e-commerce sparepart</em>, portal pelanggan, pelacakan status publik, dan RESTful API Sanctum.
+        </p>
+        <div class="pill-row">
+          <span class="pill">Laravel 13 &amp; PHP 8.3+</span>
+          <span class="pill">Dual-Guard Auth &amp; 3-Level RBAC</span>
+          <span class="pill">Sanctum RESTful API</span>
+          <span class="pill">137 Blackbox Test Cases</span>
+          <span class="pill">DevSecOps + SIDIK SAST/SCA</span>
+        </div>
+        <div class="badge-row">
+          <a href="https://github.com/radityobw/SIBENGKEL/releases/latest"><img src="https://img.shields.io/github/v/release/radityobw/SIBENGKEL?label=Release&color=FF6B00&cacheSeconds=3600" alt="GitHub Release" /></a>
+          <a href="https://github.com/radityobw/SIBENGKEL/actions/workflows/devsecops-cicd.yml"><img src="https://img.shields.io/github/actions/workflow/status/radityobw/SIBENGKEL/devsecops-cicd.yml?label=CI&color=22c55e" alt="CI Status" /></a>
+          <a href="https://github.com/radityobw/SIBENGKEL/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-MIT-a855f7.svg" alt="MIT License" /></a>
+        </div>
+        <div class="cta-row">
+          <a class="btn primary" href="https://github.com/radityobw/SIBENGKEL">GitHub Repository</a>
+          <a class="btn" href="https://sibengkel.web.id">Live Portal (sibengkel.web.id)</a>
+          <a class="btn" href="https://github.com/radityobw/SIBENGKEL/blob/main/docs/PRD_Sistem_Informasi_Bengkel.md">PRD &amp; API Spec</a>
+          <a class="btn" href="https://github.com/radityobw/SIBENGKEL/blob/main/docs/blackbox.md">Blackbox QA Report</a>
+        </div>
+      </div>
+      <div class="logo-box">
+        <img src="logobengkel.png" alt="Logo SIBENGKEL" width="128" height="128" />
+        <span class="logo-caption">SIBENGKEL</span>
+      </div>
+    </header>
+
+    <section>
+      <h2>Kapabilitas Utama</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>Operasional Servis &amp; Nota PDF</h3>
+          <p>Pelacakan progres pengerjaan (<code>pending</code>, <code>proses</code>, <code>selesai</code>), penugasan mekanik, analitik pendapatan 7 hari, dan cetak nota servis.</p>
+        </div>
+        <div class="card">
+          <h3>Portal Pelanggan &amp; Booking Daring</h3>
+          <p>Autentikasi terpisah pada guard <code>customer</code> di <code>/masuk</code> dan <code>/portal</code>, pengajuan jadwal servis, konversi otomatis ke transaksi, dan reset OTP.</p>
+        </div>
+        <div class="card">
+          <h3>E-Commerce Sparepart &amp; Cek Status</h3>
+          <p>Katalog <code>/sparepart</code> dengan keranjang persisten (<code>cart_data</code>), <em>checkout</em> dengan pengurangan stok, serta pelacakan publik <code>/cek-status</code> tanpa login.</p>
+        </div>
+        <div class="card">
+          <h3>Sanctum REST API &amp; DevSecOps</h3>
+          <p>Endpoint JSON terautentikasi Bearer Token serta <em>pipeline</em> CI/CD otomatis (Gitleaks, Trivy, SIDIK SAST/SCA, Composer Audit, PHPUnit PHP 8.3 &amp; 8.4).</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Arsitektur &amp; Tumpukan Teknologi</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Lapisan</th>
+            <th>Teknologi</th>
+            <th>Cakupan</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="tag-pill">Backend</span></td>
+            <td><strong>Laravel 13 &amp; PHP 8.3+</strong></td>
+            <td>25 migrasi database, 13 Eloquent Model, 35 Controller, Dual-Guard &amp; RBAC</td>
+          </tr>
+          <tr>
+            <td><span class="tag-pill">Frontend</span></td>
+            <td><strong>Tailwind CSS 3 &amp; Alpine.js</strong></td>
+            <td>78 Blade views, tema Monochrome Industrial &amp; Workshop Orange, View Transition API</td>
+          </tr>
+          <tr>
+            <td><span class="tag-pill">API &amp; Auth</span></td>
+            <td><strong>Laravel Breeze &amp; Sanctum</strong></td>
+            <td>Session auth staff/pelanggan, OTP reset password, REST API Bearer Token</td>
+          </tr>
+          <tr>
+            <td><span class="tag-pill">QA &amp; DevSecOps</span></td>
+            <td><strong>PHPUnit, SIDIK, Gitleaks, Trivy</strong></td>
+            <td>Automated unit &amp; feature tests, 137 blackbox test cases, LEMP SSH deploy</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Quick Start (Lokal)</h2>
+      <pre><code>git clone https://github.com/radityobw/SIBENGKEL.git
+cd SIBENGKEL
+composer install
+npm ci
+cp .env.example .env
+php artisan key:generate
+php artisan migrate --seed
+php artisan storage:link
+npm run build
+php artisan test
+php artisan serve</code></pre>
+    </section>
+
+    <section>
+      <h2>Tim Pengembang</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>Radityo Budi Waskito</h3>
+          <p>Lead Developer &amp; Software Architect (Fullstack Architecture, Multi-Guard Auth, Sanctum API, DevSecOps &amp; Deployment).</p>
+        </div>
+        <div class="card">
+          <h3>Zayyan Fadhlur Rahman</h3>
+          <p>Frontend &amp; UI/UX Engineer (Blade Templating, Mobile-First Design, Dark Mode System, Component Styling &amp; Animations).</p>
+        </div>
+        <div class="card">
+          <h3>Raditya Ahmad Pratama</h3>
+          <p>Backend &amp; Database Engineer (Eloquent Data Layer, Database Migrations, Input Validation &amp; System Testing).</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Rilis Terbaru (Tersinkron Otomatis dari CHANGELOG.md)</h2>
+      <div class="release-grid">
+        <!-- AUTO_CHANGELOG_START -->
+        <article class="release-card">
+          <div class="release-head">
+            <span class="release-tag">v1.1.0</span>
+            <span class="release-date">2026-11-25</span>
+          </div>
+          <ul>
+            <li>Pematangan tata kelola repositori, pengujian otomatis PHPUnit, penambalan dependensi, dan publikasi GitHub Pages.</li>
+          </ul>
+        </article>
+        <!-- AUTO_CHANGELOG_END -->
+      </div>
+    </section>
+
+    <footer>
+      <span>SIBENGKEL - Sistem Informasi Bengkel - MIT License - <!-- AUTO_UPDATED_START -->Updated 2026-11-25<!-- AUTO_UPDATED_END --></span>
+      <span><a href="https://github.com/radityobw/SIBENGKEL">GitHub</a> | <a href="https://sibengkel.web.id">Live App</a> | <a href="https://github.com/radityobw/SIBENGKEL/releases">Releases</a> | <a href="https://github.com/radityobw/SIBENGKEL/blob/main/CHANGELOG.md">Changelog</a></span>
+    </footer>
+  </div>
+</body>
+</html>
