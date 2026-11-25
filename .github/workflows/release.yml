@@ -1,0 +1,111 @@
+name: Release & Package SIBENGKEL
+
+on:
+  release:
+    types: [ published ]
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: "Optional existing release tag (e.g., v1.1.0) to attach release tarball and SHA256SUMS.txt"
+        required: false
+        default: ""
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-release-assets:
+    name: Test, Build Production Bundle & Upload Release Assets
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Verify VERSION Matches Release Tag
+        env:
+          EVENT_TAG: ${{ github.event.release.tag_name }}
+          DISPATCH_TAG: ${{ inputs.release_tag }}
+        run: |
+          APP_VER="$(tr -d '[:space:]' < VERSION)"
+          echo "APP_VER=$APP_VER" >> "$GITHUB_ENV"
+          RAW_TAG="${EVENT_TAG:-$DISPATCH_TAG}"
+          if [ -n "$RAW_TAG" ]; then
+            TAG_VER="${RAW_TAG#v}"
+            if [ "$APP_VER" != "$TAG_VER" ]; then
+              echo "VERSION ($APP_VER) does not match tag ($TAG_VER)" >&2
+              exit 1
+            fi
+          fi
+
+      - name: Setup PHP 8.3
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: mbstring, pdo, pdo_sqlite, sqlite3, intl, gd
+          tools: composer
+
+      - name: Prepare Environment & Install Full Dependencies for Tests
+        run: |
+          php -r "file_exists('.env') || copy('.env.example', '.env');"
+          composer install --no-interaction --prefer-dist --no-progress
+          php artisan key:generate --no-interaction
+
+      - name: Set up Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+
+      - name: Build Frontend Assets
+        run: |
+          npm ci
+          npm run build
+
+      - name: Run Full Test Suite
+        env:
+          APP_ENV: testing
+          DB_CONNECTION: sqlite
+          DB_DATABASE: ':memory:'
+        run: php artisan test
+
+      - name: Install Production-Only PHP Dependencies
+        run: composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist
+
+      - name: Package Production Tarball & Checksums
+        run: |
+          mkdir -p build-release
+          TAR_NAME="sibengkel-${APP_VER}.tar.gz"
+          tar -czf "build-release/${TAR_NAME}" \
+            --exclude='.git' \
+            --exclude='node_modules' \
+            --exclude='tests' \
+            --exclude='docs/stitch' \
+            --exclude='.github' \
+            --exclude='.env' \
+            --exclude='build-release' \
+            --exclude='_site' \
+            .
+          (cd build-release && sha256sum "${TAR_NAME}" > SHA256SUMS.txt)
+
+      - name: Upload Release Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: sibengkel-release
+          path: build-release/
+
+      - name: Attach Assets to GitHub Release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          EVENT_TAG: ${{ github.event.release.tag_name }}
+          DISPATCH_TAG: ${{ inputs.release_tag }}
+        run: |
+          RELEASE_TAG="${EVENT_TAG:-$DISPATCH_TAG}"
+          if [ -n "$RELEASE_TAG" ]; then
+            gh release upload "$RELEASE_TAG" build-release/*.tar.gz build-release/SHA256SUMS.txt --clobber
+          else
+            echo "No release_tag specified on workflow_dispatch; skipping gh release upload."
+          fi

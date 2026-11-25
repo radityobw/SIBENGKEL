@@ -4,97 +4,146 @@ on:
   push:
     branches: [ "main", "dev" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "main", "dev" ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
 
 jobs:
   security-and-linting:
-    name: 🔍 DevSecOps Audit & SAST Scanning
+    name: DevSecOps Audit & SAST/SCA Scanning
     runs-on: ubuntu-latest
     permissions:
       contents: read
       pull-requests: read
+
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      # 1. Secret Scanning via Gitleaks
       - name: Gitleaks Secret Scan
         uses: gitleaks/gitleaks-action@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # 2. Filesystem & OS Security Scan via Trivy
       - name: Trivy Security Scan
-        uses: aquasecurity/trivy-action@master
+        uses: aquasecurity/trivy-action@0.28.0
         with:
           scan-type: 'fs'
           ignore-unfixed: true
           format: 'table'
           severity: 'CRITICAL,HIGH'
 
-      # 3. PHP Setup & Composer Security Audit
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install SIDIK Security Scanner
+        run: |
+          python -m pip install --upgrade pip
+          pip install "sidik>=1.4.0,<2.0.0" || pip install "git+https://github.com/radityobw/SIDIK.git@main"
+
+      - name: Run SIDIK SAST & SCA Scan
+        run: |
+          sidik --target . --mode all --format github --sarif-output sidik-results.sarif --fail-on high --lang en --quiet
+
+      - name: Upload SIDIK SARIF Artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sidik-sarif-report
+          path: sidik-results.sarif
+
       - name: Setup PHP 8.3
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.3'
           tools: composer
 
+      - name: Validate Composer Manifest & Lock
+        run: composer validate --strict --no-interaction
+
       - name: Composer Audit Security Check
-        run: composer audit --locked
+        run: composer audit --locked --no-interaction
 
   automated-testing:
-    name: 🧪 Automated Unit & Feature Testing
+    name: Automated Unit & Feature Testing (PHP ${{ matrix.php }})
     needs: security-and-linting
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
+    strategy:
+      fail-fast: false
+      matrix:
+        php: [ "8.3", "8.4" ]
 
-      - name: Setup PHP 8.3
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup PHP ${{ matrix.php }}
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.3'
-          extensions: mbstring, pdo, pdo_mysql
+          php-version: ${{ matrix.php }}
+          extensions: mbstring, pdo, pdo_sqlite, sqlite3, intl, gd
+          tools: composer
 
-      - name: Copy .env.testing
+      - name: Copy .env for Testing
         run: php -r "file_exists('.env') || copy('.env.example', '.env');"
 
-      - name: Install Dependencies
-        run: composer update --no-ansi --no-interaction --prefer-dist
+      - name: Install PHP Dependencies
+        run: composer install --no-interaction --prefer-dist --no-progress
+
+      - name: Set up Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
 
       - name: Build Frontend Assets
-        run: npm install && npm run build
+        run: |
+          npm ci
+          npm run build
 
-      - name: Generate App Key
-        run: php artisan key:generate
+      - name: Generate Application Key
+        run: php artisan key:generate --no-interaction
 
       - name: Execute Tests (PHPUnit)
         env:
+          APP_ENV: testing
           DB_CONNECTION: sqlite
           DB_DATABASE: ':memory:'
-        run: vendor/bin/phpunit
+        run: php artisan test
 
   staging-deployment:
-    name: 🚀 Staging CD Deployment to VPS
+    name: Staging CD Deployment to VPS
     needs: automated-testing
-    if: github.ref == 'refs/heads/dev'
+    if: github.event_name == 'push' && github.ref == 'refs/heads/dev'
+    environment: staging
     runs-on: ubuntu-latest
+
     steps:
       - name: Execute Remote SSH Deploy Script
-        uses: appleboy/ssh-action@master
+        uses: appleboy/ssh-action@v1.2.0
         with:
           host: ${{ secrets.STAGING_VPS_HOST }}
           username: ${{ secrets.STAGING_VPS_USERNAME }}
           key: ${{ secrets.STAGING_VPS_SSH_KEY }}
           script: |
+            set -e
             export PATH=$PATH:/usr/local/bin:~/.nvm/versions/node/$(ls ~/.nvm/versions/node 2>/dev/null | tail -n 1)/bin
             cd /var/www/staging-sibengkel
             git pull origin dev
-            composer update --no-dev --optimize-autoloader
+            composer install --no-dev --optimize-autoloader --no-interaction
             php artisan migrate --force
             php artisan storage:link --force
-            npm install
+            npm ci
             npm run build
             php artisan view:clear
             php artisan config:cache
@@ -103,25 +152,28 @@ jobs:
             sudo systemctl restart php8.3-fpm
 
   production-deployment:
-    name: 🚀 Production CD Deployment to VPS
+    name: Production CD Deployment to VPS
     needs: automated-testing
-    if: github.ref == 'refs/heads/main'
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    environment: production
     runs-on: ubuntu-latest
+
     steps:
       - name: Execute Remote SSH Deploy Script
-        uses: appleboy/ssh-action@master
+        uses: appleboy/ssh-action@v1.2.0
         with:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USERNAME }}
           key: ${{ secrets.VPS_SSH_KEY }}
           script: |
+            set -e
             export PATH=$PATH:/usr/local/bin:~/.nvm/versions/node/$(ls ~/.nvm/versions/node 2>/dev/null | tail -n 1)/bin
             cd /var/www/sibengkel
             git pull origin main
-            composer update --no-dev --optimize-autoloader
+            composer install --no-dev --optimize-autoloader --no-interaction
             php artisan migrate --force
             php artisan storage:link --force
-            npm install
+            npm ci
             npm run build
             php artisan view:clear
             php artisan config:cache
