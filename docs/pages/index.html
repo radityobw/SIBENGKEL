@@ -15,7 +15,7 @@
   <meta name="google-site-verification" content="6y-5Cff0WkeBj7_uWju39rv0nQnqmEgw81an57VJkGg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Sora:wght@600;700&display=swap" rel="stylesheet" />
 
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="SIBENGKEL" />
@@ -31,6 +31,15 @@
   <meta name="twitter:title" content="SIBENGKEL - Sistem Informasi Bengkel Terpadu" />
   <meta name="twitter:description" content="Platform web Laravel 13 untuk operasional bengkel otomotif, cek status servis real-time, booking daring, toko sparepart, dan RESTful API Sanctum." />
   <meta name="twitter:image" content="https://radityobw.github.io/SIBENGKEL/og-banner.png" />
+
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+    }
+  }
+  </script>
 
   <script type="application/ld+json">
   {
@@ -70,162 +79,326 @@
   <style>
     :root {
       --bg: #0a0a0a;
-      --bg-card: #161615;
-      --bg-soft: #1f1f1d;
-      --border: #2e2e2b;
+      --surface: #131312;
+      --surface-2: #1c1c1a;
+      --border: #262623;
+      --border-strong: #3c3c36;
       --text: #ededec;
-      --muted: #a8a8a3;
+      --muted: #9e9e97;
       --accent: #ff6b00;
-      --accent-soft: #ff8f42;
-      --green: #22c55e;
+      --accent-soft: #ff9447;
+      --mono: "JetBrains Mono", Consolas, monospace;
+      --display: "Sora", "Inter", sans-serif;
+      --sans: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
     }
     * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
       margin: 0;
-      font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      background: radial-gradient(circle at top right, rgba(255, 107, 0, 0.14) 0%, var(--bg) 46%);
+      font-family: var(--sans);
+      background-color: var(--bg);
+      background-image:
+        linear-gradient(to right, rgba(237, 237, 236, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(237, 237, 236, 0.03) 1px, transparent 1px);
+      background-size: 48px 48px;
       color: var(--text);
       line-height: 1.6;
-    }
-    h1, h2, h3, .brand-font {
-      font-family: "Sora", "Inter", sans-serif;
+      -webkit-font-smoothing: antialiased;
     }
     a { color: var(--accent-soft); text-decoration: none; }
     a:hover { text-decoration: underline; }
-    .wrap { max-width: 1080px; margin: 0 auto; padding: 36px 20px 64px; }
-    .hero {
-      background: linear-gradient(145deg, #111110 0%, #191816 100%);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 36px 32px;
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 28px;
-      align-items: center;
-      box-shadow: 0 22px 48px rgba(0, 0, 0, 0.6);
+
+    .progress-track {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: rgba(255, 255, 255, 0.06);
+      z-index: 60;
+      pointer-events: none;
     }
-    @media (max-width: 780px) {
-      .hero { grid-template-columns: 1fr; text-align: center; }
-      .cta-row, .pill-row, .badge-row { justify-content: center; }
+    #scroll-progress-bar {
+      width: 100%;
+      height: 100%;
+      background: var(--accent);
+      transform-origin: left center;
+      transform: scaleX(0);
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background: rgba(10, 10, 10, 0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+    }
+    .topbar-inner {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .brand-mark {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text);
+      font-weight: 600;
+      letter-spacing: 0.06em;
+    }
+    .brand-hex {
+      width: 10px;
+      height: 10px;
+      background: var(--accent);
+      display: inline-block;
+    }
+    .topbar-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+    }
+    .topbar-nav a { color: var(--muted); }
+    .topbar-nav a:hover { color: var(--text); text-decoration: none; }
+
+    .wrap {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 36px 24px 72px;
+    }
+    .spec-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(350px, 0.85fr);
+      gap: 40px;
+      align-items: start;
+    }
+    .vitrine-col {
+      position: sticky;
+      top: 74px;
+      order: 2;
+    }
+    .chapters-col {
+      order: 1;
+      min-width: 0;
+    }
+
+    #stage-3d {
+      position: relative;
+      height: min(540px, calc(100vh - 110px));
+      min-height: 400px;
+      background: linear-gradient(160deg, #121210 0%, #0b0b0a 100%);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      cursor: grab;
+      user-select: none;
+      touch-action: pan-y;
+    }
+    #stage-3d:active { cursor: grabbing; }
+    .cad-tick {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      pointer-events: none;
+      z-index: 4;
+    }
+    .cad-tick.tl { top: 10px; left: 10px; border-top: 2px solid var(--accent); border-left: 2px solid var(--accent); }
+    .cad-tick.tr { top: 10px; right: 10px; border-top: 1px solid var(--border-strong); border-right: 1px solid var(--border-strong); }
+    .cad-tick.bl { bottom: 10px; left: 10px; border-bottom: 1px solid var(--border-strong); border-left: 1px solid var(--border-strong); }
+    .cad-tick.br { bottom: 10px; right: 10px; border-bottom: 2px solid var(--accent); border-right: 2px solid var(--accent); }
+
+    .stage-hud-top {
+      position: absolute;
+      top: 18px;
+      left: 22px;
+      right: 22px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      pointer-events: none;
+      z-index: 4;
+    }
+    #stage-chapter {
+      color: var(--accent-soft);
+      font-weight: 600;
+    }
+    .stage-hud-bottom {
+      position: absolute;
+      bottom: 16px;
+      left: 22px;
+      right: 22px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--muted);
+      pointer-events: none;
+      z-index: 4;
+    }
+    #canvas-3d {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      height: 100%;
+      display: block;
+      opacity: 0;
+      transition: opacity 0.45s ease;
+    }
+    #stage-3d.is-ready #canvas-3d { opacity: 1; }
+    .stage-fallback {
+      position: absolute;
+      inset: 0;
+      margin: auto;
+      width: 150px;
+      height: 150px;
+      object-fit: contain;
+      z-index: 1;
+      transition: opacity 0.45s ease;
+    }
+    #stage-3d.is-ready .stage-fallback {
+      display: none;
+    }
+
+    .chapter {
+      padding-bottom: 52px;
+      margin-bottom: 52px;
+      border-bottom: 1px solid var(--border);
+    }
+    .chapter:last-child {
+      border-bottom: none;
+      margin-bottom: 16px;
+      padding-bottom: 16px;
     }
     .eyebrow {
       display: inline-block;
-      font-size: 12px;
-      font-weight: 700;
+      font-family: var(--mono);
+      font-size: 11.5px;
+      font-weight: 600;
       letter-spacing: 0.08em;
       text-transform: uppercase;
       color: var(--accent-soft);
-      background: rgba(255, 107, 0, 0.14);
-      border: 1px solid rgba(255, 107, 0, 0.4);
-      border-radius: 999px;
-      padding: 4px 12px;
-      margin-bottom: 12px;
+      border-left: 2px solid var(--accent);
+      padding-left: 10px;
+      margin-bottom: 14px;
     }
-    h1 { margin: 0 0 10px; font-size: clamp(28px, 4vw, 40px); line-height: 1.15; color: #ffffff; }
-    .lead { margin: 0 0 18px; color: #d4d4d0; font-size: 16.5px; max-width: 720px; }
-    .pill-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+    h1 {
+      font-family: var(--display);
+      margin: 0 0 14px;
+      font-size: clamp(30px, 4vw, 44px);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: #ffffff;
+    }
+    .lead {
+      margin: 0 0 22px;
+      color: #d4d4d0;
+      font-size: 16px;
+      max-width: 680px;
+    }
+    .pill-row { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 18px; }
     .pill {
-      font-size: 13px;
-      font-weight: 600;
-      background: var(--bg-soft);
+      font-family: var(--mono);
+      font-size: 11.5px;
+      background: var(--surface);
       border: 1px solid var(--border);
       color: var(--text);
-      padding: 5px 12px;
-      border-radius: 999px;
+      padding: 4px 10px;
     }
-    .badge-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+    .badge-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; }
     .cta-row { display: flex; flex-wrap: wrap; gap: 10px; }
     .btn {
       display: inline-block;
       padding: 10px 18px;
-      border-radius: 10px;
       font-weight: 600;
-      font-size: 14px;
-      border: 1px solid #3e3e3a;
+      font-size: 13.5px;
+      border: 1px solid var(--border-strong);
       color: var(--text);
-      background: #1f1f1d;
+      background: var(--surface-2);
     }
     .btn.primary {
-      background: linear-gradient(135deg, var(--accent) 0%, #e05a00 100%);
-      border-color: var(--accent-soft);
-      color: #ffffff;
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #0a0a0a;
+      font-weight: 700;
     }
-    .btn:hover { text-decoration: none; filter: brightness(1.08); }
-    .logo-box {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
-      background: #111110;
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 20px;
-    }
-    .logo-box img { width: 128px; max-width: 100%; height: auto; }
-    .logo-caption { font-family: "Sora", sans-serif; font-weight: 700; letter-spacing: 0.08em; font-size: 14px; color: #ffffff; }
-    section { margin-top: 38px; }
+    .btn:hover { text-decoration: none; border-color: var(--text); }
+    .btn.primary:hover { background: var(--accent-soft); border-color: var(--accent-soft); }
+
     h2 {
+      font-family: var(--display);
       font-size: 22px;
       color: #ffffff;
-      margin: 0 0 14px;
-      border-left: 4px solid var(--accent);
+      margin: 0 0 16px;
+      border-left: 3px solid var(--accent);
       padding-left: 12px;
     }
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 14px;
     }
     .card {
-      background: var(--bg-card);
+      background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 14px;
       padding: 18px;
     }
-    .card h3 { margin: 0 0 6px; font-size: 16px; color: var(--accent-soft); }
-    .card p { margin: 0; font-size: 14px; color: var(--muted); }
+    .card h3 {
+      font-family: var(--display);
+      margin: 0 0 8px;
+      font-size: 15.5px;
+      color: var(--accent-soft);
+    }
+    .card p { margin: 0; font-size: 13.8px; color: var(--muted); }
     pre {
       background: #050505;
       border: 1px solid var(--border);
-      border-radius: 12px;
       padding: 16px 18px;
       overflow-x: auto;
-      font-size: 13.5px;
+      font-size: 13px;
       color: #ededec;
       margin: 0;
     }
-    code { font-family: "Cascadia Code", Consolas, "Courier New", monospace; }
+    code { font-family: var(--mono); }
     table {
       width: 100%;
       border-collapse: collapse;
-      background: var(--bg-card);
+      background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 12px;
-      overflow: hidden;
-      font-size: 14px;
+      font-size: 13.5px;
     }
     th, td { padding: 11px 14px; text-align: left; border-bottom: 1px solid var(--border); }
-    th { background: #1f1f1d; color: #ffdcc3; font-weight: 700; }
+    th { background: var(--surface-2); color: #ffdcc3; font-family: var(--mono); font-size: 12px; text-transform: uppercase; }
     tr:last-child td { border-bottom: none; }
     .tag-pill {
       display: inline-block;
-      font-weight: 700;
-      font-size: 12px;
+      font-family: var(--mono);
+      font-weight: 600;
+      font-size: 11.5px;
       padding: 2px 8px;
-      border-radius: 6px;
       background: rgba(255, 107, 0, 0.14);
       color: var(--accent-soft);
       border: 1px solid rgba(255, 107, 0, 0.35);
     }
     .release-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 14px;
+      margin-top: 16px;
     }
     .release-card {
-      background: var(--bg-card);
+      background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 14px;
       padding: 18px 20px;
     }
     .release-head {
@@ -235,123 +408,140 @@
       margin-bottom: 10px;
     }
     .release-tag {
+      font-family: var(--mono);
       font-weight: 700;
-      font-size: 14px;
+      font-size: 13px;
       color: var(--accent-soft);
       background: rgba(255, 107, 0, 0.14);
       border: 1px solid rgba(255, 107, 0, 0.35);
       padding: 2px 10px;
-      border-radius: 999px;
     }
-    .release-date { font-size: 12.5px; color: var(--muted); }
+    .release-date { font-family: var(--mono); font-size: 12px; color: var(--muted); }
     .release-card ul { margin: 0; padding-left: 18px; color: var(--muted); font-size: 13.5px; }
     .release-card li { margin-bottom: 6px; }
     footer {
-      margin-top: 48px;
+      margin-top: 40px;
       padding-top: 20px;
       border-top: 1px solid var(--border);
       color: var(--muted);
-      font-size: 13px;
+      font-family: var(--mono);
+      font-size: 12px;
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
       gap: 10px;
     }
+    @media (max-width: 960px) {
+      .spec-grid { grid-template-columns: 1fr; gap: 28px; }
+      .vitrine-col { position: relative; top: 0; order: 1; }
+      .chapters-col { order: 2; }
+      #stage-3d { height: 340px; min-height: 300px; }
+    }
   </style>
 </head>
 <body>
+  <div class="progress-track"><div id="scroll-progress-bar"></div></div>
+
+  <nav class="topbar" aria-label="Navigasi SIBENGKEL">
+    <div class="topbar-inner">
+      <a class="brand-mark" href="https://radityobw.github.io/SIBENGKEL/"><span class="brand-hex"></span>SIBENGKEL / SPEC-SHEET</a>
+      <div class="topbar-nav">
+        <a href="#sec-kapabilitas">Kapabilitas</a>
+        <a href="#sec-arsitektur">Arsitektur</a>
+        <a href="#sec-instalasi">Instalasi</a>
+        <a href="https://radityobw.github.io/">Portfolio</a>
+      </div>
+    </div>
+  </nav>
+
   <div class="wrap">
-    <header class="hero">
-      <div>
-        <span class="eyebrow">v1.1.0 | Monochrome Industrial Edition | MIT License</span>
-        <h1>SIBENGKEL: Sistem Informasi Bengkel Terpadu</h1>
-        <p class="lead">
-          Platform web berbasis <strong>Laravel 13</strong> dan <strong>PHP 8.3+</strong> untuk mendigitalisasi operasional bengkel otomotif: manajemen transaksi servis, <em>booking</em> daring, <em>e-commerce sparepart</em>, portal pelanggan, pelacakan status publik, dan RESTful API Sanctum.
-        </p>
-        <div class="pill-row">
-          <span class="pill">Laravel 13 &amp; PHP 8.3+</span>
-          <span class="pill">Dual-Guard Auth &amp; 3-Level RBAC</span>
-          <span class="pill">Sanctum RESTful API</span>
-          <span class="pill">137 Blackbox Test Cases</span>
-          <span class="pill">DevSecOps + SIDIK SAST/SCA</span>
-        </div>
-        <div class="badge-row">
-          <a href="https://github.com/radityobw/SIBENGKEL/releases/latest"><img src="https://img.shields.io/github/v/release/radityobw/SIBENGKEL?label=Release&color=FF6B00&cacheSeconds=3600" alt="GitHub Release" /></a>
-          <a href="https://github.com/radityobw/SIBENGKEL/actions/workflows/devsecops-cicd.yml"><img src="https://img.shields.io/github/actions/workflow/status/radityobw/SIBENGKEL/devsecops-cicd.yml?label=CI&color=22c55e" alt="CI Status" /></a>
-          <a href="https://github.com/radityobw/SIBENGKEL/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-MIT-a855f7.svg" alt="MIT License" /></a>
-        </div>
-        <div class="cta-row">
-          <a class="btn primary" href="https://github.com/radityobw/SIBENGKEL">GitHub Repository</a>
-          <a class="btn" href="https://github.com/radityobw/SIBENGKEL/blob/main/docs/PRD_Sistem_Informasi_Bengkel.md">PRD &amp; API Spec</a>
-          <a class="btn" href="https://github.com/radityobw/SIBENGKEL/blob/main/docs/blackbox.md">Blackbox QA Report</a>
-        </div>
-      </div>
-      <div class="logo-box">
-        <img src="logobengkel.png" alt="Logo SIBENGKEL" width="128" height="128" />
-        <span class="logo-caption">SIBENGKEL</span>
-      </div>
-    </header>
+    <div class="spec-grid">
+      <main class="chapters-col">
+        <section class="chapter" data-chapter="overview" id="sec-overview">
+          <span class="eyebrow">v1.1.0 | Monochrome Industrial Edition | MIT License</span>
+          <h1>SIBENGKEL: Sistem Informasi Bengkel Terpadu</h1>
+          <p class="lead">
+            Platform web berbasis <strong>Laravel 13</strong> dan <strong>PHP 8.3+</strong> untuk mendigitalisasi operasional bengkel otomotif: manajemen transaksi servis, <em>booking</em> daring, <em>e-commerce sparepart</em>, portal pelanggan, pelacakan status publik, dan RESTful API Sanctum.
+          </p>
+          <div class="pill-row">
+            <span class="pill">Laravel 13 &amp; PHP 8.3+</span>
+            <span class="pill">Dual-Guard Auth &amp; 3-Level RBAC</span>
+            <span class="pill">Sanctum RESTful API</span>
+            <span class="pill">137 Blackbox Test Cases</span>
+            <span class="pill">DevSecOps + SIDIK SAST/SCA</span>
+          </div>
+          <div class="badge-row">
+            <a href="https://github.com/radityobw/SIBENGKEL/releases/latest"><img src="https://img.shields.io/github/v/release/radityobw/SIBENGKEL?label=Release&color=FF6B00&cacheSeconds=3600" alt="GitHub Release" /></a>
+            <a href="https://github.com/radityobw/SIBENGKEL/actions/workflows/devsecops-cicd.yml"><img src="https://img.shields.io/github/actions/workflow/status/radityobw/SIBENGKEL/devsecops-cicd.yml?label=CI&color=22c55e" alt="CI Status" /></a>
+            <a href="https://github.com/radityobw/SIBENGKEL/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-MIT-a855f7.svg" alt="MIT License" /></a>
+          </div>
+          <div class="cta-row">
+            <a class="btn primary" href="https://github.com/radityobw/SIBENGKEL">GitHub Repository</a>
+            <a class="btn" href="https://github.com/radityobw/SIBENGKEL/blob/main/docs/PRD_Sistem_Informasi_Bengkel.md">PRD &amp; API Spec</a>
+            <a class="btn" href="https://github.com/radityobw/SIBENGKEL/blob/main/docs/blackbox.md">Blackbox QA Report</a>
+          </div>
+        </section>
 
-    <section>
-      <h2>Kapabilitas Utama</h2>
-      <div class="grid">
-        <div class="card">
-          <h3>Operasional Servis &amp; Nota PDF</h3>
-          <p>Pelacakan progres pengerjaan (<code>pending</code>, <code>proses</code>, <code>selesai</code>), penugasan mekanik, analitik pendapatan 7 hari, dan cetak nota servis.</p>
-        </div>
-        <div class="card">
-          <h3>Portal Pelanggan &amp; Booking Daring</h3>
-          <p>Autentikasi terpisah pada guard <code>customer</code> di <code>/masuk</code> dan <code>/portal</code>, pengajuan jadwal servis, konversi otomatis ke transaksi, dan reset OTP.</p>
-        </div>
-        <div class="card">
-          <h3>E-Commerce Sparepart &amp; Cek Status</h3>
-          <p>Katalog <code>/sparepart</code> dengan keranjang persisten (<code>cart_data</code>), <em>checkout</em> dengan pengurangan stok, serta pelacakan publik <code>/cek-status</code> tanpa login.</p>
-        </div>
-        <div class="card">
-          <h3>Sanctum REST API &amp; DevSecOps</h3>
-          <p>Endpoint JSON terautentikasi Bearer Token serta <em>pipeline</em> CI/CD otomatis (Gitleaks, Trivy, SIDIK SAST/SCA, Composer Audit, PHPUnit PHP 8.3 &amp; 8.4).</p>
-        </div>
-      </div>
-    </section>
+        <section class="chapter" data-chapter="kapabilitas" id="sec-kapabilitas">
+          <h2>Kapabilitas Utama</h2>
+          <div class="grid">
+            <div class="card">
+              <h3>Operasional Servis &amp; Nota PDF</h3>
+              <p>Pelacakan progres pengerjaan (<code>pending</code>, <code>proses</code>, <code>selesai</code>), penugasan mekanik, analitik pendapatan 7 hari, dan cetak nota servis.</p>
+            </div>
+            <div class="card">
+              <h3>Portal Pelanggan &amp; Booking Daring</h3>
+              <p>Autentikasi terpisah pada guard <code>customer</code> di <code>/masuk</code> dan <code>/portal</code>, pengajuan jadwal servis, konversi otomatis ke transaksi, dan reset OTP.</p>
+            </div>
+            <div class="card">
+              <h3>E-Commerce Sparepart &amp; Cek Status</h3>
+              <p>Katalog <code>/sparepart</code> dengan keranjang persisten (<code>cart_data</code>), <em>checkout</em> dengan pengurangan stok, serta pelacakan publik <code>/cek-status</code> tanpa login.</p>
+            </div>
+            <div class="card">
+              <h3>Sanctum REST API &amp; DevSecOps</h3>
+              <p>Endpoint JSON terautentikasi Bearer Token serta <em>pipeline</em> CI/CD otomatis (Gitleaks, Trivy, SIDIK SAST/SCA, Composer Audit, PHPUnit PHP 8.3 &amp; 8.4).</p>
+            </div>
+          </div>
+        </section>
 
-    <section>
-      <h2>Arsitektur &amp; Tumpukan Teknologi</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Lapisan</th>
-            <th>Teknologi</th>
-            <th>Cakupan</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><span class="tag-pill">Backend</span></td>
-            <td><strong>Laravel 13 &amp; PHP 8.3+</strong></td>
-            <td>25 migrasi database, 13 Eloquent Model, 35 Controller, Dual-Guard &amp; RBAC</td>
-          </tr>
-          <tr>
-            <td><span class="tag-pill">Frontend</span></td>
-            <td><strong>Tailwind CSS 3 &amp; Alpine.js</strong></td>
-            <td>78 Blade views, tema Monochrome Industrial &amp; Workshop Orange, View Transition API</td>
-          </tr>
-          <tr>
-            <td><span class="tag-pill">API &amp; Auth</span></td>
-            <td><strong>Laravel Breeze &amp; Sanctum</strong></td>
-            <td>Session auth staff/pelanggan, OTP reset password, REST API Bearer Token</td>
-          </tr>
-          <tr>
-            <td><span class="tag-pill">QA &amp; DevSecOps</span></td>
-            <td><strong>PHPUnit, SIDIK, Gitleaks, Trivy</strong></td>
-            <td>Automated unit &amp; feature tests, 137 blackbox test cases, GitHub Releases &amp; <code>ghcr.io</code> container</td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
+        <section class="chapter" data-chapter="arsitektur" id="sec-arsitektur">
+          <h2>Arsitektur &amp; Tumpukan Teknologi</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Lapisan</th>
+                <th>Teknologi</th>
+                <th>Cakupan</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="tag-pill">Backend</span></td>
+                <td><strong>Laravel 13 &amp; PHP 8.3+</strong></td>
+                <td>25 migrasi database, 13 Eloquent Model, 35 Controller, Dual-Guard &amp; RBAC</td>
+              </tr>
+              <tr>
+                <td><span class="tag-pill">Frontend</span></td>
+                <td><strong>Tailwind CSS 3 &amp; Alpine.js</strong></td>
+                <td>78 Blade views, tema Monochrome Industrial &amp; Workshop Orange, View Transition API</td>
+              </tr>
+              <tr>
+                <td><span class="tag-pill">API &amp; Auth</span></td>
+                <td><strong>Laravel Breeze &amp; Sanctum</strong></td>
+                <td>Session auth staff/pelanggan, OTP reset password, REST API Bearer Token</td>
+              </tr>
+              <tr>
+                <td><span class="tag-pill">QA &amp; DevSecOps</span></td>
+                <td><strong>PHPUnit, SIDIK, Gitleaks, Trivy</strong></td>
+                <td>Automated unit &amp; feature tests, 137 blackbox test cases, GitHub Releases &amp; <code>ghcr.io</code> container</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
 
-    <section>
-      <h2>Quick Start (Lokal)</h2>
-      <pre><code>git clone https://github.com/radityobw/SIBENGKEL.git
+        <section class="chapter" data-chapter="instalasi" id="sec-instalasi">
+          <h2>Quick Start (Lokal)</h2>
+          <pre><code>git clone https://github.com/radityobw/SIBENGKEL.git
 cd SIBENGKEL
 composer install
 npm ci
@@ -362,47 +552,68 @@ php artisan storage:link
 npm run build
 php artisan test
 php artisan serve</code></pre>
-    </section>
+        </section>
 
-    <section>
-      <h2>Tim Pengembang</h2>
-      <div class="grid">
-        <div class="card">
-          <h3>Radityo Budi Waskito</h3>
-          <p>Lead Developer &amp; Software Architect (Fullstack Architecture, Multi-Guard Auth, Sanctum API, DevSecOps &amp; Deployment).</p>
-        </div>
-        <div class="card">
-          <h3>Zayyan Fadhlur Rahman</h3>
-          <p>Frontend &amp; UI/UX Engineer (Blade Templating, Mobile-First Design, Dark Mode System, Component Styling &amp; Animations).</p>
-        </div>
-        <div class="card">
-          <h3>Raditya Ahmad Pratama</h3>
-          <p>Backend &amp; Database Engineer (Eloquent Data Layer, Database Migrations, Input Validation &amp; System Testing).</p>
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <h2>Rilis Terbaru (Tersinkron Otomatis dari CHANGELOG.md)</h2>
-      <div class="release-grid">
-        <!-- AUTO_CHANGELOG_START -->
-        <article class="release-card">
-          <div class="release-head">
-            <span class="release-tag">v1.1.0</span>
-            <span class="release-date">2026-11-25</span>
+        <section class="chapter" data-chapter="rilis" id="sec-rilis">
+          <h2>Tim Pengembang</h2>
+          <div class="grid">
+            <div class="card">
+              <h3>Radityo Budi Waskito</h3>
+              <p>Lead Developer &amp; Software Architect (Fullstack Architecture, Multi-Guard Auth, Sanctum API, DevSecOps &amp; Deployment).</p>
+            </div>
+            <div class="card">
+              <h3>Zayyan Fadhlur Rahman</h3>
+              <p>Frontend &amp; UI/UX Engineer (Blade Templating, Mobile-First Design, Dark Mode System, Component Styling &amp; Animations).</p>
+            </div>
+            <div class="card">
+              <h3>Raditya Ahmad Pratama</h3>
+              <p>Backend &amp; Database Engineer (Eloquent Data Layer, Database Migrations, Input Validation &amp; System Testing).</p>
+            </div>
           </div>
-          <ul>
-            <li>Pematangan tata kelola repositori, pengujian otomatis PHPUnit, penambalan dependensi, dan publikasi GitHub Pages.</li>
-          </ul>
-        </article>
-        <!-- AUTO_CHANGELOG_END -->
-      </div>
-    </section>
+
+          <h2 style="margin-top:34px;">Rilis Terbaru (Tersinkron Otomatis dari CHANGELOG.md)</h2>
+          <div class="release-grid">
+            <!-- AUTO_CHANGELOG_START -->
+            <article class="release-card">
+              <div class="release-head">
+                <span class="release-tag">v1.1.0</span>
+                <span class="release-date">2026-11-25</span>
+              </div>
+              <ul>
+                <li>Pematangan tata kelola repositori, pengujian otomatis PHPUnit, penambalan dependensi, dan publikasi GitHub Pages.</li>
+              </ul>
+            </article>
+            <!-- AUTO_CHANGELOG_END -->
+          </div>
+        </section>
+      </main>
+
+      <aside class="vitrine-col" aria-label="Showcase 3D Emblem SIBENGKEL">
+        <div id="stage-3d">
+          <span class="cad-tick tl"></span>
+          <span class="cad-tick tr"></span>
+          <span class="cad-tick bl"></span>
+          <span class="cad-tick br"></span>
+          <div class="stage-hud-top">
+            <span id="stage-chapter">01 / OVERVIEW</span>
+            <span>DRAG TO INSPECT</span>
+          </div>
+          <img class="stage-fallback" src="logobengkel.png" alt="Logo SIBENGKEL" width="150" height="150" />
+          <canvas id="canvas-3d" aria-label="Model 3D Emblem Heksagon SIBENGKEL"></canvas>
+          <div class="stage-hud-bottom">
+            <span>sibengkel.glb</span>
+            <span>MONOCHROME TITANIUM</span>
+          </div>
+        </div>
+      </aside>
+    </div>
 
     <footer>
       <span>SIBENGKEL - Sistem Informasi Bengkel - MIT License - <!-- AUTO_UPDATED_START -->Updated 2026-11-25<!-- AUTO_UPDATED_END --></span>
       <span><a href="https://github.com/radityobw/SIBENGKEL">GitHub</a> | <a href="https://github.com/radityobw/SIBENGKEL/releases">Releases</a> | <a href="https://github.com/radityobw/SIBENGKEL/blob/main/CHANGELOG.md">Changelog</a></span>
     </footer>
   </div>
+
+  <script type="module" src="scene3d.js"></script>
 </body>
 </html>

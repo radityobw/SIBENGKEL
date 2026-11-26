@@ -139,6 +139,7 @@ def build_site(out_dir: Path) -> None:
         "robots.txt",
         "sitemap.txt",
         "og-banner.png",
+        "scene3d.js",
         "favicon.ico",
         "favicon-48x48.png",
         "favicon-192x192.png",
@@ -147,6 +148,11 @@ def build_site(out_dir: Path) -> None:
         src = PAGES_DIR / fname
         if src.is_file():
             shutil.copy2(src, out_dir / fname)
+
+    glb_src = PAGES_DIR / "models" / "sibengkel.glb"
+    if glb_src.is_file():
+        (out_dir / "models").mkdir(parents=True, exist_ok=True)
+        shutil.copy2(glb_src, out_dir / "models" / "sibengkel.glb")
 
     for rel_src, dst_name in (
         ("public/logobengkel.png", "logobengkel.png"),

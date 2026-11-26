@@ -58,14 +58,10 @@
             });
         </script>
 
-        <!-- Abstract Modern Background Elements -->
-        <div class="absolute top-0 right-0 -mr-32 -mt-32 w-[600px] h-[600px] bg-secondary/10 rounded-full blur-3xl"></div>
-        <div class="absolute bottom-0 left-0 -ml-32 -mb-32 w-[600px] h-[600px] bg-secondary/10 rounded-full blur-3xl"></div>
-        
-        <div class="max-w-3xl w-full mx-auto relative z-10 flex flex-col items-center text-center gap-8 md:gap-12">
-            <div class="space-y-6 md:space-y-8 relative z-20 flex flex-col items-center">
-                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/70 dark:bg-[#161615]/70 backdrop-blur-md border border-white/50 dark:border-white/10 shadow-sm text-sm font-semibold text-black dark:text-[#EDEDEC]">
-                    <span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+        <div class="max-w-screen-xl w-full mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-12 items-center gap-10 lg:gap-12">
+            <div class="lg:col-span-7 space-y-6 md:space-y-8 relative z-20 flex flex-col items-center lg:items-start text-center lg:text-left">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 dark:bg-[#161615]/80 backdrop-blur-md border border-black/10 dark:border-white/10 shadow-sm text-sm font-semibold text-black dark:text-[#EDEDEC]">
+                    <span class="w-2 h-2 rounded-full bg-secondary"></span>
                     Sistem Informasi Bengkel Era Digital
                 </div>
                 <style>
@@ -154,7 +150,7 @@
                         targets.forEach(target => observer.observe(target));
                     });
                 </script>
-                <div class="flex flex-col sm:flex-row gap-4 pt-4 justify-center">
+                <div class="flex flex-col sm:flex-row gap-4 pt-4 justify-center lg:justify-start">
                     <style>
                         .btn-interactive {
                             position: relative;
@@ -225,6 +221,46 @@
                         .btn-interactive:hover .btn-interactive-bg {
                             transform: scale(50);
                         }
+                        #sibengkel-hero-3d {
+                            position: relative;
+                            width: 100%;
+                            max-width: 420px;
+                            aspect-ratio: 1 / 1;
+                            background: linear-gradient(155deg, rgba(255,255,255,0.75) 0%, rgba(245,244,240,0.9) 100%);
+                            border: 1px solid rgba(0, 0, 0, 0.12);
+                            cursor: grab;
+                            user-select: none;
+                            touch-action: pan-y;
+                            overflow: hidden;
+                        }
+                        .dark #sibengkel-hero-3d {
+                            background: linear-gradient(155deg, #131312 0%, #0b0b0a 100%);
+                            border-color: #262623;
+                        }
+                        #sibengkel-hero-3d:active { cursor: grabbing; }
+                        #sibengkel-hero-canvas {
+                            position: relative;
+                            z-index: 2;
+                            width: 100%;
+                            height: 100%;
+                            display: block;
+                            opacity: 0;
+                            transition: opacity 0.45s ease;
+                        }
+                        #sibengkel-hero-3d.is-ready #sibengkel-hero-canvas { opacity: 1; }
+                        #sibengkel-hero-3d .hero-3d-fallback {
+                            position: absolute;
+                            inset: 0;
+                            margin: auto;
+                            width: 168px;
+                            height: 168px;
+                            object-fit: contain;
+                            z-index: 1;
+                            transition: opacity 0.45s ease;
+                        }
+                        #sibengkel-hero-3d.is-ready .hero-3d-fallback {
+                            display: none;
+                        }
                     </style>
                     <a href="{{ Auth::guard('customer')->check() ? route('public.dashboard') : route('public.login') }}" class="btn-interactive">
                         <span class="btn-interactive-text">Portal Pelanggan</span>
@@ -240,7 +276,7 @@
                     </a>
                 </div>
                 
-                <div class="pt-8 flex flex-wrap justify-center items-center gap-4 md:gap-6 text-on-surface-variant dark:text-gray-400 text-sm">
+                <div class="pt-6 flex flex-wrap justify-center lg:justify-start items-center gap-4 md:gap-6 text-on-surface-variant dark:text-gray-400 text-sm">
                     <div class="flex items-center gap-2">
                         <span class="material-symbols-outlined text-green-500">check_circle</span> Terpercaya
                     </div>
@@ -252,8 +288,30 @@
                     </div>
                 </div>
             </div>
-            
+
+            <div class="lg:col-span-5 flex justify-center w-full">
+                <div id="sibengkel-hero-3d" data-model="{{ asset('models/sibengkel.glb') }}" aria-label="Model 3D Emblem SIBENGKEL">
+                    <span class="pointer-events-none absolute top-3 left-3 w-3 h-3 border-t-2 border-l-2 border-[#FF6B00] z-10"></span>
+                    <span class="pointer-events-none absolute bottom-3 right-3 w-3 h-3 border-b-2 border-r-2 border-[#FF6B00] z-10"></span>
+                    <div class="pointer-events-none absolute top-3.5 right-4 z-10 font-mono text-[10px] tracking-widest uppercase text-black/50 dark:text-[#9e9e97]">DRAG TO INSPECT</div>
+                    <img src="{{ asset('logobengkel.png') }}" alt="Logo SIBENGKEL" class="hero-3d-fallback" />
+                    <canvas id="sibengkel-hero-canvas"></canvas>
+                    <div class="pointer-events-none absolute bottom-3.5 left-4 right-4 flex justify-between z-10 font-mono text-[10px] tracking-wider uppercase text-black/50 dark:text-[#9e9e97]">
+                        <span>sibengkel.glb</span>
+                        <span>3D WORKSHOP EMBLEM</span>
+                    </div>
+                </div>
+            </div>
         </div>
+        <script type="importmap">
+        {
+            "imports": {
+                "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+                "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+            }
+        }
+        </script>
+        <script type="module" src="{{ asset('js/sibengkel-3d.js') }}"></script>
     </section>
 
     <!-- Stats Section -->
