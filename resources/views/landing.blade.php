@@ -21,7 +21,7 @@
             overflow: hidden;
         }
         .dark #sibengkel-hero-3d {
-            background: radial-gradient(ellipse 68% 66% at 50% 48%, #2a2a30 0%, #141418 50%, #09090b 84%, #050506 100%);
+            background: radial-gradient(ellipse 74% 72% at 50% 48%, #43444f 0%, #202128 42%, #0d0d11 76%, #050506 100%);
             border-color: rgba(255, 255, 255, 0.1);
             box-shadow: 0 20px 50px rgba(0, 0, 0, 0.48);
         }
