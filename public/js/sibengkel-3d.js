@@ -54,25 +54,25 @@ function initLandingEmblem() {
   scene.add(orangeRim);
 
   const mat = new THREE.MeshStandardMaterial({
-    color: 0xe6e6e2,
-    metalness: 0.62,
-    roughness: 0.28,
+    color: 0xe6e6e8,
+    metalness: 0.68,
+    roughness: 0.24,
   });
 
   function applyTheme() {
     const isDark = document.documentElement.classList.contains('dark');
     if (isDark) {
-      mat.color.setHex(0xe6e6e2);
-      mat.metalness = 0.62;
+      mat.color.setHex(0xe6e6e8);
+      mat.metalness = 0.68;
+      mat.roughness = 0.24;
+      orangeRim.intensity = 14.0;
+      scene.environmentIntensity = 0.92;
+    } else {
+      mat.color.setHex(0x1d1d1f);
+      mat.metalness = 0.54;
       mat.roughness = 0.28;
       orangeRim.intensity = 14.0;
-      scene.environmentIntensity = 0.9;
-    } else {
-      mat.color.setHex(0x262624);
-      mat.metalness = 0.52;
-      mat.roughness = 0.34;
-      orangeRim.intensity = 16.0;
-      scene.environmentIntensity = 0.78;
+      scene.environmentIntensity = 0.72;
     }
     mat.needsUpdate = true;
   }

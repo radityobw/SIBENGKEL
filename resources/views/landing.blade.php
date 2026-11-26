@@ -5,300 +5,94 @@
 @section('meta_keywords', 'sibengkel, sistem informasi bengkel, servis mobil, bengkel terpercaya')
 
 @section('content')
-    <!-- Hero Section -->
-    <section class="relative bg-surface dark:bg-[#0a0a0a] text-on-surface dark:text-[#EDEDEC] py-20 lg:py-32 px-margin-mobile md:px-margin-desktop overflow-hidden flex-grow flex items-center md:min-h-[calc(100vh-64px)]" id="home">
-        <!-- Interactive Hover Grid Effect -->
-        <style>
-            .interactive-grid-base {
-                position: absolute;
-                inset: 0;
-                background-image: 
-                    linear-gradient(to right, rgba(0,0,0,0.03) 1px, transparent 1px),
-                    linear-gradient(to bottom, rgba(0,0,0,0.03) 1px, transparent 1px);
-                background-size: 50px 50px;
-                pointer-events: none;
-            }
-            .dark .interactive-grid-base {
-                background-image: 
-                    linear-gradient(to right, rgba(255,255,255,0.02) 1px, transparent 1px),
-                    linear-gradient(to bottom, rgba(255,255,255,0.02) 1px, transparent 1px);
-            }
-            .interactive-grid-glow {
-                position: absolute;
-                inset: 0;
-                background-image: 
-                    linear-gradient(to right, rgba(255,107,0,0.4) 1px, transparent 1px),
-                    linear-gradient(to bottom, rgba(255,107,0,0.4) 1px, transparent 1px);
-                background-size: 50px 50px;
-                pointer-events: none;
-                mask-image: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), black 0%, transparent 25%);
-                -webkit-mask-image: radial-gradient(circle 300px at var(--mouse-x, 50%) var(--mouse-y, 50%), black 0%, transparent 100%);
-                opacity: 0;
-                transition: opacity 0.5s ease;
-            }
-            #home:hover .interactive-grid-glow {
-                opacity: 1;
-            }
-        </style>
-        <div class="interactive-grid-base"></div>
-        <div class="interactive-grid-glow" id="grid-glow"></div>
-        
-        <script>
-            document.addEventListener('DOMContentLoaded', () => {
-                const homeSection = document.getElementById('home');
-                const gridGlow = document.getElementById('grid-glow');
-                
-                homeSection.addEventListener('mousemove', (e) => {
-                    const rect = homeSection.getBoundingClientRect();
-                    const x = e.clientX - rect.left;
-                    const y = e.clientY - rect.top;
-                    gridGlow.style.setProperty('--mouse-x', `${x}px`);
-                    gridGlow.style.setProperty('--mouse-y', `${y}px`);
-                });
-            });
-        </script>
+    <style>
+        #sibengkel-hero-3d {
+            position: relative;
+            width: 100%;
+            max-width: 440px;
+            aspect-ratio: 1 / 1;
+            border-radius: 28px;
+            background: radial-gradient(circle at 50% 42%, #ffffff 0%, #f1f1f4 72%, #e8e8ed 100%);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.06);
+            cursor: grab;
+            user-select: none;
+            touch-action: pan-y;
+            overflow: hidden;
+        }
+        .dark #sibengkel-hero-3d {
+            background: radial-gradient(circle at 50% 45%, #1c1c1e 0%, #0d0d0f 70%, #050506 100%);
+            border-color: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+        }
+        #sibengkel-hero-3d:active { cursor: grabbing; }
+        #sibengkel-hero-canvas {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            height: 100%;
+            display: block;
+            opacity: 0;
+            transition: opacity 0.45s ease;
+        }
+        #sibengkel-hero-3d.is-ready #sibengkel-hero-canvas { opacity: 1; }
+        #sibengkel-hero-3d .hero-3d-fallback {
+            position: absolute;
+            inset: 0;
+            margin: auto;
+            width: 168px;
+            height: 168px;
+            object-fit: contain;
+            z-index: 1;
+        }
+        #sibengkel-hero-3d.is-ready .hero-3d-fallback {
+            display: none;
+        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
 
-        <div class="max-w-screen-xl w-full mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-12 items-center gap-10 lg:gap-12">
-            <div class="lg:col-span-7 space-y-6 md:space-y-8 relative z-20 flex flex-col items-center lg:items-start text-center lg:text-left">
-                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 dark:bg-[#161615]/80 backdrop-blur-md border border-black/10 dark:border-white/10 shadow-sm text-sm font-semibold text-black dark:text-[#EDEDEC]">
-                    <span class="w-2 h-2 rounded-full bg-secondary"></span>
+    <!-- Hero Section -->
+    <section class="bg-white dark:bg-black text-[#1d1d1f] dark:text-[#f5f5f7] py-16 lg:py-24 px-margin-mobile md:px-margin-desktop flex-grow flex items-center md:min-h-[calc(100vh-56px)]" id="home">
+        <div class="max-w-screen-xl w-full mx-auto grid grid-cols-1 lg:grid-cols-12 items-center gap-12 lg:gap-16">
+            <div class="lg:col-span-7 space-y-6 flex flex-col items-center lg:items-start text-center lg:text-left">
+                <p class="text-xs font-semibold uppercase tracking-[0.12em] text-[#ff6b00]">
                     Sistem Informasi Bengkel Era Digital
-                </div>
-                <style>
-                    .split-char {
-                        display: inline-block;
-                        opacity: 0;
-                        transform: translateY(20px) scale(0.9);
-                        animation: split-pop 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards paused;
-                    }
-                    .split-target.is-visible .split-char {
-                        animation-play-state: running;
-                    }
-                    @keyframes split-pop {
-                        to {
-                            opacity: 1;
-                            transform: translateY(0) scale(1);
-                        }
-                    }
-                </style>
-                <h1 class="split-target font-headline-lg-mobile lg:font-headline-xl text-headline-lg-mobile lg:text-[4rem] lg:leading-tight text-on-surface dark:text-[#EDEDEC] font-bold tracking-tight">
-                    Transformasi <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#FF6B00] to-[#FF8F42]">Servis Kendaraan</span> Anda
-                </h1>
-                <p class="font-body-lg text-lg lg:text-xl text-on-surface-variant dark:text-gray-400 max-w-lg leading-relaxed mx-auto">
-                    Kelola jadwal servis, pantau status pengerjaan secara real-time, dan akses riwayat perawatan kendaraan Anda dalam satu aplikasi canggih.
                 </p>
-                <script>
-                    document.addEventListener('DOMContentLoaded', () => {
-                        const targets = document.querySelectorAll('.split-target');
-                        
-                        // 1. Process all nodes to wrap them in .split-char spans
-                        targets.forEach(target => {
-                            const nodes = Array.from(target.childNodes);
-                            target.innerHTML = '';
-                            let delay = 0;
-                            
-                            const processNode = (node, parent) => {
-                                if (node.nodeType === Node.TEXT_NODE) {
-                                    const words = node.textContent.split(/(\s+)/);
-                                    words.forEach(word => {
-                                        if (/^\s+$/.test(word)) {
-                                            parent.appendChild(document.createTextNode(word));
-                                        } else {
-                                            const wordSpan = document.createElement('span');
-                                            wordSpan.style.display = 'inline-block';
-                                            wordSpan.style.whiteSpace = 'nowrap';
-                                            const chars = word.split('');
-                                            chars.forEach(char => {
-                                                const span = document.createElement('span');
-                                                span.textContent = char;
-                                                span.className = 'split-char';
-                                                span.style.animationDelay = `${delay}s`;
-                                                wordSpan.appendChild(span);
-                                                delay += 0.02;
-                                            });
-                                            parent.appendChild(wordSpan);
-                                        }
-                                    });
-                                } else if (node.nodeType === Node.ELEMENT_NODE) {
-                                    if (node.classList && node.classList.contains('bg-clip-text')) {
-                                        const clone = node.cloneNode(true);
-                                        clone.classList.add('split-char');
-                                        clone.style.animationDelay = `${delay}s`;
-                                        parent.appendChild(clone);
-                                        delay += 0.3; // Tambah delay lebih besar untuk satu frasa/kata utuh
-                                    } else {
-                                        const clone = node.cloneNode(false);
-                                        parent.appendChild(clone);
-                                        Array.from(node.childNodes).forEach(child => processNode(child, clone));
-                                    }
-                                }
-                            };
-                            
-                            nodes.forEach(node => processNode(node, target));
-                        });
-                        
-                        // 2. Use Intersection Observer to trigger animations
-                        const observer = new IntersectionObserver((entries, observer) => {
-                            entries.forEach(entry => {
-                                if (entry.isIntersecting) {
-                                    entry.target.classList.add('is-visible');
-                                    observer.unobserve(entry.target);
-                                }
-                            });
-                        }, { threshold: 0.2 });
-                        
-                        targets.forEach(target => observer.observe(target));
-                    });
-                </script>
-                <div class="flex flex-col sm:flex-row gap-4 pt-4 justify-center lg:justify-start">
-                    <style>
-                        .btn-interactive {
-                            position: relative;
-                            display: inline-flex;
-                            height: 3.5rem;
-                            width: 15rem;
-                            align-items: center;
-                            justify-content: center;
-                            overflow: hidden;
-                            border-radius: 9999px;
-                            border: 1px solid #f26b21;
-                            background-color: white;
-                            font-weight: 600;
-                            color: #f26b21;
-                            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
-                            transition: all 0.3s ease;
-                        }
-                        .dark .btn-interactive {
-                            background-color: #161615;
-                            color: #EDEDEC;
-                            border-color: rgba(242, 107, 33, 0.5);
-                        }
-                        .btn-interactive:hover {
-                            border-color: transparent;
-                        }
-                        .btn-interactive-text {
-                            position: relative;
-                            z-index: 10;
-                            display: inline-block;
-                            transform: translateX(4px);
-                            transition: all 0.3s ease;
-                        }
-                        .btn-interactive:hover .btn-interactive-text {
-                            transform: translateX(48px);
-                            opacity: 0;
-                        }
-                        .btn-interactive-hover-content {
-                            position: absolute;
-                            inset: 0;
-                            z-index: 20;
-                            display: flex;
-                            height: 100%;
-                            width: 100%;
-                            transform: translateX(48px);
-                            align-items: center;
-                            justify-content: center;
-                            gap: 8px;
-                            color: white;
-                            opacity: 0;
-                            transition: all 0.3s ease;
-                        }
-                        .btn-interactive:hover .btn-interactive-hover-content {
-                            transform: translateX(0);
-                            opacity: 1;
-                        }
-                        .btn-interactive-bg {
-                            position: absolute;
-                            left: 16px;
-                            top: calc(50% - 6px);
-                            z-index: 0;
-                            height: 12px;
-                            width: 12px;
-                            border-radius: 50%;
-                            background-color: #f26b21;
-                            transform: scale(1);
-                            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-                        }
-                        .btn-interactive:hover .btn-interactive-bg {
-                            transform: scale(50);
-                        }
-                        #sibengkel-hero-3d {
-                            position: relative;
-                            width: 100%;
-                            max-width: 420px;
-                            aspect-ratio: 1 / 1;
-                            background: linear-gradient(155deg, rgba(255,255,255,0.75) 0%, rgba(245,244,240,0.9) 100%);
-                            border: 1px solid rgba(0, 0, 0, 0.12);
-                            cursor: grab;
-                            user-select: none;
-                            touch-action: pan-y;
-                            overflow: hidden;
-                        }
-                        .dark #sibengkel-hero-3d {
-                            background: linear-gradient(155deg, #131312 0%, #0b0b0a 100%);
-                            border-color: #262623;
-                        }
-                        #sibengkel-hero-3d:active { cursor: grabbing; }
-                        #sibengkel-hero-canvas {
-                            position: relative;
-                            z-index: 2;
-                            width: 100%;
-                            height: 100%;
-                            display: block;
-                            opacity: 0;
-                            transition: opacity 0.45s ease;
-                        }
-                        #sibengkel-hero-3d.is-ready #sibengkel-hero-canvas { opacity: 1; }
-                        #sibengkel-hero-3d .hero-3d-fallback {
-                            position: absolute;
-                            inset: 0;
-                            margin: auto;
-                            width: 168px;
-                            height: 168px;
-                            object-fit: contain;
-                            z-index: 1;
-                            transition: opacity 0.45s ease;
-                        }
-                        #sibengkel-hero-3d.is-ready .hero-3d-fallback {
-                            display: none;
-                        }
-                    </style>
-                    <a href="{{ Auth::guard('customer')->check() ? route('public.dashboard') : route('public.login') }}" class="btn-interactive">
-                        <span class="btn-interactive-text">Portal Pelanggan</span>
-                        <div class="btn-interactive-hover-content">
-                            <span>Portal Pelanggan</span>
-                            <span class="material-symbols-outlined" style="font-size: 20px; font-variation-settings: 'FILL' 0;">arrow_forward</span>
-                        </div>
-                        <div class="btn-interactive-bg"></div>
+                <h1 class="text-4xl sm:text-5xl lg:text-[3.75rem] lg:leading-[1.06] font-bold tracking-[-0.035em] text-[#1d1d1f] dark:text-white">
+                    Transformasi Servis <span class="text-[#ff6b00]">Kendaraan</span> Anda
+                </h1>
+                <p class="text-lg text-[#6e6e73] dark:text-[#a1a1a6] max-w-xl leading-relaxed">
+                    Kelola jadwal servis, pantau status pengerjaan secara real-time, dan akses riwayat perawatan kendaraan Anda dalam satu aplikasi terpadu.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-3 pt-2 justify-center lg:justify-start">
+                    <a href="{{ Auth::guard('customer')->check() ? route('public.dashboard') : route('public.login') }}" class="bg-[#ff6b00] hover:bg-[#e55f00] text-white font-semibold text-sm h-12 px-7 rounded-full inline-flex items-center justify-center gap-2 transition-colors">
+                        <span>Portal Pelanggan</span>
+                        <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
                     </a>
-                    <a href="{{ url('/cek-status') }}" class="bg-white/70 dark:bg-[#161615]/70 backdrop-blur-md text-on-surface dark:text-[#EDEDEC] hover:bg-white/90 dark:hover:bg-[#3E3E3A] border border-black/10 dark:border-white/10 transition-all duration-300 font-label-md text-label-md h-14 px-8 rounded-full flex items-center justify-center gap-2 shadow-sm">
-                        <span class="material-symbols-outlined">search</span>
+                    <a href="{{ url('/cek-status') }}" class="bg-black/[0.04] dark:bg-white/[0.08] hover:bg-black/[0.08] dark:hover:bg-white/[0.14] text-[#1d1d1f] dark:text-[#f5f5f7] border border-black/[0.08] dark:border-white/[0.12] font-medium text-sm h-12 px-7 rounded-full inline-flex items-center justify-center gap-2 transition-colors">
+                        <span class="material-symbols-outlined text-[18px]">search</span>
                         Cek Status Servis
                     </a>
                 </div>
-                
-                <div class="pt-6 flex flex-wrap justify-center lg:justify-start items-center gap-4 md:gap-6 text-on-surface-variant dark:text-gray-400 text-sm">
-                    <div class="flex items-center gap-2">
-                        <span class="material-symbols-outlined text-green-500">check_circle</span> Terpercaya
-                    </div>
-                    <div class="flex items-center gap-2">
-                        <span class="material-symbols-outlined text-green-500">check_circle</span> Transparan
-                    </div>
-                    <div class="flex items-center gap-2">
-                        <span class="material-symbols-outlined text-green-500">check_circle</span> Profesional
-                    </div>
+                <div class="pt-3 flex flex-wrap justify-center lg:justify-start items-center gap-5 text-[#6e6e73] dark:text-[#86868b] text-xs font-medium">
+                    <span class="inline-flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-[#30d158]"></span> Terpercaya</span>
+                    <span class="inline-flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-[#30d158]"></span> Transparan</span>
+                    <span class="inline-flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-[#30d158]"></span> Profesional</span>
                 </div>
             </div>
 
             <div class="lg:col-span-5 flex justify-center w-full">
                 <div id="sibengkel-hero-3d" data-model="{{ asset('models/sibengkel.glb') }}" aria-label="Model 3D Emblem SIBENGKEL">
-                    <span class="pointer-events-none absolute top-3 left-3 w-3 h-3 border-t-2 border-l-2 border-[#FF6B00] z-10"></span>
-                    <span class="pointer-events-none absolute bottom-3 right-3 w-3 h-3 border-b-2 border-r-2 border-[#FF6B00] z-10"></span>
-                    <div class="pointer-events-none absolute top-3.5 right-4 z-10 font-mono text-[10px] tracking-widest uppercase text-black/50 dark:text-[#9e9e97]">DRAG TO INSPECT</div>
+                    <div class="pointer-events-none absolute top-5 left-5 right-5 flex justify-between items-center z-10 text-xs font-medium text-[#6e6e73] dark:text-[#86868b]">
+                        <span class="px-3 py-1 rounded-full bg-white/80 dark:bg-white/[0.08] border border-black/[0.06] dark:border-white/[0.1] text-[#1d1d1f] dark:text-[#f5f5f7]">SIBENGKEL 3D</span>
+                        <span>Drag to inspect</span>
+                    </div>
                     <img src="{{ asset('logobengkel.png') }}" alt="Logo SIBENGKEL" class="hero-3d-fallback" />
                     <canvas id="sibengkel-hero-canvas"></canvas>
-                    <div class="pointer-events-none absolute bottom-3.5 left-4 right-4 flex justify-between z-10 font-mono text-[10px] tracking-wider uppercase text-black/50 dark:text-[#9e9e97]">
+                    <div class="pointer-events-none absolute bottom-5 left-5 right-5 flex justify-between z-10 font-mono text-[11px] text-[#6e6e73] dark:text-[#86868b]">
                         <span>sibengkel.glb</span>
-                        <span>3D WORKSHOP EMBLEM</span>
+                        <span>Workshop emblem</span>
                     </div>
                 </div>
             </div>
@@ -315,25 +109,24 @@
     </section>
 
     <!-- Stats Section -->
-    <section class="py-16 bg-white dark:bg-[#111111] relative overflow-hidden border-y border-outline-variant/30 dark:border-[#3E3E3A]/30">
-        <div class="absolute inset-0 opacity-5 dark:opacity-10 text-on-surface" style="background-image: radial-gradient(circle at 2px 2px, currentColor 1px, transparent 0); background-size: 24px 24px;"></div>
-        <div class="max-w-screen-xl mx-auto px-margin-mobile md:px-margin-desktop relative z-10">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 divide-x divide-outline-variant/30 dark:divide-white/10 text-center" id="stats-container">
+    <section class="py-16 bg-[#f5f5f7] dark:bg-[#0d0d0e] border-y border-black/[0.06] dark:border-white/[0.08]">
+        <div class="max-w-screen-xl mx-auto px-margin-mobile md:px-margin-desktop">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center" id="stats-container">
                 <div class="px-4">
-                    <h3 class="text-4xl md:text-5xl font-bold text-on-surface dark:text-white font-sora mb-2"><span class="count-up" data-target="{{ $stats['servis_selesai'] }}">0</span>+</h3>
-                    <p class="text-on-surface-variant dark:text-white/80 text-sm md:text-base">Servis Selesai</p>
+                    <h3 class="text-4xl md:text-5xl font-bold tracking-tight text-[#1d1d1f] dark:text-white mb-2 tabular-nums"><span class="count-up" data-target="{{ $stats['servis_selesai'] }}">0</span>+</h3>
+                    <p class="text-[#6e6e73] dark:text-[#86868b] text-sm">Servis Selesai</p>
                 </div>
                 <div class="px-4">
-                    <h3 class="text-4xl md:text-5xl font-bold text-on-surface dark:text-white font-sora mb-2"><span class="count-up" data-target="{{ $stats['pelanggan'] }}">0</span>+</h3>
-                    <p class="text-on-surface-variant dark:text-white/80 text-sm md:text-base">Pelanggan Setia</p>
+                    <h3 class="text-4xl md:text-5xl font-bold tracking-tight text-[#1d1d1f] dark:text-white mb-2 tabular-nums"><span class="count-up" data-target="{{ $stats['pelanggan'] }}">0</span>+</h3>
+                    <p class="text-[#6e6e73] dark:text-[#86868b] text-sm">Pelanggan Setia</p>
                 </div>
                 <div class="px-4">
-                    <h3 class="text-4xl md:text-5xl font-bold text-on-surface dark:text-white font-sora mb-2"><span class="count-up" data-target="{{ $stats['mekanik'] }}">0</span></h3>
-                    <p class="text-on-surface-variant dark:text-white/80 text-sm md:text-base">Mekanik Ahli</p>
+                    <h3 class="text-4xl md:text-5xl font-bold tracking-tight text-[#1d1d1f] dark:text-white mb-2 tabular-nums"><span class="count-up" data-target="{{ $stats['mekanik'] }}">0</span></h3>
+                    <p class="text-[#6e6e73] dark:text-[#86868b] text-sm">Mekanik Ahli</p>
                 </div>
                 <div class="px-4">
-                    <h3 class="text-4xl md:text-5xl font-bold text-on-surface dark:text-white font-sora mb-2"><span class="count-up" data-target="{{ $stats['kepuasan'] }}">0</span>%</h3>
-                    <p class="text-on-surface-variant dark:text-white/80 text-sm md:text-base">Kepuasan Pelanggan</p>
+                    <h3 class="text-4xl md:text-5xl font-bold tracking-tight text-[#1d1d1f] dark:text-white mb-2 tabular-nums"><span class="count-up" data-target="{{ $stats['kepuasan'] }}">0</span>%</h3>
+                    <p class="text-[#6e6e73] dark:text-[#86868b] text-sm">Kepuasan Pelanggan</p>
                 </div>
             </div>
         </div>
@@ -341,268 +134,98 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const counters = document.querySelectorAll('.count-up');
-            const speed = 200; // Semakin kecil semakin lambat, tapi karena pakai requestAnimationFrame kita akan mengatur durasi animasi
-
             const animateCountUp = (el) => {
                 const target = +el.getAttribute('data-target');
-                const duration = 2000; // 2 detik
+                const duration = 1400;
                 const start = performance.now();
-                
                 const updateCount = (currentTime) => {
-                    const elapsed = currentTime - start;
-                    const progress = Math.min(elapsed / duration, 1);
-                    
-                    // Ease out quart function
+                    const progress = Math.min((currentTime - start) / duration, 1);
                     const easeOut = 1 - Math.pow(1 - progress, 4);
-                    const current = Math.floor(easeOut * target);
-                    
-                    el.innerText = current;
-                    
-                    if (progress < 1) {
-                        requestAnimationFrame(updateCount);
-                    } else {
-                        el.innerText = target;
-                    }
+                    el.innerText = progress < 1 ? Math.floor(easeOut * target) : target;
+                    if (progress < 1) requestAnimationFrame(updateCount);
                 };
-                
                 requestAnimationFrame(updateCount);
             };
-
-            const observer = new IntersectionObserver((entries, observer) => {
+            const observer = new IntersectionObserver((entries, obs) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        const targets = entry.target.querySelectorAll('.count-up');
-                        targets.forEach(animateCountUp);
-                        observer.unobserve(entry.target);
+                        entry.target.querySelectorAll('.count-up').forEach(animateCountUp);
+                        obs.unobserve(entry.target);
                     }
                 });
-            }, { threshold: 0.5 });
-
+            }, { threshold: 0.4 });
             const statsContainer = document.getElementById('stats-container');
             if (statsContainer) observer.observe(statsContainer);
         });
     </script>
 
-
     <!-- Services Section -->
-    <section class="py-24 bg-surface-container-lowest dark:bg-[#0a0a0a] px-margin-mobile md:px-margin-desktop relative" id="services">
-        <style>
-            .cards-container {
-                perspective: 1000px;
-            }
-            .cards-container:hover .spotlight-card {
-                opacity: 0.3;
-                filter: grayscale(40%) blur(1px);
-            }
-            .cards-container .spotlight-card {
-                position: relative;
-                overflow: hidden;
-                transition: transform 0.2s ease-out, opacity 0.3s ease, filter 0.3s ease, box-shadow 0.3s ease;
-                transform-style: preserve-3d;
-                will-change: transform;
-            }
-            .cards-container .spotlight-card:hover {
-                opacity: 1;
-                filter: none;
-                z-index: 10;
-                box-shadow: 0 20px 40px -10px rgba(255, 107, 0, 0.15);
-            }
-            .spotlight-card::before {
-                content: "";
-                position: absolute;
-                inset: 0;
-                background: radial-gradient(500px circle at var(--x, 0) var(--y, 0), rgba(255, 107, 0, 0.15), transparent 40%);
-                pointer-events: none;
-                opacity: 0;
-                transition: opacity 0.3s;
-                z-index: 0;
-            }
-            .spotlight-card:hover::before {
-                opacity: 1;
-            }
-            .spotlight-card > * {
-                position: relative;
-                z-index: 1;
-                transform: translateZ(20px); /* 3D pop effect for content */
-            }
-        </style>
-        
-        <div class="max-w-screen-xl mx-auto relative z-10">
-            <div class="text-center max-w-2xl mx-auto mb-16 space-y-4">
-                <h2 class="text-secondary font-semibold tracking-wider uppercase text-sm">Layanan Utama</h2>
-                <h3 class="split-target font-headline-lg text-4xl lg:text-5xl font-bold text-on-surface dark:text-[#EDEDEC]">Solusi Otomotif <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#FF6B00] to-[#FF8F42]">Terpadu</span></h3>
-                <p class="text-on-surface-variant dark:text-gray-400 text-lg">Kami menyediakan berbagai layanan perbaikan dan perawatan kendaraan dengan standar industri terdepan.</p>
+    <section class="py-24 bg-white dark:bg-black px-margin-mobile md:px-margin-desktop" id="services">
+        <div class="max-w-screen-xl mx-auto">
+            <div class="max-w-2xl mb-14 space-y-3">
+                <p class="text-xs font-semibold uppercase tracking-[0.1em] text-[#ff6b00]">Layanan Utama</p>
+                <h2 class="text-3xl lg:text-4xl font-bold tracking-tight text-[#1d1d1f] dark:text-white">Solusi Otomotif Terpadu</h2>
+                <p class="text-[#6e6e73] dark:text-[#86868b] text-lg">Layanan perbaikan dan perawatan kendaraan dengan standar pengerjaan transparan.</p>
             </div>
             
-            <div class="cards-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <!-- Card 1 -->
-                <div class="spotlight-card bg-white/80 dark:bg-[#161615]/80 backdrop-blur-xl rounded-3xl p-8 border border-outline-variant/30 dark:border-white/5 group">
-                    <div class="w-16 h-16 bg-primary/10 dark:bg-[#EDEDEC]/10 text-primary dark:text-[#EDEDEC] rounded-2xl flex items-center justify-center mb-6 group-hover:bg-primary dark:group-hover:bg-[#EDEDEC] group-hover:text-white dark:group-hover:text-black transition-colors duration-300">
-                        <span class="material-symbols-outlined text-3xl">build</span>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+                <div class="bg-[#f5f5f7] dark:bg-[#161617] rounded-3xl p-7 border border-black/[0.05] dark:border-white/[0.08]">
+                    <div class="w-11 h-11 bg-white dark:bg-[#1d1d1f] text-[#ff6b00] rounded-2xl flex items-center justify-center mb-5 border border-black/[0.06] dark:border-white/[0.08]">
+                        <span class="material-symbols-outlined text-2xl">build</span>
                     </div>
-                    <h4 class="font-headline-md text-xl font-bold mb-3 dark:text-[#EDEDEC]">Servis Berkala</h4>
-                    <p class="text-on-surface-variant dark:text-gray-400 leading-relaxed">Perawatan rutin dengan standar pabrikan untuk menjaga performa optimal kendaraan Anda.</p>
+                    <h3 class="text-lg font-semibold mb-2 text-[#1d1d1f] dark:text-white">Servis Berkala</h3>
+                    <p class="text-sm text-[#6e6e73] dark:text-[#86868b] leading-relaxed">Perawatan rutin dengan standar pabrikan untuk menjaga performa optimal kendaraan Anda.</p>
                 </div>
-                <!-- Card 2 -->
-                <div class="spotlight-card bg-white/80 dark:bg-[#161615]/80 backdrop-blur-xl rounded-3xl p-8 border border-outline-variant/30 dark:border-white/5 group">
-                    <div class="w-16 h-16 bg-secondary/10 text-secondary rounded-2xl flex items-center justify-center mb-6 group-hover:bg-secondary group-hover:text-white transition-colors duration-300">
-                        <span class="material-symbols-outlined text-3xl">settings</span>
+                <div class="bg-[#f5f5f7] dark:bg-[#161617] rounded-3xl p-7 border border-black/[0.05] dark:border-white/[0.08]">
+                    <div class="w-11 h-11 bg-white dark:bg-[#1d1d1f] text-[#ff6b00] rounded-2xl flex items-center justify-center mb-5 border border-black/[0.06] dark:border-white/[0.08]">
+                        <span class="material-symbols-outlined text-2xl">settings</span>
                     </div>
-                    <h4 class="font-headline-md text-xl font-bold mb-3 dark:text-[#EDEDEC]">Ganti Suku Cadang</h4>
-                    <p class="text-on-surface-variant dark:text-gray-400 leading-relaxed">Penyediaan suku cadang orisinal bergaransi resmi untuk keamanan jangka panjang.</p>
+                    <h3 class="text-lg font-semibold mb-2 text-[#1d1d1f] dark:text-white">Ganti Suku Cadang</h3>
+                    <p class="text-sm text-[#6e6e73] dark:text-[#86868b] leading-relaxed">Penyediaan suku cadang orisinal bergaransi resmi untuk keamanan jangka panjang.</p>
                 </div>
-                <!-- Card 3 -->
-                <div class="spotlight-card bg-white/80 dark:bg-[#161615]/80 backdrop-blur-xl rounded-3xl p-8 border border-outline-variant/30 dark:border-white/5 group">
-                    <div class="w-16 h-16 bg-primary/10 dark:bg-[#EDEDEC]/10 text-primary dark:text-[#EDEDEC] rounded-2xl flex items-center justify-center mb-6 group-hover:bg-primary dark:group-hover:bg-[#EDEDEC] group-hover:text-white dark:group-hover:text-black transition-colors duration-300">
-                        <span class="material-symbols-outlined text-3xl">calendar_month</span>
+                <div class="bg-[#f5f5f7] dark:bg-[#161617] rounded-3xl p-7 border border-black/[0.05] dark:border-white/[0.08]">
+                    <div class="w-11 h-11 bg-white dark:bg-[#1d1d1f] text-[#ff6b00] rounded-2xl flex items-center justify-center mb-5 border border-black/[0.06] dark:border-white/[0.08]">
+                        <span class="material-symbols-outlined text-2xl">calendar_month</span>
                     </div>
-                    <h4 class="font-headline-md text-xl font-bold mb-3 dark:text-[#EDEDEC]">Booking Online</h4>
-                    <p class="text-on-surface-variant dark:text-gray-400 leading-relaxed">Sistem penjadwalan pintar untuk menghindari antrean panjang di bengkel.</p>
+                    <h3 class="text-lg font-semibold mb-2 text-[#1d1d1f] dark:text-white">Booking Online</h3>
+                    <p class="text-sm text-[#6e6e73] dark:text-[#86868b] leading-relaxed">Sistem penjadwalan teratur untuk menghindari antrean panjang di bengkel.</p>
                 </div>
-                <!-- Card 4 -->
-                <div class="spotlight-card bg-white/80 dark:bg-[#161615]/80 backdrop-blur-xl rounded-3xl p-8 border border-outline-variant/30 dark:border-white/5 group">
-                    <div class="w-16 h-16 bg-secondary/10 text-secondary rounded-2xl flex items-center justify-center mb-6 group-hover:bg-secondary group-hover:text-white transition-colors duration-300">
-                        <span class="material-symbols-outlined text-3xl">query_stats</span>
+                <div class="bg-[#f5f5f7] dark:bg-[#161617] rounded-3xl p-7 border border-black/[0.05] dark:border-white/[0.08]">
+                    <div class="w-11 h-11 bg-white dark:bg-[#1d1d1f] text-[#ff6b00] rounded-2xl flex items-center justify-center mb-5 border border-black/[0.06] dark:border-white/[0.08]">
+                        <span class="material-symbols-outlined text-2xl">query_stats</span>
                     </div>
-                    <h4 class="font-headline-md text-xl font-bold mb-3 dark:text-[#EDEDEC]">Pantau Status</h4>
-                    <p class="text-on-surface-variant dark:text-gray-400 leading-relaxed">Akses *real-time* untuk melihat progres pengerjaan kendaraan Anda dari mana saja.</p>
+                    <h3 class="text-lg font-semibold mb-2 text-[#1d1d1f] dark:text-white">Pantau Status</h3>
+                    <p class="text-sm text-[#6e6e73] dark:text-[#86868b] leading-relaxed">Akses real-time untuk melihat progres pengerjaan kendaraan Anda dari mana saja.</p>
                 </div>
             </div>
         </div>
-        
-        <script>
-            document.addEventListener('DOMContentLoaded', () => {
-                const cards = document.querySelectorAll('.spotlight-card');
-                
-                cards.forEach(card => {
-                    card.addEventListener('mousemove', e => {
-                        const rect = card.getBoundingClientRect();
-                        const x = e.clientX - rect.left;
-                        const y = e.clientY - rect.top;
-                        
-                        // Set Spotlight position
-                        card.style.setProperty('--x', `${x}px`);
-                        card.style.setProperty('--y', `${y}px`);
-                        
-                        // Calculate 3D tilt
-                        const centerX = rect.width / 2;
-                        const centerY = rect.height / 2;
-                        // Limit rotation to -10 to 10 degrees for a subtle effect
-                        const rotateX = ((y - centerY) / centerY) * -10; 
-                        const rotateY = ((x - centerX) / centerX) * 10;
-                        
-                        card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
-                    });
-                    
-                    card.addEventListener('mouseleave', () => {
-                        card.style.transform = `rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
-                    });
-                });
-            });
-        </script>
     </section>
 
     <!-- How it Works Section -->
-    <section class="py-24 bg-surface dark:bg-[#111111] px-margin-mobile md:px-margin-desktop border-t border-outline-variant/30 dark:border-[#3E3E3A]/30 relative" id="features">
-        <div id="alur-servis" class="absolute -top-24"></div>
+    <section class="py-24 bg-[#f5f5f7] dark:bg-[#0d0d0e] px-margin-mobile md:px-margin-desktop border-t border-black/[0.06] dark:border-white/[0.08] relative" id="features">
+        <div id="alur-servis" class="absolute -top-20"></div>
         <div class="max-w-screen-xl mx-auto">
-            <style>
-                @keyframes shiny-text {
-                    0% { background-position: 100% center; }
-                    100% { background-position: 0% center; }
-                }
-                .shiny-text {
-                    background-image: linear-gradient(
-                        120deg,
-                        #1f2937 45%,
-                        #FF6B00 50%,
-                        #1f2937 55%
-                    );
-                    background-size: 300% auto;
-                    background-clip: text;
-                    -webkit-background-clip: text;
-                    color: transparent !important;
-                    display: inline-block;
-                    background-position: 100% center;
-                    cursor: default;
-                }
-                .shiny-text.is-animating {
-                    animation: shiny-text 2s linear infinite;
-                }
-                .dark .shiny-text {
-                    background-image: linear-gradient(
-                        120deg,
-                        #EDEDEC 45%,
-                        #FF8F42 50%,
-                        #EDEDEC 55%
-                    );
-                }
-            </style>
-            
-            <script>
-                document.addEventListener('DOMContentLoaded', () => {
-                    document.querySelectorAll('.flex.group').forEach(group => {
-                        const text = group.querySelector('.shiny-text');
-                        if (!text) return;
+            <div class="max-w-2xl mb-14 space-y-3">
+                <p class="text-xs font-semibold uppercase tracking-[0.1em] text-[#ff6b00]">Cara Kerja</p>
+                <h2 class="text-3xl lg:text-4xl font-bold tracking-tight text-[#1d1d1f] dark:text-white">Kemudahan Dalam Tiga Langkah</h2>
+                <p class="text-[#6e6e73] dark:text-[#86868b] text-lg">Pengalaman servis yang dirancang menjadi praktis, terukur, dan transparan.</p>
+            </div>
 
-                        // Start animation on hover
-                        group.addEventListener('mouseenter', () => {
-                            text.classList.add('is-animating');
-                        });
-
-                        // Stop animation ONLY at the end of a cycle, if no longer hovering
-                        text.addEventListener('animationiteration', () => {
-                            if (!group.matches(':hover')) {
-                                text.classList.remove('is-animating');
-                            }
-                        });
-                        
-                        // Fallback in case animation gets interrupted or mouse leaves before first iteration starts (rare)
-                        group.addEventListener('mouseleave', () => {
-                            // We intentionally don't remove the class here so it finishes the cycle
-                        });
-                    });
-                });
-            </script>
-            <div class="flex flex-col lg:flex-row items-center gap-16">
-                <div class="lg:w-1/2 space-y-8">
-                    <div>
-                        <h2 class="text-secondary font-semibold tracking-wider uppercase text-sm mb-4">Cara Kerja</h2>
-                        <h3 class="split-target font-headline-lg text-4xl lg:text-5xl font-bold text-on-surface dark:text-[#EDEDEC] mb-6"><span class="text-transparent bg-clip-text bg-gradient-to-r from-[#FF6B00] to-[#FF8F42]">Kemudahan</span> Dalam Tiga Langkah</h3>
-                        <p class="text-on-surface-variant dark:text-gray-400 text-lg">Kami mendesain ulang pengalaman servis Anda menjadi jauh lebih praktis dan transparan.</p>
-                    </div>
-                    
-                    <div class="space-y-6">
-                        <div class="flex gap-6 group">
-                            <div class="w-12 h-12 rounded-full bg-surface-container-highest dark:bg-[#3E3E3A] text-on-surface dark:text-[#EDEDEC] flex items-center justify-center font-bold text-xl shrink-0 shadow-sm">1</div>
-                            <div>
-                                <h4 class="shiny-text text-xl font-bold mb-2">Booking Jadwal Servis</h4>
-                                <p class="text-on-surface-variant dark:text-gray-400">Pilih waktu yang sesuai dengan kesibukan Anda melalui portal pelanggan kami tanpa perlu menelepon.</p>
-                            </div>
-                        </div>
-                        <div class="flex gap-6 group">
-                            <div class="w-12 h-12 rounded-full bg-secondary text-white flex items-center justify-center font-bold text-xl shrink-0 shadow-lg shadow-secondary/30">2</div>
-                            <div>
-                                <h4 class="shiny-text text-xl font-bold mb-2">Pantau Pengerjaan</h4>
-                                <p class="text-on-surface-variant dark:text-gray-400">Kendaraan dikerjakan oleh mekanik ahli. Anda dapat memantau status pengerjaannya secara real-time dari HP Anda.</p>
-                            </div>
-                        </div>
-                        <div class="flex gap-6 group">
-                            <div class="w-12 h-12 rounded-full bg-surface-container-high dark:bg-[#161615] border-2 border-outline-variant dark:border-[#EDEDEC] text-on-surface dark:text-[#EDEDEC] flex items-center justify-center font-bold text-xl shrink-0">3</div>
-                            <div>
-                                <h4 class="shiny-text text-xl font-bold mb-2">Selesai & Ambil Kendaraan</h4>
-                                <p class="text-on-surface-variant dark:text-gray-400">Dapatkan notifikasi instan saat kendaraan siap. Riwayat dan invoice digital otomatis tersimpan.</p>
-                            </div>
-                        </div>
-                    </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white dark:bg-[#161617] rounded-3xl p-8 border border-black/[0.05] dark:border-white/[0.08]">
+                    <span class="inline-flex w-9 h-9 rounded-full bg-[#f5f5f7] dark:bg-[#1d1d1f] text-[#1d1d1f] dark:text-white items-center justify-center font-semibold text-sm mb-5">01</span>
+                    <h3 class="text-xl font-semibold mb-2 text-[#1d1d1f] dark:text-white">Booking Jadwal Servis</h3>
+                    <p class="text-sm text-[#6e6e73] dark:text-[#86868b] leading-relaxed">Pilih waktu yang sesuai dengan kesibukan Anda melalui portal pelanggan tanpa perlu menelepon.</p>
                 </div>
-                
-                <div class="lg:w-1/2 w-full">
-                    <div class="relative rounded-3xl overflow-hidden shadow-2xl h-[500px]">
-                        <div class="absolute inset-0 bg-cover bg-center transition-transform duration-1000 hover:scale-105" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBqcFyfSaGZkAhCtijRJkrnP6PUW7V-24XDxsWZXgXekVLt5P1DbMak7qb1FnRHTch5HqA9JrtpbrFB-I8HWTrdgs_IW8uBHKcjpmYl6_DAqtx_bPRobMMLplGCY4MMepnV1ApYOjjIu8cKQCw-kAEWMOUGGJk80w7qvpjYDw-79hG9Stpou345AExteGRoggQax9SZ8K1PyJiIitezCajqNplnm537UTTL1Wgbd7iDLRY1SuNRR-K4Ow');"></div>
-                        <div class="absolute inset-0 bg-primary/20 mix-blend-multiply"></div>
-                    </div>
+                <div class="bg-white dark:bg-[#161617] rounded-3xl p-8 border border-black/[0.05] dark:border-white/[0.08]">
+                    <span class="inline-flex w-9 h-9 rounded-full bg-[#ff6b00] text-white items-center justify-center font-semibold text-sm mb-5">02</span>
+                    <h3 class="text-xl font-semibold mb-2 text-[#1d1d1f] dark:text-white">Pantau Pengerjaan</h3>
+                    <p class="text-sm text-[#6e6e73] dark:text-[#86868b] leading-relaxed">Kendaraan dikerjakan oleh mekanik ahli dan status pengerjaannya dapat dipantau langsung secara real-time.</p>
+                </div>
+                <div class="bg-white dark:bg-[#161617] rounded-3xl p-8 border border-black/[0.05] dark:border-white/[0.08]">
+                    <span class="inline-flex w-9 h-9 rounded-full bg-[#f5f5f7] dark:bg-[#1d1d1f] text-[#1d1d1f] dark:text-white items-center justify-center font-semibold text-sm mb-5">03</span>
+                    <h3 class="text-xl font-semibold mb-2 text-[#1d1d1f] dark:text-white">Selesai &amp; Ambil Kendaraan</h3>
+                    <p class="text-sm text-[#6e6e73] dark:text-[#86868b] leading-relaxed">Dapatkan notifikasi saat kendaraan siap, dengan riwayat servis dan invoice digital yang tersimpan rapi.</p>
                 </div>
             </div>
         </div>
@@ -610,69 +233,44 @@
 
     <!-- Sparepart Catalog Section -->
     @if(isset($spareparts) && $spareparts->count() > 0)
-    <section class="py-24 bg-surface-container-lowest dark:bg-[#0a0a0a] px-margin-mobile md:px-margin-desktop border-t border-outline-variant/30 dark:border-[#3E3E3A]/30" id="katalog-sparepart">
+    <section class="py-24 bg-white dark:bg-black px-margin-mobile md:px-margin-desktop border-t border-black/[0.06] dark:border-white/[0.08]" id="katalog-sparepart">
         <div class="max-w-screen-xl mx-auto">
-            <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
-                <div class="max-w-2xl">
-                    <h2 class="text-secondary font-semibold tracking-wider uppercase text-sm mb-4">Suku Cadang Asli</h2>
-                    <h3 class="split-target font-headline-lg text-4xl lg:text-5xl font-bold text-on-surface dark:text-[#EDEDEC] mb-4">Katalog <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#FF6B00] to-[#FF8F42]">Sparepart</span></h3>
-                    <p class="text-on-surface-variant dark:text-gray-400 text-lg">Temukan suku cadang berkualitas tinggi untuk kendaraan Anda. Bisa dibeli langsung atau melalui pemesanan online.</p>
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-6">
+                <div class="max-w-2xl space-y-2">
+                    <p class="text-xs font-semibold uppercase tracking-[0.1em] text-[#ff6b00]">Suku Cadang Asli</p>
+                    <h2 class="text-3xl lg:text-4xl font-bold tracking-tight text-[#1d1d1f] dark:text-white">Katalog Sparepart</h2>
+                    <p class="text-[#6e6e73] dark:text-[#86868b] text-lg">Suku cadang berkualitas untuk kendaraan Anda, tersedia untuk pemesanan langsung via portal.</p>
                 </div>
-                <a href="{{ Auth::guard('customer')->check() ? route('public.sparepart.index') : route('public.login') }}" class="group flex items-center gap-2 text-primary dark:text-[#EDEDEC] font-bold hover:text-primary/80 dark:hover:text-[#EDEDEC]/80 transition-colors shrink-0">
-                    Lihat Semua
-                    <span class="material-symbols-outlined transition-transform group-hover:translate-x-1">arrow_forward</span>
+                <a href="{{ Auth::guard('customer')->check() ? route('public.sparepart.index') : route('public.login') }}" class="inline-flex items-center gap-1.5 text-[#0071e3] dark:text-[#ff9447] text-sm font-medium hover:underline shrink-0">
+                    <span>Lihat Semua</span>
+                    <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
                 </a>
             </div>
-
-            <style>
-                .highlighter-item {
-                    position: relative;
-                }
-                .highlighter-item::after {
-                    content: "";
-                    position: absolute;
-                    inset: -1px; /* Overlap existing border */
-                    border-radius: inherit; /* Inherit parent radius */
-                    padding: 1.5px; /* Highlight border thickness */
-                    background: radial-gradient(400px circle at var(--x, -1000px) var(--y, -1000px), rgba(255, 107, 0, 0.8), transparent 40%);
-                    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-                    -webkit-mask-composite: xor;
-                    mask-composite: exclude;
-                    opacity: 0;
-                    transition: opacity 0.3s ease;
-                    pointer-events: none;
-                    z-index: 20;
-                }
-                .highlighter-group:hover .highlighter-item::after {
-                    opacity: 1;
-                }
-            </style>
             
-            <div class="highlighter-group grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
                 @foreach($spareparts as $item)
-                    <div class="highlighter-item bg-white/70 dark:bg-[#161615]/70 backdrop-blur-md rounded-2xl p-4 shadow-sm border border-outline-variant/30 dark:border-white/5 hover:shadow-lg transition-all group flex flex-col h-full relative" style="border-radius: 1rem;">
-                        <a href="{{ Auth::guard('customer')->check() ? route('public.sparepart.index') : route('public.login') }}" class="aspect-square bg-surface-container-lowest dark:bg-[#0a0a0a] rounded-xl mb-4 relative overflow-hidden flex items-center justify-center block">
+                    <div class="bg-[#f5f5f7] dark:bg-[#161617] rounded-3xl p-4 border border-black/[0.05] dark:border-white/[0.08] flex flex-col h-full transition-colors">
+                        <a href="{{ Auth::guard('customer')->check() ? route('public.sparepart.index') : route('public.login') }}" class="aspect-square bg-white dark:bg-[#0d0d0e] rounded-2xl mb-4 relative overflow-hidden flex items-center justify-center block">
                             @if($item->image_path)
-                                <img src="{{ Storage::url($item->image_path) }}" alt="{{ $item->name }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                <img src="{{ Storage::url($item->image_path) }}" alt="{{ $item->name }}" class="w-full h-full object-cover">
                             @else
-                                <span class="material-symbols-outlined text-6xl text-outline-variant dark:text-[#3E3E3A] group-hover:scale-110 transition-transform duration-500">construction</span>
+                                <span class="material-symbols-outlined text-5xl text-[#86868b]">construction</span>
                             @endif
-                            <div class="absolute inset-0 bg-primary/0 group-hover:bg-primary/5 transition-colors duration-300"></div>
                         </a>
-                        <div class="flex flex-col flex-grow relative z-10">
-                            <span class="text-[10px] md:text-xs font-bold text-secondary uppercase tracking-widest mb-1">{{ $item->category }}</span>
-                            <a href="{{ Auth::guard('customer')->check() ? route('public.sparepart.index') : route('public.login') }}" class="font-bold text-on-surface dark:text-[#EDEDEC] line-clamp-2 mb-2 flex-grow hover:text-primary transition-colors">
+                        <div class="flex flex-col flex-grow px-1">
+                            <span class="text-[11px] font-semibold text-[#ff6b00] uppercase tracking-wider mb-1">{{ $item->category }}</span>
+                            <a href="{{ Auth::guard('customer')->check() ? route('public.sparepart.index') : route('public.login') }}" class="font-semibold text-[#1d1d1f] dark:text-[#f5f5f7] line-clamp-2 mb-3 flex-grow hover:text-[#ff6b00] transition-colors">
                                 {{ $item->name }}
                             </a>
-                            <div class="flex items-center justify-between mt-auto pt-2">
-                                <p class="font-bold text-primary dark:text-[#FF8F42] text-sm md:text-base">Rp {{ number_format($item->price, 0, ',', '.') }}</p>
+                            <div class="flex items-center justify-between mt-auto pt-2 border-t border-black/[0.06] dark:border-white/[0.08]">
+                                <p class="font-semibold text-[#1d1d1f] dark:text-[#f5f5f7] text-sm md:text-base tabular-nums">Rp {{ number_format($item->price, 0, ',', '.') }}</p>
                                 @if(Auth::guard('customer')->check())
-                                    <a href="{{ Auth::guard('customer')->check() ? route('public.sparepart.index') : route('public.login') }}" class="w-8 h-8 rounded-full bg-surface-container-highest dark:bg-[#3E3E3A] text-primary dark:text-[#EDEDEC] flex items-center justify-center hover:bg-primary dark:hover:bg-secondary hover:text-white transition-colors" title="Lihat di Katalog">
-                                        <span class="material-symbols-outlined text-[18px] font-bold">add_shopping_cart</span>
+                                    <a href="{{ route('public.sparepart.index') }}" class="w-8 h-8 rounded-full bg-white dark:bg-[#1d1d1f] text-[#1d1d1f] dark:text-[#f5f5f7] flex items-center justify-center hover:bg-[#ff6b00] hover:text-white transition-colors" title="Lihat di Katalog">
+                                        <span class="material-symbols-outlined text-[18px]">add_shopping_cart</span>
                                     </a>
                                 @else
-                                    <a href="{{ route('public.login') }}" class="w-8 h-8 rounded-full bg-surface-container-highest dark:bg-[#3E3E3A] text-primary dark:text-[#EDEDEC] flex items-center justify-center hover:bg-primary dark:hover:bg-secondary hover:text-white transition-colors" title="Masuk untuk Membeli">
-                                        <span class="material-symbols-outlined text-[18px] font-bold">login</span>
+                                    <a href="{{ route('public.login') }}" class="w-8 h-8 rounded-full bg-white dark:bg-[#1d1d1f] text-[#1d1d1f] dark:text-[#f5f5f7] flex items-center justify-center hover:bg-[#ff6b00] hover:text-white transition-colors" title="Masuk untuk Membeli">
+                                        <span class="material-symbols-outlined text-[18px]">login</span>
                                     </a>
                                 @endif
                             </div>
@@ -680,61 +278,30 @@
                     </div>
                 @endforeach
             </div>
-            
-            <script>
-                document.addEventListener('DOMContentLoaded', () => {
-                    const highlighterGroups = document.querySelectorAll('.highlighter-group');
-                    highlighterGroups.forEach(group => {
-                        group.addEventListener('mousemove', e => {
-                            const items = group.querySelectorAll('.highlighter-item');
-                            items.forEach(item => {
-                                const rect = item.getBoundingClientRect();
-                                const x = e.clientX - rect.left;
-                                const y = e.clientY - rect.top;
-                                item.style.setProperty('--x', `${x}px`);
-                                item.style.setProperty('--y', `${y}px`);
-                            });
-                        });
-                    });
-                });
-            </script>
-            
-            <div class="mt-12 text-center md:hidden">
-                <a href="{{ Auth::guard('customer')->check() ? route('public.sparepart.index') : route('public.login') }}" class="inline-flex items-center justify-center gap-2 w-full h-14 bg-primary dark:bg-secondary text-white dark:text-white rounded-full font-bold hover:bg-primary/90 dark:hover:bg-secondary/90 transition-colors shadow-md">
-                    Lihat Semua Sparepart
-                    <span class="material-symbols-outlined">arrow_forward</span>
-                </a>
-            </div>
         </div>
     </section>
     @endif
 
-    <!-- Testimonials (Optional / Skeleton) -->
+    <!-- Testimonials Section -->
     @if(isset($testimonials) && count($testimonials) > 0)
-    <section class="py-24 bg-surface-container-lowest dark:bg-[#0a0a0a] relative overflow-hidden" id="testimonials">
-        <div class="max-w-screen-xl mx-auto px-margin-mobile md:px-margin-desktop">
-            <div class="text-center max-w-2xl mx-auto mb-16">
-                <h2 class="text-secondary font-semibold tracking-wider uppercase text-sm mb-4">Ulasan Pelanggan</h2>
-                <h3 class="split-target font-headline-lg text-4xl font-bold text-on-surface dark:text-[#EDEDEC]">Apa Kata <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#FF6B00] to-[#FF8F42]">Mereka?</span></h3>
-            </div>
+    <section class="py-24 bg-[#f5f5f7] dark:bg-[#0d0d0e] border-t border-black/[0.06] dark:border-white/[0.08] overflow-hidden" id="testimonials">
+        <div class="max-w-screen-xl mx-auto px-margin-mobile md:px-margin-desktop mb-12">
+            <p class="text-xs font-semibold uppercase tracking-[0.1em] text-[#ff6b00] mb-2">Ulasan Pelanggan</p>
+            <h2 class="text-3xl lg:text-4xl font-bold tracking-tight text-[#1d1d1f] dark:text-white">Apa Kata Mereka</h2>
         </div>
-            
-        <!-- Horizontal Scrollable Container (Auto-scroll Ticker) -->
-        <div class="relative w-full group highlighter-group"
-             style="-webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%); mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);">
-            <div id="testimonial-scroll" class="flex overflow-x-auto gap-6 px-margin-mobile md:px-margin-desktop pb-8 pt-4 no-scrollbar w-full">
-                <!-- Set 1 -->
+
+        <div class="relative w-full">
+            <div id="testimonial-scroll" class="flex overflow-x-auto gap-5 px-margin-mobile md:px-margin-desktop pb-6 no-scrollbar w-full">
                 @foreach($testimonials as $testimonial)
-                <div class="highlighter-item bg-white/70 dark:bg-[#161615]/70 backdrop-blur-md p-8 rounded-3xl shadow-sm hover:shadow-xl hover:scale-105 hover:z-10 border border-outline-variant/30 dark:border-white/5 relative flex flex-col shrink-0 w-[85vw] sm:w-[400px] transition-all duration-300" style="border-radius: 1.5rem;">
-                    <span class="material-symbols-outlined absolute top-6 right-6 text-5xl text-outline-variant/30 dark:text-outline-variant/10">format_quote</span>
-                    <div class="flex gap-1 text-secondary mb-6">
+                <div class="bg-white dark:bg-[#161617] p-7 rounded-3xl border border-black/[0.05] dark:border-white/[0.08] flex flex-col shrink-0 w-[85vw] sm:w-[380px]">
+                    <div class="flex gap-1 text-[#ff6b00] mb-5">
                         @for($i = 0; $i < 5; $i++)
-                            <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' {{ $i < $testimonial->rating ? '1' : '0' }};">star</span>
+                            <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' {{ $i < $testimonial->rating ? '1' : '0' }};">star</span>
                         @endfor
                     </div>
-                    <p class="text-on-surface-variant dark:text-gray-400 italic mb-8 relative z-10 flex-grow whitespace-normal">"{{ $testimonial->content }}"</p>
-                    <div class="flex items-center gap-4 mt-auto">
-                        <div class="w-12 h-12 bg-primary-container rounded-full flex items-center justify-center text-primary font-bold shrink-0 overflow-hidden border border-outline-variant/30 dark:border-[#3E3E3A]">
+                    <p class="text-[#424245] dark:text-[#a1a1a6] text-sm leading-relaxed mb-7 flex-grow whitespace-normal">"{{ $testimonial->content }}"</p>
+                    <div class="flex items-center gap-3 mt-auto">
+                        <div class="w-10 h-10 bg-[#f5f5f7] dark:bg-[#1d1d1f] rounded-full flex items-center justify-center text-[#1d1d1f] dark:text-white text-xs font-semibold shrink-0 overflow-hidden border border-black/[0.06] dark:border-white/[0.1]">
                             @if(optional($testimonial->customer)->profile_photo_url)
                                 <img src="{{ $testimonial->customer->profile_photo_url }}" class="w-full h-full object-cover" alt="{{ $testimonial->customer_name }}">
                             @else
@@ -742,27 +309,25 @@
                             @endif
                         </div>
                         <div class="min-w-0">
-                            <p class="font-bold text-on-surface dark:text-[#EDEDEC] truncate">{{ $testimonial->customer ? $testimonial->customer->name : $testimonial->customer_name }}</p>
+                            <p class="font-semibold text-sm text-[#1d1d1f] dark:text-[#f5f5f7] truncate">{{ $testimonial->customer ? $testimonial->customer->name : $testimonial->customer_name }}</p>
                             @if($testimonial->vehicle)
-                                <p class="text-sm text-on-surface-variant dark:text-gray-500 truncate">{{ $testimonial->vehicle }}</p>
+                                <p class="text-xs text-[#6e6e73] dark:text-[#86868b] truncate">{{ $testimonial->vehicle }}</p>
                             @endif
                         </div>
                     </div>
                 </div>
                 @endforeach
 
-                <!-- Set 2 (for seamless infinite loop) -->
                 @foreach($testimonials as $testimonial)
-                <div class="highlighter-item bg-surface dark:bg-[#161615] p-8 rounded-3xl shadow-sm hover:shadow-xl hover:scale-105 hover:z-10 border border-outline-variant dark:border-[#3E3E3A] relative flex flex-col shrink-0 w-[85vw] sm:w-[400px] transition-all duration-300" aria-hidden="true" style="border-radius: 1.5rem;">
-                    <span class="material-symbols-outlined absolute top-6 right-6 text-5xl text-outline-variant/30 dark:text-outline-variant/10">format_quote</span>
-                    <div class="flex gap-1 text-secondary mb-6">
+                <div class="bg-white dark:bg-[#161617] p-7 rounded-3xl border border-black/[0.05] dark:border-white/[0.08] flex flex-col shrink-0 w-[85vw] sm:w-[380px]" aria-hidden="true">
+                    <div class="flex gap-1 text-[#ff6b00] mb-5">
                         @for($i = 0; $i < 5; $i++)
-                            <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' {{ $i < $testimonial->rating ? '1' : '0' }};">star</span>
+                            <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' {{ $i < $testimonial->rating ? '1' : '0' }};">star</span>
                         @endfor
                     </div>
-                    <p class="text-on-surface-variant dark:text-gray-400 italic mb-8 relative z-10 flex-grow whitespace-normal">"{{ $testimonial->content }}"</p>
-                    <div class="flex items-center gap-4 mt-auto">
-                        <div class="w-12 h-12 bg-primary-container rounded-full flex items-center justify-center text-primary font-bold shrink-0 overflow-hidden border border-outline-variant/30 dark:border-[#3E3E3A]">
+                    <p class="text-[#424245] dark:text-[#a1a1a6] text-sm leading-relaxed mb-7 flex-grow whitespace-normal">"{{ $testimonial->content }}"</p>
+                    <div class="flex items-center gap-3 mt-auto">
+                        <div class="w-10 h-10 bg-[#f5f5f7] dark:bg-[#1d1d1f] rounded-full flex items-center justify-center text-[#1d1d1f] dark:text-white text-xs font-semibold shrink-0 overflow-hidden border border-black/[0.06] dark:border-white/[0.1]">
                             @if(optional($testimonial->customer)->profile_photo_url)
                                 <img src="{{ $testimonial->customer->profile_photo_url }}" class="w-full h-full object-cover" alt="{{ $testimonial->customer_name }}">
                             @else
@@ -770,9 +335,9 @@
                             @endif
                         </div>
                         <div class="min-w-0">
-                            <p class="font-bold text-on-surface dark:text-[#EDEDEC] truncate">{{ $testimonial->customer ? $testimonial->customer->name : $testimonial->customer_name }}</p>
+                            <p class="font-semibold text-sm text-[#1d1d1f] dark:text-[#f5f5f7] truncate">{{ $testimonial->customer ? $testimonial->customer->name : $testimonial->customer_name }}</p>
                             @if($testimonial->vehicle)
-                                <p class="text-sm text-on-surface-variant dark:text-gray-500 truncate">{{ $testimonial->vehicle }}</p>
+                                <p class="text-xs text-[#6e6e73] dark:text-[#86868b] truncate">{{ $testimonial->vehicle }}</p>
                             @endif
                         </div>
                     </div>
@@ -785,88 +350,67 @@
             document.addEventListener('DOMContentLoaded', () => {
                 const scrollContainer = document.getElementById('testimonial-scroll');
                 if(!scrollContainer) return;
-
                 let isHovered = false;
                 let isDown = false;
                 let startX;
                 let scrollLeft;
-                
+                let scrollPos = 0;
+
                 scrollContainer.addEventListener('mouseenter', () => isHovered = true);
                 scrollContainer.addEventListener('mouseleave', () => {
                     isHovered = false;
                     isDown = false;
-                    scrollContainer.classList.remove('cursor-grabbing');
                 });
                 scrollContainer.addEventListener('touchstart', () => isHovered = true);
                 scrollContainer.addEventListener('touchend', () => {
                     setTimeout(() => isHovered = false, 2000);
                 });
-                
                 scrollContainer.addEventListener('mousedown', (e) => {
                     isDown = true;
                     isHovered = true;
-                    scrollContainer.classList.add('cursor-grabbing');
                     startX = e.pageX - scrollContainer.offsetLeft;
                     scrollLeft = scrollContainer.scrollLeft;
                 });
-                
                 scrollContainer.addEventListener('mouseup', () => {
                     isDown = false;
                     isHovered = false;
-                    scrollContainer.classList.remove('cursor-grabbing');
                 });
-                
                 scrollContainer.addEventListener('mousemove', (e) => {
                     if (!isDown) return;
                     e.preventDefault();
                     const x = e.pageX - scrollContainer.offsetLeft;
-                    const walk = (x - startX) * 1.5;
-                    scrollContainer.scrollLeft = scrollLeft - walk;
+                    scrollContainer.scrollLeft = scrollLeft - (x - startX) * 1.5;
                     scrollPos = scrollContainer.scrollLeft;
                 });
 
-                // Smooth scrolling ticker — seamless infinite loop
-                let scrollPos = 0;
-                let animFrameId;
-
-                // Tunggu sampai DOM siap lalu ambil lebar setengah konten (Set 1 = Set 2)
                 const getHalfWidth = () => scrollContainer.scrollWidth / 2;
-
                 const step = () => {
-                    if (!isHovered) {
-                        scrollPos += 0.6; // Kecepatan scroll (lebih lambat = lebih smooth)
-                        
-                        // Seamless reset: begitu mencapai titik tengah (akhir Set 1), 
-                        // langsung kembali ke awal — transisinya tidak terlihat karena Set 2 identik dengan Set 1
-                        if (scrollPos >= getHalfWidth()) {
-                            scrollPos = 0;
-                        }
-                        
+                    const half = getHalfWidth();
+                    if (!isHovered && half > 0) {
+                        scrollPos += 0.55;
+                        if (scrollPos >= half) scrollPos = 0;
                         scrollContainer.scrollLeft = scrollPos;
-                    } else {
-                        // Sync scrollPos dengan posisi manual agar tidak loncat saat hover dilepas
-                        scrollPos = scrollContainer.scrollLeft % getHalfWidth();
+                    } else if (half > 0) {
+                        scrollPos = scrollContainer.scrollLeft % half;
                     }
-                    animFrameId = requestAnimationFrame(step);
+                    requestAnimationFrame(step);
                 };
-                animFrameId = requestAnimationFrame(step);
+                requestAnimationFrame(step);
             });
         </script>
     </section>
     @endif
 
     <!-- Final CTA Section -->
-    <section class="py-24 bg-surface-container-lowest dark:bg-[#0a0a0a] relative overflow-hidden border-t border-outline-variant/30 dark:border-[#3E3E3A]/30">
-        <div class="absolute inset-0 bg-[url('https://lh3.googleusercontent.com/aida-public/AB6AXuBqcFyfSaGZkAhCtijRJkrnP6PUW7V-24XDxsWZXgXekVLt5P1DbMak7qb1FnRHTch5HqA9JrtpbrFB-I8HWTrdgs_IW8uBHKcjpmYl6_DAqtx_bPRobMMLplGCY4MMepnV1ApYOjjIu8cKQCw-kAEWMOUGGJk80w7qvpjYDw-79hG9Stpou345AExteGRoggQax9SZ8K1PyJiIitezCajqNplnm537UTTL1Wgbd7iDLRY1SuNRR-K4Ow')] bg-cover bg-center mix-blend-overlay opacity-5 dark:opacity-20"></div>
-        <div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest dark:from-black to-transparent"></div>
-        <div class="max-w-4xl mx-auto px-margin-mobile md:px-margin-desktop relative z-10 text-center">
-            <h2 class="split-target text-4xl md:text-5xl font-bold text-on-surface dark:text-white mb-6 font-sora">Siap Merawat <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#FF6B00] to-[#FF8F42]">Kendaraan</span> Anda?</h2>
-            <p class="text-xl text-on-surface-variant dark:text-white/90 mb-10 leading-relaxed">Bergabunglah dengan ribuan pelanggan lainnya dan rasakan pengalaman servis kendaraan yang modern, transparan, dan tanpa ribet.</p>
-            <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <a href="{{ route('public.register') }}" class="bg-[#FF7A1F] text-white hover:bg-[#FF8F42] hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 font-bold text-lg h-16 px-10 rounded-full shadow-xl shadow-[#FF6B00]/30 flex items-center justify-center gap-2">
+    <section class="py-24 bg-white dark:bg-black border-t border-black/[0.06] dark:border-white/[0.08]">
+        <div class="max-w-3xl mx-auto px-margin-mobile md:px-margin-desktop text-center">
+            <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-[#1d1d1f] dark:text-white mb-4">Siap Merawat Kendaraan Anda?</h2>
+            <p class="text-lg text-[#6e6e73] dark:text-[#86868b] mb-8 leading-relaxed">Daftar sekarang untuk menjadwalkan servis, memantau progres pengerjaan, dan mengakses riwayat kendaraan secara transparan.</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-3">
+                <a href="{{ route('public.register') }}" class="bg-[#ff6b00] hover:bg-[#e55f00] text-white font-semibold text-sm h-12 px-8 rounded-full inline-flex items-center justify-center transition-colors">
                     Daftar Sekarang
                 </a>
-                <a href="{{ route('public.login') }}" class="bg-transparent border-2 border-outline-variant dark:border-white text-on-surface dark:text-white hover:bg-surface-container-highest dark:hover:bg-white/10 transition-all font-bold text-lg h-16 px-10 rounded-full flex items-center justify-center">
+                <a href="{{ route('public.login') }}" class="bg-black/[0.04] dark:bg-white/[0.08] hover:bg-black/[0.08] dark:hover:bg-white/[0.14] text-[#1d1d1f] dark:text-[#f5f5f7] border border-black/[0.08] dark:border-white/[0.12] font-medium text-sm h-12 px-8 rounded-full inline-flex items-center justify-center transition-colors">
                     Masuk Portal
                 </a>
             </div>

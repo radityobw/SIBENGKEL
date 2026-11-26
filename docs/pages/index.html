@@ -15,7 +15,7 @@
   <meta name="google-site-verification" content="6y-5Cff0WkeBj7_uWju39rv0nQnqmEgw81an57VJkGg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Sora:wght@600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="SIBENGKEL" />
@@ -78,32 +78,28 @@
 
   <style>
     :root {
-      --bg: #0a0a0a;
-      --surface: #131312;
-      --surface-2: #1c1c1a;
-      --border: #262623;
-      --border-strong: #3c3c36;
-      --text: #ededec;
-      --muted: #9e9e97;
+      --bg: #000000;
+      --surface: #161617;
+      --surface-2: #1d1d1f;
+      --hairline: rgba(255, 255, 255, 0.10);
+      --text: #f5f5f7;
+      --muted: #86868b;
       --accent: #ff6b00;
       --accent-soft: #ff9447;
-      --mono: "JetBrains Mono", Consolas, monospace;
-      --display: "Sora", "Inter", sans-serif;
-      --sans: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+      --mono: "SF Mono", ui-monospace, "JetBrains Mono", Menlo, monospace;
+      --display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", "Helvetica Neue", sans-serif;
+      --sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", "Helvetica Neue", sans-serif;
     }
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     body {
       margin: 0;
       font-family: var(--sans);
-      background-color: var(--bg);
-      background-image:
-        linear-gradient(to right, rgba(237, 237, 236, 0.03) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(237, 237, 236, 0.03) 1px, transparent 1px);
-      background-size: 48px 48px;
+      background: var(--bg);
       color: var(--text);
-      line-height: 1.6;
+      line-height: 1.58;
       -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
     }
     a { color: var(--accent-soft); text-decoration: none; }
     a:hover { text-decoration: underline; }
@@ -114,7 +110,7 @@
       left: 0;
       right: 0;
       height: 2px;
-      background: rgba(255, 255, 255, 0.06);
+      background: transparent;
       z-index: 60;
       pointer-events: none;
     }
@@ -130,58 +126,63 @@
       position: sticky;
       top: 0;
       z-index: 40;
-      background: rgba(10, 10, 10, 0.92);
-      backdrop-filter: blur(8px);
-      border-bottom: 1px solid var(--border);
+      height: 52px;
+      background: rgba(0, 0, 0, 0.72);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 1px solid var(--hairline);
     }
     .topbar-inner {
-      max-width: 1240px;
+      max-width: 1180px;
+      height: 100%;
       margin: 0 auto;
-      padding: 12px 24px;
+      padding: 0 28px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 16px;
-      font-family: var(--mono);
-      font-size: 12px;
+      font-size: 13px;
       color: var(--muted);
     }
     .brand-mark {
       display: inline-flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
       color: var(--text);
       font-weight: 600;
-      letter-spacing: 0.06em;
+      font-size: 14px;
+      letter-spacing: -0.01em;
     }
-    .brand-hex {
-      width: 10px;
-      height: 10px;
+    .brand-mark:hover { text-decoration: none; }
+    .brand-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
       background: var(--accent);
       display: inline-block;
     }
     .topbar-nav {
       display: flex;
       flex-wrap: wrap;
-      gap: 18px;
+      gap: 24px;
     }
-    .topbar-nav a { color: var(--muted); }
+    .topbar-nav a { color: var(--muted); font-weight: 500; transition: color 0.15s ease; }
     .topbar-nav a:hover { color: var(--text); text-decoration: none; }
 
     .wrap {
-      max-width: 1240px;
+      max-width: 1180px;
       margin: 0 auto;
-      padding: 36px 24px 72px;
+      padding: 56px 28px 84px;
     }
     .spec-grid {
       display: grid;
-      grid-template-columns: minmax(0, 1.15fr) minmax(350px, 0.85fr);
-      gap: 40px;
+      grid-template-columns: minmax(0, 1.08fr) minmax(360px, 0.92fr);
+      gap: 56px;
       align-items: start;
     }
     .vitrine-col {
       position: sticky;
-      top: 74px;
+      top: 84px;
       order: 2;
     }
     .chapters-col {
@@ -191,50 +192,44 @@
 
     #stage-3d {
       position: relative;
-      height: min(540px, calc(100vh - 110px));
-      min-height: 400px;
-      background: linear-gradient(160deg, #121210 0%, #0b0b0a 100%);
-      border: 1px solid var(--border);
+      height: min(560px, calc(100vh - 120px));
+      min-height: 420px;
+      background: radial-gradient(circle at 50% 45%, #1c1c1e 0%, #0d0d0f 70%, #050506 100%);
+      border: 1px solid var(--hairline);
+      border-radius: 28px;
       overflow: hidden;
       cursor: grab;
       user-select: none;
       touch-action: pan-y;
     }
     #stage-3d:active { cursor: grabbing; }
-    .cad-tick {
-      position: absolute;
-      width: 12px;
-      height: 12px;
-      pointer-events: none;
-      z-index: 4;
-    }
-    .cad-tick.tl { top: 10px; left: 10px; border-top: 2px solid var(--accent); border-left: 2px solid var(--accent); }
-    .cad-tick.tr { top: 10px; right: 10px; border-top: 1px solid var(--border-strong); border-right: 1px solid var(--border-strong); }
-    .cad-tick.bl { bottom: 10px; left: 10px; border-bottom: 1px solid var(--border-strong); border-left: 1px solid var(--border-strong); }
-    .cad-tick.br { bottom: 10px; right: 10px; border-bottom: 2px solid var(--accent); border-right: 2px solid var(--accent); }
 
     .stage-hud-top {
       position: absolute;
-      top: 18px;
+      top: 20px;
       left: 22px;
       right: 22px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font-family: var(--mono);
-      font-size: 11px;
-      letter-spacing: 0.08em;
+      font-size: 12px;
+      font-weight: 500;
       color: var(--muted);
       pointer-events: none;
       z-index: 4;
     }
     #stage-chapter {
-      color: var(--accent-soft);
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 4px 12px;
+      border-radius: 980px;
+      color: var(--text);
       font-weight: 600;
     }
     .stage-hud-bottom {
       position: absolute;
-      bottom: 16px;
+      bottom: 18px;
       left: 22px;
       right: 22px;
       display: flex;
@@ -264,16 +259,13 @@
       height: 150px;
       object-fit: contain;
       z-index: 1;
-      transition: opacity 0.45s ease;
     }
-    #stage-3d.is-ready .stage-fallback {
-      display: none;
-    }
+    #stage-3d.is-ready .stage-fallback { display: none; }
 
     .chapter {
-      padding-bottom: 52px;
-      margin-bottom: 52px;
-      border-bottom: 1px solid var(--border);
+      padding-bottom: 64px;
+      margin-bottom: 64px;
+      border-bottom: 1px solid var(--hairline);
     }
     .chapter:last-child {
       border-bottom: none;
@@ -282,91 +274,94 @@
     }
     .eyebrow {
       display: inline-block;
-      font-family: var(--mono);
-      font-size: 11.5px;
+      font-size: 12px;
       font-weight: 600;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
       color: var(--accent-soft);
-      border-left: 2px solid var(--accent);
-      padding-left: 10px;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
     }
     h1 {
       font-family: var(--display);
-      margin: 0 0 14px;
-      font-size: clamp(30px, 4vw, 44px);
-      line-height: 1.1;
-      letter-spacing: -0.02em;
+      margin: 0 0 16px;
+      font-size: clamp(34px, 4.4vw, 52px);
+      font-weight: 700;
+      line-height: 1.06;
+      letter-spacing: -0.035em;
       color: #ffffff;
     }
     .lead {
-      margin: 0 0 22px;
-      color: #d4d4d0;
-      font-size: 16px;
-      max-width: 680px;
+      margin: 0 0 24px;
+      color: #a1a1a6;
+      font-size: 17px;
+      line-height: 1.55;
+      max-width: 620px;
     }
-    .pill-row { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 18px; }
-    .pill {
-      font-family: var(--mono);
-      font-size: 11.5px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      color: var(--text);
-      padding: 4px 10px;
+    .spec-meta {
+      margin: 0 0 26px;
+      font-size: 13.5px;
+      color: var(--muted);
+      line-height: 1.7;
     }
-    .badge-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; }
     .cta-row { display: flex; flex-wrap: wrap; gap: 10px; }
     .btn {
-      display: inline-block;
-      padding: 10px 18px;
-      font-weight: 600;
-      font-size: 13.5px;
-      border: 1px solid var(--border-strong);
+      display: inline-flex;
+      align-items: center;
+      padding: 10px 20px;
+      border-radius: 980px;
+      font-weight: 500;
+      font-size: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
       color: var(--text);
-      background: var(--surface-2);
+      background: rgba(255, 255, 255, 0.06);
+      transition: background 0.15s ease, border-color 0.15s ease;
     }
     .btn.primary {
       background: var(--accent);
       border-color: var(--accent);
-      color: #0a0a0a;
-      font-weight: 700;
+      color: #000000;
+      font-weight: 600;
     }
-    .btn:hover { text-decoration: none; border-color: var(--text); }
-    .btn.primary:hover { background: var(--accent-soft); border-color: var(--accent-soft); }
+    .btn:hover { text-decoration: none; background: rgba(255, 255, 255, 0.12); }
+    .btn.primary:hover { background: #ff8533; border-color: #ff8533; }
 
     h2 {
       font-family: var(--display);
-      font-size: 22px;
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.025em;
       color: #ffffff;
-      margin: 0 0 16px;
-      border-left: 3px solid var(--accent);
-      padding-left: 12px;
+      margin: 0 0 18px;
     }
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 14px;
+      gap: 16px;
     }
     .card {
       background: var(--surface);
-      border: 1px solid var(--border);
-      padding: 18px;
+      border: 1px solid var(--hairline);
+      border-radius: 24px;
+      padding: 24px;
     }
     .card h3 {
       font-family: var(--display);
       margin: 0 0 8px;
-      font-size: 15.5px;
-      color: var(--accent-soft);
+      font-size: 17px;
+      font-weight: 600;
+      letter-spacing: -0.015em;
+      color: var(--text);
     }
-    .card p { margin: 0; font-size: 13.8px; color: var(--muted); }
+    .card p { margin: 0; font-size: 14px; color: var(--muted); line-height: 1.55; }
     pre {
-      background: #050505;
-      border: 1px solid var(--border);
-      padding: 16px 18px;
+      background: #111113;
+      border: 1px solid var(--hairline);
+      border-radius: 18px;
+      padding: 20px 22px;
       overflow-x: auto;
       font-size: 13px;
-      color: #ededec;
+      line-height: 1.65;
+      color: #f5f5f7;
       margin: 0;
     }
     code { font-family: var(--mono); }
@@ -374,68 +369,70 @@
       width: 100%;
       border-collapse: collapse;
       background: var(--surface);
-      border: 1px solid var(--border);
-      font-size: 13.5px;
+      border: 1px solid var(--hairline);
+      border-radius: 20px;
+      overflow: hidden;
+      font-size: 14px;
+      font-variant-numeric: tabular-nums;
     }
-    th, td { padding: 11px 14px; text-align: left; border-bottom: 1px solid var(--border); }
-    th { background: var(--surface-2); color: #ffdcc3; font-family: var(--mono); font-size: 12px; text-transform: uppercase; }
+    th, td { padding: 14px 18px; text-align: left; border-bottom: 1px solid var(--hairline); }
+    th { background: var(--surface-2); color: var(--muted); font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; }
     tr:last-child td { border-bottom: none; }
     .tag-pill {
       display: inline-block;
-      font-family: var(--mono);
+      font-size: 12px;
       font-weight: 600;
-      font-size: 11.5px;
-      padding: 2px 8px;
+      padding: 3px 10px;
+      border-radius: 980px;
       background: rgba(255, 107, 0, 0.14);
       color: var(--accent-soft);
-      border: 1px solid rgba(255, 107, 0, 0.35);
     }
     .release-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 14px;
+      gap: 16px;
       margin-top: 16px;
     }
     .release-card {
       background: var(--surface);
-      border: 1px solid var(--border);
-      padding: 18px 20px;
+      border: 1px solid var(--hairline);
+      border-radius: 24px;
+      padding: 22px 24px;
     }
     .release-head {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
     }
     .release-tag {
       font-family: var(--mono);
-      font-weight: 700;
-      font-size: 13px;
+      font-weight: 600;
+      font-size: 12.5px;
       color: var(--accent-soft);
       background: rgba(255, 107, 0, 0.14);
-      border: 1px solid rgba(255, 107, 0, 0.35);
-      padding: 2px 10px;
+      padding: 3px 10px;
+      border-radius: 980px;
     }
     .release-date { font-family: var(--mono); font-size: 12px; color: var(--muted); }
-    .release-card ul { margin: 0; padding-left: 18px; color: var(--muted); font-size: 13.5px; }
+    .release-card ul { margin: 0; padding-left: 18px; color: var(--muted); font-size: 14px; }
     .release-card li { margin-bottom: 6px; }
     footer {
       margin-top: 40px;
-      padding-top: 20px;
-      border-top: 1px solid var(--border);
+      padding-top: 24px;
+      border-top: 1px solid var(--hairline);
       color: var(--muted);
-      font-family: var(--mono);
-      font-size: 12px;
+      font-size: 12.5px;
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
       gap: 10px;
     }
     @media (max-width: 960px) {
-      .spec-grid { grid-template-columns: 1fr; gap: 28px; }
+      .spec-grid { grid-template-columns: 1fr; gap: 32px; }
       .vitrine-col { position: relative; top: 0; order: 1; }
       .chapters-col { order: 2; }
-      #stage-3d { height: 340px; min-height: 300px; }
+      #stage-3d { height: 360px; min-height: 300px; }
     }
   </style>
 </head>
@@ -444,7 +441,7 @@
 
   <nav class="topbar" aria-label="Navigasi SIBENGKEL">
     <div class="topbar-inner">
-      <a class="brand-mark" href="https://radityobw.github.io/SIBENGKEL/"><span class="brand-hex"></span>SIBENGKEL / SPEC-SHEET</a>
+      <a class="brand-mark" href="https://radityobw.github.io/SIBENGKEL/"><span class="brand-dot"></span>SIBENGKEL</a>
       <div class="topbar-nav">
         <a href="#sec-kapabilitas">Kapabilitas</a>
         <a href="#sec-arsitektur">Arsitektur</a>
@@ -458,27 +455,19 @@
     <div class="spec-grid">
       <main class="chapters-col">
         <section class="chapter" data-chapter="overview" id="sec-overview">
-          <span class="eyebrow">v1.1.0 | Monochrome Industrial Edition | MIT License</span>
+          <span class="eyebrow">v1.1.0 | Apple Pro Titanium | MIT License</span>
           <h1>SIBENGKEL: Sistem Informasi Bengkel Terpadu</h1>
           <p class="lead">
             Platform web berbasis <strong>Laravel 13</strong> dan <strong>PHP 8.3+</strong> untuk mendigitalisasi operasional bengkel otomotif: manajemen transaksi servis, <em>booking</em> daring, <em>e-commerce sparepart</em>, portal pelanggan, pelacakan status publik, dan RESTful API Sanctum.
           </p>
-          <div class="pill-row">
-            <span class="pill">Laravel 13 &amp; PHP 8.3+</span>
-            <span class="pill">Dual-Guard Auth &amp; 3-Level RBAC</span>
-            <span class="pill">Sanctum RESTful API</span>
-            <span class="pill">137 Blackbox Test Cases</span>
-            <span class="pill">DevSecOps + SIDIK SAST/SCA</span>
-          </div>
-          <div class="badge-row">
-            <a href="https://github.com/radityobw/SIBENGKEL/releases/latest"><img src="https://img.shields.io/github/v/release/radityobw/SIBENGKEL?label=Release&color=FF6B00&cacheSeconds=3600" alt="GitHub Release" /></a>
-            <a href="https://github.com/radityobw/SIBENGKEL/actions/workflows/devsecops-cicd.yml"><img src="https://img.shields.io/github/actions/workflow/status/radityobw/SIBENGKEL/devsecops-cicd.yml?label=CI&color=22c55e" alt="CI Status" /></a>
-            <a href="https://github.com/radityobw/SIBENGKEL/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-MIT-a855f7.svg" alt="MIT License" /></a>
-          </div>
+          <p class="spec-meta">
+            Dual-Guard Auth &amp; 3-Level RBAC  ·  Sanctum RESTful API  ·  40 PHPUnit Tests (137 Blackbox Cases)  ·  DevSecOps + SIDIK SAST/SCA
+          </p>
           <div class="cta-row">
             <a class="btn primary" href="https://github.com/radityobw/SIBENGKEL">GitHub Repository</a>
+            <a class="btn" href="https://github.com/radityobw/SIBENGKEL/releases/latest">Releases</a>
             <a class="btn" href="https://github.com/radityobw/SIBENGKEL/blob/main/docs/PRD_Sistem_Informasi_Bengkel.md">PRD &amp; API Spec</a>
-            <a class="btn" href="https://github.com/radityobw/SIBENGKEL/blob/main/docs/blackbox.md">Blackbox QA Report</a>
+            <a class="btn" href="https://github.com/radityobw/SIBENGKEL/blob/main/docs/blackbox.md">Blackbox QA</a>
           </div>
         </section>
 
@@ -523,7 +512,7 @@
               <tr>
                 <td><span class="tag-pill">Frontend</span></td>
                 <td><strong>Tailwind CSS 3 &amp; Alpine.js</strong></td>
-                <td>78 Blade views, tema Monochrome Industrial &amp; Workshop Orange, View Transition API</td>
+                <td>78 Blade views, mode terang &amp; gelap terpadu, View Transition API</td>
               </tr>
               <tr>
                 <td><span class="tag-pill">API &amp; Auth</span></td>
@@ -571,7 +560,7 @@ php artisan serve</code></pre>
             </div>
           </div>
 
-          <h2 style="margin-top:34px;">Rilis Terbaru (Tersinkron Otomatis dari CHANGELOG.md)</h2>
+          <h2 style="margin-top:40px;">Rilis Terbaru</h2>
           <div class="release-grid">
             <!-- AUTO_CHANGELOG_START -->
             <article class="release-card">
@@ -590,26 +579,22 @@ php artisan serve</code></pre>
 
       <aside class="vitrine-col" aria-label="Showcase 3D Emblem SIBENGKEL">
         <div id="stage-3d">
-          <span class="cad-tick tl"></span>
-          <span class="cad-tick tr"></span>
-          <span class="cad-tick bl"></span>
-          <span class="cad-tick br"></span>
           <div class="stage-hud-top">
-            <span id="stage-chapter">01 / OVERVIEW</span>
-            <span>DRAG TO INSPECT</span>
+            <span id="stage-chapter">01 Overview</span>
+            <span>Drag to inspect</span>
           </div>
           <img class="stage-fallback" src="logobengkel.png" alt="Logo SIBENGKEL" width="150" height="150" />
           <canvas id="canvas-3d" aria-label="Model 3D Emblem Heksagon SIBENGKEL"></canvas>
           <div class="stage-hud-bottom">
             <span>sibengkel.glb</span>
-            <span>MONOCHROME TITANIUM</span>
+            <span>Brushed titanium</span>
           </div>
         </div>
       </aside>
     </div>
 
     <footer>
-      <span>SIBENGKEL - Sistem Informasi Bengkel - MIT License - <!-- AUTO_UPDATED_START -->Updated 2026-11-25<!-- AUTO_UPDATED_END --></span>
+      <span>SIBENGKEL · Sistem Informasi Bengkel · MIT License · <!-- AUTO_UPDATED_START -->Updated 2026-11-25<!-- AUTO_UPDATED_END --></span>
       <span><a href="https://github.com/radityobw/SIBENGKEL">GitHub</a> | <a href="https://github.com/radityobw/SIBENGKEL/releases">Releases</a> | <a href="https://github.com/radityobw/SIBENGKEL/blob/main/CHANGELOG.md">Changelog</a></span>
     </footer>
   </div>

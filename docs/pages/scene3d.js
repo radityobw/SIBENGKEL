@@ -11,11 +11,11 @@ const KEYFRAMES = [
 ];
 
 const CHAPTER_LABELS = {
-  overview: '01 / OVERVIEW',
-  kapabilitas: '02 / KAPABILITAS',
-  arsitektur: '03 / ARSITEKTUR',
-  instalasi: '04 / INSTALASI',
-  rilis: '05 / TIM & RILIS',
+  overview: '01 Overview',
+  kapabilitas: '02 Kapabilitas',
+  arsitektur: '03 Arsitektur',
+  instalasi: '04 Quick Start',
+  rilis: '05 Rilis',
 };
 
 function clamp(v, lo, hi) {
@@ -192,9 +192,9 @@ function initShowcase() {
   let loaded = false;
 
   const titaniumMat = new THREE.MeshStandardMaterial({
-    color: 0xe6e6e2,
-    metalness: 0.62,
-    roughness: 0.28,
+    color: 0xe6e6e8,
+    metalness: 0.68,
+    roughness: 0.24,
   });
 
   const loader = new GLTFLoader();

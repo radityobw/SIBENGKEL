@@ -18,14 +18,14 @@
     <meta property="og:url" content="{{ url()->current() }}">
     <meta property="og:title" content="@yield('title', 'SIBENGKEL - Sistem Informasi Bengkel Era Digital')">
     <meta property="og:description" content="@yield('meta_description', 'Kelola jadwal servis, pantau status pengerjaan secara real-time, dan akses riwayat perawatan kendaraan Anda dalam satu aplikasi canggih.')">
-    <meta property="og:image" content="{{ asset('logobengkel.png') }}">
+    <meta property="og:image" content="{{ asset('og-banner.png') }}">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="{{ url()->current() }}">
     <meta property="twitter:title" content="@yield('title', 'SIBENGKEL - Sistem Informasi Bengkel Era Digital')">
     <meta property="twitter:description" content="@yield('meta_description', 'Kelola jadwal servis, pantau status pengerjaan secara real-time, dan akses riwayat perawatan kendaraan Anda dalam satu aplikasi canggih.')">
-    <meta property="twitter:image" content="{{ asset('logobengkel.png') }}">
+    <meta property="twitter:image" content="{{ asset('og-banner.png') }}">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@600;700&display=swap" rel="stylesheet"/>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -116,35 +116,35 @@
         }
     </script>
 </head>
-<body class="bg-background dark:bg-[#0a0a0a] text-on-background dark:text-[#EDEDEC] font-body-md antialiased min-h-screen flex flex-col transition-colors duration-300">
+<body class="bg-white dark:bg-black text-[#1d1d1f] dark:text-[#f5f5f7] font-body-md antialiased min-h-screen flex flex-col transition-colors duration-300">
     <!-- TopNavBar Component -->
-    <nav class="flex justify-between items-center w-full px-4 md:px-margin-desktop py-3 md:py-4 sticky top-0 z-50 bg-white/70 dark:bg-[#0a0a0a]/75 backdrop-blur-xl border-b border-white/50 dark:border-white/10 shadow-sm text-black dark:text-[#EDEDEC] transition-all duration-300">
-        <a href="{{ url('/') }}" class="font-headline-md text-lg md:text-headline-md tracking-tighter flex items-center gap-1.5 md:gap-2 hover:opacity-90 text-black dark:text-[#EDEDEC]">
-            <img src="{{ asset('logobengkel.png') }}" alt="Logo" class="h-6 md:h-8 object-contain brightness-0 dark:invert"> SIBENGKEL
+    <nav class="flex justify-between items-center w-full h-14 px-4 md:px-margin-desktop sticky top-0 z-50 bg-white/80 dark:bg-black/75 backdrop-blur-xl border-b border-black/[0.08] dark:border-white/[0.1] text-[#1d1d1f] dark:text-[#f5f5f7] transition-colors duration-300">
+        <a href="{{ url('/') }}" class="font-semibold text-base tracking-tight flex items-center gap-2 hover:opacity-80 text-[#1d1d1f] dark:text-[#f5f5f7]">
+            <img src="{{ asset('logobengkel.png') }}" alt="Logo" class="h-6 object-contain brightness-0 dark:invert"> SIBENGKEL
         </a>
-        <div class="hidden md:flex gap-6 items-center">
-            <a class="nav-link font-bold text-black dark:text-white hover:text-secondary transition-colors font-body-md text-body-md pb-1 active:scale-95 duration-200" href="{{ url('/#home') }}">Home</a>
-            <a class="nav-link {{ request()->routeIs('public.status.*') ? 'font-bold text-black dark:text-white' : 'text-gray-700 dark:text-[#EDEDEC]/80' }} hover:text-secondary transition-colors font-body-md text-body-md pb-1 active:scale-95 duration-200" href="{{ route('public.status.index') }}">Cek Status</a>
-            <a class="nav-link text-gray-700 dark:text-[#EDEDEC]/80 hover:text-secondary transition-colors font-body-md text-body-md pb-1 active:scale-95 duration-200" href="{{ url('/#services') }}">Services</a>
-            <a class="nav-link text-gray-700 dark:text-[#EDEDEC]/80 hover:text-secondary transition-colors font-body-md text-body-md pb-1 active:scale-95 duration-200" href="{{ url('/#features') }}">Features</a>
-            <a class="nav-link text-gray-700 dark:text-[#EDEDEC]/80 hover:text-secondary transition-colors font-body-md text-body-md pb-1 active:scale-95 duration-200" href="{{ url('/#katalog-sparepart') }}">Katalog Sparepart</a>
-            <a class="nav-link text-gray-700 dark:text-[#EDEDEC]/80 hover:text-secondary transition-colors font-body-md text-body-md pb-1 active:scale-95 duration-200" href="{{ url('/#testimonials') }}">Testimonial</a>
-            <a class="nav-link text-gray-700 dark:text-[#EDEDEC]/80 hover:text-secondary transition-colors font-body-md text-body-md pb-1 active:scale-95 duration-200" href="{{ route('contact.index') }}">Contact Us</a>
+        <div class="hidden md:flex gap-7 items-center text-sm">
+            <a class="nav-link font-medium text-[#1d1d1f] dark:text-white hover:text-[#ff6b00] transition-colors" href="{{ url('/#home') }}">Home</a>
+            <a class="nav-link {{ request()->routeIs('public.status.*') ? 'font-semibold text-[#1d1d1f] dark:text-white' : 'text-[#6e6e73] dark:text-[#86868b]' }} hover:text-[#1d1d1f] dark:hover:text-white transition-colors" href="{{ route('public.status.index') }}">Cek Status</a>
+            <a class="nav-link text-[#6e6e73] dark:text-[#86868b] hover:text-[#1d1d1f] dark:hover:text-white transition-colors" href="{{ url('/#services') }}">Services</a>
+            <a class="nav-link text-[#6e6e73] dark:text-[#86868b] hover:text-[#1d1d1f] dark:hover:text-white transition-colors" href="{{ url('/#features') }}">Features</a>
+            <a class="nav-link text-[#6e6e73] dark:text-[#86868b] hover:text-[#1d1d1f] dark:hover:text-white transition-colors" href="{{ url('/#katalog-sparepart') }}">Katalog Sparepart</a>
+            <a class="nav-link text-[#6e6e73] dark:text-[#86868b] hover:text-[#1d1d1f] dark:hover:text-white transition-colors" href="{{ url('/#testimonials') }}">Testimonial</a>
+            <a class="nav-link text-[#6e6e73] dark:text-[#86868b] hover:text-[#1d1d1f] dark:hover:text-white transition-colors" href="{{ route('contact.index') }}">Contact Us</a>
         </div>
-        <div class="flex gap-2 md:gap-4 items-center">
+        <div class="flex gap-2 md:gap-3 items-center">
             <!-- Theme Toggle -->
-            <button onclick="toggleTheme(event)" class="flex items-center justify-center p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors focus:outline-none text-black dark:text-[#EDEDEC]" aria-label="Toggle Dark Mode">
+            <button onclick="toggleTheme(event)" class="flex items-center justify-center p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors focus:outline-none text-[#1d1d1f] dark:text-[#f5f5f7]" aria-label="Toggle Dark Mode">
                 <span class="material-symbols-outlined text-[20px] dark:hidden">dark_mode</span>
                 <span class="material-symbols-outlined text-[20px] hidden dark:block">light_mode</span>
             </button>
             
             @if(Auth::guard('customer')->check())
-                <a href="{{ route('public.dashboard') }}" class="bg-primary dark:bg-secondary text-white dark:text-white hover:bg-primary/90 dark:hover:bg-secondary/90 transition-colors font-label-md text-xs md:text-label-md h-[36px] md:h-[44px] px-3 md:px-6 rounded shadow-sm border border-transparent flex items-center justify-center font-bold">Portal Saya</a>
+                <a href="{{ route('public.dashboard') }}" class="bg-[#ff6b00] text-white hover:bg-[#e55f00] transition-colors text-xs md:text-sm h-9 px-4 rounded-full flex items-center justify-center font-medium">Portal Saya</a>
             @elseif(Auth::guard('web')->check())
-                <a href="{{ route('dashboard') }}" class="bg-primary dark:bg-secondary text-white dark:text-white hover:bg-primary/90 dark:hover:bg-secondary/90 transition-colors font-label-md text-xs md:text-label-md h-[36px] md:h-[44px] px-3 md:px-6 rounded shadow-sm border border-transparent flex items-center justify-center font-bold">Dashboard Staff</a>
+                <a href="{{ route('dashboard') }}" class="bg-[#ff6b00] text-white hover:bg-[#e55f00] transition-colors text-xs md:text-sm h-9 px-4 rounded-full flex items-center justify-center font-medium">Dashboard Staff</a>
             @else
-                <a href="{{ route('public.login') }}" class="text-on-surface dark:text-[#EDEDEC] hover:text-secondary dark:hover:text-secondary transition-colors font-label-md text-sm md:text-label-md h-[36px] md:h-[44px] px-2 md:px-4 rounded flex items-center justify-center hidden sm:flex font-bold">Login</a>
-                <a href="{{ route('public.register') }}" class="bg-secondary text-white dark:bg-secondary dark:text-white hover:bg-[#e05d14] dark:hover:bg-[#e05d14] transition-colors font-label-md text-xs md:text-label-md h-[36px] md:h-[44px] px-3 md:px-6 rounded shadow-sm border border-transparent flex items-center justify-center font-bold">Get Started</a>
+                <a href="{{ route('public.login') }}" class="text-[#1d1d1f] dark:text-[#f5f5f7] hover:text-[#ff6b00] transition-colors text-sm h-9 px-3 rounded-full hidden sm:flex items-center justify-center font-medium">Login</a>
+                <a href="{{ route('public.register') }}" class="bg-[#ff6b00] text-white hover:bg-[#e55f00] transition-colors text-xs md:text-sm h-9 px-4 rounded-full flex items-center justify-center font-medium">Get Started</a>
             @endif
         </div>
     </nav>
@@ -154,21 +154,21 @@
     </main>
 
     <!-- Footer Component -->
-    <footer id="contact-us" class="flex flex-col md:flex-row justify-between items-center w-full px-margin-desktop py-12 gap-6 bg-[#1b1b18] dark:bg-black border-t border-gray-800 dark:border-[#3E3E3A]/20 mt-auto text-white">
-        <div class="font-headline-md text-headline-md text-white flex items-center gap-2">
-            <img src="{{ asset('logobengkel.png') }}" alt="Logo" class="h-6 opacity-80 filter invert brightness-0"> SIBENGKEL
+    <footer id="contact-us" class="flex flex-col md:flex-row justify-between items-center w-full px-margin-desktop py-10 gap-6 bg-[#f5f5f7] dark:bg-black border-t border-black/[0.08] dark:border-white/[0.1] mt-auto text-[#6e6e73] dark:text-[#86868b]">
+        <div class="font-semibold text-sm text-[#1d1d1f] dark:text-[#f5f5f7] flex items-center gap-2">
+            <img src="{{ asset('logobengkel.png') }}" alt="Logo" class="h-5 opacity-80 brightness-0 dark:invert"> SIBENGKEL
         </div>
-        <div class="flex flex-wrap gap-4 justify-center">
-            <a class="font-label-sm text-label-sm text-white/80 hover:text-secondary transition-colors cursor-pointer" href="{{ route('public.page', 'privacy-policy') }}">Privacy Policy</a>
-            <a class="font-label-sm text-label-sm text-white/80 hover:text-secondary transition-colors cursor-pointer" href="{{ route('public.page', 'terms-of-service') }}">Terms of Service</a>
-            <a class="font-label-sm text-label-sm text-white/80 hover:text-secondary transition-colors cursor-pointer" href="{{ route('contact.index') }}">Contact Us</a>
-            <a class="font-label-sm text-label-sm text-white/80 hover:text-secondary transition-colors cursor-pointer" href="{{ route('public.page', 'support') }}">Support</a>
+        <div class="flex flex-wrap gap-5 justify-center text-xs">
+            <a class="hover:text-[#1d1d1f] dark:hover:text-white transition-colors" href="{{ route('public.page', 'privacy-policy') }}">Privacy Policy</a>
+            <a class="hover:text-[#1d1d1f] dark:hover:text-white transition-colors" href="{{ route('public.page', 'terms-of-service') }}">Terms of Service</a>
+            <a class="hover:text-[#1d1d1f] dark:hover:text-white transition-colors" href="{{ route('contact.index') }}">Contact Us</a>
+            <a class="hover:text-[#1d1d1f] dark:hover:text-white transition-colors" href="{{ route('public.page', 'support') }}">Support</a>
             @if(!Auth::guard('web')->check())
-                <a class="font-label-sm text-label-sm text-white/80 hover:text-secondary transition-colors cursor-pointer ml-4 border-l border-white/30 pl-4" href="{{ route('login') }}">Staff Login</a>
+                <a class="hover:text-[#1d1d1f] dark:hover:text-white transition-colors ml-2 border-l border-black/15 dark:border-white/20 pl-4" href="{{ route('login') }}">Staff Login</a>
             @endif
         </div>
-        <div class="font-label-sm text-label-sm text-white/80">
-            © {{ date('Y') }} SIBENGKEL Industrial Systems. All rights reserved.
+        <div class="text-xs">
+            © {{ date('Y') }} SIBENGKEL. All rights reserved.
         </div>
     </footer>
     <script>
