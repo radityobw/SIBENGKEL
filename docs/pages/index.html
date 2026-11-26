@@ -16,6 +16,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <script>(function(){try{var t=localStorage.getItem('radityobw_theme');document.documentElement.dataset.theme=(t==='light')?'light':'dark';}catch(e){document.documentElement.dataset.theme='dark';}})();</script>
 
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="SIBENGKEL" />
@@ -79,16 +80,48 @@
   <style>
     :root {
       --bg: #000000;
+      --topbar-bg: rgba(0, 0, 0, 0.72);
       --surface: #161617;
       --surface-2: #1d1d1f;
       --hairline: rgba(255, 255, 255, 0.10);
+      --card-border: rgba(255, 255, 255, 0.08);
       --text: #f5f5f7;
+      --heading: #ffffff;
+      --lead: #b0b0b6;
       --muted: #86868b;
       --accent: #ff6b00;
       --accent-soft: #ff9447;
+      --accent-pill: rgba(255, 107, 0, 0.14);
+      --btn-bg: rgba(255, 255, 255, 0.07);
+      --btn-hover: rgba(255, 255, 255, 0.13);
+      --code-bg: #111113;
+      --code-text: #f5f5f7;
+      --stage-bg: radial-gradient(ellipse 68% 66% at 50% 48%, #2a2a30 0%, #141418 50%, #09090b 84%, #050506 100%);
+      --stage-pill: rgba(255, 255, 255, 0.09);
       --mono: "SF Mono", ui-monospace, "JetBrains Mono", Menlo, monospace;
       --display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", "Helvetica Neue", sans-serif;
       --sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", "Helvetica Neue", sans-serif;
+    }
+    html[data-theme="light"] {
+      --bg: #ffffff;
+      --topbar-bg: rgba(255, 255, 255, 0.78);
+      --surface: #f5f5f7;
+      --surface-2: #ececef;
+      --hairline: rgba(0, 0, 0, 0.08);
+      --card-border: rgba(0, 0, 0, 0.06);
+      --text: #1d1d1f;
+      --heading: #1d1d1f;
+      --lead: #424245;
+      --muted: #6e6e73;
+      --accent: #e55f00;
+      --accent-soft: #c95200;
+      --accent-pill: rgba(255, 107, 0, 0.10);
+      --btn-bg: rgba(0, 0, 0, 0.05);
+      --btn-hover: rgba(0, 0, 0, 0.09);
+      --code-bg: #1d1d1f;
+      --code-text: #f5f5f7;
+      --stage-bg: radial-gradient(circle at 50% 42%, #ffffff 0%, #f1f1f4 72%, #e8e8ed 100%);
+      --stage-pill: rgba(255, 255, 255, 0.86);
     }
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
@@ -98,8 +131,10 @@
       background: var(--bg);
       color: var(--text);
       line-height: 1.58;
+      overflow-x: clip;
       -webkit-font-smoothing: antialiased;
       text-rendering: optimizeLegibility;
+      transition: background-color 0.22s ease, color 0.22s ease;
     }
     a { color: var(--accent-soft); text-decoration: none; }
     a:hover { text-decoration: underline; }
@@ -126,17 +161,17 @@
       position: sticky;
       top: 0;
       z-index: 40;
-      height: 52px;
-      background: rgba(0, 0, 0, 0.72);
+      min-height: 52px;
+      background: var(--topbar-bg);
       backdrop-filter: saturate(180%) blur(20px);
       -webkit-backdrop-filter: saturate(180%) blur(20px);
       border-bottom: 1px solid var(--hairline);
     }
     .topbar-inner {
-      max-width: 1180px;
-      height: 100%;
+      max-width: 1220px;
+      min-height: 52px;
       margin: 0 auto;
-      padding: 0 28px;
+      padding: 10px 28px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -152,6 +187,7 @@
       font-weight: 600;
       font-size: 14px;
       letter-spacing: -0.01em;
+      white-space: nowrap;
     }
     .brand-mark:hover { text-decoration: none; }
     .brand-dot {
@@ -160,42 +196,64 @@
       border-radius: 50%;
       background: var(--accent);
       display: inline-block;
+      flex-shrink: 0;
     }
     .topbar-nav {
       display: flex;
-      flex-wrap: wrap;
-      gap: 24px;
+      align-items: center;
+      gap: 20px;
     }
-    .topbar-nav a { color: var(--muted); font-weight: 500; transition: color 0.15s ease; }
+    .topbar-nav a { color: var(--muted); font-weight: 500; white-space: nowrap; transition: color 0.15s ease; }
     .topbar-nav a:hover { color: var(--text); text-decoration: none; }
+    .theme-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      border-radius: 980px;
+      border: 1px solid var(--hairline);
+      background: var(--btn-bg);
+      color: var(--text);
+      cursor: pointer;
+      padding: 0;
+      flex-shrink: 0;
+      transition: background 0.15s ease;
+    }
+    .theme-btn:hover { background: var(--btn-hover); }
+    .theme-btn svg { width: 15px; height: 15px; display: block; }
+    html[data-theme="dark"] .icon-moon { display: none; }
+    html[data-theme="light"] .icon-sun { display: none; }
 
     .wrap {
-      max-width: 1180px;
+      max-width: 1220px;
       margin: 0 auto;
       padding: 56px 28px 84px;
     }
     .spec-grid {
       display: grid;
-      grid-template-columns: minmax(0, 1.08fr) minmax(360px, 0.92fr);
-      gap: 56px;
+      grid-template-columns: minmax(0, 1.18fr) minmax(350px, 0.82fr);
+      gap: 48px;
       align-items: start;
     }
     .vitrine-col {
       position: sticky;
       top: 84px;
       order: 2;
+      min-width: 0;
     }
     .chapters-col {
       order: 1;
       min-width: 0;
+      max-width: 100%;
     }
 
     #stage-3d {
       position: relative;
       height: min(560px, calc(100vh - 120px));
-      min-height: 420px;
-      background: radial-gradient(circle at 50% 45%, #1c1c1e 0%, #0d0d0f 70%, #050506 100%);
-      border: 1px solid var(--hairline);
+      min-height: 400px;
+      background: var(--stage-bg);
+      border: 1px solid var(--card-border);
       border-radius: 28px;
       overflow: hidden;
       cursor: grab;
@@ -219,9 +277,9 @@
       z-index: 4;
     }
     #stage-chapter {
-      background: rgba(255, 255, 255, 0.08);
+      background: var(--stage-pill);
       backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      border: 1px solid var(--hairline);
       padding: 4px 12px;
       border-radius: 980px;
       color: var(--text);
@@ -263,9 +321,11 @@
     #stage-3d.is-ready .stage-fallback { display: none; }
 
     .chapter {
-      padding-bottom: 64px;
-      margin-bottom: 64px;
+      padding-bottom: 60px;
+      margin-bottom: 60px;
       border-bottom: 1px solid var(--hairline);
+      min-width: 0;
+      max-width: 100%;
     }
     .chapter:last-child {
       border-bottom: none;
@@ -284,18 +344,19 @@
     h1 {
       font-family: var(--display);
       margin: 0 0 16px;
-      font-size: clamp(34px, 4.4vw, 52px);
+      font-size: clamp(32px, 4.2vw, 50px);
       font-weight: 700;
       line-height: 1.06;
       letter-spacing: -0.035em;
-      color: #ffffff;
+      color: var(--heading);
+      overflow-wrap: break-word;
     }
     .lead {
       margin: 0 0 24px;
-      color: #a1a1a6;
+      color: var(--lead);
       font-size: 17px;
       line-height: 1.55;
-      max-width: 620px;
+      max-width: 640px;
     }
     .spec-meta {
       margin: 0 0 26px;
@@ -311,18 +372,18 @@
       border-radius: 980px;
       font-weight: 500;
       font-size: 14px;
-      border: 1px solid rgba(255, 255, 255, 0.14);
+      border: 1px solid var(--hairline);
       color: var(--text);
-      background: rgba(255, 255, 255, 0.06);
-      transition: background 0.15s ease, border-color 0.15s ease;
+      background: var(--btn-bg);
+      transition: background 0.15s ease;
     }
     .btn.primary {
       background: var(--accent);
       border-color: var(--accent);
-      color: #000000;
+      color: #ffffff;
       font-weight: 600;
     }
-    .btn:hover { text-decoration: none; background: rgba(255, 255, 255, 0.12); }
+    .btn:hover { text-decoration: none; background: var(--btn-hover); }
     .btn.primary:hover { background: #ff8533; border-color: #ff8533; }
 
     h2 {
@@ -330,19 +391,24 @@
       font-size: 28px;
       font-weight: 700;
       letter-spacing: -0.025em;
-      color: #ffffff;
+      color: var(--heading);
       margin: 0 0 18px;
+      overflow-wrap: break-word;
     }
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 16px;
+      min-width: 0;
     }
     .card {
       background: var(--surface);
-      border: 1px solid var(--hairline);
+      border: 1px solid var(--card-border);
       border-radius: 24px;
       padding: 24px;
+      min-width: 0;
+      max-width: 100%;
+      overflow-wrap: break-word;
     }
     .card h3 {
       font-family: var(--display);
@@ -352,26 +418,35 @@
       letter-spacing: -0.015em;
       color: var(--text);
     }
-    .card p { margin: 0; font-size: 14px; color: var(--muted); line-height: 1.55; }
+    .card p { margin: 0; font-size: 14px; color: var(--muted); line-height: 1.55; overflow-wrap: break-word; }
+    :not(pre) > code { overflow-wrap: anywhere; word-break: break-word; font-size: 0.9em; }
     pre {
-      background: #111113;
-      border: 1px solid var(--hairline);
+      background: var(--code-bg);
+      border: 1px solid var(--card-border);
       border-radius: 18px;
       padding: 20px 22px;
+      max-width: 100%;
       overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
       font-size: 13px;
       line-height: 1.65;
-      color: #f5f5f7;
+      color: var(--code-text);
       margin: 0;
     }
     code { font-family: var(--mono); }
-    table {
+    pre code { white-space: pre; word-break: normal; overflow-wrap: normal; }
+    .table-wrap {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      border-radius: 20px;
+      border: 1px solid var(--hairline);
+      background: var(--surface);
+    }
+    .table-wrap table {
       width: 100%;
       border-collapse: collapse;
-      background: var(--surface);
-      border: 1px solid var(--hairline);
-      border-radius: 20px;
-      overflow: hidden;
       font-size: 14px;
       font-variant-numeric: tabular-nums;
     }
@@ -384,25 +459,32 @@
       font-weight: 600;
       padding: 3px 10px;
       border-radius: 980px;
-      background: rgba(255, 107, 0, 0.14);
+      background: var(--accent-pill);
       color: var(--accent-soft);
+      white-space: nowrap;
     }
     .release-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: 1fr;
       gap: 16px;
       margin-top: 16px;
+      min-width: 0;
     }
     .release-card {
       background: var(--surface);
-      border: 1px solid var(--hairline);
+      border: 1px solid var(--card-border);
       border-radius: 24px;
       padding: 22px 24px;
+      min-width: 0;
+      max-width: 100%;
+      overflow-wrap: break-word;
     }
     .release-head {
       display: flex;
+      flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
+      gap: 8px;
       margin-bottom: 12px;
     }
     .release-tag {
@@ -410,13 +492,13 @@
       font-weight: 600;
       font-size: 12.5px;
       color: var(--accent-soft);
-      background: rgba(255, 107, 0, 0.14);
+      background: var(--accent-pill);
       padding: 3px 10px;
       border-radius: 980px;
     }
     .release-date { font-family: var(--mono); font-size: 12px; color: var(--muted); }
     .release-card ul { margin: 0; padding-left: 18px; color: var(--muted); font-size: 14px; }
-    .release-card li { margin-bottom: 6px; }
+    .release-card li { margin-bottom: 6px; overflow-wrap: anywhere; }
     footer {
       margin-top: 40px;
       padding-top: 24px;
@@ -434,6 +516,12 @@
       .chapters-col { order: 2; }
       #stage-3d { height: 360px; min-height: 300px; }
     }
+    @media (max-width: 640px) {
+      .wrap { padding: 32px 18px 64px; }
+      .topbar-inner { padding: 10px 16px; gap: 10px; }
+      .topbar-nav { gap: 12px; font-size: 12px; }
+      .topbar-nav a:nth-child(n+4) { display: none; }
+    }
   </style>
 </head>
 <body>
@@ -447,6 +535,10 @@
         <a href="#sec-arsitektur">Arsitektur</a>
         <a href="#sec-instalasi">Instalasi</a>
         <a href="https://radityobw.github.io/">Portfolio</a>
+        <button id="theme-toggle" class="theme-btn" type="button" aria-label="Toggle light or dark theme" title="Toggle theme">
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        </button>
       </div>
     </div>
   </nav>
@@ -495,37 +587,39 @@
 
         <section class="chapter" data-chapter="arsitektur" id="sec-arsitektur">
           <h2>Arsitektur &amp; Tumpukan Teknologi</h2>
-          <table>
-            <thead>
-              <tr>
-                <th>Lapisan</th>
-                <th>Teknologi</th>
-                <th>Cakupan</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><span class="tag-pill">Backend</span></td>
-                <td><strong>Laravel 13 &amp; PHP 8.3+</strong></td>
-                <td>25 migrasi database, 13 Eloquent Model, 35 Controller, Dual-Guard &amp; RBAC</td>
-              </tr>
-              <tr>
-                <td><span class="tag-pill">Frontend</span></td>
-                <td><strong>Tailwind CSS 3 &amp; Alpine.js</strong></td>
-                <td>78 Blade views, mode terang &amp; gelap terpadu, View Transition API</td>
-              </tr>
-              <tr>
-                <td><span class="tag-pill">API &amp; Auth</span></td>
-                <td><strong>Laravel Breeze &amp; Sanctum</strong></td>
-                <td>Session auth staff/pelanggan, OTP reset password, REST API Bearer Token</td>
-              </tr>
-              <tr>
-                <td><span class="tag-pill">QA &amp; DevSecOps</span></td>
-                <td><strong>PHPUnit, SIDIK, Gitleaks, Trivy</strong></td>
-                <td>Automated unit &amp; feature tests, 137 blackbox test cases, GitHub Releases &amp; <code>ghcr.io</code> container</td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Lapisan</th>
+                  <th>Teknologi</th>
+                  <th>Cakupan</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><span class="tag-pill">Backend</span></td>
+                  <td><strong>Laravel 13 &amp; PHP 8.3+</strong></td>
+                  <td>25 migrasi database, 13 Eloquent Model, 35 Controller, Dual-Guard &amp; RBAC</td>
+                </tr>
+                <tr>
+                  <td><span class="tag-pill">Frontend</span></td>
+                  <td><strong>Tailwind CSS 3 &amp; Alpine.js</strong></td>
+                  <td>78 Blade views, mode terang &amp; gelap terpadu, View Transition API</td>
+                </tr>
+                <tr>
+                  <td><span class="tag-pill">API &amp; Auth</span></td>
+                  <td><strong>Laravel Breeze &amp; Sanctum</strong></td>
+                  <td>Session auth staff/pelanggan, OTP reset password, REST API Bearer Token</td>
+                </tr>
+                <tr>
+                  <td><span class="tag-pill">QA &amp; DevSecOps</span></td>
+                  <td><strong>PHPUnit, SIDIK, Gitleaks, Trivy</strong></td>
+                  <td>Automated unit &amp; feature tests, 137 blackbox test cases, GitHub Releases &amp; <code>ghcr.io</code> container</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </section>
 
         <section class="chapter" data-chapter="instalasi" id="sec-instalasi">
@@ -599,6 +693,17 @@ php artisan serve</code></pre>
     </footer>
   </div>
 
+  <script>
+    (function(){
+      var btn = document.getElementById('theme-toggle');
+      if (!btn) return;
+      btn.addEventListener('click', function(){
+        var next = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
+        document.documentElement.dataset.theme = next;
+        try { localStorage.setItem('radityobw_theme', next); } catch(e) {}
+      });
+    })();
+  </script>
   <script type="module" src="scene3d.js"></script>
 </body>
 </html>

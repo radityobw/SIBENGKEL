@@ -197,6 +197,29 @@ function initShowcase() {
     roughness: 0.24,
   });
 
+  function applyTheme() {
+    const isLight = document.documentElement.dataset.theme === 'light';
+    if (isLight) {
+      titaniumMat.color.setHex(0x1d1d1f);
+      titaniumMat.metalness = 0.54;
+      titaniumMat.roughness = 0.28;
+      scene.environmentIntensity = 0.72;
+      renderer.toneMappingExposure = 1.08;
+    } else {
+      titaniumMat.color.setHex(0xe6e6e8);
+      titaniumMat.metalness = 0.68;
+      titaniumMat.roughness = 0.24;
+      scene.environmentIntensity = 0.95;
+      renderer.toneMappingExposure = 1.12;
+    }
+    titaniumMat.needsUpdate = true;
+  }
+  applyTheme();
+  new MutationObserver(applyTheme).observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ['data-theme'],
+  });
+
   const loader = new GLTFLoader();
   loader.load(
     './models/sibengkel.glb',

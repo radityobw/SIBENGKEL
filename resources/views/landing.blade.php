@@ -21,9 +21,9 @@
             overflow: hidden;
         }
         .dark #sibengkel-hero-3d {
-            background: radial-gradient(circle at 50% 45%, #1c1c1e 0%, #0d0d0f 70%, #050506 100%);
+            background: radial-gradient(ellipse 68% 66% at 50% 48%, #2a2a30 0%, #141418 50%, #09090b 84%, #050506 100%);
             border-color: rgba(255, 255, 255, 0.1);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.48);
         }
         #sibengkel-hero-3d:active { cursor: grabbing; }
         #sibengkel-hero-canvas {
@@ -55,7 +55,7 @@
     <!-- Hero Section -->
     <section class="bg-white dark:bg-black text-[#1d1d1f] dark:text-[#f5f5f7] py-16 lg:py-24 px-margin-mobile md:px-margin-desktop flex-grow flex items-center md:min-h-[calc(100vh-56px)]" id="home">
         <div class="max-w-screen-xl w-full mx-auto grid grid-cols-1 lg:grid-cols-12 items-center gap-12 lg:gap-16">
-            <div class="lg:col-span-7 space-y-6 flex flex-col items-center lg:items-start text-center lg:text-left">
+            <div class="lg:col-span-7 min-w-0 space-y-6 flex flex-col items-center lg:items-start text-center lg:text-left">
                 <p class="text-xs font-semibold uppercase tracking-[0.12em] text-[#ff6b00]">
                     Sistem Informasi Bengkel Era Digital
                 </p>
